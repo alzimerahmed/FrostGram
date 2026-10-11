@@ -39,24 +39,36 @@ jobs:
           - { package: Packages/StatusKit, scheme: StatusKitTests }
     steps:
       - uses: actions/checkout@v4
+      - name: Pick simulator
+        id: sim
+        run: |
+          SIM="$(xcrun simctl list devices available | grep -m1 'iPhone' | sed -E 's/.*\(([A-Za-z0-9 ]+)\) \(.*/\1/')"
+          echo "Using simulator: $SIM"
+          echo "name=$SIM" >> "$GITHUB_OUTPUT"
       - name: Run package tests
         run: |
           xcodebuild test \
             -scheme ${{ matrix.scheme }} \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }},OS=latest" \
             CODE_SIGNING_ALLOWED=NO
         working-directory: ${{ matrix.package }}
 
   build:
     name: Build app (unsigned)
     runs-on: macos-latest
-    needs: [lint]
+    needs: [test]
     steps:
       - uses: actions/checkout@v4
+      - name: Pick simulator
+        id: sim
+        run: |
+          SIM="$(xcrun simctl list devices available | grep -m1 'iPhone' | sed -E 's/.*\(([A-Za-z0-9 ]+)\) \(.*/\1/')"
+          echo "Using simulator: $SIM"
+          echo "name=$SIM" >> "$GITHUB_OUTPUT"
       - name: Build
         run: |
           xcodebuild build \
             -project IceCubesApp.xcodeproj \
             -scheme IceCubesApp \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }},OS=latest" \
             CODE_SIGNING_ALLOWED=NO
