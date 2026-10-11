@@ -36,7 +36,7 @@ FrostGram is a standalone fork of [IceCubesApp](https://github.com/Dimillian/Ice
 - **Alt-text reminder** — local-only soft prompt (banner + pre-post confirmation) when media is posted without a description
 - **Media previews off mode** — disable image previews and video autoplay for lighter, faster timelines
 - **Follower management** — follow-requests screen and a "remove from followers" quick action
-- **Push proxy self-host option** — end-to-end-encrypted push notifications with an overridable relay URL; see [docs/push-proxy-selfhost.md](docs/push-proxy-selfhost.md)
+- **Push proxy self-host option** — end-to-end-encrypted push notifications with an overridable relay URL (`FrostGramPushProxyURL` Info.plist key; self-host guide available on request)
 - **Privacy-first**: no analytics or telemetry collected by the app (telemetry is compiled out by default)
 
 ## Tech Stack
