@@ -32,7 +32,7 @@ final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable
           throw Error.notMastodonInstance
         }
         await MainActor.run {
-          let deeplink = url.iceCubesAppDeepLink
+          let deeplink = url.frostgramDeepLink
           let output = output(wrapping: deeplink)
           context.completeRequest(returningItems: output)
         }
@@ -61,7 +61,7 @@ extension URL {
     }
   }
 
-  var iceCubesAppDeepLink: URL {
+  var frostgramDeepLink: URL {
     var components = URLComponents(url: self, resolvingAgainstBaseURL: false)!
     components.scheme = AppInfo.scheme.trimmingCharacters(in: [":", "/"])
     return components.url!

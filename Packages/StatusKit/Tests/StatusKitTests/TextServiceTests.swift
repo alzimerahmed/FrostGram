@@ -8,7 +8,7 @@ import XCTest
 final class TextServiceTests: XCTestCase {
   func testProcessTextSuggestsHashtagAtCursor() {
     let service = StatusEditor.TextService()
-    let text = NSMutableAttributedString(string: "Testing #icecubes")
+    let text = NSMutableAttributedString(string: "Testing #frostgram")
     let selection = NSRange(location: text.string.utf16.count, length: 0)
 
     let result = service.processText(
@@ -20,12 +20,12 @@ final class TextServiceTests: XCTestCase {
     )
 
     XCTAssertTrue(result.didProcess)
-    XCTAssertEqual(result.action, .suggest(query: "#icecubes"))
+    XCTAssertEqual(result.action, .suggest(query: "#frostgram"))
   }
 
   func testProcessTextResetsSuggestionWhenCursorIsOutsideRange() {
     let service = StatusEditor.TextService()
-    let text = NSMutableAttributedString(string: "Testing #icecubes ")
+    let text = NSMutableAttributedString(string: "Testing #frostgram ")
     let selection = NSRange(location: text.string.utf16.count, length: 0)
 
     let result = service.processText(
@@ -61,7 +61,7 @@ final class TextServiceTests: XCTestCase {
 
   func testProcessTextResetsSuggestionWhenCursorIsInsideHashtag() {
     let service = StatusEditor.TextService()
-    let text = NSMutableAttributedString(string: "Testing #icecubes")
+    let text = NSMutableAttributedString(string: "Testing #frostgram")
     let selection = NSRange(location: "Testing #ice".utf16.count, length: 0)
 
     let result = service.processText(
@@ -78,7 +78,7 @@ final class TextServiceTests: XCTestCase {
 
   func testProcessTextSuggestsHashtagWithEmojiPrefix() {
     let service = StatusEditor.TextService()
-    let text = NSMutableAttributedString(string: "Hello 😄 #icecubes")
+    let text = NSMutableAttributedString(string: "Hello 😄 #frostgram")
     let selection = NSRange(location: text.string.utf16.count, length: 0)
 
     let result = service.processText(
@@ -90,7 +90,7 @@ final class TextServiceTests: XCTestCase {
     )
 
     XCTAssertTrue(result.didProcess)
-    XCTAssertEqual(result.action, .suggest(query: "#icecubes"))
+    XCTAssertEqual(result.action, .suggest(query: "#frostgram"))
   }
 
   func testInitialTextChangesForReplyMentionsAuthorAndMentions() {

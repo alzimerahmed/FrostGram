@@ -44,7 +44,7 @@ FrostGram = open-source Mastodon client for Apple platforms (standalone fork of 
 
 - **Windows checkout**: avoid `git clean -fdx`; some upstream asset paths can be Windows-hostile.
 - **No local build safety net** — grep all references (Info.plist keys, entitlements, .xcstrings keys, asset names, pbxproj) before deleting or renaming anything.
-- **Product/target names are still IceCubes\*** — internal target/package names keep upstream names for build stability; user-facing branding is FrostGram. Full rename is a later CI-verified phase.
+- **Product/target names are still IceCubes\*** — visual identity is FrostGram since Phase 8 (icons, entitlements, loggers); the xcodeproj/target/scheme rename is deferred to Phase 9 as one atomic CI-verified commit (checklist: `docs/phase-8-report.md`). Do not rename targets/schemes/bundle IDs piecemeal.
 - **IceCubesSDK** is a remote SPM dependency (upstream git URL) — do not rename or vendor casually.
 - **Keychain/app-group identifiers** must stay consistent between entitlements, `UserPreferences.sharedDefault`, and `AppInfo.keychainGroup`.
 - **Telemetry is disabled** (`Packages/Env/Sources/Env/Telemetry.swift` no-ops without an app ID) — do not re-enable upstream's TelemetryDeck app ID.

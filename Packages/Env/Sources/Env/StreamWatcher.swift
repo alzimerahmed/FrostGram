@@ -27,7 +27,7 @@ import Observation
   public var events: [any StreamEvent] = []
   public var latestEvent: (any StreamEvent)?
 
-  private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
+  private let logger = Logger(subsystem: "com.frostgram", category: "stream")
 
   public static let shared = StreamWatcher()
 

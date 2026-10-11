@@ -36,8 +36,8 @@
           ],
           "glass" : true,
           "hidden" : false,
-          "image-name" : "puple_cube.png",
-          "name" : "puple_cube",
+          "image-name" : "frostgram.png",
+          "name" : "frostgram",
           "position" : {
             "scale" : 1.24,
             "translation-in-points" : [
@@ -106,8 +106,8 @@
           ],
           "glass" : true,
           "hidden" : false,
-          "image-name" : "puple_cube.png",
-          "name" : "puple_cube",
+          "image-name" : "frostgram.png",
+          "name" : "frostgram",
           "position" : {
             "scale" : 1.13,
             "translation-in-points" : [

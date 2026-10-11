@@ -9,12 +9,12 @@ assignees: ''
 
 ## Environment:
 
-<!-- Please complete the following information, when reporting bugs related to the IceCubesApp. -->
+<!-- Please complete the following information, when reporting bugs related to the FrostGram. -->
 
  - OS: 
  <!-- [e.g. iOS vX.Y.Z] -->
  - FrostGram version: 
- <!-- [e.g. IceCubesApp vX.Y.Z] -->
+ <!-- [e.g. FrostGram vX.Y.Z] -->
 
 ## Description
 

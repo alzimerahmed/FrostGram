@@ -45,7 +45,7 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
 
-  private let logger = Logger(subsystem: "com.icecubesapp", category: "networking")
+  private let logger = Logger(subsystem: "com.frostgram", category: "networking")
 
   // Putting all mutable state inside an `OSAllocatedUnfairLock` makes `Client`
   // provably `Sendable`. The lock is a struct, but it uses a `ManagedBuffer`
