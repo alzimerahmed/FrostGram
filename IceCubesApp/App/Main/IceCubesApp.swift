@@ -4,6 +4,7 @@ import AppAccount
 import DesignSystem
 import Env
 import KeychainSwift
+import Models
 import MediaUI
 import NetworkClient
 import StatusKit
@@ -32,7 +33,7 @@ struct IceCubesApp: App {
 
   @State var selectedTab: AppTab = .timeline
   @State var appRouterPath = RouterPath()
-  @State private var showOnboarding = false
+  @State var showOnboarding = false
 
   @State var isSupporter: Bool = false
   

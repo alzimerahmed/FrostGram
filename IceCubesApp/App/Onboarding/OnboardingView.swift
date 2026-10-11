@@ -256,7 +256,7 @@ struct OnboardingView: View {
     isLoadingInstance = true
     Task {
       let client = MastodonClient(server: server)
-      let fetchedInstance = try? await client.get(endpoint: Instances.instance)
+      let fetchedInstance: Instance? = try? await client.get(endpoint: Instances.instance)
       withAnimation {
         instance = fetchedInstance
         isLoadingInstance = false

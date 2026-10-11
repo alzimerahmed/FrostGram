@@ -41,7 +41,6 @@ struct AppView: View {
       Group {
         if #available(iOS 27.0, visionOS 27.0, *) {
           tabBarView
-            .defaultTabBarPlacement(horizontalSizeClass == .regular ? .sidebar : .automatic)
         } else {
           tabBarView
         }
