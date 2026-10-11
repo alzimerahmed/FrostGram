@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: SwiftFormat lint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftFormat
+        run: brew install swiftformat
+      - name: Lint
+        run: swiftformat --lint .
+
+  test:
+    name: Unit tests (${{ matrix.scheme }})
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        scheme: [ModelsTests, NetworkClientTests, TimelineTests, EnvTests, AccountTests]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run package tests
+        run: |
+          xcodebuild test \
+            -project IceCubesApp.xcodeproj \
+            -scheme ${{ matrix.scheme }} \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            CODE_SIGNING_ALLOWED=NO
+
+  build:
+    name: Build app (unsigned)
+    runs-on: macos-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          xcodebuild build \
+            -project IceCubesApp.xcodeproj \
+            -scheme IceCubesApp \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            CODE_SIGNING_ALLOWED=NO
