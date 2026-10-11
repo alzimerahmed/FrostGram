@@ -31,7 +31,7 @@ extension StatusEditor {
       var scheduledAt: Date? = nil
     }
 
-    func buildStatusData(from input: Input) throws -> StatusData {
+    func buildStatusData(from input: Input, scheduledAt: Date? = nil) throws -> StatusData {
       if input.requiresAltText, !input.allMediaHasDescription {
         throw PostError.missingAltText
       }
@@ -54,7 +54,8 @@ extension StatusEditor {
         poll: pollData,
         language: input.selectedLanguage,
         mediaAttributes: input.pendingMediaAttributes,
-        quotedStatusId: input.embeddedStatusId
+        quotedStatusId: input.embeddedStatusId,
+        scheduledAt: scheduledAt.map(Statuses.iso8601String(from:))
       )
     }
 
@@ -82,7 +83,7 @@ extension StatusEditor {
       guard let scheduledAt = input.scheduledAt else {
         throw PostError.missingScheduleDate
       }
-      let data = try buildStatusData(from: input)
+      let data = try buildStatusData(from: input, scheduledAt: scheduledAt)
       return try await client.scheduleStatus(data: data, scheduledAt: scheduledAt)
     }
   }
