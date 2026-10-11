@@ -12,8 +12,12 @@ concurrency:
 
 jobs:
   lint:
-    name: SwiftFormat lint
+    name: SwiftFormat lint (advisory)
     runs-on: macos-latest
+    # Upstream code has thousands of pre-existing violations; a one-time
+    # `swiftformat .` pass is planned in the Quality Gate phase. Until then
+    # lint reports but does not block.
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - name: Install SwiftFormat
