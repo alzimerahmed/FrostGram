@@ -4,8 +4,8 @@
 Produces a 1024x1024 RGBA PNG: a deep-indigo -> frost-blue vertical gradient
 with a white six-fold snowflake. Used for:
   - AppIcon.icon/Assets/frostgram.png (Icon Composer primary icon)
-  - IceCubesApp/Assets.xcassets/AppIconAlternate0-image.imageset/AppIcon.png
-  - IceCubesApp/Assets.xcassets/AppIcon.solidimagestack layers
+  - FrostGram/Assets.xcassets/AppIconAlternate0-image.imageset/AppIcon.png
+  - FrostGram/Assets.xcassets/AppIcon.solidimagestack layers
   - Images/AppIcon.png (marketing)
 
 Local tooling only (Pillow); not a project dependency. Run from repo root:
@@ -97,7 +97,7 @@ def main():
 
     targets = [
         out / "AppIcon.icon" / "Assets" / "frostgram.png",
-        out / "IceCubesApp" / "Assets.xcassets" / "AppIconAlternate0-image.imageset" / "AppIcon.png",
+        out / "FrostGram" / "Assets.xcassets" / "AppIconAlternate0-image.imageset" / "AppIcon.png",
         out / "Images" / "AppIcon.png",
     ]
     for t in targets:
@@ -108,7 +108,7 @@ def main():
     # Solid image stack (watch): background gradient + foreground flake
     bg = gradient(big).resize((SIZE, SIZE), Image.LANCZOS).convert("RGB")
     bg_target = (
-        out / "IceCubesApp" / "Assets.xcassets" / "AppIcon.solidimagestack"
+        out / "FrostGram" / "Assets.xcassets" / "AppIcon.solidimagestack"
         / "Back.solidimagestacklayer" / "Content.imageset" / "Background.png"
     )
     bg.save(bg_target, "PNG")
@@ -116,7 +116,7 @@ def main():
 
     fg = snowflake(big, WHITE).resize((SIZE, SIZE), Image.LANCZOS)
     fg_target = (
-        out / "IceCubesApp" / "Assets.xcassets" / "AppIcon.solidimagestack"
+        out / "FrostGram" / "Assets.xcassets" / "AppIcon.solidimagestack"
         / "Front.solidimagestacklayer" / "Content.imageset" / "Layer 1.png"
     )
     fg.save(fg_target, "PNG")

@@ -11,7 +11,7 @@ FrostGram = open-source Mastodon client for Apple platforms (standalone fork of 
 ## How It Works (domain constraints — read before touching the engine)
 
 - **Modules are the architecture** (`Packages/` — local Swift packages: Models, NetworkClient, Env, DesignSystem, Timeline, StatusKit, Account, Notifications, Conversations, Explore, Lists, MediaUI, AppAccount). New reusable logic goes into the right package, not the app target. App code imports packages; packages never import the app.
-- **Main app target** is `IceCubesApp/` (pure SwiftUI). Extensions: `IceCubesAppWidgetsExtension`, `IceCubesShareExtension`, `IceCubesActionExtension`, `IceCubesNotifications`.
+- **Main app target** is `FrostGram/` (pure SwiftUI). Extensions: `FrostGramWidgetsExtension`, `FrostGramShareExtension`, `FrostGramActionExtension`, `FrostGramNotifications`.
 - **Modern SwiftUI rules (from upstream CLAUDE.md, now our law):** NO ViewModels for new code — use `@State`, `@Observable`, `@Environment`; state flows down, actions flow up; never nest `@Observable` objects inside other `@Observable` objects; async/await over Combine.
 - **Data layer**: `MastodonClient` (NetworkClient) for API calls; `AppAccountsManager` for multi-account with keychain; SwiftData for local persistence.
 - **Theming**: every screen must work in all themes via `Theme` (`@Environment(Theme.self)`) and DesignSystem tokens; never hardcode colors.
@@ -21,10 +21,10 @@ FrostGram = open-source Mastodon client for Apple platforms (standalone fork of 
 ## Tech Stack & Conventions (do not fight it)
 
 - **Language**: Swift 5, Xcode latest. Swift Concurrency throughout.
-- **Project**: single `IceCubesApp.xcodeproj`; shared schemes in `IceCubesApp.xcodeproj/xcshareddata/xcschemes` (main scheme: `IceCubesApp`); package test schemes (ModelsTests, NetworkClientTests, TimelineTests, EnvTests, AccountTests) are Xcode automatic schemes.
+- **Project**: single `FrostGram.xcodeproj`; shared schemes in `FrostGram.xcodeproj/xcshareddata/xcschemes` (main scheme: `FrostGram`); package test schemes (ModelsTests, NetworkClientTests, TimelineTests, EnvTests, AccountTests) are Xcode automatic schemes.
 - **Format**: SwiftFormat, 2-space indent, config in `.swiftformat`. CI runs `swiftformat --lint`.
 - **Dependencies**: SPM via the xcodeproj (EmojiText, HTML2Markdown, KeychainSwift, LRUCache, Bodega, Nuke, SwiftSoup, TelemetryDeck, SFSafeSymbols). Upstream package URLs are dependencies, not ownership — do not rename.
-- **Bundle identity**: `BUNDLE_ID_PREFIX = com.alzimerahmed` in `IceCubesApp-release.xcconfig`; app group `group.$(BUNDLE_ID_PREFIX).FrostGram`; URL scheme `frostgram://`; keychain group `com.alzimerahmed.FrostGram`.
+- **Bundle identity**: `BUNDLE_ID_PREFIX = com.alzimerahmed` in `FrostGram-release.xcconfig`; app group `group.$(BUNDLE_ID_PREFIX).FrostGram`; URL scheme `frostgram://`; keychain group `com.alzimerahmed.FrostGram`.
 
 ## Build / Verify
 
@@ -33,18 +33,18 @@ FrostGram = open-source Mastodon client for Apple platforms (standalone fork of 
 #   1. swiftformat --lint .
 #   2. xcodebuild test per package test scheme (Models, NetworkClient, Timeline, Env, Account)
 #      -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' CODE_SIGNING_ALLOWED=NO
-#   3. xcodebuild build -scheme IceCubesApp CODE_SIGNING_ALLOWED=NO
+#   3. xcodebuild build -project FrostGram.xcodeproj -scheme FrostGram CODE_SIGNING_ALLOWED=NO
 ```
 
 **Remote-first verification (mandatory):** we do NOT build or test locally — this workspace is Windows and all builds/tests run in GitHub Actions (macOS runners). Local work is edit-only: static review while iterating. Push and let CI verify; a CI green check counts as the gate.
 
-**Signing:** `IceCubesApp-release.xcconfig` keeps upstream DEVELOPMENT_TEAM for local builds; CI overrides with `CODE_SIGNING_ALLOWED=NO`. Never hardcode new team IDs.
+**Signing:** `FrostGram-release.xcconfig` keeps upstream DEVELOPMENT_TEAM for local builds; CI overrides with `CODE_SIGNING_ALLOWED=NO`. Never hardcode new team IDs.
 
 ## Gotchas
 
 - **Windows checkout**: avoid `git clean -fdx`; some upstream asset paths can be Windows-hostile.
 - **No local build safety net** — grep all references (Info.plist keys, entitlements, .xcstrings keys, asset names, pbxproj) before deleting or renaming anything.
-- **Product/target names are still IceCubes\*** — visual identity is FrostGram since Phase 8 (icons, entitlements, loggers); the xcodeproj/target/scheme rename is deferred to Phase 9 as one atomic CI-verified commit (checklist: `docs/phase-8-report.md`). Do not rename targets/schemes/bundle IDs piecemeal.
+- **Targets/schemes renamed in Phase 9** (one atomic CI-verified commit): `FrostGram.xcodeproj`, targets `FrostGram`/`FrostGramNotifications`/`FrostGramShareExtension`/`FrostGramActionExtension`/`FrostGramWidgetsExtension`, bundle-ID suffixes `.Notifications`/`.ShareExtension`/`.Action`/`.Widgets`. Do not rename targets/schemes/bundle IDs piecemeal.
 - **IceCubesSDK** is a remote SPM dependency (upstream git URL) — do not rename or vendor casually.
 - **Keychain/app-group identifiers** must stay consistent between entitlements, `UserPreferences.sharedDefault`, and `AppInfo.keychainGroup`.
 - **Telemetry is disabled** (`Packages/Env/Sources/Env/Telemetry.swift` no-ops without an app ID) — do not re-enable upstream's TelemetryDeck app ID.

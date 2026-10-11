@@ -41,6 +41,7 @@ public struct ScheduledPostsView: View {
           Task { await fetchScheduledStatuses() }
         } label: {
           Image(systemName: "arrow.clockwise")
+            .accessibilityLabel("accessibility.scheduled-posts.refresh")
         }
       }
     }
@@ -86,6 +87,7 @@ public struct ScheduledPostsView: View {
           }
         } label: {
           Image(systemName: "ellipsis.circle")
+            .accessibilityLabel("accessibility.scheduled-posts.more")
         }
       }
     }

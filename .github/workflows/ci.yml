@@ -69,11 +69,11 @@ jobs:
       - name: Generate xcconfig
         run: |
           sed -e 's/YOUR_TEAM_ID/0000000000/' -e 's/com.example/com.alzimerahmed/' \
-            IceCubesApp.xcconfig.template > IceCubesApp.xcconfig
+            FrostGram.xcconfig.template > FrostGram.xcconfig
       - name: Build
         run: |
           xcodebuild build \
-            -project IceCubesApp.xcodeproj \
-            -scheme IceCubesApp \
+            -project FrostGram.xcodeproj \
+            -scheme FrostGram \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }},OS=latest" \
             CODE_SIGNING_ALLOWED=NO

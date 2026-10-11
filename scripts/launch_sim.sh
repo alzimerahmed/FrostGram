@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-PROJECT="IceCubesApp.xcodeproj"
-SCHEME="IceCubesApp"
+PROJECT="FrostGram.xcodeproj"
+SCHEME="FrostGram"
 SIMULATOR_NAME="iPhone Air"
 DESTINATION="platform=iOS Simulator,name=${SIMULATOR_NAME},OS=latest"
 DERIVED_DATA="build/sim"

@@ -89,7 +89,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 .DS_Store
-IceCubesApp.xcconfig
+FrostGram.xcconfig
 *.resolved
 buildServer.json
 /.playwright-mcp
