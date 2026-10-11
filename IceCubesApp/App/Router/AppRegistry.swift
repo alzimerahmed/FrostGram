@@ -218,9 +218,6 @@ extension View {
         case .about:
           NavigationSheet { AboutView() }
             .withEnvironments()
-        case .support:
-          NavigationSheet { SupportAppView() }
-            .withEnvironments()
         case .report(let status):
           ReportView(status: status)
             .withEnvironments()

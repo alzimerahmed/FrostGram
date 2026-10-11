@@ -819,114 +819,114 @@
         }
       }
     },
-    "%@© 2024 Thomas Ricouard" : {
+    "%@© 2026 Alzimer Ahmed" : {
       "localizations" : {
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@© 2024 Thomas Ricouard"
+            "value" : "%@© 2026 Alzimer Ahmed"
           }
         }
       }
@@ -43882,36 +43882,36 @@
         }
       }
     },
-    "Open Ice Cubes" : {
+    "Open FrostGram" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes öffnen"
+            "value" : "FrostGram öffnen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir Ice Cubes"
+            "value" : "Abrir FrostGram"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ireki Ice Cubes"
+            "value" : "Ireki FrostGram"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir Ice Cubes"
+            "value" : "Ouvrir FrostGram"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Ice Cubes"
+            "value" : "Apri FrostGram"
           }
         },
         "ko" : {
@@ -43923,37 +43923,37 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open Ice Cubes"
+            "value" : "Open FrostGram"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otwórz Ice Cubes"
+            "value" : "Otwórz FrostGram"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir Ice Cubes"
+            "value" : "Abrir FrostGram"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes Aç"
+            "value" : "FrostGram Aç"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开 Ice Cubes"
+            "value" : "打开 FrostGram"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啟 Ice Cubes"
+            "value" : "開啟 FrostGram"
           }
         }
       }
@@ -45830,54 +45830,54 @@
         }
       }
     },
-    "Send a text post to Mastodon with Ice Cubes" : {
+    "Send a text post to Mastodon with FrostGram" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Einen Textbeitrag mit Ice Cubes an Mastodon senden"
+            "value" : "Einen Textbeitrag mit FrostGram an Mastodon senden"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enviar una publicación de texto a Mastodon con Ice Cubes"
+            "value" : "Enviar una publicación de texto a Mastodon con FrostGram"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bidali Mastodonen argitaratzeko testu bat Ice Cubes bidez"
+            "value" : "Bidali Mastodonen argitaratzeko testu bat FrostGram bidez"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Envoyer une publication textulle à Mastodon avec Ice Cubes"
+            "value" : "Envoyer une publication textulle à Mastodon avec FrostGram"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia un post di testo a Mastodon con Ice Cubes"
+            "value" : "Invia un post di testo a Mastodon con FrostGram"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes로 마스토돈에 글을 작성합니다."
+            "value" : "FrostGram로 마스토돈에 글을 작성합니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyślij post tekstowy na Mastodon przez Ice Cubes"
+            "value" : "Wyślij post tekstowy na Mastodon przez FrostGram"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enviar publicação de texto no Mastodon pelo Ice Cubes"
+            "value" : "Enviar publicação de texto no Mastodon pelo FrostGram"
           }
         },
         "tr" : {
@@ -45889,41 +45889,41 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布文本嘟文"
+            "value" : "使用 FrostGram 向 Mastodon 发布文本嘟文"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用 Ice Cubes 在 Mastodon 上發表文字"
+            "value" : "用 FrostGram 在 Mastodon 上發表文字"
           }
         }
       }
     },
-    "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
+    "Send an image or multiple images to Mastodon with FrostGram without opening the app" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ein oder mehrere Bilder mit Ice Cubes an Mastodon senden, ohne die App zu öffnen"
+            "value" : "Ein oder mehrere Bilder mit FrostGram an Mastodon senden, ohne die App zu öffnen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Envía una imagen o múltiples imágenes a Mastodon con Ice Cubes sin abrir la aplicación"
+            "value" : "Envía una imagen o múltiples imágenes a Mastodon con FrostGram sin abrir la aplicación"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Envoyez une ou plusieurs images à Mastodon avec Ice Cubes sans ouvrir l'application."
+            "value" : "Envoyez une ou plusieurs images à Mastodon avec FrostGram sans ouvrir l'application."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia una o più immagini a Mastodon con Ice Cubes senza aprire l’app"
+            "value" : "Invia una o più immagini a Mastodon con FrostGram senza aprire l’app"
           }
         },
         "ko" : {
@@ -45935,19 +45935,19 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyślij jeden lub kilka obrazków na  Mastodon przez Ice Cubes bez otwierania aplikacji"
+            "value" : "Wyślij jeden lub kilka obrazków na  Mastodon przez FrostGram bez otwierania aplikacji"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enviar uma imagem ou várias imagens para o Mastodon com o Ice Cubes sem abrir o app"
+            "value" : "Enviar uma imagem ou várias imagens para o Mastodon com o FrostGram sem abrir o app"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不開啟 Ice Cubes 也上傳圖片給 Mastodon"
+            "value" : "不開啟 FrostGram 也上傳圖片給 Mastodon"
           }
         }
       }
@@ -46207,115 +46207,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes створаны з наступным праграмным забеспячэннем з адкрытым зыходным кодам:"
+            "value" : "FrostGram створаны з наступным праграмным забеспячэннем з адкрытым зыходным кодам:"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is built with the following Open Source software:"
+            "value" : "FrostGram is built with the following Open Source software:"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes wird mit folgender Open-Source-Software erstellt:"
+            "value" : "FrostGram wird mit folgender Open-Source-Software erstellt:"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is built with the following Open Source software:"
+            "value" : "FrostGram is built with the following Open Source software:"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is built with the following Open Source software:"
+            "value" : "FrostGram is built with the following Open Source software:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes utiliza estas librerías de código abierto:"
+            "value" : "FrostGram utiliza estas librerías de código abierto:"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes ondorengo iturburu irekiko softwarea erabiliz egin da:"
+            "value" : "FrostGram ondorengo iturburu irekiko softwarea erabiliz egin da:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes est développé avec les logiciels Open Source suivants :"
+            "value" : "FrostGram est développé avec les logiciels Open Source suivants :"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes si basa sui seguenti software open-source:"
+            "value" : "FrostGram si basa sui seguenti software open-source:"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesは以下のオープンソースソフトウェアで構築されています:"
+            "value" : "FrostGramは以下のオープンソースソフトウェアで構築されています:"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:"
+            "value" : "FrostGram는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes er bygget med følgende åpen kildekode-programvare:"
+            "value" : "FrostGram er bygget med følgende åpen kildekode-programvare:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is gebouwd met de volgende opensourcesoftware:"
+            "value" : "FrostGram is gebouwd met de volgende opensourcesoftware:"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:"
+            "value" : "FrostGram zbudowano z wykorzystaniem następującego oprogramowania Open Source:"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes é construído com os seguintes softwares de código aberto:"
+            "value" : "FrostGram é construído com os seguintes softwares de código aberto:"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes şu açık kaynak yazılımları ile kuruldu:"
+            "value" : "FrostGram şu açık kaynak yazılımları ile kuruldu:"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes створено за допомогою цього Open Source програмного забезпечення:"
+            "value" : "FrostGram створено за допомогою цього Open Source програмного забезпечення:"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 的构建使用了以下开源项目："
+            "value" : "FrostGram 的构建使用了以下开源项目："
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 運用下列開源碼："
+            "value" : "FrostGram 運用下列開源碼："
           }
         }
       }
@@ -46325,115 +46325,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes"
+            "value" : "FrostGram"
           }
         }
       }
@@ -46810,7 +46810,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Über Ice Cubes"
+            "value" : "Über FrostGram"
           }
         },
         "en" : {
@@ -47538,7 +47538,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apoya a Ice Cubes"
+            "value" : "Apoya a FrostGram"
           }
         },
         "eu" : {
@@ -58441,115 +58441,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ацаніце Ice Cubes"
+            "value" : "Ацаніце FrostGram"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valora Ice Cubes"
+            "value" : "Valora FrostGram"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bewerte Ice Cubes"
+            "value" : "Bewerte FrostGram"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rate Ice Cubes"
+            "value" : "Rate FrostGram"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rate Ice Cubes"
+            "value" : "Rate FrostGram"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valora Ice Cubes"
+            "value" : "Valora FrostGram"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Baloratu Ice Cubes"
+            "value" : "Baloratu FrostGram"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noter Ice Cubes"
+            "value" : "Noter FrostGram"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valuta Ice Cubes"
+            "value" : "Valuta FrostGram"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesを評価する"
+            "value" : "FrostGramを評価する"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 평가 남기기"
+            "value" : "FrostGram 평가 남기기"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vurder Ice Cubes"
+            "value" : "Vurder FrostGram"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Beoordeel Ice Cubes"
+            "value" : "Beoordeel FrostGram"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oceń Ice Cubes"
+            "value" : "Oceń FrostGram"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avalie o Ice Cubes"
+            "value" : "Avalie o FrostGram"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes'u puanlayın"
+            "value" : "FrostGram'u puanlayın"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Оцінити Ice Cubes"
+            "value" : "Оцінити FrostGram"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "给 Ice Cubes 评分"
+            "value" : "给 FrostGram 评分"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "給 Ice Cubes 評分"
+            "value" : "給 FrostGram 評分"
           }
         }
       }
@@ -59740,115 +59740,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Гэта вельмі дапаможа Ice Cubes працаваць!"
+            "value" : "Гэта вельмі дапаможа FrostGram працаваць!"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajudarà molt a mantenir Ice Cubes en funcionament!"
+            "value" : "Ajudarà molt a mantenir FrostGram en funcionament!"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Das wird eine große Hilfe sein, Ice Cubes am Laufen zu halten!"
+            "value" : "Das wird eine große Hilfe sein, FrostGram am Laufen zu halten!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It'll go a long way to keep Ice Cubes running!"
+            "value" : "It'll go a long way to keep FrostGram running!"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It'll go a long way to keep Ice Cubes running!"
+            "value" : "It'll go a long way to keep FrostGram running!"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¡Será de gran ayuda para que Ice Cubes siga funcionando!"
+            "value" : "¡Será de gran ayuda para que FrostGram siga funcionando!"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Askorako emango du eta Ice Cubes mantentzen lagunduko du!"
+            "value" : "Askorako emango du eta FrostGram mantentzen lagunduko du!"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cela ira loin pour maintenir Ice Cubes fonctionnel !"
+            "value" : "Cela ira loin pour maintenir FrostGram fonctionnel !"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sarà di grande aiuto per mantenere Ice Cubes in funzione!"
+            "value" : "Sarà di grande aiuto per mantenere FrostGram in funzione!"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesの運営に大きく貢献することでしょう！"
+            "value" : "FrostGramの運営に大きく貢献することでしょう！"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes가 계속 발전하는 데 정말 많은 도움이 될 거에요!"
+            "value" : "FrostGram가 계속 발전하는 데 정말 많은 도움이 될 거에요!"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Det vil gå en lang vei å holde Ice Cubes i gang!"
+            "value" : "Det vil gå en lang vei å holde FrostGram i gang!"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Daarmee kan Ice Cubes nog een tijdje vooruit!"
+            "value" : "Daarmee kan FrostGram nog een tijdje vooruit!"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To bardzo pomoże w utrzymaniu Ice Cubes w działaniu!"
+            "value" : "To bardzo pomoże w utrzymaniu FrostGram w działaniu!"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Será de grande ajuda para manter o Ice Cubes funcionando!"
+            "value" : "Será de grande ajuda para manter o FrostGram funcionando!"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bu, Ice Cubes'u daha uzun süre devam ettirmemize yardımcı olacak!"
+            "value" : "Bu, FrostGram'u daha uzun süre devam ettirmemize yardımcı olacak!"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It'll go a long way to keep Ice Cubes running!"
+            "value" : "It'll go a long way to keep FrostGram running!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "这将大大有助于 Ice Cubes 的持续运行！"
+            "value" : "这将大大有助于 FrostGram 的持续运行！"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "這將大大有助於 Ice Cubes 持續運行！"
+            "value" : "這將大大有助於 FrostGram 持續運行！"
           }
         }
       }
@@ -59976,115 +59976,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Прывітанне! Мяне завуць Томас і я вельмі люблю ствараць праграмы з адкрытым зыходным кодам. Ice Cubesбезумоўна, адзін з праектаў, якімі я найбольш ганаруся на сённяшні дзень. Давайце будзем шчырымі, ён таксама патрабуе надзвычайнага догляду з-за пастаянна зменлівага сусвету Mastodon і сацыяльныя медыя. Калі вы атрымліваеце задавальненне ад карыстання Ice Cubes, падкіньце мне невялікі гасцінец. Гэта зробіць мой дзень (і дапаможа праграме працаваць бесперабойна). 🚀"
+            "value" : "Прывітанне! Мяне завуць Томас і я вельмі люблю ствараць праграмы з адкрытым зыходным кодам. FrostGramбезумоўна, адзін з праектаў, якімі я найбольш ганаруся на сённяшні дзень. Давайце будзем шчырымі, ён таксама патрабуе надзвычайнага догляду з-за пастаянна зменлівага сусвету Mastodon і сацыяльныя медыя. Калі вы атрымліваеце задавальненне ад карыстання FrostGram, падкіньце мне невялікі гасцінец. Гэта зробіць мой дзень (і дапаможа праграме працаваць бесперабойна). 🚀"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hola! Em dic Thomas i m'encanta crear aplicacions de codi obert. Ice Cubes és sens dubte un dels meus projectes del qual més orgullós estic fins avui, i siguem sincers, és també el que requereix més manteniment a causa del món sempre canviant de Mastodon i les xarxes socials. Si estàs t'encisa Ice Cubes, considera fer-me una petita propina. M'alegrarà el  dia (i ajudarà a mantenir l'aplicació funcionant sense problemes). 🚀"
+            "value" : "Hola! Em dic Thomas i m'encanta crear aplicacions de codi obert. FrostGram és sens dubte un dels meus projectes del qual més orgullós estic fins avui, i siguem sincers, és també el que requereix més manteniment a causa del món sempre canviant de Mastodon i les xarxes socials. Si estàs t'encisa FrostGram, considera fer-me una petita propina. M'alegrarà el  dia (i ajudarà a mantenir l'aplicació funcionant sense problemes). 🚀"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀"
+            "value" : "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. FrostGram ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von FrostGram hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
+            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. FrostGram is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using FrostGram, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
+            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. FrostGram is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using FrostGram, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¡Hola! Me llamo Thomas y adoro crear aplicaciones de código abierto. Ice Cubes es definitivamente una de las que más orgulloso estoy hasta la fecha - y siendo honestos, también es una de las que más mantenimiento requiere debido a los constantes cambios en el entorno de Mastodon y las redes sociales. Si te encanta usar Ice Cubes, considera dejar una pequeña propina. Me alegrará el día (y ayudará a mantener la app en perfecto funcionamiento para ti). 🚀"
+            "value" : "¡Hola! Me llamo Thomas y adoro crear aplicaciones de código abierto. FrostGram es definitivamente una de las que más orgulloso estoy hasta la fecha - y siendo honestos, también es una de las que más mantenimiento requiere debido a los constantes cambios en el entorno de Mastodon y las redes sociales. Si te encanta usar FrostGram, considera dejar una pequeña propina. Me alegrará el día (y ayudará a mantener la app en perfecto funcionamiento para ti). 🚀"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kaixo! Thomas dut izena eta izugarri gustatzen zait kode irekiko aplikazioak sortzea. Ice Cubes orain arte harroen egiten nauen proiektua da eta —ez gaitezen engainatu— lan handiena behar duena ere bada Mastodon eta gizarte-sareen etengabeko aldaketen ondorioz. Ice Cubes erabiltzea gustoko baduzu, agian eskupekoren bat eman zeniezadake. Eguna poztuko didazu (eta aplikazioak arazorik gabe funtzionatzen jarraitzen lagunduko du). 🚀"
+            "value" : "Kaixo! Thomas dut izena eta izugarri gustatzen zait kode irekiko aplikazioak sortzea. FrostGram orain arte harroen egiten nauen proiektua da eta —ez gaitezen engainatu— lan handiena behar duena ere bada Mastodon eta gizarte-sareen etengabeko aldaketen ondorioz. FrostGram erabiltzea gustoko baduzu, agian eskupekoren bat eman zeniezadake. Eguna poztuko didazu (eta aplikazioak arazorik gabe funtzionatzen jarraitzen lagunduko du). 🚀"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bonjour ! Mon nom est Thomas et j'adore créer des applications open-source. Ice Cubes est certainement l'un de mes projets dont je suis le plus fier à ce jour - et soyons honnêtes, c'est aussi celui qui nécessite le plus d'entretien en raison de l'évolution constante de Mastodon et des réseaux sociaux. Si vous vous amusez avec Ice Cubes, envisagez de me faire une petite contribution. Cela me fera plaisir (et aidera à maintenir l'application en bon état pour vous). 🚀"
+            "value" : "Bonjour ! Mon nom est Thomas et j'adore créer des applications open-source. FrostGram est certainement l'un de mes projets dont je suis le plus fier à ce jour - et soyons honnêtes, c'est aussi celui qui nécessite le plus d'entretien en raison de l'évolution constante de Mastodon et des réseaux sociaux. Si vous vous amusez avec FrostGram, envisagez de me faire une petite contribution. Cela me fera plaisir (et aidera à maintenir l'application en bon état pour vous). 🚀"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ehilà! Mi chiamo Thomas e adoro creare applicazioni open source. Ice Cubes è senza dubbio uno dei progetti di cui vado più fiero al momento e, a dirla tutta, è anche quello che richiede più tempo per via dei continui cambiamenti nel mondo di Mastodon e dei social. Se ti stai trovando bene con Ice Cubes, ti invito a lasciare una piccola mancia. Mi farai molto felice (e contribuirai a rendere l’app migliore per tutti). 🚀"
+            "value" : "Ehilà! Mi chiamo Thomas e adoro creare applicazioni open source. FrostGram è senza dubbio uno dei progetti di cui vado più fiero al momento e, a dirla tutta, è anche quello che richiede più tempo per via dei continui cambiamenti nel mondo di Mastodon e dei social. Se ti stai trovando bene con FrostGram, ti invito a lasciare una piccola mancia. Mi farai molto felice (e contribuirai a rendere l’app migliore per tutti). 🚀"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "こんにちは。オープンソースのアプリを作るのが大好きなThomasです。Ice Cubesは、私の最も得意とするプロジェクトの1つではありますが、Mastodonやソーシャルメディアが常に変化しているため、多くのメンテナンスが必要なプロジェクトでもあります。もし、あなたがIce Cubesを楽しんでいるなら、私宛にちょっとしたチップを投げ入れてください。アプリを円滑に運営することができます。🚀"
+            "value" : "こんにちは。オープンソースのアプリを作るのが大好きなThomasです。FrostGramは、私の最も得意とするプロジェクトの1つではありますが、Mastodonやソーシャルメディアが常に変化しているため、多くのメンテナンスが必要なプロジェクトでもあります。もし、あなたがFrostGramを楽しんでいるなら、私宛にちょっとしたチップを投げ入れてください。アプリを円滑に運営することができます。🚀"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "안녕하세요! 저는 Thomas입니다. 저는 오픈 소스 앱을 만드는 걸 정말 좋아해요. Ice Cubes는 제가 가장 자랑스럽게 생각하는 프로젝트 중 하나에요. 동시에 가장 많은 유지·보수가 필요한 프로젝트이기도 하죠. 마스토돈은 끊임없이 업데이트되고, 소셜 미디어의 세계 역시 빠르게 변화하니까요. Ice Cubes를 쓰며 즐거운 시간을 보내고 있나요? 그렇다면, 작은 기부금을 한 번 보내보는 건 어때요? 제 하루가 행복해질 거에요. (그리고 이 앱이 계속 잘 작동하는 데 도움이 될 거에요.) 🚀"
+            "value" : "안녕하세요! 저는 Thomas입니다. 저는 오픈 소스 앱을 만드는 걸 정말 좋아해요. FrostGram는 제가 가장 자랑스럽게 생각하는 프로젝트 중 하나에요. 동시에 가장 많은 유지·보수가 필요한 프로젝트이기도 하죠. 마스토돈은 끊임없이 업데이트되고, 소셜 미디어의 세계 역시 빠르게 변화하니까요. FrostGram를 쓰며 즐거운 시간을 보내고 있나요? 그렇다면, 작은 기부금을 한 번 보내보는 건 어때요? 제 하루가 행복해질 거에요. (그리고 이 앱이 계속 잘 작동하는 데 도움이 될 거에요.) 🚀"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hei der! Jeg heter Thomas og jeg elsker å lage apper med åpen kildekode. Ice Cubes er definitivt et av mine stolteste prosjekter til nå – og la oss være ekte, det er også det som krever mest vedlikehold på grunn av den stadig skiftende verdenen til Mastodon og sosiale medier. Hvis du har det kjempegøy med Ice Cubes, bør du vurdere å kaste et lite tips min vei. Det vil gjøre dagen min (og bidra til at appen kjører jevnt for deg). 🚀"
+            "value" : "Hei der! Jeg heter Thomas og jeg elsker å lage apper med åpen kildekode. FrostGram er definitivt et av mine stolteste prosjekter til nå – og la oss være ekte, det er også det som krever mest vedlikehold på grunn av den stadig skiftende verdenen til Mastodon og sosiale medier. Hvis du har det kjempegøy med FrostGram, bør du vurdere å kaste et lite tips min vei. Det vil gjøre dagen min (og bidra til at appen kjører jevnt for deg). 🚀"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hallo! Mijn naam is Thomas en ik ben dol op het maken van opensource-apps. Ice Cubes is een van de projecten waar ik het meest trots op ben - en laten we eerlijk zijn, het is ook degene die het meeste onderhoud vergt vanwege de voortdurend veranderende wereld van Mastodon en sociale media. Als je Ice Cubes graag gebruikt, overweeg dan om een kleine fooi te geven. Daar word ik heel blij van (en het zal helpen om de app soepel voor je te laten werken). 🚀"
+            "value" : "Hallo! Mijn naam is Thomas en ik ben dol op het maken van opensource-apps. FrostGram is een van de projecten waar ik het meest trots op ben - en laten we eerlijk zijn, het is ook degene die het meeste onderhoud vergt vanwege de voortdurend veranderende wereld van Mastodon en sociale media. Als je FrostGram graag gebruikt, overweeg dan om een kleine fooi te geven. Daar word ik heel blij van (en het zal helpen om de app soepel voor je te laten werken). 🚀"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cześć! Mam na imię Thomas i uwielbiam tworzenie aplikacji open source. Ice Cubes jest zdecydowanie jednym z tych moich dotychczasowych projektów, z których jestem najbardziej dumny – i bądźmy szczerzy, jest to również ten, który wymaga najwięcej nieustannych prac utrzymaniowych ze względu na ciągle zmieniający się świat Mastodona i mediów społecznościowych. Jeśli świetnie się bawisz, używając kostek lodu, rozważ podrzucenie mi małego napiwku. Umili mi to dzień (i pomoże sprawić, że aplikacja zawsze działać będzie bezproblemowo). 🚀"
+            "value" : "Cześć! Mam na imię Thomas i uwielbiam tworzenie aplikacji open source. FrostGram jest zdecydowanie jednym z tych moich dotychczasowych projektów, z których jestem najbardziej dumny – i bądźmy szczerzy, jest to również ten, który wymaga najwięcej nieustannych prac utrzymaniowych ze względu na ciągle zmieniający się świat Mastodona i mediów społecznościowych. Jeśli świetnie się bawisz, używając kostek lodu, rozważ podrzucenie mi małego napiwku. Umili mi to dzień (i pomoże sprawić, że aplikacja zawsze działać będzie bezproblemowo). 🚀"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Olá! Meu nome é Thomas e eu amo criar aplicativos open source. Ice Cubes é definitivamente um dos meus projetos de maior orgulho até agora - e vamos ser realistas, é um dos que exigem maior manutenção devido ao mundo de constantes mudanças do Mastodon e das redes sociais. Se você está se divertindo usando o Ice Cubes, considere dar uma pequena gorjeta para mim. Isto deixará meu dia muito feliz (e ajudará a manter o aplicativo rodando sem problemas para você). 🚀"
+            "value" : "Olá! Meu nome é Thomas e eu amo criar aplicativos open source. FrostGram é definitivamente um dos meus projetos de maior orgulho até agora - e vamos ser realistas, é um dos que exigem maior manutenção devido ao mundo de constantes mudanças do Mastodon e das redes sociais. Se você está se divertindo usando o FrostGram, considere dar uma pequena gorjeta para mim. Isto deixará meu dia muito feliz (e ajudará a manter o aplicativo rodando sem problemas para você). 🚀"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Merhaba! Benim adım Thomas ve açık kaynak kodlu uygulamalar oluşturmayı seviyorum. Ice Cubes benim şu ana kadarki en çok gurur duyduğum projelerden biri - ve doğrusu, Mastodon ve sosyal medyanın durmadan değişen yapısı nedeniyle en çok bakım gerektireni. Eğer Ice Cubes'u kullanmaktan memnunsanız, ufak bir bağış göndermeyi düşünebilirsiniz. Bu gerçekten günümü güzelleştirir (ve uygulamanın senin için daha da düzgün çalışmasına yardımcı olur). 🚀"
+            "value" : "Merhaba! Benim adım Thomas ve açık kaynak kodlu uygulamalar oluşturmayı seviyorum. FrostGram benim şu ana kadarki en çok gurur duyduğum projelerden biri - ve doğrusu, Mastodon ve sosyal medyanın durmadan değişen yapısı nedeniyle en çok bakım gerektireni. Eğer FrostGram'u kullanmaktan memnunsanız, ufak bir bağış göndermeyi düşünebilirsiniz. Bu gerçekten günümü güzelleştirir (ve uygulamanın senin için daha da düzgün çalışmasına yardımcı olur). 🚀"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
+            "value" : "Hi there! My name is Thomas and I absolutely love creating open source apps. FrostGram is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using FrostGram, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你好呀！我叫 Thomas，我非常喜欢写开源应用。Ice Cubes 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 Ice Cubes，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀"
+            "value" : "你好呀！我叫 Thomas，我非常喜欢写开源应用。FrostGram 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 FrostGram，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您好！我是 Thomas，我愛寫開源碼程式。Ice Cubes 是我最引以為傲的作品之一，但是老實說因為 Mastodon 和社交媒體的日新月異，也是最需要維護的。您如果愛用 Ice Cubes，請考慮贊助我。這將讓我很開心，也幫助我繼續維護這個軟體。 🚀"
+            "value" : "您好！我是 Thomas，我愛寫開源碼程式。FrostGram 是我最引以為傲的作品之一，但是老實說因為 Mastodon 和社交媒體的日新月異，也是最需要維護的。您如果愛用 FrostGram，請考慮贊助我。這將讓我很開心，也幫助我繼續維護這個軟體。 🚀"
           }
         }
       }
@@ -60094,115 +60094,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Падтрымаць Ice Cubes"
+            "value" : "Падтрымаць FrostGram"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dona suport a Ice Cubes"
+            "value" : "Dona suport a FrostGram"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes unterstützen"
+            "value" : "FrostGram unterstützen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Support Ice Cubes"
+            "value" : "Support FrostGram"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Support Ice Cubes"
+            "value" : "Support FrostGram"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apoya a Ice Cubes"
+            "value" : "Apoya a FrostGram"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eman babesa Ice Cubes-i"
+            "value" : "Eman babesa FrostGram-i"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Soutenez Ice Cubes"
+            "value" : "Soutenez FrostGram"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supporta Ice Cubes"
+            "value" : "Supporta FrostGram"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesを支援する"
+            "value" : "FrostGramを支援する"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 지원하기"
+            "value" : "FrostGram 지원하기"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Støtt Ice Cubes"
+            "value" : "Støtt FrostGram"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ondersteun Ice Cubes"
+            "value" : "Ondersteun FrostGram"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wspieraj Ice Cubes"
+            "value" : "Wspieraj FrostGram"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apoie o Ice Cubes"
+            "value" : "Apoie o FrostGram"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes'u destekleyin"
+            "value" : "FrostGram'u destekleyin"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Підтримка Ice Cubes"
+            "value" : "Підтримка FrostGram"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "支持 Ice Cubes"
+            "value" : "支持 FrostGram"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "支援 Ice Cubes"
+            "value" : "支援 FrostGram"
           }
         }
       }
@@ -60920,115 +60920,115 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Thanks for being an FrostGram supporter!"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Thanks for being an FrostGram supporter!"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Danke, dass du Ice Cubes unterstützst!"
+            "value" : "Danke, dass du FrostGram unterstützst!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Thanks for being an FrostGram supporter!"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Thanks for being an FrostGram supporter!"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " ¡Gracias por ser seguidor de Ice Cubes!"
+            "value" : " ¡Gracias por ser seguidor de FrostGram!"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Eskerrik asko Ice Cubes-en babeslea izateagatik!"
+            "value" : " Eskerrik asko FrostGram-en babeslea izateagatik!"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Merci d'être un supporter de Ice Cubes supporter !"
+            "value" : "Merci d'être un supporter de FrostGram supporter !"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grazie per il tuo sostegno a Ice Cubes!"
+            "value" : "Grazie per il tuo sostegno a FrostGram!"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesサポーターになってくれてありがとう！"
+            "value" : "FrostGramサポーターになってくれてありがとう！"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Ice Cubes의 후원자가 되어 주셔서 감사합니다!"
+            "value" : " FrostGram의 후원자가 되어 주셔서 감사합니다!"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Takk for at du er en Ice Cubes-støttespiller!"
+            "value" : " Takk for at du er en FrostGram-støttespiller!"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bedankt dat je supporter van Ice Cubes bent!"
+            "value" : "Bedankt dat je supporter van FrostGram bent!"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Dziękuję, że wspierasz Ice Cubes!"
+            "value" : " Dziękuję, że wspierasz FrostGram!"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Obrigado por ser um apoiador do Ice Cubes!"
+            "value" : " Obrigado por ser um apoiador do FrostGram!"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes destekçisi olduğunuz için teşekkürler!"
+            "value" : "FrostGram destekçisi olduğunuz için teşekkürler!"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Thanks for being an FrostGram supporter!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "感谢你成为 Ice Cubes 的支持者！"
+            "value" : "感谢你成为 FrostGram 的支持者！"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " 感謝您成為 Ice Cubes 支持者！"
+            "value" : " 感謝您成為 FrostGram 支持者！"
           }
         }
       }
@@ -61156,61 +61156,61 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "By giving a monthly tip to FrostGram, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "By giving a monthly tip to FrostGram, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Indem du Ice Cubes ein monatliches Trinkgeld gibst, wirst du Unterstützer und bekommst sogar einen Verifiziert-Haken in deinem Profil. Nur für deine 👀."
+            "value" : "Indem du FrostGram ein monatliches Trinkgeld gibst, wirst du Unterstützer und bekommst sogar einen Verifiziert-Haken in deinem Profil. Nur für deine 👀."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "By giving a monthly tip to FrostGram, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "By giving a monthly tip to FrostGram, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aportando una propina mensual a Ice Cubes, te convertirás en seguidor, incluso conseguirás una insignia de verificación en tu perfil. Sólo para tus 👀."
+            "value" : "Aportando una propina mensual a FrostGram, te convertirás en seguidor, incluso conseguirás una insignia de verificación en tu perfil. Sólo para tus 👀."
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes-i hilero eskupeko bat ematean babesle bilakatuko zara eta zure profilean egiaztatutako intsignia bat ere lortuko duzu. Zuk bakarrik 👀 ahal izango duzu."
+            "value" : "FrostGram-i hilero eskupeko bat ematean babesle bilakatuko zara eta zure profilean egiaztatutako intsignia bat ere lortuko duzu. Zuk bakarrik 👀 ahal izango duzu."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En donnant un pourboire mensuel à Ice Cubes, vous devenez supporter, vous obtiendrez même un badge vérifié sur votre profil. Pour vos 👀 seulement."
+            "value" : "En donnant un pourboire mensuel à FrostGram, vous devenez supporter, vous obtiendrez même un badge vérifié sur votre profil. Pour vos 👀 seulement."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inviando una mancia mensile a Ice Cubes si diventa sostenitori, riceverai anche un badge di verifica sul profilo. Solo per i tuoi 👀."
+            "value" : "Inviando una mancia mensile a FrostGram si diventa sostenitori, riceverai anche un badge di verifica sul profilo. Solo per i tuoi 👀."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesに毎月のヒントを提供することで、あなたはサポーターになり、プロフィールに認証済みのバッジを取得することもできます。👀 あなた専用です。"
+            "value" : "FrostGramに毎月のヒントを提供することで、あなたはサポーターになり、プロフィールに認証済みのバッジを取得することもできます。👀 あなた専用です。"
           }
         },
         "ko" : {
@@ -61222,49 +61222,49 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ved å gi et månedlig tips til Ice Cubes, blir du en støttespiller. Du vil til og med få bekreftet merke på profilen din. Kun for dine 👀."
+            "value" : "Ved å gi et månedlig tips til FrostGram, blir du en støttespiller. Du vil til og med få bekreftet merke på profilen din. Kun for dine 👀."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Door maandelijks een fooi te geven aan Ice Cubes word je supporter. Je krijgt dan zelfs een verificatievinkje op je profiel. Alleen voor jou zichtbaar 👀"
+            "value" : "Door maandelijks een fooi te geven aan FrostGram word je supporter. Je krijgt dan zelfs een verificatievinkje op je profiel. Alleen voor jou zichtbaar 👀"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Przekazując Ice Cubes comiesięczny napiwek, stajesz się osobą wspierającą, a dodatkowo na swoim profilu otrzymasz znaczek weryfikacji. Tylko dla twoich 👀."
+            "value" : "Przekazując FrostGram comiesięczny napiwek, stajesz się osobą wspierającą, a dodatkowo na swoim profilu otrzymasz znaczek weryfikacji. Tylko dla twoich 👀."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dando uma gorjeta mensal ao Ice Cubes, você se torna um apoiador, e ainda receberá um selo de 'verificado' no seu perfil (apenas para seus 👀)"
+            "value" : "Dando uma gorjeta mensal ao FrostGram, você se torna um apoiador, e ainda receberá um selo de 'verificado' no seu perfil (apenas para seus 👀)"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes uygulamasına aylık bağış yaparak, profilinde bile onaylanmış etiketi alabilirsin. Sadece senin için. 👀"
+            "value" : "FrostGram uygulamasına aylık bağış yaparak, profilinde bile onaylanmış etiketi alabilirsin. Sadece senin için. 👀"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "By giving a monthly tip to FrostGram, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你可以通过每月给 Ice Cubes 捐赠成为支持者，你还能在个人资料上得到一个认证徽章，仅你可见 👀"
+            "value" : "你可以通过每月给 FrostGram 捐赠成为支持者，你还能在个人资料上得到一个认证徽章，仅你可见 👀"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您若每月捐贈給 Ice Cubes 就能成為支持者，更能在個人檔案裡看到驗證徽章。限您 👀 見。"
+            "value" : "您若每月捐贈給 FrostGram 就能成為支持者，更能在個人檔案裡看到驗證徽章。限您 👀 見。"
           }
         }
       }
@@ -65174,61 +65174,61 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "FrostGram will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "FrostGram will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes wird versuchen, die Sprache deines Beitrags automatisch zu erkennen, und, falls nötig, vorschlagen, die Sprache zur Veröffentlichung zu ändern."
+            "value" : "FrostGram wird versuchen, die Sprache deines Beitrags automatisch zu erkennen, und, falls nötig, vorschlagen, die Sprache zur Veröffentlichung zu ändern."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "FrostGram will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "FrostGram will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes intentará detectar el idioma de la publicación automáticamente cuando estés a punto de publicarla y sugerirá cambiar el idioma de la publicación si es necesario."
+            "value" : "FrostGram intentará detectar el idioma de la publicación automáticamente cuando estés a punto de publicarla y sugerirá cambiar el idioma de la publicación si es necesario."
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes automatikoki saiatuko da argitaratzear zauden bidalketaren hizkuntza antzematen eta bidalketaren hizkuntza aldatzea gomendatuko dizu bat ez datorrela ikusten badu."
+            "value" : "FrostGram automatikoki saiatuko da argitaratzear zauden bidalketaren hizkuntza antzematen eta bidalketaren hizkuntza aldatzea gomendatuko dizu bat ez datorrela ikusten badu."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes tentera de détecter automatiquement la langue du message que vous êtes sur le point de publier et vous proposera de mettre à jour la langue de votre message si nécessaire."
+            "value" : "FrostGram tentera de détecter automatiquement la langue du message que vous êtes sur le point de publier et vous proposera de mettre à jour la langue de votre message si nécessaire."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes cercherà di rilevare automaticamente la lingua del post che stai per pubblicare e, se necessario, ti suggerirà di aggiornare la lingua del post."
+            "value" : "FrostGram cercherà di rilevare automaticamente la lingua del post che stai per pubblicare e, se necessario, ti suggerirà di aggiornare la lingua del post."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubesは、投稿しようとしている投稿の言語を自動的に検出しようとし、必要に応じて投稿言語を更新するよう提案します。"
+            "value" : "FrostGramは、投稿しようとしている投稿の言語を自動的に検出しようとし、必要に応じて投稿言語を更新するよう提案します。"
           }
         },
         "ko" : {
@@ -65240,49 +65240,49 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "FrostGram will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes probeert de taal van de te plaatsen post automatisch te herkennen en geeft dan de suggestie de taal van de post aan te passen, indien nodig. "
+            "value" : "FrostGram probeert de taal van de te plaatsen post automatisch te herkennen en geeft dan de suggestie de taal van de post aan te passen, indien nodig. "
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes spróbuje automatycznie wykryć język postu, który zamierzasz opublikować i w razie potrzeby zasugeruje aktualizację języka postu."
+            "value" : "FrostGram spróbuje automatycznie wykryć język postu, który zamierzasz opublikować i w razie potrzeby zasugeruje aktualizację języka postu."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O Ice Cubes tentará detectar automaticamente o idioma da publicação que você está prestes a enviar e sugerirá a atualização do idioma da publicação, se necessário."
+            "value" : "O FrostGram tentará detectar automaticamente o idioma da publicação que você está prestes a enviar e sugerirá a atualização do idioma da publicação, se necessário."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes göndereceğin gönderinin dilini algılamaya çalışacak ve gerekirse gönderi dilini güncellemeni önerecek."
+            "value" : "FrostGram göndereceğin gönderinin dilini algılamaya çalışacak ve gerekirse gönderi dilini güncellemeni önerecek."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes спробує автоматично визначити мову вашого допису і запропонує оновити мову допису, якщо забажаєте."
+            "value" : "FrostGram спробує автоматично визначити мову вашого допису і запропонує оновити мову допису, якщо забажаєте."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。"
+            "value" : "FrostGram 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes 將自動偵測您用的語言，必要時會提醒您設定嘟文的語言。"
+            "value" : "FrostGram 將自動偵測您用的語言，必要時會提醒您設定嘟文的語言。"
           }
         }
       }
@@ -87392,36 +87392,36 @@
         }
       }
     },
-    "Use Ice Cubes to compose a post for Mastodon" : {
+    "Use FrostGram to compose a post for Mastodon" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes verwenden, um einen Beitrag für Mastodon zu verfassen"
+            "value" : "FrostGram verwenden, um einen Beitrag für Mastodon zu verfassen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usar Ice Cubes para escribir una publicación para Mastodon"
+            "value" : "Usar FrostGram para escribir una publicación para Mastodon"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erabili Ice Cubes Mastodonerako bidalketa bat idazteko"
+            "value" : "Erabili FrostGram Mastodonerako bidalketa bat idazteko"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utiliser Ice Cubes pour composer une publication pour Mastodon"
+            "value" : "Utiliser FrostGram pour composer une publication pour Mastodon"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usa Ice Cubes per comporre un post per Mastodon"
+            "value" : "Usa FrostGram per comporre un post per Mastodon"
           }
         },
         "ko" : {
@@ -87433,65 +87433,65 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Użyj Ice Cubes do pisania postów na Mastodonie"
+            "value" : "Użyj FrostGram do pisania postów na Mastodonie"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usar Ice Cubes para criar uma postagem para o Mastodon"
+            "value" : "Usar FrostGram para criar uma postagem para o Mastodon"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mastodon için bir gönderi oluşturmak için Ice Cubes kullanın"
+            "value" : "Mastodon için bir gönderi oluşturmak için FrostGram kullanın"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
+            "value" : "使用 FrostGram 向 Mastodon 发布嘟文"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用 Ice Cubes 在 Mastodon 上發表嘟文"
+            "value" : "用 FrostGram 在 Mastodon 上發表嘟文"
           }
         }
       }
     },
-    "Use Ice Cubes to compose a post with an image to Mastodon" : {
+    "Use FrostGram to compose a post with an image to Mastodon" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes verwenden, um einen Beitrag mit einem Bild für Mastodon zu verfassen"
+            "value" : "FrostGram verwenden, um einen Beitrag mit einem Bild für Mastodon zu verfassen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usar Ice Cubes para escribir una publicación con una imagen para Mastodon"
+            "value" : "Usar FrostGram para escribir una publicación con una imagen para Mastodon"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat idazteko"
+            "value" : "Erabili FrostGram irudi bat duen Mastodonerako bidalketa bat idazteko"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utiliser Ice Cubes pour composer une publication avec une image sur Mastodon"
+            "value" : "Utiliser FrostGram pour composer une publication avec une image sur Mastodon"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usa Ice Cubes per comporre un post con un'immagine per Mastodon"
+            "value" : "Usa FrostGram per comporre un post con un'immagine per Mastodon"
           }
         },
         "ko" : {
@@ -87503,25 +87503,25 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Użyj Ice Cubes do pisania postów z obrazkami na Mastodonie"
+            "value" : "Użyj FrostGram do pisania postów z obrazkami na Mastodonie"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için Ice Cubes kullanın"
+            "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için FrostGram kullanın"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
+            "value" : "使用 FrostGram 向 Mastodon 发布带有图片的嘟文"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用 Ice Cubes 在 Mastodon 上發表圖片"
+            "value" : "用 FrostGram 在 Mastodon 上發表圖片"
           }
         }
       }

@@ -7,7 +7,6 @@ import KeychainSwift
 import MediaUI
 import Models
 import NetworkClient
-import RevenueCat
 import StatusKit
 import SwiftData
 import SwiftUI

@@ -65,7 +65,7 @@ extension IceCubesApp {
     }
     CommandGroup(replacing: .help) {
       Button("menu.help.github") {
-        let url = URL(string: "https://github.com/Dimillian/IceCubesApp/issues")!
+        let url = URL(string: "https://github.com/alzimerahmed/FrostGram/issues")!
         UIApplication.shared.open(url)
       }
     }

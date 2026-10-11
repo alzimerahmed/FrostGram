@@ -36,7 +36,7 @@ private struct SafariRouter: ViewModifier {
         }
       )
       .onOpenURL { url in
-        // Open external URL (from icecubesapp://)
+        // Open external URL (from frostgram://)
         guard !isSecondaryColumn else { return }
         let urlString = url.absoluteString.replacingOccurrences(
           of: AppInfo.scheme, with: "https://")

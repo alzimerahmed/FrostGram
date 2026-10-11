@@ -6,14 +6,9 @@ import Env
 import KeychainSwift
 import MediaUI
 import NetworkClient
-import RevenueCat
 import StatusKit
 import SwiftUI
 import Timeline
-
-#if !targetEnvironment(macCatalyst)
-  import WishKit
-#endif
 
 @main
 struct IceCubesApp: App {
@@ -71,16 +66,6 @@ struct IceCubesApp: App {
     }
   }
 
-  func setupRevenueCat() {
-    Purchases.logLevel = .error
-    Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
-    Purchases.shared.getCustomerInfo { info, _ in
-      if info?.entitlements["Supporter"]?.isActive == true {
-        isSupporter = true
-      }
-    }
-  }
-
   func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
   }
@@ -96,9 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     Telemetry.setup()
     Telemetry.signal("app.launched")
-    #if !targetEnvironment(macCatalyst)
-      WishKit.configure(with: "AF21AE07-3BA9-4FE2-BFB1-59A3B3941730")
-    #endif
     return true
   }
 

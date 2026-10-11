@@ -20,7 +20,7 @@ pushd $(dirname $CI_ARCHIVE_PATH)
 zip -r --symlinks "$(basename $zip_path)" "$(basename $CI_ARCHIVE_PATH)"
 popd
 
-repo_name='Dimillian/IceCubesApp'
+repo_name='alzimerahmed/FrostGram'
 tag='release'
 json_fields=$(cat <<EOF
 "filename":"${zip_path}",

@@ -10,7 +10,6 @@ extension IceCubesApp {
       AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
         .onAppear {
-          setupRevenueCat()
           refreshPushSubs()
         }
         .withAppDependencyGraph(

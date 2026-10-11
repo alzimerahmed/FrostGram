@@ -50,7 +50,7 @@ extension StatusEditor {
               Link(
                 "Review Privacy Policy",
                 destination: URL(
-                  string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD"
+                  string: "https://github.com/alzimerahmed/FrostGram/blob/main/PRIVACY.MD"
                 )!
               )
             }

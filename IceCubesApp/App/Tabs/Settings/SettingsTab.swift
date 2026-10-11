@@ -307,39 +307,17 @@ struct SettingsTabs: View {
         }
       #endif
 
-      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
+      Link(destination: URL(string: "https://github.com/alzimerahmed/FrostGram")!) {
         Label("settings.app.source", systemImage: "link")
       }
       .accessibilityRemoveTraits(.isButton)
       .tint(theme.labelColor)
-
-      NavigationLink(destination: SupportAppView()) {
-        Label("settings.app.support", systemImage: "wand.and.stars")
-      }
-
-      if let reviewURL = URL(
-        string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review")
-      {
-        Link(destination: reviewURL) {
-          Label("settings.rate", systemImage: "link")
-        }
-        .accessibilityRemoveTraits(.isButton)
-        .tint(theme.labelColor)
-      }
 
       NavigationLink {
         AboutView()
       } label: {
         Label("settings.app.about", systemImage: "info.circle")
       }
-
-      #if !targetEnvironment(macCatalyst)
-        NavigationLink {
-          WishlistView()
-        } label: {
-          Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
-        }
-      #endif
 
     } header: {
       Text("settings.section.app")
