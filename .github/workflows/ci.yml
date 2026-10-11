@@ -66,6 +66,10 @@ jobs:
           SIM="$(xcrun simctl list devices available | grep -m1 'iPhone' | sed -E 's/^ +([^(]+) \(.*/\1/' | xargs)"
           echo "Using simulator: $SIM"
           echo "name=$SIM" >> "$GITHUB_OUTPUT"
+      - name: Generate xcconfig
+        run: |
+          sed -e 's/YOUR_TEAM_ID/0000000000/' -e 's/com.example/com.alzimerahmed/' \
+            IceCubesApp.xcconfig.template > IceCubesApp.xcconfig
       - name: Build
         run: |
           xcodebuild build \
