@@ -129,8 +129,8 @@ public struct AccountsListView: View {
         if accounts.isEmpty {
           PlaceholderView(
             iconName: "person.icloud",
-            title: "No accounts found",
-            message: "This list of accounts is empty"
+            title: "account.list.empty.title",
+            message: "account.list.empty.message"
           )
           .listRowSeparator(.hidden)
         } else {

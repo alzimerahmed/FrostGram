@@ -76,6 +76,7 @@ public struct AccountsListRow: View {
             Image(systemName: "checkmark.seal")
               .font(.scaledFootnote)
               .foregroundColor(.green)
+              .accessibilityHidden(true)
 
             EmojiTextApp(field.value, emojis: viewModel.account.emojis)
               .font(.scaledFootnote)

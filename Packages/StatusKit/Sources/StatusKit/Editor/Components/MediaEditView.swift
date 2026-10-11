@@ -137,6 +137,8 @@ extension StatusEditor {
       .frame(height: 200)
       .clipShape(RoundedRectangle(cornerRadius: 8))
       .padding(8)
+      // Decorative preview: the alt-text field below is the meaningful content.
+      .accessibilityHidden(true)
     }
 
     @ViewBuilder

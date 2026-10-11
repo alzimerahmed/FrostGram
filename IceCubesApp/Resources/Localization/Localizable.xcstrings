@@ -85461,6 +85461,72 @@
           }
         }
       }
+    },
+    "accessibility.editor.button.remove-follow-up": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove follow-up post"
+          }
+        }
+      }
+    },
+    "accessibility.editor.button.discard-media": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove attached media"
+          }
+        }
+      }
+    },
+    "accessibility.editor.button.edit-alt-text": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit alt text"
+          }
+        }
+      }
+    },
+    "status.editor.media.retry-upload": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retry Upload"
+          }
+        }
+      }
+    },
+    "account.list.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No accounts found"
+          }
+        }
+      }
+    },
+    "account.list.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This list of accounts is empty"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

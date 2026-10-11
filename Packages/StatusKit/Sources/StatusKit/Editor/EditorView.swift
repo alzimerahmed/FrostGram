@@ -139,6 +139,7 @@ extension StatusEditor {
                 Image(systemName: "minus.circle.fill").foregroundStyle(.red)
               }
             }
+            .accessibilityLabel("accessibility.editor.button.remove-follow-up")
           }
         }
         .padding(.horizontal, .layoutPadding)

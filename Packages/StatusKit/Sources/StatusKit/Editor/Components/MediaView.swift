@@ -206,7 +206,7 @@ extension StatusEditor {
             await store.upload(container: container)
           }
         } label: {
-          Label("Retry Upload", systemImage: "arrow.clockwise")
+          Label("status.editor.media.retry-upload", systemImage: "arrow.clockwise")
         }
       case .uploading:
         EmptyView()
@@ -252,6 +252,7 @@ extension StatusEditor {
         }
         .buttonStyle(.glass)
         .padding()
+        .accessibilityLabel("accessibility.editor.button.edit-alt-text")
       } else {
         Button {
           editingMediaContainer = container
@@ -263,6 +264,7 @@ extension StatusEditor {
         .background(.thinMaterial)
         .cornerRadius(8)
         .padding(4)
+        .accessibilityLabel("accessibility.editor.button.edit-alt-text")
       }
     }
 
@@ -278,6 +280,7 @@ extension StatusEditor {
         }
         .buttonStyle(.glass)
         .padding()
+        .accessibilityLabel("accessibility.editor.button.discard-media")
       } else {
         Button(role: .destructive) {
           deleteAction(container: container)
@@ -289,6 +292,7 @@ extension StatusEditor {
             .background(Circle().fill(.thinMaterial))
         }
         .padding(4)
+        .accessibilityLabel("accessibility.editor.button.discard-media")
       }
     }
 
