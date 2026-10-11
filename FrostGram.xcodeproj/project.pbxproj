@@ -214,7 +214,6 @@
 		9FF305672CCA8515007B6B8F /* FrostGramActionExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9FF3056D2CCA8515007B6B8F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FrostGramActionExtension; sourceTree = "<group>"; };
 		9FF305712CCA8528007B6B8F /* FrostGramShareExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9FF305732CCA8528007B6B8F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FrostGramShareExtension; sourceTree = "<group>"; };
 		9FF305C02CCA8569007B6B8F /* FrostGram */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9FF305FB2CCA856A007B6B8F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9FF305FC2CCA856A007B6B8F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9FF305FD2CCA856A007B6B8F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FrostGram; sourceTree = "<group>"; };
-		E9FB0ACA2E09B13C002D232F /* AlternateIcons */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AlternateIcons; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,7 +300,6 @@
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
-				E9FB0ACA2E09B13C002D232F /* AlternateIcons */,
 				E9DB78972E004E4C004EAC2E /* AppIcon.icon */,
 				DD31E2E5297FB68B00A4BE29 /* FrostGram.xcconfig */,
 				9F7D939529800B0300EE6B7A /* FrostGram-release.xcconfig */,
@@ -459,7 +457,6 @@
 			fileSystemSynchronizedGroups = (
 				9FF304F52CCA8440007B6B8F /* FrostGramAppIntents */,
 				9FF305C02CCA8569007B6B8F /* FrostGram */,
-				E9FB0ACA2E09B13C002D232F /* AlternateIcons */,
 			);
 			name = FrostGram;
 			packageProductDependencies = (

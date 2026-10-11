@@ -294,26 +294,7 @@ struct SettingsTabs: View {
 
   private var appSection: some View {
     Section {
-      #if !targetEnvironment(macCatalyst) && !os(visionOS)
-        NavigationLink(destination: IconSelectorView()) {
-          Label {
-            Text("settings.app.icon")
-          } icon: {
-            let icon = IconSelectorView.Icon(
-              string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            if let image: UIImage = .init(named: icon.previewImageName) {
-              Image(uiImage: image)
-                .resizable()
-                .frame(width: 25, height: 25)
-                .cornerRadius(4)
-            } else {
-              EmptyView()
-            }
-          }
-        }
-      #endif
-
-      Link(destination: URL(string: "https://github.com/alzimerahmed/FrostGram")!) {
+        Link(destination: URL(string: "https://github.com/alzimerahmed/FrostGram")!) {
         Label("settings.app.source", systemImage: "link")
       }
       .accessibilityRemoveTraits(.isButton)

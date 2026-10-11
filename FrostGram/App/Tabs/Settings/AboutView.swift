@@ -27,18 +27,6 @@ struct AboutView: View {
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate1-image") ?? .init())
-              .resizable()
-              .frame(width: 50, height: 50)
-              .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate2-image") ?? .init())
-              .resizable()
-              .frame(width: 50, height: 50)
-              .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate3-image") ?? .init())
-              .resizable()
-              .frame(width: 50, height: 50)
-              .cornerRadius(4)
             Spacer()
           }
         #endif
