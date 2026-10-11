@@ -166,7 +166,7 @@ private struct MediaPreview: View {
           }
         } else {
           MediaPreviewsPlaceholder(
-            systemImage: MediaPreviewsPolicy.placeholderSystemImage(for: displayData.type)
+            systemImage: MediaPreviewsPolicy.placeholderSystemImage(for: displayData.supportedType)
           )
         }
       }
@@ -336,6 +336,7 @@ private struct DisplayData: Identifiable, Hashable {
   let previewUrl: URL?
   let description: String?
   let type: DisplayType
+  let supportedType: MediaAttachment.SupportedType
   let accessibilityText: String
   let isLandscape: Bool
 
@@ -348,6 +349,7 @@ private struct DisplayData: Identifiable, Hashable {
     previewUrl = attachment.previewUrl ?? attachment.url
     description = attachment.description
     self.type = DisplayType(from: type)
+    self.supportedType = type
     accessibilityText = Self.getAccessibilityString(from: attachment)
     isLandscape = (attachment.meta?.original?.width ?? 0) > (attachment.meta?.original?.height ?? 0)
   }

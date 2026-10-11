@@ -107,5 +107,9 @@ private final class MockEditorClient: StatusEditor.AutocompleteService.Client,
     throw DummyError()
   }
 
+  func scheduleStatus(data _: StatusData, scheduledAt _: Date) async throws -> ScheduledStatus {
+    throw DummyError()
+  }
+
   func fetchCustomEmojis() async throws -> [Emoji] { [] }
 }

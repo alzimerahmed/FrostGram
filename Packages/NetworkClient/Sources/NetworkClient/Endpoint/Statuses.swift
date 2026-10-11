@@ -108,6 +108,8 @@ public struct StatusData: Encodable, Sendable {
   public let language: String?
   public let mediaAttributes: [MediaAttribute]?
   public let quotedStatusId: String?
+  /// ISO 8601 formatted publication time; when set, the server schedules the status instead of posting it.
+  public let scheduledAt: String?
 
   public struct PollData: Encodable, Sendable {
     public let options: [String]
@@ -144,7 +146,8 @@ public struct StatusData: Encodable, Sendable {
     poll: PollData? = nil,
     language: String? = nil,
     mediaAttributes: [MediaAttribute]? = nil,
-    quotedStatusId: String? = nil
+    quotedStatusId: String? = nil,
+    scheduledAt: String? = nil
   ) {
     self.status = status
     self.visibility = visibility
@@ -155,5 +158,6 @@ public struct StatusData: Encodable, Sendable {
     self.language = language
     self.mediaAttributes = mediaAttributes
     self.quotedStatusId = quotedStatusId
+    self.scheduledAt = scheduledAt
   }
 }

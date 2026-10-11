@@ -143,6 +143,8 @@ extension View {
         InstanceInfoView(instance: instance)
       case .metrics:
         AccountMetricsView()
+      case .scheduledPosts:
+        ScheduledPostsView()
       }
     }
   }

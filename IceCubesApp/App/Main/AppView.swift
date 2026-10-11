@@ -54,7 +54,11 @@ struct AppView: View {
         userPreferences.showiPadSecondaryColumn
       {
         Divider().edgesIgnoringSafeArea(.all)
-        notificationsSecondaryColumn
+        if userPreferences.isMultiColumnLayoutEnabled {
+          multiColumnSecondaryColumn
+        } else {
+          notificationsSecondaryColumn
+        }
       }
     }
   }
@@ -180,5 +184,42 @@ struct AppView: View {
       .environment(\.isSecondaryColumn, true)
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
+  }
+
+  @State private var secondaryColumnTimeline: SecondaryColumnTimeline = .home
+
+  var multiColumnSecondaryColumn: some View {
+    VStack(spacing: 0) {
+      Picker("multi-column.timeline.picker", selection: $secondaryColumnTimeline) {
+        ForEach(SecondaryColumnTimeline.allCases, id: \.rawValue) { timeline in
+          Text(timeline.title).tag(timeline)
+        }
+      }
+      .pickerStyle(.segmented)
+      .padding(.horizontal, 8)
+      .padding(.vertical, 4)
+      Divider()
+      TimelineView(
+        timeline: .constant(timelineFilter(for: secondaryColumnTimeline)),
+        pinnedFilters: .constant([]),
+        selectedTagGroup: .constant(nil),
+        canFilterTimeline: false)
+    }
+    .environment(\.isSecondaryColumn, true)
+    .frame(maxWidth: .secondaryColumnWidth)
+    .id(secondaryColumnTimeline)
+  }
+
+  private func timelineFilter(for column: SecondaryColumnTimeline) -> TimelineFilter {
+    switch column {
+    case .home:
+      .home
+    case .local:
+      .local
+    case .federated:
+      .federated
+    case .trending:
+      .trending
+    }
   }
 }

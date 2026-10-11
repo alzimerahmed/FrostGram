@@ -45,6 +45,8 @@ import SwiftUI
 
     @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
+    @AppStorage("multi-column-layout") public var isMultiColumnLayoutEnabled = false
+
     @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight =
       StatusAction.favorite
     @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft =
@@ -293,6 +295,13 @@ import SwiftUI
   public var showiPadSecondaryColumn: Bool {
     didSet {
       storage.showiPadSecondaryColumn = showiPadSecondaryColumn
+    }
+  }
+
+  /// Multi-column timeline layout on iPad/macOS Catalyst instead of a single-column tab stack.
+  public var isMultiColumnLayoutEnabled: Bool {
+    didSet {
+      storage.isMultiColumnLayoutEnabled = isMultiColumnLayoutEnabled
     }
   }
 
@@ -560,6 +569,7 @@ import SwiftUI
     soundEffectEnabled = storage.soundEffectEnabled
     showAltTextForMedia = storage.showAltTextForMedia
     showiPadSecondaryColumn = storage.showiPadSecondaryColumn
+    isMultiColumnLayoutEnabled = storage.isMultiColumnLayoutEnabled
     swipeActionsStatusTrailingRight = storage.swipeActionsStatusTrailingRight
     swipeActionsStatusTrailingLeft = storage.swipeActionsStatusTrailingLeft
     swipeActionsStatusLeadingLeft = storage.swipeActionsStatusLeadingLeft

@@ -157,6 +157,9 @@ extension StatusEditor {
     var postingError: String?
     var showPostingErrorAlert: Bool = false
 
+    /// When set, the status is scheduled for this date instead of being posted immediately.
+    var scheduledAt: Date?
+
     var canPost: Bool {
       textState.statusText.length > 0 || !mediaContainers.isEmpty
     }
@@ -275,6 +278,26 @@ extension StatusEditor {
       }
     }
 
+    func makePostingInput() -> PostingService.Input {
+      PostingService.Input(
+        mode: mode,
+        statusText: textState.statusText.string,
+        visibility: visibility,
+        spoilerOn: spoilerOn,
+        spoilerText: spoilerText,
+        mediaAttachments: mediaContainers.compactMap { $0.mediaAttachment },
+        pollOptions: getPollOptionsForAPI(),
+        pollVotingFrequency: pollVotingFrequency,
+        pollDuration: pollDuration,
+        selectedLanguage: selectedLanguage,
+        pendingMediaAttributes: pendingMediaDescriptions.mediaAttributes,
+        embeddedStatusId: embeddedStatus?.id,
+        allMediaHasDescription: allMediaHasDescription,
+        requiresAltText: preferences?.appRequireAltText ?? UserPreferences.shared.appRequireAltText,
+        scheduledAt: scheduledAt
+      )
+    }
+
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
@@ -308,22 +331,7 @@ extension StatusEditor {
           )
         }
 
-        let input = PostingService.Input(
-          mode: mode,
-          statusText: textState.statusText.string,
-          visibility: visibility,
-          spoilerOn: spoilerOn,
-          spoilerText: spoilerText,
-          mediaAttachments: mediaContainers.compactMap { $0.mediaAttachment },
-          pollOptions: getPollOptionsForAPI(),
-          pollVotingFrequency: pollVotingFrequency,
-          pollDuration: pollDuration,
-          selectedLanguage: selectedLanguage,
-          pendingMediaAttributes: pendingMediaDescriptions.mediaAttributes,
-          embeddedStatusId: embeddedStatus?.id,
-          allMediaHasDescription: allMediaHasDescription,
-          requiresAltText: preferences?.appRequireAltText ?? UserPreferences.shared.appRequireAltText
-        )
+        let input = makePostingInput()
 
         let postStatus = try await postingService.submit(
           input: input,
@@ -351,6 +359,42 @@ extension StatusEditor {
       } catch {
         postingTimer?.invalidate()
         postingTimer = nil
+        if let error = error as? Models.ServerError {
+          postingError = error.error
+          showPostingErrorAlert = true
+        }
+        if let postError = error as? PostError {
+          postingError = postError.description
+          showPostingErrorAlert = true
+        }
+        isPosting = false
+        HapticManager.shared.fireHaptic(.notification(.error))
+        return nil
+      }
+    }
+
+    /// Schedules the status for `scheduledAt` instead of posting it immediately.
+    func scheduleStatus() async -> ScheduledStatus? {
+      guard let client else { return nil }
+      do {
+        isPosting = true
+        if !pendingMediaDescriptions.altTextByContainerId.isEmpty {
+          mediaDescriptionService.applyPendingAltText(
+            mediaContainers: mediaContainers,
+            store: &pendingMediaDescriptions
+          )
+        }
+        let input = makePostingInput()
+        let scheduledStatus = try await postingService.schedule(
+          input: input,
+          client: client)
+        HapticManager.shared.fireHaptic(.notification(.success))
+        if hasExplicitlySelectedLanguage, let selectedLanguage {
+          preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
+        }
+        isPosting = false
+        return scheduledStatus
+      } catch {
         if let error = error as? Models.ServerError {
           postingError = error.error
           showPostingErrorAlert = true

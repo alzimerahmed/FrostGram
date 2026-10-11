@@ -9,6 +9,7 @@ extension StatusEditor {
     protocol Client {
       func postStatus(data: StatusData) async throws -> Status
       func editStatus(id: String, data: StatusData) async throws -> Status
+      func scheduleStatus(data: StatusData, scheduledAt: Date) async throws -> ScheduledStatus
     }
 
     struct Input {
@@ -26,6 +27,7 @@ extension StatusEditor {
       var embeddedStatusId: String?
       var allMediaHasDescription: Bool
       var requiresAltText: Bool
+      var scheduledAt: Date? = nil
     }
 
     func buildStatusData(from input: Input) throws -> StatusData {
@@ -71,6 +73,17 @@ extension StatusEditor {
         return updated
       }
     }
+
+    func schedule(
+      input: Input,
+      client: Client
+    ) async throws -> ScheduledStatus {
+      guard let scheduledAt = input.scheduledAt else {
+        throw PostError.missingScheduleDate
+      }
+      let data = try buildStatusData(from: input)
+      return try await client.scheduleStatus(data: data, scheduledAt: scheduledAt)
+    }
   }
 }
 
@@ -82,5 +95,20 @@ extension MastodonClient: StatusEditor.PostingService.Client {
 
   public func editStatus(id: String, data: StatusData) async throws -> Status {
     try await put(endpoint: Statuses.editStatus(id: id, json: data))
+  }
+
+  public func scheduleStatus(data: StatusData, scheduledAt: Date) async throws -> ScheduledStatus {
+    let scheduledData = StatusData(
+      status: data.status,
+      visibility: data.visibility,
+      inReplyToId: data.inReplyToId,
+      spoilerText: data.spoilerText,
+      mediaIds: data.mediaIds,
+      poll: data.poll,
+      language: data.language,
+      mediaAttributes: data.mediaAttributes,
+      quotedStatusId: data.quotedStatusId,
+      scheduledAt: MastodonClient.iso8601String(from: scheduledAt))
+    return try await post(endpoint: Statuses.postStatus(json: scheduledData))
   }
 }

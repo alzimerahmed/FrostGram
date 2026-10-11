@@ -266,9 +266,15 @@ struct DisplaySettingsView: View {
   private var platformsSection: some View {
     @Bindable var userPreferences = userPreferences
 
-    if UIDevice.current.userInterfaceIdiom == .pad {
+    if UIDevice.current.userInterfaceIdiom == .pad
+      || UIDevice.current.userInterfaceIdiom == .mac
+    {
       Section("settings.display.section.platform") {
         Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
+        Toggle("settings.display.multi-column", isOn: $userPreferences.isMultiColumnLayoutEnabled)
+        Text("settings.display.multi-column-hint")
+          .font(.footnote)
+          .foregroundStyle(.gray)
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

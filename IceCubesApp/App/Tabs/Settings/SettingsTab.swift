@@ -197,6 +197,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
+      NavigationLink(value: RouterDestination.scheduledPosts) {
+        Label("settings.general.scheduled-posts", systemImage: "clock")
+      }
       #if !targetEnvironment(macCatalyst)
         Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
           Label("settings.system", systemImage: "gear")

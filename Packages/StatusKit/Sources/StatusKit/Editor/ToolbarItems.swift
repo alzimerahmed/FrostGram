@@ -11,6 +11,7 @@ extension StatusEditor {
     @State private var isLanguageConfirmPresented = false
     @State private var isDismissAlertPresented: Bool = false
     @State private var isDraftsSheetDisplayed: Bool = false
+    @State private var isScheduleSheetDisplayed: Bool = false
 
     let mainStore: EditorStore
     let focusedStore: EditorStore
@@ -48,6 +49,10 @@ extension StatusEditor {
             draftsListView
           }
         }
+      }
+
+      ToolbarItem(placement: .navigationBarTrailing) {
+        scheduleMenu
       }
 
       if #available(iOS 26, *) {
@@ -107,7 +112,9 @@ extension StatusEditor {
       Button {
         guard !isSendingDisabled else { return }
         mainStore.evaluateLanguages()
-        if preferences.autoDetectPostLanguage,
+        if mainStore.scheduledAt != nil {
+          startScheduling()
+        } else if preferences.autoDetectPostLanguage,
           mainStore.languageConfirmationDialogLanguages != nil
         {
           isLanguageConfirmPresented = true
@@ -115,7 +122,7 @@ extension StatusEditor {
           startPosting()
         }
       } label: {
-        Image(systemName: "paperplane")
+        Image(systemName: mainStore.scheduledAt != nil ? "clock.badge.checkmark" : "paperplane")
           .symbolVariant(isSendingDisabled ? .none : .fill)
           .foregroundStyle(.white)
           .bold()
@@ -127,6 +134,91 @@ extension StatusEditor {
         actions: {
           languageConfirmationDialog
         })
+    }
+
+    private var scheduleMenu: some View {
+      Menu {
+        Button("status.editor.schedule.now") {
+          mainStore.scheduledAt = nil
+        }
+        Button("status.editor.schedule.pick") {
+          isScheduleSheetDisplayed = true
+        }
+      } label: {
+        Image(systemName: mainStore.scheduledAt != nil ? "clock.badge.checkmark" : "clock")
+      }
+      .tint(.label)
+      .accessibilityLabel("accessibility.editor.button.schedule")
+      .sheet(isPresented: $isScheduleSheetDisplayed) {
+        scheduleSheet
+      }
+    }
+
+    private var scheduleSheet: some View {
+      NavigationStack {
+        Form {
+          Section("status.editor.schedule.section") {
+            DatePicker(
+              "status.editor.schedule.date",
+              selection: Binding(
+                get: { mainStore.scheduledAt ?? Date().addingTimeInterval(60 * 60) },
+                set: { mainStore.scheduledAt = $0 }
+              ))
+          }
+        }
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("action.cancel") {
+              isScheduleSheetDisplayed = false
+            }
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("status.editor.schedule.done") {
+              isScheduleSheetDisplayed = false
+            }
+          }
+        }
+        .navigationTitle("status.editor.schedule.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .presentationDetents([.medium, .large])
+      }
+    }
+
+    private func startScheduling() {
+      let toastID = toastCenter.showProgress(
+        title: String(localized: "toast.scheduling.title"),
+        systemImage: "clock.badge.checkmark",
+        tint: theme.tintColor,
+        progress: 0
+      )
+      mainStore.postingToastID = toastID
+      close()
+      NotificationCenter.default.post(name: .shareSheetClose, object: nil)
+
+      Task { @MainActor in
+        let scheduledStatus = await mainStore.scheduleStatus()
+        mainStore.postingToastID = nil
+        if scheduledStatus != nil {
+          let successToast = ToastCenter.Toast(
+            id: toastID,
+            title: String(localized: "toast.scheduling.success.title"),
+            systemImage: "clock.badge.checkmark",
+            tint: theme.tintColor,
+            kind: .message
+          )
+          toastCenter.update(id: toastID, toast: successToast, autoDismissAfter: .seconds(3))
+        } else {
+          let errorToast = ToastCenter.Toast(
+            id: toastID,
+            title: String(localized: "status.error.posting.title"),
+            message: mainStore.postingError ?? "",
+            systemImage: "exclamationmark.triangle.fill",
+            tint: .red,
+            kind: .message
+          )
+          toastCenter.update(id: toastID, toast: errorToast, autoDismissAfter: .seconds(4))
+        }
+      }
     }
 
     private func startPosting() {

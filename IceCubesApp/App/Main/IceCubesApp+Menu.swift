@@ -63,6 +63,42 @@ extension IceCubesApp {
       }
       .keyboardShortcut("l", modifiers: .shift)
     }
+    CommandMenu("menu.go") {
+      Button("tab.timeline") {
+        selectedTab = .timeline
+      }
+      .keyboardShortcut("1", modifiers: .command)
+      Button("tab.notifications") {
+        selectedTab = .notifications
+      }
+      .keyboardShortcut("2", modifiers: .command)
+      Button("tab.explore") {
+        selectedTab = .explore
+      }
+      .keyboardShortcut("3", modifiers: .command)
+      Button("tab.messages") {
+        selectedTab = .messages
+      }
+      .keyboardShortcut("4", modifiers: .command)
+      Button("tab.profile") {
+        selectedTab = .profile
+      }
+      .keyboardShortcut("5", modifiers: .command)
+      Divider()
+      Button("accessibility.tabs.profile.picker.bookmarks") {
+        selectedTab = .bookmarks
+      }
+      .keyboardShortcut("b", modifiers: [.command, .shift])
+      Button("accessibility.tabs.profile.picker.favorites") {
+        selectedTab = .favorites
+      }
+      .keyboardShortcut("v", modifiers: [.command, .shift])
+      Divider()
+      Button("menu.go.scheduled-posts") {
+        appRouterPath.navigate(to: .scheduledPosts)
+      }
+      .keyboardShortcut("s", modifiers: [.command, .shift])
+    }
     CommandGroup(replacing: .help) {
       Button("menu.help.github") {
         let url = URL(string: "https://github.com/alzimerahmed/FrostGram/issues")!

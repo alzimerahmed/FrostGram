@@ -85109,6 +85109,237 @@
           }
         }
       }
+    },
+    "accessibility.editor.button.schedule": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule post"
+          }
+        }
+      }
+    },
+    "menu.go": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go"
+          }
+        }
+      }
+    },
+    "menu.go.scheduled-posts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled posts"
+          }
+        }
+      }
+    },
+    "multi-column.timeline.picker": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Column timeline"
+          }
+        }
+      }
+    },
+    "settings.display.multi-column": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Multi-column layout"
+          }
+        }
+      }
+    },
+    "settings.display.multi-column-hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show an extra timeline column on iPad and Mac instead of the notifications column."
+          }
+        }
+      }
+    },
+    "settings.general.scheduled-posts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled posts"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publish at"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.navigation-title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule post"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.now": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post immediately"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.pick": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule for later…"
+          }
+        }
+      }
+    },
+    "status.editor.schedule.section": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule"
+          }
+        }
+      }
+    },
+    "status.error.missing-schedule-date": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A schedule date is required to schedule a post."
+          }
+        }
+      }
+    },
+    "status.scheduled-posts.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "status.scheduled-posts.navigation-title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled posts"
+          }
+        }
+      }
+    },
+    "status.scheduled-posts.reschedule": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reschedule"
+          }
+        }
+      }
+    },
+    "status.scheduled-posts.reschedule.navigation-title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reschedule post"
+          }
+        }
+      }
+    },
+    "status.scheduled-posts.reschedule.save": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "toast.scheduling.success.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post scheduled"
+          }
+        }
+      }
+    },
+    "toast.scheduling.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduling post"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
