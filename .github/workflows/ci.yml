@@ -37,6 +37,7 @@ jobs:
           - { package: Packages/Timeline, scheme: TimelineTests }
           - { package: Packages/Account, scheme: AccountTests }
           - { package: Packages/StatusKit, scheme: StatusKitTests }
+          - { package: Packages/Env, scheme: EnvTests }
     steps:
       - uses: actions/checkout@v4
       - name: Pick simulator

@@ -98,6 +98,7 @@ final class OnboardingStateMachineTests: XCTestCase {
     onboarding.send(.logIn)
     onboarding.send(.goBack)
     XCTAssertEqual(onboarding.step, .serverPicker)
+    XCTAssertNil(onboarding.selectedServer)
   }
 
   func testResetClearsPersistedState() {

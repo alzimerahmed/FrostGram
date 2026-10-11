@@ -47,12 +47,23 @@ public final class OnboardingStateMachine {
     defaults.string(forKey: Self.guestServerKey)
   }
 
+  /// True when the current step can handle a `goBack` event.
+  public var canGoBack: Bool {
+    switch step {
+    case .serverPicker, .signingIn:
+      true
+    default:
+      false
+    }
+  }
+
   public func send(_ event: Event) {
     switch event {
     case .start:
       guard step == .welcome else { return }
       step = .serverPicker
     case let .chooseServer(server):
+      guard case .serverPicker = step else { return }
       selectedServer = server
     case .browseAsGuest:
       guard let server = selectedServer else { return }
@@ -73,6 +84,7 @@ public final class OnboardingStateMachine {
       case .serverPicker:
         step = .welcome
       case .signingIn:
+        selectedServer = nil
         step = .serverPicker
       default:
         break

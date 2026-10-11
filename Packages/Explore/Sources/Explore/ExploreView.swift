@@ -184,7 +184,7 @@ extension ExploreView {
       trendingLinks = data.trendingLinks
 
       // Relationships require an authenticated account; skip in guest mode.
-      if !suggestedAccounts.isEmpty {
+      if client.isAuth, !suggestedAccounts.isEmpty {
         suggestedAccountsRelationShips = try await client.get(
           endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
       }

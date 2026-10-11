@@ -46,8 +46,6 @@ let package = Package(
       name: "TimelineTests",
       dependencies: [
         "Timeline",
-        .product(name: "Env", package: "Env"),
-        .product(name: "StatusKit", package: "StatusKit"),
       ]
     ),
   ]

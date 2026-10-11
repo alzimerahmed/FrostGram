@@ -61,7 +61,7 @@ struct OnboardingView: View {
         .background(theme.secondaryBackgroundColor)
       #endif
       .toolbar {
-        if onboarding.step != .welcome {
+        if onboarding.canGoBack {
           ToolbarItem(placement: .navigationBarLeading) {
             Button {
               withAnimation {

@@ -20,11 +20,6 @@ final class AppTabRouter {
     !appAccountsManager.currentClient.isAuth
   }
 
-  /// The tab the app should land on for the current account state.
-  var defaultTab: AppTab {
-    isGuestMode ? .explore : .timeline
-  }
-
   func availableSections(
     horizontalSizeClass: UserSizeClass?,
     localTimelines: [LocalTimeline],
