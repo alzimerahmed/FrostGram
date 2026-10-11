@@ -26,6 +26,7 @@ import SwiftUI
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
     @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
+    @AppStorage("media-previews-enabled") public var isMediaPreviewsEnabled = true
     @AppStorage("animate_emojis") public var animateEmojis = true
     @AppStorage("mute_video") public var muteVideo = true
     @AppStorage("preferred_translation_type") public var preferredTranslationType = TranslationType
@@ -212,6 +213,14 @@ import SwiftUI
   public var autoPlayVideo: Bool {
     didSet {
       storage.autoPlayVideo = autoPlayVideo
+    }
+  }
+
+  /// Image-off / low-data mode: when `false`, timelines show media placeholders
+  /// instead of loading remote images and videos.
+  public var isMediaPreviewsEnabled: Bool {
+    didSet {
+      storage.isMediaPreviewsEnabled = isMediaPreviewsEnabled
     }
   }
     
@@ -539,6 +548,7 @@ import SwiftUI
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
     appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
+    isMediaPreviewsEnabled = storage.isMediaPreviewsEnabled
     animateEmojis = storage.animateEmojis
     preferredTranslationType = storage.preferredTranslationType
     userDeeplAPIFree = storage.userDeeplAPIFree

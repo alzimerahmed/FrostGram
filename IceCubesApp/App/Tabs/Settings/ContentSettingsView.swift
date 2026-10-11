@@ -18,7 +18,7 @@ struct ContentSettingsView: View {
   var body: some View {
     @Bindable var userPreferences = userPreferences
     Form {
-      Section("settings.content.media") {
+      Section {
         Toggle(isOn: $userPreferences.autoPlayVideo) {
           Text("settings.other.autoplay-video")
         }
@@ -31,6 +31,13 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.animateEmojis) {
             Text("settings.other.animate-emojis")
         }
+        Toggle(isOn: $userPreferences.isMediaPreviewsEnabled) {
+          Text("settings.content.media.previews")
+        }
+      } header: {
+        Text("settings.content.media")
+      } footer: {
+        Text("settings.content.media.previews-hint")
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

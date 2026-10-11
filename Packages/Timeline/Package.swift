@@ -44,7 +44,11 @@ let package = Package(
     ),
     .testTarget(
       name: "TimelineTests",
-      dependencies: ["Timeline"]
+      dependencies: [
+        "Timeline",
+        .product(name: "Env", package: "Env"),
+        .product(name: "StatusKit", package: "StatusKit"),
+      ]
     ),
   ]
 )

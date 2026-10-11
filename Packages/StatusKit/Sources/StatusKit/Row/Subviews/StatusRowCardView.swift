@@ -14,6 +14,11 @@ public struct StatusRowCardView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(UserPreferences.self) private var preferences
+
+  private var previewsEnabled: Bool {
+    MediaPreviewsPolicy.shouldLoadPreviews(isEnabled: preferences.isMediaPreviewsEnabled)
+  }
 
   let card: Card
 
@@ -119,7 +124,7 @@ public struct StatusRowCardView: View {
 
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
-    if let imageURL = card.image {
+    if let imageURL = card.image, previewsEnabled {
       DefaultPreviewImage(
         url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
     }
@@ -149,23 +154,29 @@ public struct StatusRowCardView: View {
   private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
     HStack(alignment: .top) {
       if let imageURL = card.image {
-        LazyResizableImage(url: imageURL) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: imageHeight, height: imageHeight)
-              .clipShape(RoundedRectangle(cornerRadius: 8))
-              .clipped()
-          } else if state.isLoading {
-            Rectangle()
-              .fill(Color.gray)
-              .frame(width: imageHeight, height: imageHeight)
+        if previewsEnabled {
+          LazyResizableImage(url: imageURL) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: imageHeight, height: imageHeight)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .clipped()
+            } else if state.isLoading {
+              Rectangle()
+                .fill(Color.gray)
+                .frame(width: imageHeight, height: imageHeight)
+            }
           }
+          // This image is decorative
+          .accessibilityHidden(true)
+          .frame(width: imageHeight, height: imageHeight)
+        } else {
+          MediaPreviewsPlaceholder(systemImage: "photo")
+            .frame(width: imageHeight, height: imageHeight)
+            .accessibilityHidden(true)
         }
-        // This image is decorative
-        .accessibilityHidden(true)
-        .frame(width: imageHeight, height: imageHeight)
       }
       VStack(alignment: .leading, spacing: 6) {
         HStack(spacing: 6) {
@@ -241,22 +252,28 @@ public struct StatusRowCardView: View {
     // ..where the image is known to be a square icon
     HStack {
       if let imageURL = card.image {
-        LazyResizableImage(url: imageURL) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: imageHeight, height: imageHeight)
-              .clipped()
-          } else if state.isLoading {
-            Rectangle()
-              .fill(Color.gray)
-              .frame(width: imageHeight, height: imageHeight)
+        if previewsEnabled {
+          LazyResizableImage(url: imageURL) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: imageHeight, height: imageHeight)
+                .clipped()
+            } else if state.isLoading {
+              Rectangle()
+                .fill(Color.gray)
+                .frame(width: imageHeight, height: imageHeight)
+            }
           }
+          // This image is decorative
+          .accessibilityHidden(true)
+          .frame(width: imageHeight, height: imageHeight)
+        } else {
+          MediaPreviewsPlaceholder(systemImage: "photo")
+            .frame(width: imageHeight, height: imageHeight)
+            .accessibilityHidden(true)
         }
-        // This image is decorative
-        .accessibilityHidden(true)
-        .frame(width: imageHeight, height: imageHeight)
       }
 
       VStack(alignment: .leading, spacing: 6) {

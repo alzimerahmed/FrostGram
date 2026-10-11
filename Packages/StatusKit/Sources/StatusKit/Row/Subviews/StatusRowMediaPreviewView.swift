@@ -120,43 +120,54 @@ public struct StatusRowMediaPreviewView: View {
 
 private struct MediaPreview: View {
   @Environment(QuickLook.self) private var quickLook
-  
+  @Environment(UserPreferences.self) private var preferences
+
   let sensitive: Bool
   let imageMaxHeight: CGFloat
   let displayData: DisplayData
 
+  private var previewsEnabled: Bool {
+    MediaPreviewsPolicy.shouldLoadPreviews(isEnabled: preferences.isMediaPreviewsEnabled)
+  }
+
   var body: some View {
     if let namespace = quickLook.namespace {
       Group {
-        switch displayData.type {
-        case .image:
-          LazyResizableImage(url: displayData.previewUrl) { state in
-            if let image = state.image {
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(
-                  width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-                  height: imageMaxHeight
-                )
-                .overlay(
-                  RoundedRectangle(cornerRadius: 10)
-                    .stroke(.gray.opacity(0.35), lineWidth: 1)
-                )
-            } else if state.isLoading {
-              RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray)
+        if previewsEnabled {
+          switch displayData.type {
+          case .image:
+            LazyResizableImage(url: displayData.previewUrl) { state in
+              if let image = state.image {
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(
+                    width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                    height: imageMaxHeight
+                  )
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                      .stroke(.gray.opacity(0.35), lineWidth: 1)
+                  )
+              } else if state.isLoading {
+                RoundedRectangle(cornerRadius: 10)
+                  .fill(Color.gray)
+              }
             }
+            .overlay {
+              BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+            }
+            .overlay {
+              AltTextButton(text: displayData.description, font: .scaledFootnote)
+            }
+          case .av:
+            MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
+              .accessibilityAddTraits(.startsMediaSession)
           }
-          .overlay {
-            BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
-          }
-          .overlay {
-            AltTextButton(text: displayData.description, font: .scaledFootnote)
-          }
-        case .av:
-          MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
-            .accessibilityAddTraits(.startsMediaSession)
+        } else {
+          MediaPreviewsPlaceholder(
+            systemImage: MediaPreviewsPolicy.placeholderSystemImage(for: displayData.type)
+          )
         }
       }
       .matchedTransitionSource(id: displayData.id, in: namespace)
@@ -423,6 +434,11 @@ private struct FeaturedImagePreView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(\.isModal) private var isModal: Bool
+  @Environment(UserPreferences.self) private var preferences
+
+  private var previewsEnabled: Bool {
+    MediaPreviewsPolicy.shouldLoadPreviews(isEnabled: preferences.isMediaPreviewsEnabled)
+  }
 
   private var originalWidth: CGFloat {
     CGFloat(attachment.meta?.original?.width ?? 300)
@@ -438,21 +454,28 @@ private struct FeaturedImagePreView: View {
         Group {
           RoundedRectangle(cornerRadius: 10).fill(Color.gray)
             .overlay {
-              switch attachment.supportedType {
-              case .image:
-                LazyResizableImage(url: attachment.url) { state in
-                  if let image = state.image {
-                    image
-                      .resizable()
-                      .scaledToFill()
-                  } else {
-                    RoundedRectangle(cornerRadius: 10).fill(Color.gray)
+              if !previewsEnabled {
+                MediaPreviewsPlaceholder(
+                  systemImage: MediaPreviewsPolicy.placeholderSystemImage(
+                    for: attachment.supportedType)
+                )
+              } else {
+                switch attachment.supportedType {
+                case .image:
+                  LazyResizableImage(url: attachment.url) { state in
+                    if let image = state.image {
+                      image
+                        .resizable()
+                        .scaledToFill()
+                    } else {
+                      RoundedRectangle(cornerRadius: 10).fill(Color.gray)
+                    }
                   }
+                case .gifv, .video, .audio:
+                  MediaUIAttachmentVideoView(viewModel: .init(url: url))
+                default:
+                  EmptyView()
                 }
-              case .gifv, .video, .audio:
-                MediaUIAttachmentVideoView(viewModel: .init(url: url))
-              default:
-                EmptyView()
               }
             }
             .overlay(
