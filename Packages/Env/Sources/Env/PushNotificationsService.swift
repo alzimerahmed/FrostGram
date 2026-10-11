@@ -117,7 +117,17 @@ public struct HandledNotification: Equatable {
 @MainActor
 @Observable public class PushNotificationsService: NSObject {
   enum Constants {
-    static let endpoint = "https://icecubesrelay.fly.dev"
+    /// Push notification proxy/relay host. FrostGram default keeps upstream's
+    /// relay; override via the `FrostGramPushProxyURL` Info.plist key to point
+    /// at a self-hosted APNs-to-Mastodon push proxy (see docs/push-proxy-selfhost.md).
+    static let endpoint: String = {
+      if let override = Bundle.main.object(forInfoDictionaryKey: "FrostGramPushProxyURL") as? String,
+        !override.isEmpty
+      {
+        return override
+      }
+      return "https://icecubesrelay.fly.dev"
+    }()
   }
 
   public static let shared = PushNotificationsService()
