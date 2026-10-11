@@ -112,7 +112,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   }
 
   static func loggedOutTab() -> [AppTab] {
-    [.timeline, .settings]
+    [.timeline, .explore, .settings]
   }
 
   static func visionOSTab() -> [AppTab] {
@@ -363,7 +363,7 @@ enum SidebarSections: Int, Identifiable {
     case .app:
       return [.settings]
     case .loggedOutTabs:
-      return [.timeline, .settings]
+      return AppTab.loggedOutTab()
     case .iosTabs:
       return iOSTabs.shared.tabs
     case .visionOSTabs:

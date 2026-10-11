@@ -27,9 +27,12 @@ struct IceCubesApp: App {
   @State var quickLook = QuickLook.shared
   @State var theme = Theme.shared
   @State var toastCenter = ToastCenter.shared
+  @State var onboarding = OnboardingStateMachine(
+    defaults: UserPreferences.sharedDefault ?? .standard)
 
   @State var selectedTab: AppTab = .timeline
   @State var appRouterPath = RouterPath()
+  @State private var showOnboarding = false
 
   @State var isSupporter: Bool = false
   
@@ -68,6 +71,26 @@ struct IceCubesApp: App {
 
   func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
+  }
+
+  /// Onboarding is shown on first launch, until the user either browses as a
+  /// guest or signs in. Users with an existing account never see it again.
+  var needsOnboarding: Bool {
+    !onboarding.isCompleted
+      && !appAccountsManager.availableAccounts.contains { $0.oauthToken != nil }
+  }
+
+  /// Restores the server chosen during guest onboarding: with no logged-in
+  /// account, the current (token-less) account points at that server.
+  func applyGuestServerIfAvailable() {
+    guard !appAccountsManager.availableAccounts.contains(where: { $0.oauthToken != nil }),
+      let guestServer = onboarding.guestServer,
+      appAccountsManager.currentAccount.server != guestServer
+    else { return }
+    appAccountsManager.currentAccount = AppAccount(
+      server: guestServer,
+      accountName: nil,
+      oauthToken: nil)
   }
 }
 

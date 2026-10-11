@@ -22,7 +22,7 @@ struct AddAccountView: View {
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(Theme.self) private var theme
 
-  @State private var instanceName: String = ""
+  @State private var instanceName: String
   @State private var instance: Instance?
   @State private var isSigninIn = false
   @State private var signInClient: MastodonClient?
@@ -48,6 +48,14 @@ struct AddAccountView: View {
   }
 
   @FocusState private var isInstanceURLFieldFocused: Bool
+
+  /// Server to prefill the instance field with (used by the onboarding wizard).
+  private let initialServer: String
+
+  init(initialServer: String = "") {
+    self.initialServer = initialServer
+    _instanceName = State(initialValue: initialServer)
+  }
 
   private func cleanServerStr(_ server: String) -> String {
     server.replacingOccurrences(of: " ", with: "")

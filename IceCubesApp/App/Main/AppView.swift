@@ -27,6 +27,7 @@ struct AppView: View {
   @Binding var appRouterPath: RouterPath
 
   @State var iosTabs = iOSTabs.shared
+  @State var tabRouter = AppTabRouter(appAccountsManager: .shared)
   @State var selectedTabScrollToTop: Int = -1
   @State var timeline: TimelineFilter = .home
 
@@ -59,23 +60,10 @@ struct AppView: View {
   }
 
   var availableSections: [SidebarSections] {
-    guard appAccountsManager.currentClient.isAuth else {
-      return [SidebarSections.loggedOutTabs]
-    }
-    if horizontalSizeClass == .compact {
-      return [SidebarSections.iosTabs]
-    } else if UIDevice.current.userInterfaceIdiom == .vision {
-      return [SidebarSections.visionOSTabs]
-    }
-    var sections = SidebarSections.macOrIpadOSSections
-    if !localTimelines.isEmpty {
-      sections.append(.localTimeline)
-    }
-    if !tagGroups.isEmpty {
-      sections.append(.tagGroup)
-    }
-    sections.append(.app)
-    return sections
+    tabRouter.availableSections(
+      horizontalSizeClass: horizontalSizeClass,
+      localTimelines: localTimelines,
+      tagGroups: tagGroups)
   }
 
   @ViewBuilder

@@ -84969,6 +84969,146 @@
           }
         }
       }
+    },
+    "settings.content.media.previews": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Load media previews"
+          }
+        }
+      }
+    },
+    "settings.content.media.previews-hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When disabled, timelines show placeholders instead of loading images and videos, saving data and improving scrolling performance."
+          }
+        }
+      }
+    },
+    "onboarding.back": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        }
+      }
+    },
+    "onboarding.server-picker.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a server"
+          }
+        }
+      }
+    },
+    "onboarding.server-picker.search-placeholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search servers"
+          }
+        }
+      }
+    },
+    "onboarding.server-picker.section.curated": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Popular servers"
+          }
+        }
+      }
+    },
+    "onboarding.server-picker.section.results": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search results"
+          }
+        }
+      }
+    },
+    "onboarding.server-detail.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server"
+          }
+        }
+      }
+    },
+    "onboarding.server-detail.guest-button": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Browse as guest"
+          }
+        }
+      }
+    },
+    "onboarding.server-detail.login-button": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log in"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to FrostGram"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a Mastodon server to explore. You can browse its public timelines without an account, or sign in anytime."
+          }
+        }
+      }
+    },
+    "onboarding.welcome.get-started": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get started"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.guest-hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No account needed — you can browse any server as a guest and sign in later."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

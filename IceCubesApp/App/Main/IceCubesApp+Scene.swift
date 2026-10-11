@@ -9,8 +9,14 @@ extension IceCubesApp {
     WindowGroup(id: "MainWindow") {
       AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
+        .fullScreenCover(isPresented: $showOnboarding) {
+          OnboardingView(onboarding: onboarding)
+            .withEnvironments()
+        }
         .onAppear {
           refreshPushSubs()
+          showOnboarding = needsOnboarding
+          applyGuestServerIfAvailable()
         }
         .withAppDependencyGraph(
           appAccountsManager: appAccountsManager,

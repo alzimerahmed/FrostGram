@@ -183,8 +183,11 @@ extension ExploreView {
       trendingStatuses = data.trendingStatuses
       trendingLinks = data.trendingLinks
 
-      suggestedAccountsRelationShips = try await client.get(
-        endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
+      // Relationships require an authenticated account; skip in guest mode.
+      if !suggestedAccounts.isEmpty {
+        suggestedAccountsRelationShips = try await client.get(
+          endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
+      }
       withAnimation {
         isLoaded = true
       }
@@ -201,10 +204,17 @@ extension ExploreView {
   }
 
   private func fetchTrendingsData() async throws -> TrendingData {
-    async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
     async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
     async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses(offset: nil))
     async let trendingLinks: [Card] = client.get(endpoint: Trends.links(offset: nil))
+    // Follow suggestions require an authenticated account; in guest mode the
+    // rest of the trending data must still load.
+    let suggestedAccounts: [Account]
+    do {
+      suggestedAccounts = try await client.get(endpoint: Accounts.suggestions)
+    } catch {
+      suggestedAccounts = []
+    }
     return try await .init(
       suggestedAccounts: suggestedAccounts,
       trendingTags: trendingTags,
@@ -224,9 +234,12 @@ extension ExploreView {
           offset: nil,
           following: nil),
         forceVersion: .v2)
-      let relationships: [Relationship] =
-        try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
-      results.relationships = relationships
+      // Relationships require an authenticated account; skip in guest mode.
+      if client.isAuth, !results.accounts.isEmpty {
+        let relationships: [Relationship] =
+          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
+        results.relationships = relationships
+      }
       withAnimation {
         self.results[searchQuery] = results
         isSearching = false
@@ -258,7 +271,7 @@ extension ExploreView {
           offset: offset,
           following: nil),
         forceVersion: .v2)
-      if type == .accounts {
+      if client.isAuth, type == .accounts, !newPageResults.accounts.isEmpty {
         let relationships: [Relationship] =
           try await client.get(
             endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id)))
