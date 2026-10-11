@@ -21,7 +21,7 @@ final class AppTabRouter {
   }
 
   func availableSections(
-    horizontalSizeClass: UserSizeClass?,
+    horizontalSizeClass: UserInterfaceSizeClass?,
     localTimelines: [LocalTimeline],
     tagGroups: [TagGroup]
   ) -> [SidebarSections] {
