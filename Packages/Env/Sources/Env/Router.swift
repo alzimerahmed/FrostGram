@@ -35,6 +35,7 @@ public enum RouterDestination: Hashable {
   case instanceInfo(instance: Instance)
   case metrics
   case scheduledPosts
+  case followRequests
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {

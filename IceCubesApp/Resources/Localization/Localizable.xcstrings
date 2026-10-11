@@ -85417,6 +85417,50 @@
           }
         }
       }
+    },
+    "settings.general.follow-requests": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow requests"
+          }
+        }
+      }
+    },
+    "account.follow-requests.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow requests"
+          }
+        }
+      }
+    },
+    "account.follow-requests.empty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No pending follow requests"
+          }
+        }
+      }
+    },
+    "account.action.remove-follower": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from followers"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

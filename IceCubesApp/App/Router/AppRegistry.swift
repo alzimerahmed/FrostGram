@@ -145,6 +145,8 @@ extension View {
         AccountMetricsView()
       case .scheduledPosts:
         ScheduledPostsView()
+      case .followRequests:
+        FollowRequestsView()
       }
     }
   }

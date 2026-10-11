@@ -200,6 +200,9 @@ struct SettingsTabs: View {
       NavigationLink(value: RouterDestination.scheduledPosts) {
         Label("settings.general.scheduled-posts", systemImage: "clock")
       }
+      NavigationLink(value: RouterDestination.followRequests) {
+        Label("settings.general.follow-requests", systemImage: "person.badge.clock")
+      }
       #if !targetEnvironment(macCatalyst)
         Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
           Label("settings.system", systemImage: "gear")

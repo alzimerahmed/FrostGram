@@ -86,6 +86,21 @@ public struct AccountDetailContextMenu: View {
             }
           }
 
+          // Followers audit (Gap #8): quick "remove from followers" for
+          // accounts that follow the current user (Mastodon 3.3+ endpoint).
+          if relationship?.followedBy == true {
+            Button(role: .destructive) {
+              Task {
+                do {
+                  relationship = try await client.post(
+                    endpoint: Accounts.removeFollower(id: account.id))
+                } catch {}
+              }
+            } label: {
+              Label("account.action.remove-follower", systemImage: "person.badge.minus")
+            }
+          }
+
           if let relationshipValue = relationship,
             relationshipValue.following
           {

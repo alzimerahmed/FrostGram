@@ -35,6 +35,7 @@ public enum Accounts: Endpoint {
   case relationshipNote(id: String, json: RelationshipNoteData)
   case blockList
   case muteList
+  case removeFollower(id: String)
 
   public func path() -> String {
     switch self {
@@ -88,6 +89,8 @@ public enum Accounts: Endpoint {
       "blocks"
     case .muteList:
       "mutes"
+    case let .removeFollower(id):
+      "accounts/\(id)/remove_from_followers"
     }
   }
 
