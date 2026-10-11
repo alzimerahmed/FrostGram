@@ -63,9 +63,15 @@ public final class OnboardingStateMachine {
       guard step == .welcome else { return }
       step = .serverPicker
     case let .chooseServer(server):
-      guard step == .welcome || case .serverPicker = step else { return }
-      selectedServer = server
-      if step == .welcome { step = .serverPicker }
+      switch step {
+      case .welcome:
+        selectedServer = server
+        step = .serverPicker
+      case .serverPicker:
+        selectedServer = server
+      default:
+        return
+      }
     case .browseAsGuest:
       guard let server = selectedServer else { return }
       defaults.set(server, forKey: Self.guestServerKey)
