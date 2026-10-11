@@ -14,19 +14,19 @@ let package = Package(
     .library(
       name: "Models",
       targets: ["Models"]
-    )
+    ),
   ],
   dependencies: [
-    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.13.7")
+    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.13.7"),
   ],
   targets: [
     .target(
       name: "Models",
       dependencies: [
-        "SwiftSoup"
+        "SwiftSoup",
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(

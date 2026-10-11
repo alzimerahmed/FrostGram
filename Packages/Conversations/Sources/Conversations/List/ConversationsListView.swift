@@ -26,41 +26,41 @@ public struct ConversationsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle("conversations.navigation-title")
-    .navigationBarTitleDisplayMode(.inline)
-    .onChange(of: watcher.latestEvent?.id) {
-      if let latestEvent = watcher.latestEvent {
-        Task {
-          await handleStreamEvent(latestEvent)
+      .navigationTitle("conversations.navigation-title")
+      .navigationBarTitleDisplayMode(.inline)
+      .onChange(of: watcher.latestEvent?.id) {
+        if let latestEvent = watcher.latestEvent {
+          Task {
+            await handleStreamEvent(latestEvent)
+          }
         }
       }
-    }
-    .refreshable {
-      // note: this Task wrapper should not be necessary, but it reportedly crashes without it
-      // when refreshing on an empty list
-      Task {
-        SoundEffectManager.shared.playSound(.pull)
-        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-        await fetchConversations()
-        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-        SoundEffectManager.shared.playSound(.refresh)
+      .refreshable {
+        // note: this Task wrapper should not be necessary, but it reportedly crashes without it
+        // when refreshing on an empty list
+        Task {
+          SoundEffectManager.shared.playSound(.pull)
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+          await fetchConversations()
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+          SoundEffectManager.shared.playSound(.refresh)
+        }
       }
-    }
-    .onAppear {
-      if client.isAuth {
+      .onAppear {
+        if client.isAuth {
+          Task {
+            await fetchConversations()
+          }
+        }
+      }
+      .onChange(of: client) { oldValue, newValue in
+        guard oldValue.id != newValue.id else { return }
+        dataSource.reset()
+        viewState = .loading
         Task {
           await fetchConversations()
         }
       }
-    }
-    .onChange(of: client) { oldValue, newValue in
-      guard oldValue.id != newValue.id else { return }
-      dataSource.reset()
-      viewState = .loading
-      Task {
-        await fetchConversations()
-      }
-    }
   }
 
   @ViewBuilder
@@ -81,7 +81,7 @@ public struct ConversationsListView: View {
       .listSectionSeparator(.hidden, edges: .top)
       .listRowBackground(theme.primaryBackgroundColor)
 
-    case .display(let conversations, let hasNextPage):
+    case let .display(conversations, hasNextPage):
       if conversations.isEmpty {
         PlaceholderView(
           iconName: "tray",
@@ -130,7 +130,6 @@ public struct ConversationsListView: View {
 }
 
 extension ConversationsListView {
-
   private func fetchConversations() async {
     do {
       let result = try await dataSource.fetchConversations(client: client)
@@ -153,7 +152,7 @@ extension ConversationsListView {
 
   private func handleStreamEvent(_ event: any StreamEvent) async {
     if let updatedConversations = dataSource.handleStreamEvent(event: event) {
-      if case .display(_, let hasNextPage) = viewState {
+      if case let .display(_, hasNextPage) = viewState {
         withAnimation {
           viewState = .display(conversations: updatedConversations, hasNextPage: hasNextPage)
         }
@@ -163,15 +162,17 @@ extension ConversationsListView {
 
   private func markAsRead(_ conversation: Conversation) async {
     let updatedConversation = await dataSource.markAsRead(
-      client: client, conversation: conversation)
+      client: client, conversation: conversation
+    )
     updateConversation(updatedConversation)
   }
 
   private func deleteConversation(_ conversation: Conversation) async {
     do {
       let updatedConversations = try await dataSource.delete(
-        client: client, conversation: conversation)
-      if case .display(_, let hasNextPage) = viewState {
+        client: client, conversation: conversation
+      )
+      if case let .display(_, hasNextPage) = viewState {
         withAnimation {
           viewState = .display(conversations: updatedConversations, hasNextPage: hasNextPage)
         }
@@ -184,7 +185,8 @@ extension ConversationsListView {
   private func toggleFavorite(_ conversation: Conversation) async {
     do {
       let updatedConversation = try await dataSource.toggleFavorite(
-        client: client, conversation: conversation)
+        client: client, conversation: conversation
+      )
       updateConversation(updatedConversation)
     } catch {
       // Handle error if needed
@@ -194,7 +196,8 @@ extension ConversationsListView {
   private func toggleBookmark(_ conversation: Conversation) async {
     do {
       let updatedConversation = try await dataSource.toggleBookmark(
-        client: client, conversation: conversation)
+        client: client, conversation: conversation
+      )
       updateConversation(updatedConversation)
     } catch {
       // Handle error if needed
@@ -202,7 +205,7 @@ extension ConversationsListView {
   }
 
   private func updateConversation(_ conversation: Conversation) {
-    if case .display(let conversations, let hasNextPage) = viewState {
+    if case let .display(conversations, hasNextPage) = viewState {
       if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
         var updatedConversations = conversations
         updatedConversations[index] = conversation

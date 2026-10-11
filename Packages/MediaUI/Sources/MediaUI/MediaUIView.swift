@@ -127,8 +127,6 @@ private struct AltTextToolbarItem: ToolbarContent {
         } message: {
           Text(alt)
         }
-      } else {
-        EmptyView()
       }
     }
   }
@@ -163,8 +161,6 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
           case .saved: Image(systemName: "checkmark.circle.fill")
           }
         }
-      } else {
-        EmptyView()
       }
     }
   }

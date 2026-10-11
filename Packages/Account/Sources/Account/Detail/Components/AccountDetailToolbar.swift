@@ -40,11 +40,14 @@ struct AccountDetailToolbar: ToolbarContent {
             #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(
                 value: WindowDestinationEditor.mentionStatusEditor(
-                  account: account, visibility: preferences.postVisibility))
+                  account: account, visibility: preferences.postVisibility
+                )
+              )
             #else
               routerPath.presentedSheet = .mentionStatusEditor(
                 account: account,
-                visibility: preferences.postVisibility)
+                visibility: preferences.postVisibility
+              )
             #endif
           }
         } label: {
@@ -59,7 +62,8 @@ struct AccountDetailToolbar: ToolbarContent {
           showTranslateView: $showTranslateView,
           account: account,
           relationship: $relationship,
-          isCurrentUser: isCurrentUser)
+          isCurrentUser: isCurrentUser
+        )
 
         if !isCurrentUser {
           Button {
@@ -95,7 +99,8 @@ struct AccountDetailToolbar: ToolbarContent {
             Task {
               do {
                 relationship = try await client.post(
-                  endpoint: Accounts.block(id: account.id))
+                  endpoint: Accounts.block(id: account.id)
+                )
               } catch {}
             }
           }
@@ -104,8 +109,9 @@ struct AccountDetailToolbar: ToolbarContent {
         Text("account.action.block-user-confirmation")
       }
       #if canImport(_Translation_SwiftUI)
-        .addTranslateView(
-          isPresented: $showTranslateView, text: account?.note.asRawText ?? "")
+      .addTranslateView(
+        isPresented: $showTranslateView, text: account?.note.asRawText ?? ""
+      )
       #endif
     }
   }
@@ -169,7 +175,6 @@ private struct CurrentUserMenuItems: View {
       } label: {
         Label("account.muted", systemImage: "person.crop.circle.badge.moon")
       }
-
     }
 
     Button {

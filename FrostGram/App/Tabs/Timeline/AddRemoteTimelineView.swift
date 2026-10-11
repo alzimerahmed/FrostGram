@@ -63,28 +63,28 @@ struct AddRemoteTimelineView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        CancelToolbarItem()
-      }
-      .onChange(of: instanceName) { _, newValue in
-        instanceNamePublisher.send(newValue)
-      }
-      .onReceive(
-        instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-      ) { newValue in
-        Task {
-          let client = MastodonClient(server: newValue, version: .v2)
-          instance = try? await client.get(endpoint: Instances.instance)
+        .toolbar {
+          CancelToolbarItem()
         }
-      }
-      .onAppear {
-        isInstanceURLFieldFocused = true
-        let client = InstanceSocialClient()
-        let instanceName = instanceName
-        Task {
-          instances = await client.fetchInstances(keyword: instanceName)
+        .onChange(of: instanceName) { _, newValue in
+          instanceNamePublisher.send(newValue)
         }
-      }
+        .onReceive(
+          instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+        ) { newValue in
+          Task {
+            let client = MastodonClient(server: newValue, version: .v2)
+            instance = try? await client.get(endpoint: Instances.instance)
+          }
+        }
+        .onAppear {
+          isInstanceURLFieldFocused = true
+          let client = InstanceSocialClient()
+          let instanceName = instanceName
+          Task {
+            instances = await client.fetchInstances(keyword: instanceName)
+          }
+        }
     }
   }
 

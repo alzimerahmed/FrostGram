@@ -39,7 +39,8 @@ private struct SafariRouter: ViewModifier {
         // Open external URL (from frostgram://)
         guard !isSecondaryColumn else { return }
         let urlString = url.absoluteString.replacingOccurrences(
-          of: AppInfo.scheme, with: "https://")
+          of: AppInfo.scheme, with: "https://"
+        )
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handleDeepLink(url: url)
       }
@@ -71,13 +72,13 @@ private struct SafariRouter: ViewModifier {
           #endif
         }
       }
-      #if !os(visionOS)
-        .background {
-          WindowReader { window in
-            safariManager.windowScene = window.windowScene
-          }
+    #if !os(visionOS)
+      .background {
+        WindowReader { window in
+          safariManager.windowScene = window.windowScene
         }
-      #endif
+      }
+    #endif
   }
 }
 
@@ -160,12 +161,12 @@ private struct SafariRouter: ViewModifier {
         return topViewController(from: presented)
       }
       if let navigation = root as? UINavigationController,
-        let visible = navigation.visibleViewController
+         let visible = navigation.visibleViewController
       {
         return topViewController(from: visible)
       }
       if let tab = root as? UITabBarController,
-        let selected = tab.selectedViewController
+         let selected = tab.selectedViewController
       {
         return topViewController(from: selected)
       }

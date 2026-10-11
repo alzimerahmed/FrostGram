@@ -11,7 +11,8 @@ struct StatusRowReblogView: View {
         AvatarView(viewModel.status.account.avatar, config: .boost)
         EmojiTextApp(
           .init(stringValue: viewModel.status.account.safeDisplayName),
-          emojis: viewModel.status.account.emojis)
+          emojis: viewModel.status.account.emojis
+        )
         Text("status.row.was-boosted")
       }
       .accessibilityElement(children: .combine)

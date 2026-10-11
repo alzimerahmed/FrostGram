@@ -34,7 +34,8 @@ public actor TimelineCache {
     do {
       let directory = FileManager.Directory.defaultStorageDirectory(appendingPath: client).url
       let content = try FileManager.default.contentsOfDirectory(
-        at: directory, includingPropertiesForKeys: nil)
+        at: directory, includingPropertiesForKeys: nil
+      )
       var total: Int = await storageFor(client, "Home").allKeys().count
       for storage in content {
         if !storage.lastPathComponent.hasSuffix("sqlite3") {
@@ -86,7 +87,8 @@ public actor TimelineCache {
       UserDefaults.standard.set(statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)")
     } else {
       UserDefaults.standard.set(
-        statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)")
+        statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)"
+      )
     }
   }
 
@@ -102,17 +104,20 @@ public actor TimelineCache {
 // MARK: - Encoding helpers
 
 private extension TimelineCache {
-  var maxCachedStatuses: Int { 800 }
+  var maxCachedStatuses: Int {
+    800
+  }
 
   private func prepareItemsForCaching(_ items: [TimelineItem]) -> [CachedTimelineItem] {
     limitedItems(items, limit: maxCachedStatuses).map { item in
       switch item {
-      case .status(let status):
+      case let .status(status):
         return CachedTimelineItem(kind: .status, status: status, gap: nil)
-      case .gap(let gap):
+      case let .gap(gap):
         let cachedGap = CachedGap(
           sinceId: gap.sinceId,
-          maxId: gap.maxId)
+          maxId: gap.maxId
+        )
         return CachedTimelineItem(kind: .gap, status: nil, gap: cachedGap)
       }
     }
@@ -132,7 +137,9 @@ private extension TimelineCache {
         return .gap(
           TimelineGap(
             sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
-            maxId: gap.maxId))
+            maxId: gap.maxId
+          )
+        )
       }
     }
   }
@@ -152,7 +159,9 @@ private extension TimelineCache {
       case .gap:
         guard statusCount > 0 else { continue }
         collected.append(item)
-        if statusCount >= limit { return collected }
+        if statusCount >= limit {
+          return collected
+        }
       }
     }
 

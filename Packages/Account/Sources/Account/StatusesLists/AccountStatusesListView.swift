@@ -52,25 +52,25 @@ public struct AccountStatusesListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle(mode.title)
-    .navigationBarTitleDisplayMode(.inline)
-    .refreshable {
-      await fetcher.fetchNewestStatuses(pullToRefresh: true)
-    }
-    .task {
-      guard !isLoaded else { return }
-      fetcher.client = client
-      await fetcher.fetchNewestStatuses(pullToRefresh: false)
-      isLoaded = true
-    }
-    .onChange(of: client.id) { _, _ in
-      isLoaded = false
-      fetcher = AccountStatusesFetcher(mode: mode)
-      fetcher.client = client
-      Task {
+      .navigationTitle(mode.title)
+      .navigationBarTitleDisplayMode(.inline)
+      .refreshable {
+        await fetcher.fetchNewestStatuses(pullToRefresh: true)
+      }
+      .task {
+        guard !isLoaded else { return }
+        fetcher.client = client
         await fetcher.fetchNewestStatuses(pullToRefresh: false)
         isLoaded = true
       }
-    }
+      .onChange(of: client.id) { _, _ in
+        isLoaded = false
+        fetcher = AccountStatusesFetcher(mode: mode)
+        fetcher.client = client
+        Task {
+          await fetcher.fetchNewestStatuses(pullToRefresh: false)
+          isLoaded = true
+        }
+      }
   }
 }

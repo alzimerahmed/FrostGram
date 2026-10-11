@@ -11,14 +11,15 @@ struct ToolbarTab: ToolbarContent {
   @Environment(UserPreferences.self) private var userPreferences
 
   @Binding var routerPath: RouterPath
-  
+
   @Namespace private var transition
 
   var body: some ToolbarContent {
     if !isSecondaryColumn {
       statusEditorToolbarItem(
         routerPath: routerPath,
-        visibility: userPreferences.postVisibility)
+        visibility: userPreferences.postVisibility
+      )
       if #available(iOS 26.0, *) {
         #if os(iOS) && !targetEnvironment(macCatalyst)
           accountToolbarItem
@@ -57,6 +58,7 @@ struct ToolbarTab: ToolbarContent {
     AppAccountsSelectorView(
       transition: transition,
       routerPath: routerPath,
-      avatarConfig: .embed)
+      avatarConfig: .embed
+    )
   }
 }

@@ -8,14 +8,14 @@ import SwiftUI
 struct AccountInfoView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
-  
+
   let account: Account
   let relationship: Relationship?
   let isCurrentUser: Bool
   @Binding var followButtonViewModel: FollowButtonViewModel?
   @Binding var translation: Translation?
   @Binding var isLoadingTranslation: Bool
-  
+
   var body: some View {
     HStack(alignment: .firstTextBaseline) {
       VStack(alignment: .leading, spacing: 0) {
@@ -28,17 +28,17 @@ struct AccountInfoView: View {
       .accessibilitySortPriority(1)
 
       Spacer()
-      
+
       followButtonView
     }
-    
+
     relationshipNoteView
-    
+
     accountBioView
-    
+
     translationView
   }
-  
+
   private var nameAndBadgesView: some View {
     HStack(alignment: .center, spacing: 2) {
       EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
@@ -75,7 +75,7 @@ struct AccountInfoView: View {
       }
     }
   }
-  
+
   private var usernameView: some View {
     Text("@\(account.acct)")
       .font(.scaledCallout)
@@ -83,7 +83,7 @@ struct AccountInfoView: View {
       .textSelection(.enabled)
       .accessibilityRespondsToUserInteraction(false)
   }
-  
+
   @ViewBuilder
   private var movedToView: some View {
     if let movedTo = account.moved {
@@ -94,7 +94,7 @@ struct AccountInfoView: View {
       .foregroundColor(.accentColor)
     }
   }
-  
+
   @ViewBuilder
   private var joinedAtView: some View {
     let joinedAt = account.createdAt.asDate
@@ -109,7 +109,7 @@ struct AccountInfoView: View {
     .padding(.top, 6)
     .accessibilityElement(children: .combine)
   }
-  
+
   private var followButtonView: some View {
     HStack {
       if let followButtonViewModel = followButtonViewModel, !isCurrentUser {
@@ -120,7 +120,7 @@ struct AccountInfoView: View {
     }
     .padding(.top, 4)
   }
-  
+
   @ViewBuilder
   private var relationshipNoteView: some View {
     if let note = relationship?.note, !note.isEmpty, !isCurrentUser {
@@ -130,9 +130,9 @@ struct AccountInfoView: View {
         Text(note)
           .frame(maxWidth: .infinity, alignment: .leading)
           .padding(8)
-          #if !os(visionOS)
-            .background(theme.secondaryBackgroundColor)
-          #endif
+        #if !os(visionOS)
+          .background(theme.secondaryBackgroundColor)
+        #endif
           .cornerRadius(4)
           .overlay(
             RoundedRectangle(cornerRadius: 4)
@@ -141,7 +141,7 @@ struct AccountInfoView: View {
       }
     }
   }
-  
+
   private var accountBioView: some View {
     EmojiTextApp(account.note, emojis: account.emojis)
       .font(.scaledBody)
@@ -158,7 +158,7 @@ struct AccountInfoView: View {
       )
       .accessibilityRespondsToUserInteraction(false)
   }
-  
+
   @ViewBuilder
   private var translationView: some View {
     if let translation = translation, !isLoadingTranslation {
@@ -168,7 +168,8 @@ struct AccountInfoView: View {
             .font(.scaledBody)
           Text(
             getLocalizedStringLabel(
-              langCode: translation.detectedSourceLanguage, provider: translation.provider)
+              langCode: translation.detectedSourceLanguage, provider: translation.provider
+            )
           )
           .font(.footnote)
           .foregroundStyle(.secondary)
@@ -177,7 +178,7 @@ struct AccountInfoView: View {
       .fixedSize(horizontal: false, vertical: true)
     }
   }
-  
+
   private func getLocalizedStringLabel(langCode: String, provider: String) -> String {
     if let localizedLanguage = Locale.current.localizedString(forLanguageCode: langCode) {
       let format = NSLocalizedString("status.action.translated-label-from-%@-%@", comment: "")

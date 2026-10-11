@@ -52,7 +52,8 @@ public struct DeepLClient: Sendable {
       return .init(
         content: translation.text.removingPercentEncoding ?? "",
         detectedSourceLanguage: translation.detectedSourceLanguage,
-        provider: "DeepL.com")
+        provider: "DeepL.com"
+      )
     }
     throw DeepLError.notFound
   }

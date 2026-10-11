@@ -49,11 +49,13 @@ import SwiftUI
       isUpdating = true
       let list: Models.List = try await client.put(
         endpoint:
-          Lists.updateList(
-            id: list.id,
-            title: title,
-            repliesPolicy: repliesPolicy,
-            exclusive: isExclusive))
+        Lists.updateList(
+          id: list.id,
+          title: title,
+          repliesPolicy: repliesPolicy,
+          exclusive: isExclusive
+        )
+      )
       self.list = list
       title = list.title
       repliesPolicy = list.repliesPolicy ?? .list
@@ -70,7 +72,8 @@ import SwiftUI
     do {
       isUpdating = true
       let response = try await client.post(
-        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id])
+      )
       if response?.statusCode == 200 {
         accounts.append(account)
       }
@@ -85,7 +88,8 @@ import SwiftUI
     do {
       isUpdating = true
       let response = try await client.delete(
-        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id])
+      )
       if response?.statusCode == 200 {
         accounts.removeAll(where: { $0.id == account.id })
       }
@@ -104,8 +108,10 @@ import SwiftUI
           query: searchUserQuery,
           type: nil,
           offset: nil,
-          following: nil),
-        forceVersion: .v2)
+          following: nil
+        ),
+        forceVersion: .v2
+      )
       let relationships: [Relationship] =
         try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
       searchedRelationships = relationships.reduce(into: [String: Relationship]()) {

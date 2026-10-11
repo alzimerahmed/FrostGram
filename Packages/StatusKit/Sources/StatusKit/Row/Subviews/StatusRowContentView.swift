@@ -36,8 +36,8 @@ struct StatusRowContentView: View {
       }
 
       if !reasons.contains(.placeholder),
-        !isCompact,
-        viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
+         !isCompact,
+         viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
         if let embeddedStatus = viewModel.embeddedStatus {
           StatusEmbeddedView(
@@ -67,7 +67,8 @@ struct StatusRowContentView: View {
         HStack {
           StatusRowMediaPreviewView(
             attachments: viewModel.finalStatus.mediaAttachments,
-            sensitive: viewModel.finalStatus.sensitive)
+            sensitive: viewModel.finalStatus.sensitive
+          )
           if theme.statusDisplayStyle == .compact {
             Spacer()
           }
@@ -77,18 +78,19 @@ struct StatusRowContentView: View {
       }
 
       if let card = viewModel.finalStatus.card,
-        !viewModel.isEmbedLoading,
-        !isCompact,
-        theme.statusDisplayStyle != .compact,
-        viewModel.embeddedStatus == nil,
-        viewModel.finalStatus.mediaAttachments.isEmpty
+         !viewModel.isEmbedLoading,
+         !isCompact,
+         theme.statusDisplayStyle != .compact,
+         viewModel.embeddedStatus == nil,
+         viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)
       }
-      
+
       // Display trailing tags if they were removed from content
       if viewModel.finalStatus.content.hadTrailingTags,
-         !viewModel.finalStatus.tags.isEmpty {
+         !viewModel.finalStatus.tags.isEmpty
+      {
         StatusRowTagsView(tags: viewModel.finalStatus.tags)
           .padding(.top, 8)
       }

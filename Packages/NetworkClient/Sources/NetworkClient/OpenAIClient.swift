@@ -51,10 +51,11 @@ public struct OpenAIClient {
             .init(
               type: "text",
               text:
-                "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.",
-              imageUrl: nil),
+              "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.",
+              imageUrl: nil
+            ),
             .init(type: "image_url", text: nil, imageUrl: .init(url: image)),
-          ])
+          ]),
         ])
       }
     }
@@ -93,8 +94,7 @@ public struct OpenAIClient {
       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       request.httpBody = jsonData
       let (result, _) = try await URLSession.shared.data(for: request)
-      let response = try decoder.decode(Response.self, from: result)
-      return response
+      return try decoder.decode(Response.self, from: result)
     } catch {
       throw error
     }

@@ -12,7 +12,7 @@ actor TimelineDatasource {
 
   func get() -> [Status] {
     items.compactMap { item in
-      if case .status(let status) = item {
+      if case let .status(status) = item {
         return status
       }
       return nil
@@ -28,7 +28,7 @@ actor TimelineDatasource {
     let snapshot = await contentFilter.snapshot()
     var filtered: [Status] = []
     for item in items {
-      guard case .status(let status) = item else { continue }
+      guard case let .status(status) = item else { continue }
       if shouldShowStatus(status, filter: snapshot) {
         filtered.append(status)
       }
@@ -44,7 +44,7 @@ actor TimelineDatasource {
       switch item {
       case .gap:
         filtered.append(item)
-      case .status(let status):
+      case let .status(status):
         if shouldShowStatus(status, filter: snapshot) {
           filtered.append(item)
         }
@@ -56,7 +56,7 @@ actor TimelineDatasource {
   func getFiltered(using snapshot: TimelineContentFilter.Snapshot) -> [Status] {
     var filtered: [Status] = []
     for item in items {
-      guard case .status(let status) = item else { continue }
+      guard case let .status(status) = item else { continue }
       if shouldShowStatus(status, filter: snapshot) {
         filtered.append(status)
       }
@@ -80,7 +80,7 @@ actor TimelineDatasource {
 
   private func findStatusIndex(id: String) -> Int? {
     items.firstIndex(where: { item in
-      if case .status(let status) = item {
+      if case let .status(status) = item {
         return status.id == id
       }
       return false
@@ -89,7 +89,7 @@ actor TimelineDatasource {
 
   private func findGapIndex(id: String) -> Int? {
     items.firstIndex(where: { item in
-      if case .gap(let gap) = item {
+      if case let .gap(gap) = item {
         return gap.id == id
       }
       return false
@@ -107,7 +107,7 @@ actor TimelineDatasource {
   }
 
   func set(_ statuses: [Status]) {
-    self.items = statuses.map { .status($0) }
+    items = statuses.map { .status($0) }
   }
 
   func setItems(_ items: [TimelineItem]) {
@@ -134,7 +134,7 @@ actor TimelineDatasource {
     guard let index = findStatusIndex(id: status.id) else { return }
     let safeIndex = index + safeOffset
     if items.count > safeIndex {
-      items.removeSubrange(safeIndex..<items.endIndex)
+      items.removeSubrange(safeIndex ..< items.endIndex)
     }
   }
 
@@ -144,7 +144,7 @@ actor TimelineDatasource {
 
   func remove(_ statusId: String) -> Status? {
     guard let index = findStatusIndex(id: statusId),
-      case .status(let status) = items.remove(at: index)
+          case let .status(status) = items.remove(at: index)
     else {
       return nil
     }
@@ -165,7 +165,7 @@ actor TimelineDatasource {
 
   func updateGapLoadingState(id: String, isLoading: Bool) {
     guard let gapIndex = findGapIndex(id: id),
-      case .gap(var gap) = items[gapIndex]
+          case var .gap(gap) = items[gapIndex]
     else { return }
     gap.isLoading = isLoading
     items[gapIndex] = .gap(gap)

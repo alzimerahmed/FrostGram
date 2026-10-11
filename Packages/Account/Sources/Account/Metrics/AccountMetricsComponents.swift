@@ -58,50 +58,50 @@ struct MetricsChartCard: View {
       }
 
       chart
-      .chartXSelection(value: $selectedDate)
-      .chartXScale(range: .plotDimension(startPadding: 12, endPadding: 12))
-      .chartYScale(domain: 0...max(maxValue, 1))
-      .chartXAxis {
-        AxisMarks(values: axisDates) { value in
-          AxisValueLabel(
-            format: .dateTime.month(.abbreviated).day(),
-            centered: true
+        .chartXSelection(value: $selectedDate)
+        .chartXScale(range: .plotDimension(startPadding: 12, endPadding: 12))
+        .chartYScale(domain: 0 ... max(maxValue, 1))
+        .chartXAxis {
+          AxisMarks(values: axisDates) { _ in
+            AxisValueLabel(
+              format: .dateTime.month(.abbreviated).day(),
+              centered: true
+            )
+          }
+        }
+        .chartYAxis {
+          AxisMarks(position: .leading)
+        }
+        .chartOverlay { proxy in
+          MetricsChartSelectionOverlay(
+            proxy: proxy,
+            selectedData: selectedData,
+            isLoading: isLoading
           )
         }
-      }
-      .chartYAxis {
-        AxisMarks(position: .leading)
-      }
-      .chartOverlay { proxy in
-        MetricsChartSelectionOverlay(
-          proxy: proxy,
-          selectedData: selectedData,
-          isLoading: isLoading
-        )
-      }
-      .frame(height: 220)
-      .redacted(reason: isLoading ? .placeholder : [])
-      .animation(.easeInOut(duration: 0.25), value: animatedDailyData)
-      .animation(.easeInOut(duration: 0.25), value: chartStyle)
-      .onChange(of: selectedDate) { _, newValue in
-        guard let newValue else {
-          lastHapticDayStart = nil
-          return
-        }
+        .frame(height: 220)
+        .redacted(reason: isLoading ? .placeholder : [])
+        .animation(.easeInOut(duration: 0.25), value: animatedDailyData)
+        .animation(.easeInOut(duration: 0.25), value: chartStyle)
+        .onChange(of: selectedDate) { _, newValue in
+          guard let newValue else {
+            lastHapticDayStart = nil
+            return
+          }
 
-        guard let dayStart = dailyData.first(where: {
-          calendar.isDate($0.dayStart, inSameDayAs: newValue)
-        })?.dayStart else {
-          return
-        }
+          guard let dayStart = dailyData.first(where: {
+            calendar.isDate($0.dayStart, inSameDayAs: newValue)
+          })?.dayStart else {
+            return
+          }
 
-        if let lastHapticDayStart, calendar.isDate(lastHapticDayStart, inSameDayAs: dayStart) {
-          return
-        }
+          if let lastHapticDayStart, calendar.isDate(lastHapticDayStart, inSameDayAs: dayStart) {
+            return
+          }
 
-        lastHapticDayStart = dayStart
-        HapticManager.shared.fireHaptic(.timeline)
-      }
+          lastHapticDayStart = dayStart
+          HapticManager.shared.fireHaptic(.timeline)
+        }
     }
     .padding(12)
     .withCardBackground(cornerRadius: 16)
@@ -157,7 +157,7 @@ struct MetricsChartCard: View {
 
   private var axisDates: [Date] {
     guard let first = dailyData.first?.dayStart,
-      let last = dailyData.last?.dayStart
+          let last = dailyData.last?.dayStart
     else {
       return []
     }

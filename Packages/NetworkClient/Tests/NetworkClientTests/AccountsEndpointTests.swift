@@ -5,7 +5,8 @@ final class AccountsEndpointTests: XCTestCase {
   func testRemoveFollowerPath() {
     XCTAssertEqual(
       Accounts.removeFollower(id: "42").path(),
-      "accounts/42/remove_from_followers")
+      "accounts/42/remove_from_followers"
+    )
   }
 
   func testFollowRequestsPaths() {

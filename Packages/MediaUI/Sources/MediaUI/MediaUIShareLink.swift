@@ -16,7 +16,9 @@ public struct MediaUIShareLink: View, @unchecked Sendable {
         item: transferable,
         preview: .init(
           "status.media.contextmenu.share",
-          image: transferable))
+          image: transferable
+        )
+      )
     } else {
       ShareLink(item: url)
     }

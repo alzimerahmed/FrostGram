@@ -45,7 +45,7 @@ import UIKit
       windowHeight = window?.bounds.size.height ?? UIScreen.main.bounds.size.height
     #endif
     Self.observedSceneDelegate.insert(self)
-    _ = Self.observer  // just for activating the lazy static property
+    _ = Self.observer // just for activating the lazy static property
   }
 
   private static var observedSceneDelegate: Set<SceneDelegate> = []

@@ -8,12 +8,12 @@
 import Models
 
 extension ConsolidatedNotification {
-  var notificationIds: [String] { 
+  var notificationIds: [String] {
     // For V2 API groups, use the groupKey if available
     if let groupKey = groupKey, notifications.isEmpty {
       return [groupKey]
     }
-    return notifications.map(\.id) 
+    return notifications.map(\.id)
   }
 }
 

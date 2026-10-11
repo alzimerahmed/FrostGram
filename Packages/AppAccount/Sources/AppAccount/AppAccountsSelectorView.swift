@@ -106,7 +106,6 @@ public struct AppAccountsSelectorView: View {
     }
   }
 
-  @ViewBuilder
   private var labelView: some View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
@@ -137,7 +136,7 @@ public struct AppAccountsSelectorView: View {
             .foregroundStyle(theme.labelColor)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.secondaryBackgroundColor)
+        .listRowBackground(theme.secondaryBackgroundColor)
         #endif
 
         if accountCreationEnabled {
@@ -146,10 +145,10 @@ public struct AppAccountsSelectorView: View {
             aboutButton
           }
           #if os(visionOS)
-            .foregroundStyle(theme.labelColor)
+          .foregroundStyle(theme.labelColor)
           #else
-            .foregroundStyle(theme.labelColor)
-            .listRowBackground(theme.secondaryBackgroundColor)
+          .foregroundStyle(theme.labelColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
           #endif
         }
       }
@@ -219,7 +218,8 @@ public struct AppAccountsSelectorView: View {
     accountsViewModel = []
     for account in appAccounts.availableAccounts {
       let viewModel: AppAccountViewModel = .init(
-        appAccount: account, isInSettings: false, showBadge: true)
+        appAccount: account, isInSettings: false, showBadge: true
+      )
       accountsViewModel.append(viewModel)
     }
   }

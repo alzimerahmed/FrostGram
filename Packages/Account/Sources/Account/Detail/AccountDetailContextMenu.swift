@@ -23,7 +23,8 @@ public struct AccountDetailContextMenu: View {
           Button {
             routerPath.presentedSheet = .mentionStatusEditor(
               account: account,
-              visibility: preferences.postVisibility)
+              visibility: preferences.postVisibility
+            )
           } label: {
             Label("account.action.mention", systemImage: "at")
           }
@@ -42,12 +43,14 @@ public struct AccountDetailContextMenu: View {
               Task {
                 do {
                   relationship = try await client.post(
-                    endpoint: Accounts.unblock(id: account.id))
+                    endpoint: Accounts.unblock(id: account.id)
+                  )
                 } catch {}
               }
             } label: {
               Label(
-                "account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+                "account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark"
+              )
             }
           } else {
             Button {
@@ -62,7 +65,8 @@ public struct AccountDetailContextMenu: View {
               Task {
                 do {
                   relationship = try await client.post(
-                    endpoint: Accounts.unmute(id: account.id))
+                    endpoint: Accounts.unmute(id: account.id)
+                  )
                 } catch {}
               }
             } label: {
@@ -76,7 +80,9 @@ public struct AccountDetailContextMenu: View {
                     do {
                       relationship = try await client.post(
                         endpoint: Accounts.mute(
-                          id: account.id, json: MuteData(duration: duration.rawValue)))
+                          id: account.id, json: MuteData(duration: duration.rawValue)
+                        )
+                      )
                     } catch {}
                   }
                 }
@@ -93,7 +99,8 @@ public struct AccountDetailContextMenu: View {
               Task {
                 do {
                   relationship = try await client.post(
-                    endpoint: Accounts.removeFollower(id: account.id))
+                    endpoint: Accounts.removeFollower(id: account.id)
+                  )
                 } catch {}
               }
             } label: {
@@ -102,7 +109,7 @@ public struct AccountDetailContextMenu: View {
           }
 
           if let relationshipValue = relationship,
-            relationshipValue.following
+             relationshipValue.following
           {
             if relationshipValue.notifying {
               Button {
@@ -112,7 +119,9 @@ public struct AccountDetailContextMenu: View {
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: false,
-                        reblogs: relationshipValue.showingReblogs))
+                        reblogs: relationshipValue.showingReblogs
+                      )
+                    )
                   } catch {}
                 }
               } label: {
@@ -126,7 +135,9 @@ public struct AccountDetailContextMenu: View {
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: true,
-                        reblogs: relationshipValue.showingReblogs))
+                        reblogs: relationshipValue.showingReblogs
+                      )
+                    )
                   } catch {}
                 }
               } label: {
@@ -141,7 +152,9 @@ public struct AccountDetailContextMenu: View {
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: relationshipValue.notifying,
-                        reblogs: false))
+                        reblogs: false
+                      )
+                    )
                   } catch {}
                 }
               } label: {
@@ -155,7 +168,9 @@ public struct AccountDetailContextMenu: View {
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: relationshipValue.notifying,
-                        reblogs: true))
+                        reblogs: true
+                      )
+                    )
                   } catch {}
                 }
               } label: {

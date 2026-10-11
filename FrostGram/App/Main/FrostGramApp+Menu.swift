@@ -19,10 +19,13 @@ extension FrostGramApp {
         #if targetEnvironment(macCatalyst)
           openWindow(
             value: WindowDestinationEditor.newStatusEditor(
-              visibility: userPreferences.postVisibility))
+              visibility: userPreferences.postVisibility
+            )
+          )
         #else
           appRouterPath.presentedSheet = .newStatusEditor(
-            visibility: userPreferences.postVisibility)
+            visibility: userPreferences.postVisibility
+          )
         #endif
       }
       .keyboardShortcut("n", modifiers: .command)

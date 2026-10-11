@@ -5,10 +5,10 @@ import SwiftUI
 
 struct FeaturedTagsView: View {
   @Environment(RouterPath.self) private var routerPath
-  
+
   let featuredTags: [FeaturedTag]
   let accountId: String
-  
+
   var body: some View {
     if !featuredTags.isEmpty {
       ScrollView(.horizontal, showsIndicators: false) {

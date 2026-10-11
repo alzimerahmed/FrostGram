@@ -14,6 +14,7 @@ public struct Instance: Codable, Sendable, Hashable {
     public struct Users: Codable, Sendable {
       public let activeMonth: Int?
     }
+
     public let users: Users?
   }
 

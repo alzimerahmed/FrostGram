@@ -61,7 +61,8 @@ extension TextView.Representable {
     func textViewDidChange(_ textView: UITextView) {
       DispatchQueue.main.async {
         self.text.wrappedValue = NSMutableAttributedString(
-          attributedString: textView.attributedText)
+          attributedString: textView.attributedText
+        )
         self.recalculateHeight()
       }
     }
@@ -81,10 +82,11 @@ extension TextView.Representable.Coordinator {
 
   private func recalculateHeight() {
     let newSize = textView.sizeThatFits(
-      CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude))
+      CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude)
+    )
     guard calculatedHeight.wrappedValue != newSize.height else { return }
 
-    DispatchQueue.main.async {  // call in next render cycle.
+    DispatchQueue.main.async { // call in next render cycle.
       self.calculatedHeight.wrappedValue = newSize.height
     }
   }

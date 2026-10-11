@@ -1,6 +1,6 @@
-import AVFoundation
 import Account
 import AppAccount
+import AVFoundation
 import DesignSystem
 import Env
 import KeychainSwift
@@ -66,10 +66,10 @@ struct AppView: View {
     tabRouter.availableSections(
       horizontalSizeClass: horizontalSizeClass,
       localTimelines: localTimelines,
-      tagGroups: tagGroups)
+      tagGroups: tagGroups
+    )
   }
 
-  @ViewBuilder
   var tabBarView: some View {
     TabView(
       selection: .init(
@@ -78,14 +78,16 @@ struct AppView: View {
         },
         set: { newTab in
           updateTab(with: newTab)
-        })
+        }
+      )
     ) {
       ForEach(availableSections) { section in
         TabSection(section.title) {
           if section == .localTimeline {
             ForEach(localTimelines) { timeline in
               let tab = AppTab.anyTimelineFilter(
-                filter: .remoteLocal(server: timeline.instance, filter: .local))
+                filter: .remoteLocal(server: timeline.instance, filter: .local)
+              )
               Tab(value: tab) {
                 makeTabContent(for: tab)
               } label: {
@@ -99,7 +101,9 @@ struct AppView: View {
                 filter: TimelineFilter.tagGroup(
                   title: tagGroup.title,
                   tags: tagGroup.tags,
-                  symbolName: tagGroup.symbolName))
+                  symbolName: tagGroup.symbolName
+                )
+              )
               Tab(value: tab) {
                 makeTabContent(for: tab)
               } label: {
@@ -130,7 +134,6 @@ struct AppView: View {
     .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
   }
 
-  @ViewBuilder
   private func makeTabContent(for tab: AppTab) -> some View {
     tab.makeContentView(
       homeTimeline: $timeline,
@@ -171,7 +174,7 @@ struct AppView: View {
 
   private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
-      let token = appAccountsManager.currentAccount.oauthToken
+       let token = appAccountsManager.currentAccount.oauthToken
     {
       return userPreferences.notificationsCount[token] ?? 0
     }
@@ -202,7 +205,8 @@ struct AppView: View {
         timeline: .constant(timelineFilter(for: secondaryColumnTimeline)),
         pinnedFilters: .constant([]),
         selectedTagGroup: .constant(nil),
-        canFilterTimeline: false)
+        canFilterTimeline: false
+      )
     }
     .environment(\.isSecondaryColumn, true)
     .frame(maxWidth: .secondaryColumnWidth)

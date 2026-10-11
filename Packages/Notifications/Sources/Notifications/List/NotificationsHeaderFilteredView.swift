@@ -35,7 +35,9 @@ struct NotificationsHeaderFilteredView: View {
           top: 12,
           leading: .layoutPadding,
           bottom: 12,
-          trailing: .layoutPadding))
+          trailing: .layoutPadding
+        )
+      )
     }
   }
 }

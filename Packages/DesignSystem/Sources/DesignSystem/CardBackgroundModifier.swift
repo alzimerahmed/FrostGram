@@ -25,8 +25,8 @@ private struct CardBackgroundModifier: ViewModifier {
   }
 }
 
-extension View {
-  public func withCardBackground(cornerRadius: CGFloat) -> some View {
+public extension View {
+  func withCardBackground(cornerRadius: CGFloat) -> some View {
     modifier(CardBackgroundModifier(cornerRadius: cornerRadius))
   }
 }

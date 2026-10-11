@@ -1,20 +1,19 @@
 import Foundation
+@testable import Models
 import Testing
 
-@testable import Models
-
 @Test
-func testQuoteDecodingIgnoresInvalidQuotedStatus() throws {
+func quoteDecodingIgnoresInvalidQuotedStatus() throws {
   let decoder = JSONDecoder()
   decoder.keyDecodingStrategy = .convertFromSnakeCase
 
   let json = """
-    {
-      "state": "accepted",
-      "quoted_status_id": "123",
-      "quoted_status": "invalid"
-    }
-    """
+  {
+    "state": "accepted",
+    "quoted_status_id": "123",
+    "quoted_status": "invalid"
+  }
+  """
 
   let quote = try decoder.decode(Quote.self, from: Data(json.utf8))
   #expect(quote.state == .accepted)

@@ -6,7 +6,9 @@ import Models
 import NetworkClient
 
 public struct AppAccountEntity: Identifiable, AppEntity {
-  public var id: String { account.id }
+  public var id: String {
+    account.id
+  }
 
   public let account: AppAccount
 

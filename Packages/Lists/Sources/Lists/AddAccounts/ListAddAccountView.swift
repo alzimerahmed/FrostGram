@@ -45,7 +45,8 @@ public struct ListAddAccountView: View {
                       await viewModel.removeFromList(list: list)
                     }
                   }
-                })
+                }
+              )
             )
             .disabled(viewModel.isLoadingInfo)
             Spacer()

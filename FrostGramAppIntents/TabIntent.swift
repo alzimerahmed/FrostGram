@@ -12,7 +12,9 @@ enum TabEnum: String, AppEnum, Sendable {
   case lists
   case links
 
-  static var typeDisplayName: LocalizedStringResource { "Tab" }
+  static var typeDisplayName: LocalizedStringResource {
+    "Tab"
+  }
 
   static let typeDisplayRepresentation: TypeDisplayRepresentation = "Tab"
 

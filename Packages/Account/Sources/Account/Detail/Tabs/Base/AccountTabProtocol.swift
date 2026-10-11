@@ -21,12 +21,12 @@ public protocol AccountTabProtocol: Identifiable, Hashable {
   ) -> TabView
 }
 
-extension AccountTabProtocol {
-  public static func == (lhs: Self, rhs: Self) -> Bool {
+public extension AccountTabProtocol {
+  static func == (lhs: Self, rhs: Self) -> Bool {
     lhs.id == rhs.id
   }
 
-  public func hash(into hasher: inout Hasher) {
+  func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 }

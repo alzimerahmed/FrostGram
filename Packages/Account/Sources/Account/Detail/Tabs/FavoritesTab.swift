@@ -11,13 +11,12 @@ struct FavoritesTab {
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = false
 
-  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
-  {
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher {
     FavoritesTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account _: Account?
   ) -> some View {
     AnyStatusesListView(
       fetcher: fetcher,
@@ -34,7 +33,7 @@ extension FavoritesTab: @MainActor AccountTabProtocol {}
 private class FavoritesTabFetcher: AccountTabFetcher {
   private var nextPage: LinkHandler?
 
-  override func fetchNewestStatuses(pullToRefresh: Bool) async {
+  override func fetchNewestStatuses(pullToRefresh _: Bool) async {
     do {
       statusesState = .loading
       let result: ([Status], LinkHandler?) = try await client.getWithLink(

@@ -28,9 +28,9 @@ public struct NotificationsRequestsListView: View {
       switch viewState {
       case .loading:
         ProgressView()
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
           .listSectionSeparator(.hidden)
       case .error:
         ErrorView(
@@ -41,7 +41,7 @@ public struct NotificationsRequestsListView: View {
           await fetchRequests(client)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .listSectionSeparator(.hidden)
       case let .requests(data):
@@ -56,28 +56,28 @@ public struct NotificationsRequestsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle("notifications.content-filter.requests.title")
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          withAnimation {
-            isInSelectMode.toggle()
-            if !isInSelectMode {
-              selectedRequests.removeAll()
+      .navigationTitle("notifications.content-filter.requests.title")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            withAnimation {
+              isInSelectMode.toggle()
+              if !isInSelectMode {
+                selectedRequests.removeAll()
+              }
             }
+          } label: {
+            Text(isInSelectMode ? "action.cancel" : "notifications.content-filter.select")
           }
-        } label: {
-          Text(isInSelectMode ? "action.cancel" : "notifications.content-filter.select")
         }
       }
-    }
-    .task {
-      await fetchRequests(client)
-    }
-    .refreshable {
-      await fetchRequests(client)
-    }
+      .task {
+        await fetchRequests(client)
+      }
+      .refreshable {
+        await fetchRequests(client)
+      }
   }
 
   private func selectSection(data: [NotificationsRequest]) -> some View {
@@ -157,14 +157,16 @@ public struct NotificationsRequestsListView: View {
             top: 12,
             leading: .layoutPadding,
             bottom: 12,
-            trailing: .layoutPadding)
+            trailing: .layoutPadding
+          )
         )
         #if os(visionOS)
-          .listRowBackground(
-            RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(.background))
+        .listRowBackground(
+          RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background)
+        )
         #else
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .swipeActions {
           Button {
@@ -205,7 +207,8 @@ public struct NotificationsRequestsListView: View {
   private func acceptSelectedRequests(_ client: MastodonClient) async {
     isProcessingRequests = true
     _ = try? await client.post(
-      endpoint: Notifications.acceptRequests(ids: selectedRequests.map { $0.id }))
+      endpoint: Notifications.acceptRequests(ids: selectedRequests.map { $0.id })
+    )
     await fetchRequests(client)
     isProcessingRequests = false
   }
@@ -213,7 +216,8 @@ public struct NotificationsRequestsListView: View {
   private func rejectSelectedRequests(_ client: MastodonClient) async {
     isProcessingRequests = true
     _ = try? await client.post(
-      endpoint: Notifications.dismissRequests(ids: selectedRequests.map { $0.id }))
+      endpoint: Notifications.dismissRequests(ids: selectedRequests.map { $0.id })
+    )
     await fetchRequests(client)
     isProcessingRequests = false
   }

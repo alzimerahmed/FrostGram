@@ -65,12 +65,14 @@ public struct AccountDetailMediaGridView: View {
                 Button {
                   quickLook.prepareFor(
                     selectedMediaAttachment: status.attachment,
-                    mediaAttachments: status.status.mediaAttachments)
+                    mediaAttachments: status.status.mediaAttachments
+                  )
                 } label: {
                   Label("Open Media", systemImage: "photo")
                 }
                 MediaUIShareLink(
-                  url: url, type: status.attachment.supportedType == .image ? .image : .av)
+                  url: url, type: status.attachment.supportedType == .image ? .image : .av
+                )
                 Button {
                   Task {
                     let transferable = MediaUIImageTransferable(url: url)
@@ -117,7 +119,9 @@ public struct AccountDetailMediaGridView: View {
           onlyMedia: true,
           excludeReplies: true,
           excludeReblogs: true,
-          pinned: nil))
+          pinned: nil
+        )
+      )
     mediaStatuses.append(contentsOf: newStatuses.flatMap { $0.asMediaStatus })
   }
 }

@@ -36,7 +36,7 @@ public struct ListEditView: View {
           Toggle("list.edit.isExclusive", isOn: $viewModel.isExclusive)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .disabled(viewModel.isUpdating)
         .onChange(of: viewModel.repliesPolicy) { _, _ in
@@ -50,7 +50,8 @@ public struct ListEditView: View {
           HStack {
             TextField(
               "lists.edit.users-search",
-              text: $viewModel.searchUserQuery)
+              text: $viewModel.searchUserQuery
+            )
             if !viewModel.searchUserQuery.isEmpty {
               Button {
                 viewModel.searchUserQuery = ""
@@ -67,14 +68,14 @@ public struct ListEditView: View {
           }
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .disabled(viewModel.isUpdating)
       }
       #if !os(visionOS)
-        .scrollDismissesKeyboard(.immediately)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       #endif
       .toolbar {
         ToolbarItem {
@@ -156,7 +157,9 @@ public struct ListEditView: View {
                         await viewModel.delete(account: account)
                       }
                     }
-                  }))
+                  }
+                )
+              )
             } else {
               FollowButton(
                 viewModel: .init(
@@ -166,7 +169,9 @@ public struct ListEditView: View {
                   shouldDisplayNotify: false,
                   relationshipUpdated: { relationship in
                     viewModel.searchedRelationships[account.id] = relationship
-                  }))
+                  }
+                )
+              )
             }
           }
         }

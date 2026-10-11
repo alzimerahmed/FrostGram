@@ -28,7 +28,8 @@ public struct StatusEmbeddedView: View {
             status: status,
             client: client,
             routerPath: routerPath,
-            showActions: false),
+            showActions: false
+          ),
           context: .timeline
         )
         .accessibilityLabel(status.content.asRawText)
@@ -44,13 +45,13 @@ public struct StatusEmbeddedView: View {
     #else
       .background(theme.secondaryBackgroundColor)
     #endif
-    .cornerRadius(4)
-    .overlay(
-      RoundedRectangle(cornerRadius: 4)
-        .stroke(.gray.opacity(0.35), lineWidth: 1)
-    )
-    .padding(.top, 8)
-    .accessibilityElement(children: .combine)
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
+      .padding(.top, 8)
+      .accessibilityElement(children: .combine)
   }
 
   private func makeAccountView(account: Account) -> some View {

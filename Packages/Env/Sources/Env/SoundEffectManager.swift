@@ -1,5 +1,5 @@
-import AVKit
 import AudioToolbox
+import AVKit
 import CoreHaptics
 import UIKit
 
@@ -20,9 +20,9 @@ public class SoundEffectManager {
   }
 
   private func registerSounds() {
-    SoundEffect.allCases.forEach { effect in
+    for effect in SoundEffect.allCases {
       guard let url = Bundle.main.url(forResource: effect.rawValue, withExtension: "wav") else {
-        return
+        continue
       }
       register(url: url, for: effect)
     }

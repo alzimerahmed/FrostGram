@@ -48,55 +48,55 @@ struct SettingsTabs: View {
       #if !os(visionOS)
         .background(theme.secondaryBackgroundColor)
       #endif
-      .navigationTitle(Text("settings.title"))
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        if isModal {
-          ToolbarItem {
-            Button {
-              dismiss()
-            } label: {
-              Text("action.done").bold()
+        .navigationTitle(Text("settings.title"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          if isModal {
+            ToolbarItem {
+              Button {
+                dismiss()
+              } label: {
+                Text("action.done").bold()
+              }
             }
           }
+          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn,
+             !isModal
+          {
+            SecondaryColumnToolbarItem()
+          }
         }
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn,
-          !isModal
-        {
-          SecondaryColumnToolbarItem()
+        .withAppRouter()
+        .withSheetDestinations(
+          sheetDestinations: $routerPath.presentedSheet,
+          routerPath: routerPath
+        )
+        .onAppear {
+          startingPoint = RouterPath.settingsStartingPoint
+          RouterPath.settingsStartingPoint = nil
         }
-      }
-      .withAppRouter()
-      .withSheetDestinations(
-        sheetDestinations: $routerPath.presentedSheet,
-        routerPath: routerPath
-      )
-      .onAppear {
-        startingPoint = RouterPath.settingsStartingPoint
-        RouterPath.settingsStartingPoint = nil
-      }
-      .navigationDestination(item: $startingPoint) { targetView in
-        switch targetView {
-        case .display:
-          DisplaySettingsView()
-        case .haptic:
-          HapticSettingsView()
-        case .remoteTimelines:
-          RemoteTimelinesSettingView()
-        case .tagGroups:
-          TagsGroupSettingView()
-        case .recentTags:
-          RecenTagsSettingView()
-        case .content:
-          ContentSettingsView()
-        case .swipeActions:
-          SwipeActionsSettingsView()
-        case .tabAndSidebarEntries:
-          EmptyView()
-        case .translation:
-          TranslationSettingsView()
+        .navigationDestination(item: $startingPoint) { targetView in
+          switch targetView {
+          case .display:
+            DisplaySettingsView()
+          case .haptic:
+            HapticSettingsView()
+          case .remoteTimelines:
+            RemoteTimelinesSettingView()
+          case .tagGroups:
+            TagsGroupSettingView()
+          case .recentTags:
+            RecenTagsSettingView()
+          case .content:
+            ContentSettingsView()
+          case .swipeActions:
+            SwipeActionsSettingsView()
+          case .tabAndSidebarEntries:
+            EmptyView()
+          case .translation:
+            TranslationSettingsView()
+          }
         }
-      }
     }
     .onAppear {
       routerPath.client = client
@@ -142,13 +142,13 @@ struct SettingsTabs: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken,
-      let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = MastodonClient(server: account.server, oauthToken: token)
       await timelineCache.clearCache(for: client.id)
@@ -211,7 +211,7 @@ struct SettingsTabs: View {
       #endif
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -244,7 +244,7 @@ struct SettingsTabs: View {
       Text("settings.section.other")
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -258,7 +258,7 @@ struct SettingsTabs: View {
       Text("Adds @ and # keys directly on the keyboard for faster mentions and hashtags.")
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -273,7 +273,7 @@ struct SettingsTabs: View {
       Text("Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues.")
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -288,13 +288,13 @@ struct SettingsTabs: View {
       Text("Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap.")
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
   private var appSection: some View {
     Section {
-        Link(destination: URL(string: "https://github.com/alzimerahmed/FrostGram")!) {
+      Link(destination: URL(string: "https://github.com/alzimerahmed/FrostGram")!) {
         Label("settings.app.source", systemImage: "link")
       }
       .accessibilityRemoveTraits(.isButton)
@@ -311,11 +311,12 @@ struct SettingsTabs: View {
     } footer: {
       if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
         Text("settings.section.app.footer \(appVersion)").frame(
-          maxWidth: .infinity, alignment: .center)
+          maxWidth: .infinity, alignment: .center
+        )
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -365,7 +366,7 @@ struct SettingsTabs: View {
       Text("Remove all cached images and videos")
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 }

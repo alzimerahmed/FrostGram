@@ -2,8 +2,8 @@ import NetworkClient
 import SwiftUI
 
 @MainActor
-extension View {
-  public func withPreviewsEnv() -> some View {
+public extension View {
+  func withPreviewsEnv() -> some View {
     environment(RouterPath())
       .environment(MastodonClient(server: ""))
       .environment(CurrentAccount.shared)

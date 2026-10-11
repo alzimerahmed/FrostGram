@@ -15,7 +15,8 @@ public struct PlaceholderView: View {
     ContentUnavailableView(
       title,
       systemImage: iconName,
-      description: Text(message))
+      description: Text(message)
+    )
   }
 }
 
@@ -23,5 +24,6 @@ public struct PlaceholderView: View {
   PlaceholderView(
     iconName: "square.and.arrow.up.trianglebadge.exclamationmark",
     title: "Nothing to see",
-    message: "This is a preview. Please try again.")
+    message: "This is a preview. Please try again."
+  )
 }

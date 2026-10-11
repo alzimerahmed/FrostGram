@@ -37,14 +37,15 @@ public struct StatusRowView: View {
       viewModel: viewModel,
       showTextForSelection: $showSelectableText,
       isBlockConfirmationPresented: $isBlockConfirmationPresented,
-      isShareAsImageSheetPresented: $isShareAsImageSheetPresented)
+      isShareAsImageSheetPresented: $isShareAsImageSheetPresented
+    )
   }
 
   public var body: some View {
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
-          ForEach(0..<indentationLevel, id: \.self) { level in
+          ForEach(0 ..< indentationLevel, id: \.self) { level in
             Rectangle()
               .fill(theme.tintColor)
               .frame(width: 2)
@@ -74,11 +75,12 @@ public struct StatusRowView: View {
             .padding(
               .leading,
               theme.avatarPosition == .top
-                ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
+                ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing
+            )
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
-              theme.avatarPosition == .leading
+               theme.avatarPosition == .leading
             {
               AvatarView(viewModel.finalStatus.account.avatar)
                 .accessibility(addTraits: .isButton)
@@ -104,8 +106,8 @@ public struct StatusRowView: View {
                   }
                 }
               if !reasons.contains(.placeholder),
-                viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
-                !isInCaptureMode
+                 viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+                 !isInCaptureMode
               {
                 StatusRowActionsView(
                   isBlockConfirmationPresented: $isBlockConfirmationPresented,
@@ -155,20 +157,21 @@ public struct StatusRowView: View {
       }
     }
     #if os(visionOS)
-      .listRowBackground(
-        RoundedRectangle(cornerRadius: 8)
-          .foregroundStyle(.background).hoverEffect()
-      )
-      .listRowHoverEffectDisabled()
+    .listRowBackground(
+      RoundedRectangle(cornerRadius: 8)
+        .foregroundStyle(.background).hoverEffect()
+    )
+    .listRowHoverEffectDisabled()
     #else
-      .listRowBackground(viewModel.backgroundColor)
+    .listRowBackground(viewModel.backgroundColor)
     #endif
     .listRowInsets(
       .init(
         top: 0,
         leading: .layoutPadding,
         bottom: 0,
-        trailing: .layoutPadding)
+        trailing: .layoutPadding
+      )
     )
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(
@@ -222,7 +225,8 @@ public struct StatusRowView: View {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(
-              endpoint: Accounts.block(id: operationAccount.id))
+              endpoint: Accounts.block(id: operationAccount.id)
+            )
           } catch {}
         }
       }
@@ -233,13 +237,14 @@ public struct StatusRowView: View {
     .sheet(isPresented: $showSelectableText) {
       let content =
         viewModel.status.reblog?.content.asSafeMarkdownAttributedString
-        ?? viewModel.status.content.asSafeMarkdownAttributedString
+          ?? viewModel.status.content.asSafeMarkdownAttributedString
       StatusRowSelectableTextView(content: content)
     }
     .environment(
       StatusDataControllerProvider.shared.dataController(
         for: viewModel.finalStatus,
-        client: viewModel.client)
+        client: viewModel.client
+      )
     )
     .alert(
       "DeepL couldn't be reached!\nIs the API Key correct?",
@@ -262,8 +267,9 @@ public struct StatusRowView: View {
       }
     }
     #if canImport(_Translation_SwiftUI)
-      .addTranslateView(
-        isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
+    .addTranslateView(
+      isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText
+    )
     #endif
   }
 
@@ -322,10 +328,12 @@ public struct StatusRowView: View {
             value: WindowDestinationMedia.mediaViewer(
               attachments: attachments,
               selectedAttachment: attachments[0]
-            ))
+            )
+          )
         #else
           quickLook.prepareFor(
-            selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+            selectedMediaAttachment: attachments[0], mediaAttachments: attachments
+          )
         #endif
       }
     }
@@ -417,25 +425,31 @@ public struct StatusRowView: View {
   List {
     StatusRowView(
       viewModel:
-        .init(
-          status: .placeholder(),
-          client: .init(server: ""),
-          routerPath: RouterPath()),
-      context: .timeline)
+      .init(
+        status: .placeholder(),
+        client: .init(server: ""),
+        routerPath: RouterPath()
+      ),
+      context: .timeline
+    )
     StatusRowView(
       viewModel:
-        .init(
-          status: .placeholder(),
-          client: .init(server: ""),
-          routerPath: RouterPath()),
-      context: .timeline)
+      .init(
+        status: .placeholder(),
+        client: .init(server: ""),
+        routerPath: RouterPath()
+      ),
+      context: .timeline
+    )
     StatusRowView(
       viewModel:
-        .init(
-          status: .placeholder(),
-          client: .init(server: ""),
-          routerPath: RouterPath()),
-      context: .timeline)
+      .init(
+        status: .placeholder(),
+        client: .init(server: ""),
+        routerPath: RouterPath()
+      ),
+      context: .timeline
+    )
   }
   .listStyle(.plain)
   .withPreviewsEnv()

@@ -56,14 +56,14 @@ public struct TimelineView: View {
               .padding(.horizontal, .layoutPadding)
           }
         }
-        #if targetEnvironment(macCatalyst)
-          .scrollEdgeEffectStyle(.hard, for: .top)
-          // Catalyst 27 loses the scroll-edge blur when the window becomes active.
-          .toolbarBackground(.regularMaterial, for: .navigationBar)
-          .toolbarBackgroundVisibility(.visible, for: .navigationBar)
-        #else
-          .scrollEdgeEffectStyle(.soft, for: .top)
-        #endif
+      #if targetEnvironment(macCatalyst)
+        .scrollEdgeEffectStyle(.hard, for: .top)
+        // Catalyst 27 loses the scroll-edge blur when the window becomes active.
+        .toolbarBackground(.regularMaterial, for: .navigationBar)
+        .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+      #else
+        .scrollEdgeEffectStyle(.soft, for: .top)
+      #endif
     } else {
       timelineView
         .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
@@ -89,7 +89,8 @@ public struct TimelineView: View {
         timeline: $timeline,
         pinnedFilters: $pinnedFilters,
         selectedTagGroup: $selectedTagGroup,
-        scrollToIdAnimated: $scrollToIdAnimated)
+        scrollToIdAnimated: $scrollToIdAnimated
+      )
       if viewModel.timeline.supportNewestPagination {
         TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
           if let statusId {
@@ -110,7 +111,8 @@ public struct TimelineView: View {
           } label: {
             Image(
               systemName: viewModel.isStreamingTimeline
-                ? "antenna.radiowaves.left.and.right" : "antenna.radiowaves.left.and.right.slash")
+                ? "antenna.radiowaves.left.and.right" : "antenna.radiowaves.left.and.right.slash"
+            )
           }
           .tint(theme.labelColor)
         }
@@ -123,7 +125,7 @@ public struct TimelineView: View {
 
       if viewModel.client == nil {
         switch timeline {
-        case .remoteLocal(let server, _):
+        case let .remoteLocal(server, _):
           viewModel.client = MastodonClient(server: server)
         default:
           viewModel.client = client
@@ -152,10 +154,10 @@ public struct TimelineView: View {
     .onChange(of: account.lists) { _, lists in
       guard client.isAuth else { return }
       switch timeline {
-      case .list(let list):
+      case let .list(list):
         if let accountList = lists.first(where: { $0.id == list.id }),
-          list.id == accountList.id,
-          accountList.title != list.title
+           list.id == accountList.id,
+           accountList.title != list.title
         {
           timeline = .list(list: accountList)
         }
@@ -166,11 +168,11 @@ public struct TimelineView: View {
     .onChange(of: timeline) { oldValue, newValue in
       guard oldValue != newValue else { return }
       switch newValue {
-      case .remoteLocal(let server, _):
+      case let .remoteLocal(server, _):
         viewModel.client = MastodonClient(server: server)
       default:
         switch oldValue {
-        case .remoteLocal(let server, _):
+        case let .remoteLocal(server, _):
           if newValue == .latest {
             viewModel.client = MastodonClient(server: server)
           } else {
@@ -211,6 +213,7 @@ public struct TimelineView: View {
           wasBackgrounded = false
           viewModel.refreshTimeline()
         }
+
       case .background:
         wasBackgrounded = true
         viewModel.saveMarker()

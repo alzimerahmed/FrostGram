@@ -34,7 +34,9 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         maxId: nil,
         minId: nil,
         offset: 0,
-        limit: 50))
+        limit: 50
+      )
+    )
   }
 
   func fetchNewPages(client: MastodonClient?, timeline: TimelineFilter, minId: String, maxPages: Int)
@@ -55,9 +57,12 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
           minId: latestMinId,
           offset: nil,
           limit: 40
-        ))
+        )
+      )
 
-      if newStatuses.isEmpty { break }
+      if newStatuses.isEmpty {
+        break
+      }
 
       pagesLoaded += 1
       allStatuses.insert(contentsOf: newStatuses, at: 0)
@@ -76,6 +81,8 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         maxId: lastId,
         minId: nil,
         offset: offset,
-        limit: 40))
+        limit: 40
+      )
+    )
   }
 }

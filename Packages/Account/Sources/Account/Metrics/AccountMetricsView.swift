@@ -78,7 +78,7 @@ public struct AccountMetricsView: View {
               .foregroundStyle(theme.labelColor)
             if isLoadingTopStatuses && topStatuses.isEmpty {
               VStack(spacing: 8) {
-                ForEach(0..<3, id: \.self) { _ in
+                ForEach(0 ..< 3, id: \.self) { _ in
                   StatusEmbeddedView(
                     status: .placeholder(),
                     client: client,
@@ -155,8 +155,8 @@ public struct AccountMetricsView: View {
       let dayGroups = groupedByDay[dayStart] ?? []
       let count =
         dayGroups
-        .filter { metricTypes(for: selectedMetric).contains($0.type) }
-        .reduce(0) { $0 + $1.notificationsCount }
+          .filter { metricTypes(for: selectedMetric).contains($0.type) }
+          .reduce(0) { $0 + $1.notificationsCount }
       return DailyMetric(dayStart: dayStart, count: count)
     }
 
@@ -167,7 +167,8 @@ public struct AccountMetricsView: View {
           .filter { $0.dayStart >= startDate && $0.dayStart <= endDate }
           .reduce(0) { $0 + $1.notificationsCount }
         return (metric, count)
-      })
+      }
+    )
 
     let updatedDeltas: [MetricType: Double?] = Dictionary(
       uniqueKeysWithValues: MetricType.allCases.map { metric in
@@ -183,7 +184,8 @@ public struct AccountMetricsView: View {
 
         let delta = (Double(current) - Double(previous)) / Double(previous)
         return (metric, delta)
-      })
+      }
+    )
 
     let updatedTopStatusIds = topStatusIds(
       groups: groups,
@@ -214,9 +216,9 @@ public struct AccountMetricsView: View {
     return calendar.date(byAdding: .day, value: -(range.rawValue - 1), to: endDate) ?? endDate
   }
 
-  private func dayStartsInRange(startDate: Date, endDate: Date) -> [Date] {
+  private func dayStartsInRange(startDate: Date, endDate _: Date) -> [Date] {
     let dayCount = range.rawValue
-    return (0..<dayCount).compactMap { offset in
+    return (0 ..< dayCount).compactMap { offset in
       calendar.date(byAdding: .day, value: offset, to: startDate)
     }
   }
@@ -247,7 +249,6 @@ public struct AccountMetricsView: View {
       .prefix(3)
       .map(\.key)
   }
-
 }
 
 extension AccountMetricsView {

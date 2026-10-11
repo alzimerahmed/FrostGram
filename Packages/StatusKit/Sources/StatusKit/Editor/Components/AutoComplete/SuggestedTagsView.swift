@@ -11,17 +11,17 @@ extension StatusEditor.AutoCompleteView {
     enum ViewState {
       case loading, loaded(tags: [String]), error
     }
-    
+
     @Environment(\.modelContext) private var context
     @Environment(Theme.self) private var theme
-    
+
     private let assistant = StatusEditor.Assistant()
-    
+
     var store: StatusEditor.EditorStore
     @Binding var isTagSuggestionExpanded: Bool
-    
+
     @State var viewState: ViewState = .loading
-    
+
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
@@ -31,14 +31,14 @@ extension StatusEditor.AutoCompleteView {
           .task {
             viewState = .loaded(tags: await assistant.generateTags(from: store.statusText.string).values)
           }
-      case .loaded(let tags):
-        ForEach(tags, id: \.self ) { tag in
+      case let .loaded(tags):
+        ForEach(tags, id: \.self) { tag in
           Button {
             withAnimation {
               isTagSuggestionExpanded = false
               store.selectHashtagSuggestion(tag: tag)
             }
-            
+
             if let index = recentTags.firstIndex(where: {
               $0.title.lowercased() == tag.lowercased()
             }) {

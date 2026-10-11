@@ -93,13 +93,13 @@ final class TextServiceTests: XCTestCase {
     XCTAssertEqual(result.action, .suggest(query: "#frostgram"))
   }
 
-  func testInitialTextChangesForReplyMentionsAuthorAndMentions() {
+  func testInitialTextChangesForReplyMentionsAuthorAndMentions() throws {
     let service = StatusEditor.TextService()
     let author = makeAccount(acct: "alice", username: "alice")
-    let mention = Mention(
+    let mention = try Mention(
       id: "mention-1",
       username: "bob",
-      url: URL(string: "https://example.com/@bob")!,
+      url: XCTUnwrap(URL(string: "https://example.com/@bob")),
       acct: "bob"
     )
     let status = makeStatus(account: author, mentions: [mention])
@@ -116,13 +116,13 @@ final class TextServiceTests: XCTestCase {
     XCTAssertEqual(changes.selectedRange?.location, "@alice @bob ".utf16.count)
   }
 
-  func testInitialTextChangesForEditNormalizesMentionAcct() {
+  func testInitialTextChangesForEditNormalizesMentionAcct() throws {
     let service = StatusEditor.TextService()
     let author = makeAccount(acct: "alice", username: "alice")
-    let mention = Mention(
+    let mention = try Mention(
       id: "mention-1",
       username: "bob",
-      url: URL(string: "https://example.com/@bob")!,
+      url: XCTUnwrap(URL(string: "https://example.com/@bob")),
       acct: "bob@server"
     )
     let status = makeStatus(
@@ -201,7 +201,7 @@ final class TextServiceTests: XCTestCase {
 
     let expectation = XCTestExpectation(description: "Wait for share text")
     Task {
-      for _ in 0..<20 {
+      for _ in 0 ..< 20 {
         let text = await MainActor.run { store.statusText.string }
         if text == "\n\nHello " {
           expectation.fulfill()

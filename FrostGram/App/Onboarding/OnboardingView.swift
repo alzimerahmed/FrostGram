@@ -57,8 +57,8 @@ struct OnboardingView: View {
         }
       }
       #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       #endif
       .toolbar {
         if onboarding.canGoBack {
@@ -153,7 +153,8 @@ struct OnboardingView: View {
     .searchable(
       text: $searchQuery,
       placement: .navigationBarDrawer(displayMode: .always),
-      prompt: Text("onboarding.server-picker.search-placeholder"))
+      prompt: Text("onboarding.server-picker.search-placeholder")
+    )
     .onChange(of: searchQuery) {
       searchTask?.cancel()
       let query = searchQuery
@@ -187,7 +188,7 @@ struct OnboardingView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -200,7 +201,7 @@ struct OnboardingView: View {
           .font(.scaledHeadline)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
       if let instance {
         InstanceInfoSection(instance: instance)
@@ -211,7 +212,7 @@ struct OnboardingView: View {
           Spacer()
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       Section {
@@ -270,7 +271,8 @@ struct OnboardingView: View {
     appAccountsManager.currentAccount = AppAccount(
       server: server,
       accountName: nil,
-      oauthToken: nil)
+      oauthToken: nil
+    )
     dismiss()
   }
 }

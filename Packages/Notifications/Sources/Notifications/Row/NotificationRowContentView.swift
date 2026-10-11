@@ -23,7 +23,8 @@ struct NotificationRowContentView: View {
                 client: client,
                 routerPath: routerPath,
                 showActions: true,
-                filterContext: .notifications)
+                filterContext: .notifications
+              )
             )
             .environment(\.isNotificationsTab, false)
             .environment(\.isMediaCompact, false)
@@ -35,14 +36,15 @@ struct NotificationRowContentView: View {
                 routerPath: routerPath,
                 showActions: false,
                 textDisabled: notification.type != .quote,
-                filterContext: .notifications)
+                filterContext: .notifications
+              )
             )
             .environment(\.isMediaCompact, true)
           }
 
           if notification.type == .quote,
-            status.quote?.state == .accepted,
-            let quotedStatus = status.quote?.quotedStatus
+             status.quote?.state == .accepted,
+             let quotedStatus = status.quote?.quotedStatus
           {
             StatusEmbeddedView(
               status: quotedStatus,

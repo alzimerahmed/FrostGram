@@ -1,12 +1,12 @@
-import SwiftUI
 import NetworkClient
+import SwiftUI
 
 struct TimelineToolbarTitleView: ToolbarContent {
   @Environment(MastodonClient.self) private var client
-  
+
   @Binding var timeline: TimelineFilter
   let canFilterTimeline: Bool
-  
+
   var body: some ToolbarContent {
     ToolbarItem(placement: .principal) {
       VStack(alignment: .center) {

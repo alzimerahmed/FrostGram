@@ -30,7 +30,8 @@ extension StatusEditor {
       .onAppear {
         store.setInitialLanguageSelection(
           preference: preferences.recentlyUsedLanguages.first
-            ?? preferences.serverPreferences?.postLanguage)
+            ?? preferences.serverPreferences?.postLanguage
+        )
       }
       .accessibilityLabel("accessibility.editor.button.language")
       .sheet(isPresented: $isLanguageSheetDisplayed) {
@@ -40,6 +41,5 @@ extension StatusEditor {
         )
       }
     }
-
   }
 }

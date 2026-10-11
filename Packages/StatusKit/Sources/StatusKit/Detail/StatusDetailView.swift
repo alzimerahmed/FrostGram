@@ -74,30 +74,30 @@ public struct StatusDetailView: View {
           .scrollContentBackground(.hidden)
           .background(theme.primaryBackgroundColor)
         #endif
-        .onChange(of: viewModel.scrollToId) { _, newValue in
-          if let newValue {
-            viewModel.scrollToId = nil
-            proxy.scrollTo(newValue, anchor: .top)
+          .onChange(of: viewModel.scrollToId) { _, newValue in
+            if let newValue {
+              viewModel.scrollToId = nil
+              proxy.scrollTo(newValue, anchor: .top)
+            }
           }
-        }
-        .onAppear {
-          guard !isLoaded else { return }
-          viewModel.client = client
-          viewModel.routerPath = routerPath
-          Task {
-            let result = await viewModel.fetch()
-            isLoaded = true
+          .onAppear {
+            guard !isLoaded else { return }
+            viewModel.client = client
+            viewModel.routerPath = routerPath
+            Task {
+              let result = await viewModel.fetch()
+              isLoaded = true
 
-            if !result {
-              if let url = viewModel.remoteStatusURL {
-                await UIApplication.shared.open(url)
-              }
-              DispatchQueue.main.async {
-                _ = routerPath.path.popLast()
+              if !result {
+                if let url = viewModel.remoteStatusURL {
+                  await UIApplication.shared.open(url)
+                }
+                DispatchQueue.main.async {
+                  _ = routerPath.path.popLast()
+                }
               }
             }
           }
-        }
       }
       .refreshable {
         Task {
@@ -116,13 +116,15 @@ public struct StatusDetailView: View {
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
       let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(
-        id: status.id, maxIndent: userPreferences.getRealMaxIndent())
+        id: status.id, maxIndent: userPreferences.getRealMaxIndent()
+      )
       let viewModel: StatusRowViewModel = .init(
         status: status,
         client: client,
         routerPath: routerPath,
         scrollToId: $viewModel.scrollToId,
-        filterContext: .thread)
+        filterContext: .thread
+      )
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel, context: .detail)
@@ -152,7 +154,7 @@ public struct StatusDetailView: View {
       _ = await viewModel.fetch()
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
     .listRowSeparator(.hidden)
   }
@@ -164,7 +166,8 @@ public struct StatusDetailView: View {
           status: status,
           client: client,
           routerPath: routerPath,
-          filterContext: .thread),
+          filterContext: .thread
+        ),
         context: .timeline
       )
       .redacted(reason: .placeholder)
@@ -183,14 +186,14 @@ public struct StatusDetailView: View {
     #if !os(visionOS)
       .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-    .listRowInsets(.init())
+      .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

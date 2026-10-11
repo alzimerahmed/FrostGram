@@ -1,6 +1,5 @@
-import XCTest
-
 @testable import Env
+import XCTest
 
 @MainActor
 final class OnboardingStateMachineTests: XCTestCase {

@@ -2,8 +2,8 @@ import AVFoundation
 import Foundation
 import UIKit
 
-extension StatusEditor {
-  public actor Compressor {
+public extension StatusEditor {
+  actor Compressor {
     public init() {}
 
     enum CompressorError: Error {
@@ -18,7 +18,7 @@ extension StatusEditor {
           return
         }
 
-        let maxPixelSize: Int =
+        let maxPixelSize =
           if Bundle.main.bundlePath.hasSuffix(".appex") {
             1536
           } else {
@@ -40,7 +40,8 @@ extension StatusEditor {
         let data = NSMutableData()
         guard
           let imageDestination = CGImageDestinationCreateWithData(
-            data, UTType.jpeg.identifier as CFString, 1, nil)
+            data, UTType.jpeg.identifier as CFString, 1, nil
+          )
         else {
           continuation.resume(returning: nil)
           return
@@ -53,7 +54,7 @@ extension StatusEditor {
 
         let destinationProperties =
           [
-            kCGImageDestinationLossyCompressionQuality: isPNG ? 1.0 : 0.75
+            kCGImageDestinationLossyCompressionQuality: isPNG ? 1.0 : 0.75,
           ] as CFDictionary
 
         CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)
@@ -78,7 +79,8 @@ extension StatusEditor {
 
         let targetSize = CGSize(
           width: image.size.width / maxFactor,
-          height: image.size.height / maxFactor)
+          height: image.size.height / maxFactor
+        )
         image = await MainActor.run {
           image.resized(to: targetSize)
         }
@@ -92,8 +94,9 @@ extension StatusEditor {
       if imageData.count > maxSize {
         while imageData.count > maxSize && compressionQualityFactor >= 0 {
           guard let compressedImage = UIImage(data: imageData),
-            let compressedData = compressedImage.jpegData(
-              compressionQuality: compressionQualityFactor)
+                let compressedData = compressedImage.jpegData(
+                  compressionQuality: compressionQualityFactor
+                )
           else {
             throw CompressorError.noData
           }
@@ -123,7 +126,8 @@ extension StatusEditor {
         return nil
       }
       let outputURL = URL.temporaryDirectory.appending(
-        path: "\(UUID().uuidString).\(url.pathExtension)")
+        path: "\(UUID().uuidString).\(url.pathExtension)"
+      )
       exportSession.outputURL = outputURL
       exportSession.outputFileType = .mp4
       exportSession.shouldOptimizeForNetworkUse = true

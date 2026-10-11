@@ -169,7 +169,6 @@ struct StatusRowActionsView: View {
     }
   }
 
-  @ViewBuilder
   private var shareActionSlot: some View {
     HStack {
       shareSlotContent
@@ -180,7 +179,7 @@ struct StatusRowActionsView: View {
   @ViewBuilder
   private var shareSlotContent: some View {
     if let urlString = viewModel.finalStatus.url,
-      let url = URL(string: urlString)
+       let url = URL(string: urlString)
     {
       shareLink(for: url, action: .share)
     } else {
@@ -195,7 +194,6 @@ struct StatusRowActionsView: View {
       .allowsHitTesting(false)
   }
 
-  @ViewBuilder
   private func menuActionView() -> some View {
     Menu {
       StatusRowContextMenu(
@@ -247,9 +245,9 @@ struct StatusRowActionsView: View {
   private func shareLinkView<V: View>(_ view: V) -> some View {
     view
       .buttonStyle(.borderless)
-      #if !os(visionOS)
-        .offset(x: -8)
-      #endif
+    #if !os(visionOS)
+      .offset(x: -8)
+    #endif
       .accessibilityElement(children: .combine)
       .accessibilityLabel("status.action.share-link")
   }
@@ -261,18 +259,18 @@ struct StatusRowActionsView: View {
       .padding(.vertical, 6)
       .padding(.horizontal, 8)
       .contentShape(Rectangle())
-      #if targetEnvironment(macCatalyst)
-        .font(.scaledBody)
-      #else
-        .font(.body)
-        .dynamicTypeSize(.large)
-      #endif
+    #if targetEnvironment(macCatalyst)
+      .font(.scaledBody)
+    #else
+      .font(.body)
+      .dynamicTypeSize(.large)
+    #endif
   }
 
   private func makeSelectableTextSheet() -> some View {
     let content =
       viewModel.status.reblog?.content.asSafeMarkdownAttributedString
-      ?? viewModel.status.content.asSafeMarkdownAttributedString
+        ?? viewModel.status.content.asSafeMarkdownAttributedString
     return StatusRowSelectableTextView(content: content)
       .tint(theme.tintColor)
   }
@@ -317,7 +315,7 @@ struct StatusRowActionsView: View {
     let finalStatus = viewModel.finalStatus
     let isQuoteUnavailable =
       (finalStatus.visibility == .priv || finalStatus.visibility == .direct)
-      || finalStatus.quoteApproval?.currentUser == .denied
+        || finalStatus.quoteApproval?.currentUser == .denied
     let shouldDisableAction =
       (configuration.trigger == .boost
         && (finalStatus.visibility == .priv || finalStatus.visibility == .direct))
@@ -367,10 +365,13 @@ struct StatusRowActionsView: View {
         #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(
             value: WindowDestinationEditor.replyToStatusEditor(
-              status: viewModel.localStatus ?? viewModel.status))
+              status: viewModel.localStatus ?? viewModel.status
+            )
+          )
         #else
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(
-            status: viewModel.localStatus ?? viewModel.status)
+            status: viewModel.localStatus ?? viewModel.status
+          )
         #endif
       case .favorite:
         SoundEffectManager.shared.playSound(.favorite)

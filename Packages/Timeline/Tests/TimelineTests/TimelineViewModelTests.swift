@@ -1,9 +1,8 @@
 import Models
 import NetworkClient
 import Testing
-import XCTest
-
 @testable import Timeline
+import XCTest
 
 @MainActor
 @Suite("Timeline View Model tests")
@@ -18,19 +17,19 @@ struct Tests {
   }
 
   /*
-  @Test
-  func streamEventInsertNewStatus() async throws {
-    let subject = makeSubject()
-    let isEmpty = await subject.datasource.isEmpty
-    #expect(isEmpty)
-    await subject.datasource.append(.placeholder())
-    var count = await subject.datasource.count()
-    #expect(count == 1)
-    await subject.handleEvent(event: StreamEventUpdate(status: .placeholder()))
-    count = await subject.datasource.count()
-    #expect(count == 2)
-  }
-   */
+   @Test
+   func streamEventInsertNewStatus() async throws {
+     let subject = makeSubject()
+     let isEmpty = await subject.datasource.isEmpty
+     #expect(isEmpty)
+     await subject.datasource.append(.placeholder())
+     var count = await subject.datasource.count()
+     #expect(count == 1)
+     await subject.handleEvent(event: StreamEventUpdate(status: .placeholder()))
+     count = await subject.datasource.count()
+     #expect(count == 2)
+   }
+    */
 
   @Test
   func streamEventInsertDuplicateStatus() async throws {
@@ -99,7 +98,8 @@ struct Tests {
       language: status.language,
       quote: nil,
       quotesCount: nil,
-      quoteApproval: nil)
+      quoteApproval: nil
+    )
     await subject.handleEvent(event: StreamEventStatusUpdate(status: status))
     let statuses = await subject.datasource.get()
     count = await subject.datasource.count()
@@ -115,13 +115,14 @@ struct Tests {
     contentFilter.showThreads = true
     contentFilter.showQuotePosts = true
 
-    let hiddenFirstPage = (0..<50).map { makeStatus(id: "hidden-first-\($0)", hidden: true) }
-    let hiddenSecondPage = (0..<40).map { makeStatus(id: "hidden-next-\($0)", hidden: true) }
+    let hiddenFirstPage = (0 ..< 50).map { makeStatus(id: "hidden-first-\($0)", hidden: true) }
+    let hiddenSecondPage = (0 ..< 40).map { makeStatus(id: "hidden-next-\($0)", hidden: true) }
     let visibleThirdPage = [makeStatus(id: "visible-0", hidden: false)]
 
     let fetcher = MockTimelineStatusFetcher(
       firstPage: hiddenFirstPage,
-      nextPages: [hiddenSecondPage, visibleThirdPage])
+      nextPages: [hiddenSecondPage, visibleThirdPage]
+    )
 
     let subject = TimelineViewModel(statusFetcher: fetcher)
     subject.client = MastodonClient(server: "localhost")
@@ -137,15 +138,15 @@ struct Tests {
   @Test
   func hideQuotePostsFiltersLegacyAndNativeQuotes() async throws {
     let normalStatus = makeStatus(id: "normal", hidden: false)
-    let legacyQuoteStatus = makeStatus(
+    let legacyQuoteStatus = try makeStatus(
       id: "legacy-quote",
-      content: try makeHTMLStringWithStatusLink(),
+      content: makeHTMLStringWithStatusLink(),
       quote: nil
     )
-    let nativeQuoteStatus = makeStatus(
+    let nativeQuoteStatus = try makeStatus(
       id: "native-quote",
       content: Status.placeholder().content,
-      quote: try makeQuote(quotedStatusId: "123")
+      quote: makeQuote(quotedStatusId: "123")
     )
 
     let datasource = TimelineDatasource()

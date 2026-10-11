@@ -45,7 +45,7 @@ struct AboutView: View {
         Text("\(versionNumber)© 2026 Alzimer Ahmed")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("Telemetry") {
@@ -57,7 +57,7 @@ struct AboutView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section {
@@ -94,7 +94,7 @@ struct AboutView: View {
           .textCase(nil)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .listStyle(.insetGrouped)
@@ -102,15 +102,15 @@ struct AboutView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-    .navigationTitle(Text("settings.about.title"))
-    .navigationBarTitleDisplayMode(.large)
-    .environment(
-      \.openURL,
-      OpenURLAction { url in
-        routerPath.handle(url: url)
-      })
+      .navigationTitle(Text("settings.about.title"))
+      .navigationBarTitleDisplayMode(.large)
+      .environment(
+        \.openURL,
+        OpenURLAction { url in
+          routerPath.handle(url: url)
+        }
+      )
   }
-
 }
 
 struct AboutView_Previews: PreviewProvider {

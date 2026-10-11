@@ -1,12 +1,12 @@
 import AppAccount
 import AppIntents
+import CoreGraphics
 import Env
 import Foundation
+import ImageIO
 import Models
 import NetworkClient
 import UniformTypeIdentifiers
-import CoreGraphics
-import ImageIO
 
 struct InlinePostImageIntent: AppIntent {
   static let title: LocalizedStringResource = "Send image(s) to Mastodon"
@@ -23,17 +23,20 @@ struct InlinePostImageIntent: AppIntent {
     title: "Images",
     description: "Image(s) to post on Mastodon",
     supportedContentTypes: [.image, .jpeg, .png, .gif, .heic],
-    inputConnectionBehavior: .connectToPreviousIntentResult)
+    inputConnectionBehavior: .connectToPreviousIntentResult
+  )
   var images: [IntentFile]
 
   @Parameter(
     title: "Caption",
-    requestValueDialog: IntentDialog("Caption for your post"))
+    requestValueDialog: IntentDialog("Caption for your post")
+  )
   var caption: String?
 
   @Parameter(
     title: "Image descriptions",
-    requestValueDialog: IntentDialog("Descriptions (ALT) for your images in order"))
+    requestValueDialog: IntentDialog("Descriptions (ALT) for your images in order")
+  )
   var altTexts: [String]?
 
   @MainActor
@@ -45,7 +48,8 @@ struct InlinePostImageIntent: AppIntent {
     let client = MastodonClient(
       server: account.account.server,
       version: .v1,
-      oauthToken: account.account.oauthToken)
+      oauthToken: account.account.oauthToken
+    )
 
     do {
       var mediaIds: [String] = []
@@ -69,7 +73,8 @@ struct InlinePostImageIntent: AppIntent {
           method: "POST",
           mimeType: contentType,
           filename: "file",
-          data: data)
+          data: data
+        )
 
         if let altTexts, index < altTexts.count {
           let desc = altTexts[index].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -78,7 +83,9 @@ struct InlinePostImageIntent: AppIntent {
             _ = try? await client.put(
               endpoint: Media.media(
                 id: media.id,
-                json: .init(description: desc))) as MediaAttachment
+                json: .init(description: desc)
+              )
+            ) as MediaAttachment
             // Also include description in the status post as a fallback
             attributes.append(.init(id: media.id, description: desc, thumbnail: nil, focus: nil))
           }
@@ -92,7 +99,8 @@ struct InlinePostImageIntent: AppIntent {
         status: statusText,
         visibility: visibility.toAppVisibility,
         mediaIds: mediaIds,
-        mediaAttributes: attributes.isEmpty ? nil : attributes)
+        mediaAttributes: attributes.isEmpty ? nil : attributes
+      )
       let _: Status = try await client.post(endpoint: Statuses.postStatus(json: statusData))
       return .result(dialog: "Posted \(mediaIds.count) image(s) on Mastodon")
     } catch {
@@ -113,7 +121,7 @@ struct InlinePostImageIntent: AppIntent {
       return nil
     }
 
-    let maxPixelSize: Int = 1536
+    let maxPixelSize = 1536
     let downsampleOptions = [
       kCGImageSourceCreateThumbnailFromImageAlways: true,
       kCGImageSourceCreateThumbnailWithTransform: true,
@@ -126,13 +134,14 @@ struct InlinePostImageIntent: AppIntent {
 
     let data = NSMutableData()
     guard let imageDestination = CGImageDestinationCreateWithData(
-      data, UTType.jpeg.identifier as CFString, 1, nil)
+      data, UTType.jpeg.identifier as CFString, 1, nil
+    )
     else {
       return nil
     }
 
     let destinationProperties = [
-      kCGImageDestinationLossyCompressionQuality: 0.8
+      kCGImageDestinationLossyCompressionQuality: 0.8,
     ] as CFDictionary
 
     CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)

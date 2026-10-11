@@ -20,7 +20,7 @@ final class PostingServiceTests: XCTestCase {
       pollDuration: .oneDay,
       selectedLanguage: "en",
       pendingMediaAttributes: [
-        .init(id: "m1", description: "Alt", thumbnail: nil, focus: nil)
+        .init(id: "m1", description: "Alt", thumbnail: nil, focus: nil),
       ],
       embeddedStatusId: "s1",
       allMediaHasDescription: true,
@@ -193,7 +193,8 @@ private func makeAttachment(id: String) -> MediaAttachment {
   return try! JSONDecoder().decode(MediaAttachment.self, from: data)
 }
 
-private func makeStatus(id: String) -> Status {  Status(
+private func makeStatus(id: String) -> Status {
+  Status(
     id: id,
     content: HTMLString(stringValue: "Hello"),
     account: Account(
@@ -261,6 +262,8 @@ private func makeScheduledStatus(id: String, text: String) -> ScheduledStatus {
       language: nil,
       scheduledAt: ServerDate(),
       idempotency: nil,
-      withRating: nil),
-    mediaAttachments: [])
+      withRating: nil
+    ),
+    mediaAttachments: []
+  )
 }

@@ -7,7 +7,7 @@ import SwiftUI
 @MainActor
 struct AccountPopoverView: View {
   let account: Account
-  let theme: Theme  // using `@Environment(Theme.self) will crash the SwiftUI preview
+  let theme: Theme // using `@Environment(Theme.self) will crash the SwiftUI preview
   private let config: AvatarView.FrameConfig = .account
 
   @Binding var showPopup: Bool
@@ -19,16 +19,16 @@ struct AccountPopoverView: View {
       LazyImage(
         request: ImageRequest(url: account.header)
       ) { state in
-          if let container = state.imageContainer {
-              if container.type == .gif, let data = container.data {
-                  GifView(data:data)
-                      .scaledToFill()
-              } else {
-                  if let image = state.image {
-                      image.resizable().scaledToFill()
-                  }
-              }
+        if let container = state.imageContainer {
+          if container.type == .gif, let data = container.data {
+            GifView(data: data)
+              .scaledToFill()
+          } else {
+            if let image = state.image {
+              image.resizable().scaledToFill()
+            }
           }
+        }
       }
       .frame(width: 500, height: 150)
       .clipped()
@@ -126,7 +126,8 @@ struct AccountPopoverView: View {
           .bottomAvatar,
           computeValue: { dimension in
             dimension[.firstTextBaseline]
-          })
+          }
+        )
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel(title)
@@ -141,7 +142,8 @@ struct AccountPopoverView: View {
         config.cornerRadius
       }
     return AvatarView.FrameConfig(
-      width: config.width, height: config.height, cornerRadius: cornerRadius)
+      width: config.width, height: config.height, cornerRadius: cornerRadius
+    )
   }
 }
 
@@ -197,7 +199,8 @@ public struct AccountPopoverModifier: ViewModifier {
             autoDismiss: $autoDismiss,
             toggleTask: $toggleTask
           )
-        })
+        }
+    )
   }
 
   init(_ account: Account) {
@@ -205,8 +208,8 @@ public struct AccountPopoverModifier: ViewModifier {
   }
 }
 
-extension View {
-  public func accountPopover(_ account: Account) -> some View {
+public extension View {
+  func accountPopover(_ account: Account) -> some View {
     modifier(AccountPopoverModifier(account))
   }
 }

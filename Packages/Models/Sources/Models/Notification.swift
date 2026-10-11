@@ -3,7 +3,7 @@ import Foundation
 public struct Notification: Decodable, Identifiable, Equatable {
   public enum NotificationType: String, CaseIterable {
     case follow, follow_request, mention, reblog, status, favourite, poll, update, quote,
-      quoted_update
+         quoted_update
   }
 
   public let id: String
@@ -24,7 +24,8 @@ public struct Notification: Decodable, Identifiable, Equatable {
       createdAt: ServerDate(),
       account: .placeholder(),
       status: .placeholder(),
-      groupKey: nil)
+      groupKey: nil
+    )
   }
 }
 

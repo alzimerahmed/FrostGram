@@ -18,32 +18,32 @@ public final class Theme {
       case avatarAnimated
     }
 
-    @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
-    @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
-    @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
-    @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color =
+    @AppStorage("is_previously_set") var isThemePreviouslySet: Bool = false
+    @AppStorage(ThemeKey.selectedScheme.rawValue) var selectedScheme: ColorScheme = .dark
+    @AppStorage(ThemeKey.tint.rawValue) var tintColor: Color = .black
+    @AppStorage(ThemeKey.primaryBackground.rawValue) var primaryBackgroundColor: Color =
       .white
-    @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color =
+    @AppStorage(ThemeKey.secondaryBackground.rawValue) var secondaryBackgroundColor: Color =
       .gray
-    @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
+    @AppStorage(ThemeKey.label.rawValue) var labelColor: Color = .black
     @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .leading
     @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .circle
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
-    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay:
+    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) var statusActionsDisplay:
       StatusActionsDisplay = .full
-    @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle:
+    @AppStorage(ThemeKey.statusDisplayStyle.rawValue) var statusDisplayStyle:
       StatusDisplayStyle = .large
-    @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool =
+    @AppStorage(ThemeKey.followSystemColorSchme.rawValue) var followSystemColorScheme: Bool =
       true
-    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername:
+    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) var displayFullUsername:
       Bool = false
-    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 1.2
-    @AppStorage(ThemeKey.statusActionSecondary.rawValue) public var statusActionSecondary:
+    @AppStorage(ThemeKey.lineSpacing.rawValue) var lineSpacing: Double = 1.2
+    @AppStorage(ThemeKey.statusActionSecondary.rawValue) var statusActionSecondary:
       StatusActionSecondary = .share
-    @AppStorage(ThemeKey.compactLayoutPadding.rawValue) public var compactLayoutPadding: Bool = true
-    @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
-    @AppStorage("chosen_font") public var chosenFontData: Data?
-    @AppStorage(ThemeKey.avatarAnimated.rawValue) public var avatarAnimated: Bool = true
+    @AppStorage(ThemeKey.compactLayoutPadding.rawValue) var compactLayoutPadding: Bool = true
+    @AppStorage("font_size_scale") var fontSizeScale: Double = 1
+    @AppStorage("chosen_font") var chosenFontData: Data?
+    @AppStorage(ThemeKey.avatarAnimated.rawValue) var avatarAnimated: Bool = true
     init() {}
   }
 
@@ -149,8 +149,9 @@ public final class Theme {
         return _cachedChoosenFont
       }
       guard let chosenFontData,
-        let font = try? NSKeyedUnarchiver.unarchivedObject(
-          ofClass: UIFont.self, from: chosenFontData)
+            let font = try? NSKeyedUnarchiver.unarchivedObject(
+              ofClass: UIFont.self, from: chosenFontData
+            )
       else { return nil }
 
       _cachedChoosenFont = font
@@ -158,9 +159,10 @@ public final class Theme {
     }
     set {
       if let font = newValue,
-        Self.supportedFontNames.contains(font.fontName),
-        let data = try? NSKeyedArchiver.archivedData(
-          withRootObject: font, requiringSecureCoding: false)
+         Self.supportedFontNames.contains(font.fontName),
+         let data = try? NSKeyedArchiver.archivedData(
+           withRootObject: font, requiringSecureCoding: false
+         )
       {
         chosenFontData = data
       } else {
@@ -213,8 +215,8 @@ public final class Theme {
 
   public private(set) var contrastingTintColor: Color
 
-  // set contrastingTintColor to either labelColor or primaryBackgroundColor, whichever contrasts
-  // better against the tintColor
+  /// set contrastingTintColor to either labelColor or primaryBackgroundColor, whichever contrasts
+  /// better against the tintColor
   private func computeContrastingTintColor() {
     func luminance(_ color: Color.Resolved) -> Float {
       return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue
@@ -340,7 +342,7 @@ public final class Theme {
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
-    contrastingTintColor = .red  // real work done in computeContrastingTintColor()
+    contrastingTintColor = .red // real work done in computeContrastingTintColor()
     avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
@@ -352,9 +354,10 @@ public final class Theme {
     fontSizeScale = themeStorage.fontSizeScale
     let storedChosenFontData = themeStorage.chosenFontData
     if let storedChosenFontData,
-      let storedFont = try? NSKeyedUnarchiver.unarchivedObject(
-        ofClass: UIFont.self, from: storedChosenFontData),
-      Self.supportedFontNames.contains(storedFont.fontName)
+       let storedFont = try? NSKeyedUnarchiver.unarchivedObject(
+         ofClass: UIFont.self, from: storedChosenFontData
+       ),
+       Self.supportedFontNames.contains(storedFont.fontName)
     {
       chosenFontData = storedChosenFontData
     } else {

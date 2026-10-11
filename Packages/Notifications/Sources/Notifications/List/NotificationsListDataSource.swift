@@ -65,10 +65,10 @@ public final class NotificationsListDataSource {
 
     let nextPageState: NotificationsListState.PagingState =
       consolidatedNotifications.isEmpty
-      ? .none
-      : (lastNotificationGroup != nil
-        || consolidatedNotifications.count >= Constants.notificationLimit
-        ? .hasNextPage : .none)
+        ? .none
+        : (lastNotificationGroup != nil
+          || consolidatedNotifications.count >= Constants.notificationLimit
+          ? .hasNextPage : .none)
 
     return FetchResult(
       notifications: consolidatedNotifications,
@@ -96,8 +96,8 @@ public final class NotificationsListDataSource {
 
     let hasMore =
       useV2API
-      ? (lastNotificationGroup != nil)
-      : (consolidatedNotifications.count % Constants.notificationLimit == 0)
+        ? (lastNotificationGroup != nil)
+        : (consolidatedNotifications.count % Constants.notificationLimit == 0)
 
     return FetchResult(
       notifications: consolidatedNotifications,
@@ -124,18 +124,23 @@ public final class NotificationsListDataSource {
       notifications = try await client.get(
         endpoint: Notifications.notificationsForAccount(
           accountId: lockedAccountId,
-          maxId: nil))
+          maxId: nil
+        )
+      )
     } else {
       notifications = try await client.get(
         endpoint: Notifications.notifications(
           minId: nil,
           maxId: nil,
           types: queryTypes,
-          limit: Constants.notificationLimit))
+          limit: Constants.notificationLimit
+        )
+      )
     }
     latestNotificationIdForMarker = notifications.first?.id
     consolidatedNotifications = filterHiddenNotifications(
-      await notifications.consolidated(selectedType: selectedType))
+      await notifications.consolidated(selectedType: selectedType)
+    )
   }
 
   private func refreshNotificationsV1(
@@ -159,7 +164,8 @@ public final class NotificationsListDataSource {
 
     consolidatedNotifications.insert(
       contentsOf: filterHiddenNotifications(
-        await newNotifications.consolidated(selectedType: selectedType)),
+        await newNotifications.consolidated(selectedType: selectedType)
+      ),
       at: 0
     )
   }
@@ -184,12 +190,16 @@ public final class NotificationsListDataSource {
           minId: nil,
           maxId: lastId,
           types: queryTypes,
-          limit: Constants.notificationLimit))
+          limit: Constants.notificationLimit
+        )
+      )
     }
 
     consolidatedNotifications.append(
       contentsOf: filterHiddenNotifications(
-        await newNotifications.consolidated(selectedType: selectedType)))
+        await newNotifications.consolidated(selectedType: selectedType)
+      )
+    )
   }
 
   private func fetchNewPages(
@@ -213,7 +223,9 @@ public final class NotificationsListDataSource {
             minId: latestMinId,
             maxId: nil,
             types: queryTypes,
-            limit: Constants.notificationLimit)),
+            limit: Constants.notificationLimit
+          )
+        ),
         !newNotifications.isEmpty,
         pagesLoaded < maxPages
       {
@@ -290,14 +302,14 @@ public final class NotificationsListDataSource {
     lockedAccountId: String?
   ) async -> StreamEventResult? {
     guard lockedAccountId == nil,
-      let event = event as? StreamEventNotification,
-      !consolidatedNotifications.flatMap(\.notificationIds).contains(event.notification.id),
-      selectedType == nil || selectedType?.rawValue == event.notification.type
+          let event = event as? StreamEventNotification,
+          !consolidatedNotifications.flatMap(\.notificationIds).contains(event.notification.id),
+          selectedType == nil || selectedType?.rawValue == event.notification.type
     else { return nil }
 
     let useV2API =
       CurrentInstance.shared.isGroupedNotificationsSupported
-      && event.notification.groupKey != nil
+        && event.notification.groupKey != nil
 
     if useV2API {
       await handleStreamEventV2(event: event, selectedType: selectedType)
@@ -316,13 +328,13 @@ public final class NotificationsListDataSource {
     selectedType: Models.Notification.NotificationType?
   ) async {
     if let status = event.notification.status,
-      status.isHidden(in: .notifications)
+       status.isHidden(in: .notifications)
     {
       latestNotificationIdForMarker = event.notification.id
       return
     }
     if event.notification.isConsolidable(selectedType: selectedType),
-      !consolidatedNotifications.isEmpty
+       !consolidatedNotifications.isEmpty
     {
       if let index = consolidatedNotifications.firstIndex(where: {
         $0.type == event.notification.supportedType
@@ -352,10 +364,10 @@ public final class NotificationsListDataSource {
 
   private func handleStreamEventV2(
     event: StreamEventNotification,
-    selectedType: Models.Notification.NotificationType?
+    selectedType _: Models.Notification.NotificationType?
   ) async {
     if let status = event.notification.status,
-      status.isHidden(in: .notifications)
+       status.isHidden(in: .notifications)
     {
       latestNotificationIdForMarker = event.notification.id
       return
@@ -473,7 +485,7 @@ public final class NotificationsListDataSource {
       }
 
       if let notificationType = Models.Notification.NotificationType(rawValue: group.type),
-        !accounts.isEmpty
+         !accounts.isEmpty
       {
         consolidated.append(
           ConsolidatedNotification(
@@ -484,7 +496,8 @@ public final class NotificationsListDataSource {
             accounts: accounts,
             status: status,
             groupKey: group.groupKey
-          ))
+          )
+        )
       }
     }
 

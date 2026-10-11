@@ -13,12 +13,15 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
     if isOlderThanADay {
       return DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(
         for: date,
-        relativeTo: Date())
+        relativeTo: Date()
+      )
     } else {
       return Duration.seconds(-date.timeIntervalSinceNow).formatted(
         .units(
           width: .narrow,
-          maximumUnitCount: 1))
+          maximumUnitCount: 1
+        )
+      )
     }
   }
 

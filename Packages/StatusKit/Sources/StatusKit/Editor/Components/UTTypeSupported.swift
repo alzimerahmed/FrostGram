@@ -19,7 +19,7 @@ extension StatusEditor {
         return transferable
       } else {
         return await withCheckedContinuation { continuation in
-          item.loadItem(forTypeIdentifier: value) { result, error in
+          item.loadItem(forTypeIdentifier: value) { result, _ in
             if let url = result as? URL {
               continuation.resume(returning: url.absoluteString)
             } else if let text = result as? String {
@@ -122,8 +122,8 @@ extension StatusEditor {
   }
 }
 
-extension StatusEditor {
-  public final class ImageFileTranseferable: Transferable, Sendable {
+public extension StatusEditor {
+  final class ImageFileTranseferable: Transferable, Sendable {
     public let url: URL
 
     init(url: URL) {
@@ -143,8 +143,8 @@ extension StatusEditor {
   }
 }
 
-extension ReceivedTransferredFile {
-  public nonisolated var localURL: URL {
+public extension ReceivedTransferredFile {
+  nonisolated var localURL: URL {
     if isOriginalFile {
       return file
     }
@@ -154,8 +154,8 @@ extension ReceivedTransferredFile {
   }
 }
 
-extension URL {
-  public func mimeType() -> String {
+public extension URL {
+  func mimeType() -> String {
     if let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType {
       mimeType
     } else {

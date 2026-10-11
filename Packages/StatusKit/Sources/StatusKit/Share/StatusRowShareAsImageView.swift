@@ -21,13 +21,14 @@ struct StatusRowShareAsImageView: View {
           Button {
             viewModel.routerPath.presentedSheet = .shareImage(
               image: renderer.uiImage ?? UIImage(),
-              status: viewModel.status)
+              status: viewModel.status
+            )
           } label: {
             Label("status.action.share-image", systemImage: "square.and.arrow.up")
           }
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
         #endif
 
         Section {

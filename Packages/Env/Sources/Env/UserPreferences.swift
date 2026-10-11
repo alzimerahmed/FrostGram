@@ -7,82 +7,82 @@ import SwiftUI
 @MainActor
 @Observable public class UserPreferences {
   class Storage {
-    @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
-    @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
-    @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
-    @AppStorage("show_pending_left") public var pendingShownLeft: Bool = false
+    @AppStorage("preferred_browser") var preferredBrowser: PreferredBrowser = .inAppSafari
+    @AppStorage("show_translate_button_inline") var showTranslateButton: Bool = true
+    @AppStorage("show_pending_at_bottom") var pendingShownAtBottom: Bool = false
+    @AppStorage("show_pending_left") var pendingShownLeft: Bool = false
 
-    @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
-    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = false
+    @AppStorage("recently_used_languages") var recentlyUsedLanguages: [String] = []
+    @AppStorage("social_keyboard_composer") var isSocialKeyboardEnabled: Bool = false
 
-    @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
-    @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
-    @AppStorage("app_auto_expand_media") public var appAutoExpandMedia:
+    @AppStorage("use_instance_content_settings") var useInstanceContentSettings: Bool = true
+    @AppStorage("app_auto_expand_spoilers") var appAutoExpandSpoilers = false
+    @AppStorage("app_auto_expand_media") var appAutoExpandMedia:
       ServerPreferences.AutoExpandMedia = .hideSensitive
-    @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility:
+    @AppStorage("app_default_post_visibility") var appDefaultPostVisibility:
       Models.Visibility = .pub
-    @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility:
+    @AppStorage("app_default_reply_visibility") var appDefaultReplyVisibility:
       Models.Visibility = .pub
-    @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
-    @AppStorage("app_require_alt_text") public var appRequireAltText = false
-    @AppStorage("alt-text-reminder-enabled") public var isAltTextReminderEnabled = true
-    @AppStorage("autoplay_video") public var autoPlayVideo = true
-    @AppStorage("media-previews-enabled") public var isMediaPreviewsEnabled = true
-    @AppStorage("animate_emojis") public var animateEmojis = true
-    @AppStorage("mute_video") public var muteVideo = true
-    @AppStorage("preferred_translation_type") public var preferredTranslationType = TranslationType
+    @AppStorage("app_default_posts_sensitive") var appDefaultPostsSensitive = false
+    @AppStorage("app_require_alt_text") var appRequireAltText = false
+    @AppStorage("alt-text-reminder-enabled") var isAltTextReminderEnabled = true
+    @AppStorage("autoplay_video") var autoPlayVideo = true
+    @AppStorage("media-previews-enabled") var isMediaPreviewsEnabled = true
+    @AppStorage("animate_emojis") var animateEmojis = true
+    @AppStorage("mute_video") var muteVideo = true
+    @AppStorage("preferred_translation_type") var preferredTranslationType = TranslationType
       .useServerIfPossible
-    @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
-    @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
+    @AppStorage("user_deepl_api_free") var userDeeplAPIFree = true
+    @AppStorage("auto_detect_post_language") var autoDetectPostLanguage = true
 
-    @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
+    @AppStorage("inAppBrowserReaderView") var inAppBrowserReaderView = false
 
-    @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
-    @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
-    @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
-    @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
+    @AppStorage("haptic_tab") var hapticTabSelectionEnabled = true
+    @AppStorage("haptic_timeline") var hapticTimelineEnabled = true
+    @AppStorage("haptic_button_press") var hapticButtonPressEnabled = true
+    @AppStorage("sound_effect_enabled") var soundEffectEnabled = true
 
-    @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
+    @AppStorage("show_alt_text_for_media") var showAltTextForMedia = true
 
-    @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
+    @AppStorage("show_second_column_ipad") var showiPadSecondaryColumn = true
 
-    @AppStorage("multi-column-layout") public var isMultiColumnLayoutEnabled = false
+    @AppStorage("multi-column-layout") var isMultiColumnLayoutEnabled = false
 
-    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight =
+    @AppStorage("swipeactions-status-trailing-right") var swipeActionsStatusTrailingRight =
       StatusAction.favorite
-    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft =
+    @AppStorage("swipeactions-status-trailing-left") var swipeActionsStatusTrailingLeft =
       StatusAction.boost
-    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft =
+    @AppStorage("swipeactions-status-leading-left") var swipeActionsStatusLeadingLeft =
       StatusAction.reply
-    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight =
+    @AppStorage("swipeactions-status-leading-right") var swipeActionsStatusLeadingRight =
       StatusAction.none
-    @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
-    @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle =
+    @AppStorage("swipeactions-use-theme-color") var swipeActionsUseThemeColor = false
+    @AppStorage("swipeactions-icon-style") var swipeActionsIconStyle: SwipeActionsIconStyle =
       .iconWithText
 
-    @AppStorage("requested_review") public var requestedReview = false
+    @AppStorage("requested_review") var requestedReview = false
 
-    @AppStorage("collapse-long-posts") public var collapseLongPosts = true
+    @AppStorage("collapse-long-posts") var collapseLongPosts = true
 
-    @AppStorage("share-button-behavior") public var shareButtonBehavior:
+    @AppStorage("share-button-behavior") var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
-    @AppStorage("boost-button-behavior") public var boostButtonBehavior:
+    @AppStorage("boost-button-behavior") var boostButtonBehavior:
       PreferredBoostButtonBehavior = .both
 
-    @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
-    @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
+    @AppStorage("max_reply_indentation") var maxReplyIndentation: UInt = 7
+    @AppStorage("show_reply_indentation") var showReplyIndentation: Bool = true
 
-    @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
+    @AppStorage("show_account_popover") var showAccountPopover: Bool = true
 
-    @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
-    
-    @AppStorage("stream_home_timeline") public var streamHomeTimeline: Bool = false
-    @AppStorage("full_timeline_fetch") public var fullTimelineFetch: Bool = false
+    @AppStorage("sidebar_expanded") var isSidebarExpanded: Bool = false
 
-    // Notifications
+    @AppStorage("stream_home_timeline") var streamHomeTimeline: Bool = false
+    @AppStorage("full_timeline_fetch") var fullTimelineFetch: Bool = false
+
+    /// Notifications
     @AppStorage("notifications-truncate-status-content")
-    public var notificationsTruncateStatusContent: Bool = true
+    var notificationsTruncateStatusContent: Bool = true
 
     init() {
       prepareTranslationType()
@@ -98,7 +98,7 @@ import SwiftUI
       }
       #if canImport(_Translation_SwiftUI)
         if #unavailable(iOS 17.4),
-          preferredTranslationType == .useApple
+           preferredTranslationType == .useApple
         {
           preferredTranslationType = .useServerIfPossible
         }
@@ -143,7 +143,7 @@ import SwiftUI
   public var pendingLocation: Alignment {
     let fromLeft =
       Locale.current.language.characterDirection == .leftToRight
-      ? pendingShownLeft : !pendingShownLeft
+        ? pendingShownLeft : !pendingShownLeft
     if pendingShownAtBottom {
       if fromLeft {
         return .bottomLeading
@@ -233,7 +233,7 @@ import SwiftUI
       storage.isMediaPreviewsEnabled = isMediaPreviewsEnabled
     }
   }
-    
+
   public var animateEmojis: Bool {
     didSet {
       storage.animateEmojis = animateEmojis
@@ -396,7 +396,7 @@ import SwiftUI
       storage.isSidebarExpanded = isSidebarExpanded
     }
   }
-  
+
   public var streamHomeTimeline: Bool {
     didSet {
       storage.streamHomeTimeline = streamHomeTimeline
@@ -409,7 +409,7 @@ import SwiftUI
     }
   }
 
-  // Notifications
+  /// Notifications
   public var notificationsTruncateStatusContent: Bool {
     didSet {
       storage.notificationsTruncateStatusContent = notificationsTruncateStatusContent
@@ -432,12 +432,12 @@ import SwiftUI
       }
     }
 
-    // Have to implement this manually here due to compiler not implicitly
-    // inserting `nonisolated`, which leads to a warning:
-    //
-    //     Main actor-isolated static property 'allCases' cannot be used to
-    //     satisfy nonisolated protocol requirement
-    //
+    /// Have to implement this manually here due to compiler not implicitly
+    /// inserting `nonisolated`, which leads to a warning:
+    ///
+    ///     Main actor-isolated static property 'allCases' cannot be used to
+    ///     satisfy nonisolated protocol requirement
+    ///
     public nonisolated static var allCases: [Self] {
       [.iconWithText, .iconOnly]
     }

@@ -84,7 +84,8 @@ struct StatusRowContextMenu: View {
           Label(
             statusDataController.isFavorited
               ? "status.action.unfavorite" : "status.action.favorite",
-            systemImage: statusDataController.isFavorited ? "star.fill" : "star")
+            systemImage: statusDataController.isFavorited ? "star.fill" : "star"
+          )
         }
 
         Button {
@@ -97,7 +98,8 @@ struct StatusRowContextMenu: View {
           Label(
             statusDataController.isBookmarked
               ? "status.action.unbookmark" : "status.action.bookmark",
-            systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
+            systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark"
+          )
         }
       }
       .controlGroupStyle(.compactMenu)
@@ -122,9 +124,11 @@ struct StatusRowContextMenu: View {
           item: url,
           subject: Text(
             viewModel.status.reblog?.account.safeDisplayName
-              ?? viewModel.status.account.safeDisplayName),
+              ?? viewModel.status.account.safeDisplayName
+          ),
           message: Text(
-            viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)
+            viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
+          )
         ) {
           Label("status.action.share", systemImage: "square.and.arrow.up")
         }
@@ -195,17 +199,21 @@ struct StatusRowContextMenu: View {
         } label: {
           Label(
             viewModel.isPinned ? "status.action.unpin" : "status.action.pin",
-            systemImage: viewModel.isPinned ? "pin.fill" : "pin")
+            systemImage: viewModel.isPinned ? "pin.fill" : "pin"
+          )
         }
         if currentInstance.isEditSupported {
           Button {
             #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(
                 value: WindowDestinationEditor.editStatusEditor(
-                  status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+                  status: viewModel.status.reblogAsAsStatus ?? viewModel.status
+                )
+              )
             #else
               viewModel.routerPath.presentedSheet = .editStatusEditor(
-                status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+                status: viewModel.status.reblogAsAsStatus ?? viewModel.status
+              )
             #endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
@@ -217,7 +225,8 @@ struct StatusRowContextMenu: View {
           label: {
             Label("status.action.delete", systemImage: "trash")
               .tint(.red)
-          })
+          }
+        )
       }
     } else {
       if !viewModel.isRemote {
@@ -229,7 +238,8 @@ struct StatusRowContextMenu: View {
                   let operationAccount =
                     viewModel.status.reblog?.account ?? viewModel.status.account
                   viewModel.authorRelationship = try await client.post(
-                    endpoint: Accounts.unmute(id: operationAccount.id))
+                    endpoint: Accounts.unmute(id: operationAccount.id)
+                  )
                 } catch {}
               }
             } label: {
@@ -245,7 +255,9 @@ struct StatusRowContextMenu: View {
                         viewModel.status.reblog?.account ?? viewModel.status.account
                       viewModel.authorRelationship = try await client.post(
                         endpoint: Accounts.mute(
-                          id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
+                          id: operationAccount.id, json: MuteData(duration: duration.rawValue)
+                        )
+                      )
                     } catch {}
                   }
                 }
@@ -267,7 +279,8 @@ struct StatusRowContextMenu: View {
       Section {
         Button(role: .destructive) {
           viewModel.routerPath.presentedSheet = .report(
-            status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+            status: viewModel.status.reblogAsAsStatus ?? viewModel.status
+          )
         } label: {
           Label("status.action.report", systemImage: "exclamationmark.bubble").tint(.red)
         }
@@ -281,11 +294,13 @@ struct StatusRowContextMenu: View {
       #if targetEnvironment(macCatalyst) || os(visionOS)
         openWindow(
           value: WindowDestinationEditor.mentionStatusEditor(
-            account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+            account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub
+          )
         )
       #else
         viewModel.routerPath.presentedSheet = .mentionStatusEditor(
-          account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+          account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub
+        )
       #endif
     } label: {
       Label("status.action.mention", systemImage: "at")
@@ -295,7 +310,9 @@ struct StatusRowContextMenu: View {
         openWindow(
           value: WindowDestinationEditor.mentionStatusEditor(
             account: viewModel.status.reblog?.account ?? viewModel.status.account,
-            visibility: .direct))
+            visibility: .direct
+          )
+        )
       #else
         viewModel.routerPath.presentedSheet = .mentionStatusEditor(
           account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct
@@ -310,7 +327,8 @@ struct StatusRowContextMenu: View {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(
-              endpoint: Accounts.unblock(id: operationAccount.id))
+              endpoint: Accounts.unblock(id: operationAccount.id)
+            )
           } catch {}
         }
       } label: {

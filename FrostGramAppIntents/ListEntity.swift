@@ -7,7 +7,9 @@ import NetworkClient
 import Timeline
 
 public struct ListEntity: Identifiable, AppEntity {
-  public var id: String { list.id }
+  public var id: String {
+    list.id
+  }
 
   public let list: Models.List
 

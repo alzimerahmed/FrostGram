@@ -1,8 +1,8 @@
+import Env
 import Models
 import Nuke
 import NukeUI
 import SwiftUI
-import Env
 
 @MainActor
 public struct AvatarView: View {
@@ -38,8 +38,14 @@ public struct AvatarView: View {
   @MainActor
   public struct FrameConfig: Equatable, Sendable {
     public let size: CGSize
-    public var width: CGFloat { size.width }
-    public var height: CGFloat { size.height }
+    public var width: CGFloat {
+      size.width
+    }
+
+    public var height: CGFloat {
+      size.height
+    }
+
     let cornerRadius: CGFloat
 
     init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat = 4) {
@@ -91,12 +97,13 @@ struct PreviewWrapper: View {
     username: "@clattner_llvm",
     displayName: "Chris Lattner",
     avatar: URL(
-      string: "https://pbs.twimg.com/profile_images/1484209565788897285/1n6Viahb_400x400.jpg")!,
+      string: "https://pbs.twimg.com/profile_images/1484209565788897285/1n6Viahb_400x400.jpg"
+    )!,
     header: URL(string: "https://pbs.twimg.com/profile_banners/2543588034/1656822255/1500x500")!,
     acct: "clattner_llvm@example.com",
     note: .init(
       stringValue:
-        "Building beautiful things @Modular_AI 🔥, lifting the world of production AI/ML software into a new phase of innovation.  We’re hiring! 🚀🧠"
+      "Building beautiful things @Modular_AI 🔥, lifting the world of production AI/ML software into a new phase of innovation.  We’re hiring! 🚀🧠"
     ),
     createdAt: ServerDate(),
     followersCount: 77100,
@@ -116,8 +123,8 @@ struct PreviewWrapper: View {
 struct AvatarImage: View {
   @Environment(\.redactionReasons) private var reasons
 
-  public let avatar: URL
-  public let config: AvatarView.FrameConfig
+  let avatar: URL
+  let config: AvatarView.FrameConfig
   @Environment(Theme.self) private var theme
 
   var body: some View {
@@ -127,32 +134,32 @@ struct AvatarImage: View {
       LazyImage(
         request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
       ) { state in
-          if let container = state.imageContainer {
-              if theme.avatarAnimated && container.type == .gif, let data = container.data {
-                  GifView(data:data)
-                  .frame(width: config.width, height: config.height)
-                  .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
-                  .overlay(
-                    RoundedRectangle(cornerRadius: config.cornerRadius)
-                        .stroke(.primary.opacity(0.25), lineWidth: 1)
-                  )
-              } else {
-                  if let image = state.image {
-                      image
-                          .resizable()
-                          .scaledToFit()
-                          .frame(width: config.width, height: config.height)
-                          .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
-                          .overlay(
-                            RoundedRectangle(cornerRadius: config.cornerRadius)
-                                .stroke(.primary.opacity(0.25), lineWidth: 1)
-                          )
-                  } else {
-                      RoundedRectangle(cornerRadius: config.cornerRadius)
-                          .stroke(.primary.opacity(0.25), lineWidth: 1)
-                  }
-              }
+        if let container = state.imageContainer {
+          if theme.avatarAnimated && container.type == .gif, let data = container.data {
+            GifView(data: data)
+              .frame(width: config.width, height: config.height)
+              .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
+              .overlay(
+                RoundedRectangle(cornerRadius: config.cornerRadius)
+                  .stroke(.primary.opacity(0.25), lineWidth: 1)
+              )
+          } else {
+            if let image = state.image {
+              image
+                .resizable()
+                .scaledToFit()
+                .frame(width: config.width, height: config.height)
+                .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
+                .overlay(
+                  RoundedRectangle(cornerRadius: config.cornerRadius)
+                    .stroke(.primary.opacity(0.25), lineWidth: 1)
+                )
+            } else {
+              RoundedRectangle(cornerRadius: config.cornerRadius)
+                .stroke(.primary.opacity(0.25), lineWidth: 1)
+            }
           }
+        }
       }
     }
   }

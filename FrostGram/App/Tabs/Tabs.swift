@@ -1,12 +1,12 @@
 import Account
 import AppIntents
 import DesignSystem
+import Env
 import Explore
 import Foundation
 import StatusKit
 import SwiftUI
 import Timeline
-import Env
 
 @MainActor
 enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
@@ -21,7 +21,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   case lists
   case links
   case anyTimelineFilter(filter: TimelineFilter)
-  
+
   var id: Int {
     return switch self {
     case .timeline: 0
@@ -42,32 +42,32 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     case .lists: 15
     case .links: 16
     case .metrics: 17
-    case .anyTimelineFilter(let filter):
+    case let .anyTimelineFilter(filter):
       filter.hashValue
     }
   }
-  
+
   static var allCases: [AppTab] {
     [.timeline,
-      .notifications,
-      .mentions,
-      .explore,
-      .messages,
-      .settings,
-      .other,
-      .trending,
-      .federated,
-      .local,
-      .profile,
-      .bookmarks,
-      .favorites,
-      .metrics,
-      .post,
-      .followedTags,
-      .lists,
-      .links]
+     .notifications,
+     .mentions,
+     .explore,
+     .messages,
+     .settings,
+     .other,
+     .trending,
+     .federated,
+     .local,
+     .profile,
+     .bookmarks,
+     .favorites,
+     .metrics,
+     .post,
+     .followedTags,
+     .lists,
+     .links]
   }
-  
+
   init(with id: Int) {
     switch id {
     case 0:
@@ -320,15 +320,15 @@ extension View {
 @MainActor
 enum SidebarSections: Int, Identifiable {
   case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs, lists, tags, localTimeline, tagGroup
-  
+
   nonisolated var id: Int {
     rawValue
   }
-  
+
   static var macOrIpadOSSections: [SidebarSections] {
     [.timeline, .activities, .account, .lists, .tags]
   }
-  
+
   var title: String {
     switch self {
     case .timeline:
@@ -351,7 +351,7 @@ enum SidebarSections: Int, Identifiable {
       ""
     }
   }
-  
+
   var tabs: [AppTab] {
     switch self {
     case .timeline:
@@ -394,7 +394,7 @@ class iOSTabs {
   }
 
   private let storage = Storage()
-  public static let shared = iOSTabs()
+  static let shared = iOSTabs()
 
   var tabs: [AppTab] {
     [firstTab, secondTab, thirdTab, fourthTab, fifthTab]

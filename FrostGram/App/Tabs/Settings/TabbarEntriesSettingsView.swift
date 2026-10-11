@@ -50,7 +50,7 @@ struct TabbarEntriesSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.general.tabbarEntries")

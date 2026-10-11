@@ -12,7 +12,8 @@ struct NotificationRowIconView: View {
         .strokeBorder(showBorder ? Color.white : Color.clear, lineWidth: 1)
         .background(
           Circle().foregroundColor(
-            showBorder ? type.tintColor(isPrivate: status?.visibility == .direct) : .clear)
+            showBorder ? type.tintColor(isPrivate: status?.visibility == .direct) : .clear
+          )
         )
         .frame(width: showBorder ? 28 : 20, height: showBorder ? 28 : 20)
 

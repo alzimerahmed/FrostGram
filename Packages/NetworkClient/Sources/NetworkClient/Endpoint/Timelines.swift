@@ -43,7 +43,8 @@ public enum Timelines: Endpoint {
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: minId) ?? []
       params.append(
         contentsOf: (additional ?? [])
-          .map { URLQueryItem(name: "any[]", value: $0) })
+          .map { URLQueryItem(name: "any[]", value: $0) }
+      )
       return params
     case let .link(url, sinceId, maxId, minId):
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId) ?? []

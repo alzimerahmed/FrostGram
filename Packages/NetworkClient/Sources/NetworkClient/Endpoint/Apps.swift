@@ -2,10 +2,10 @@ import Foundation
 import Models
 
 private struct InstanceAppRequest: Codable, Sendable {
-  public let clientName: String
-  public let redirectUris: String
-  public let scopes: String
-  public let website: String
+  let clientName: String
+  let redirectUris: String
+  let scopes: String
+  let website: String
 }
 
 public enum Apps: Endpoint {
@@ -27,7 +27,8 @@ public enum Apps: Endpoint {
     case .registerApp:
       InstanceAppRequest(
         clientName: AppInfo.clientName, redirectUris: AppInfo.scheme, scopes: AppInfo.scopes,
-        website: AppInfo.weblink)
+        website: AppInfo.weblink
+      )
     }
   }
 }

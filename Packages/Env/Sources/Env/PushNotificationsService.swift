@@ -30,7 +30,7 @@ public struct PushKeys: Sendable {
 
   public var notificationsPrivateKeyAsKey: P256.KeyAgreement.PrivateKey {
     if let key = keychain.get(Constants.keychainPrivateKey),
-      let data = Data(base64Encoded: key)
+       let data = Data(base64Encoded: key)
     {
       do {
         return try P256.KeyAgreement.PrivateKey(rawRepresentation: data)
@@ -39,7 +39,8 @@ public struct PushKeys: Sendable {
         keychain.set(
           key.rawRepresentation.base64EncodedString(),
           forKey: Constants.keychainPrivateKey,
-          withAccess: .accessibleAfterFirstUnlock)
+          withAccess: .accessibleAfterFirstUnlock
+        )
         return key
       }
     } else {
@@ -47,14 +48,15 @@ public struct PushKeys: Sendable {
       keychain.set(
         key.rawRepresentation.base64EncodedString(),
         forKey: Constants.keychainPrivateKey,
-        withAccess: .accessibleAfterFirstUnlock)
+        withAccess: .accessibleAfterFirstUnlock
+      )
       return key
     }
   }
 
   public var notificationsPrivateKeyIfPresent: P256.KeyAgreement.PrivateKey? {
     guard let key = keychain.get(Constants.keychainPrivateKey),
-      let data = Data(base64Encoded: key)
+          let data = Data(base64Encoded: key)
     else {
       return nil
     }
@@ -64,7 +66,7 @@ public struct PushKeys: Sendable {
 
   public var notificationsAuthKeyAsKey: Data {
     if let key = keychain.get(Constants.keychainAuthKey),
-      let data = Data(base64Encoded: key)
+       let data = Data(base64Encoded: key)
     {
       return data
     } else {
@@ -72,14 +74,15 @@ public struct PushKeys: Sendable {
       keychain.set(
         key.base64EncodedString(),
         forKey: Constants.keychainAuthKey,
-        withAccess: .accessibleAfterFirstUnlock)
+        withAccess: .accessibleAfterFirstUnlock
+      )
       return key
     }
   }
 
   public var notificationsAuthKeyIfPresent: Data? {
     guard let key = keychain.get(Constants.keychainAuthKey),
-      let data = Data(base64Encoded: key)
+          let data = Data(base64Encoded: key)
     else {
       return nil
     }
@@ -122,7 +125,7 @@ public struct HandledNotification: Equatable {
     /// at a self-hosted APNs-to-Mastodon push proxy (see docs/push-proxy-selfhost.md).
     static let endpoint: String = {
       if let override = Bundle.main.object(forInfoDictionaryKey: "FrostGramPushProxyURL") as? String,
-        !override.isEmpty
+         !override.isEmpty
       {
         return override
       }
@@ -139,7 +142,7 @@ public struct HandledNotification: Equatable {
   public var pushToken: Data?
 
   public var handledNotification: HandledNotification?
-  
+
   public var tokens: [OauthToken] = []
 
   override init() {
@@ -164,7 +167,8 @@ public struct HandledNotification: Equatable {
         account: account,
         key: pushKeys.notificationsPrivateKeyAsKey.publicKey.x963Representation,
         authKey: pushKeys.notificationsAuthKeyAsKey,
-        pushToken: pushToken)
+        pushToken: pushToken
+      )
       subscriptions.append(sub)
     }
   }
@@ -183,7 +187,8 @@ public struct HandledNotification: Equatable {
               await subscription.updateSubscription()
             }
           }
-        })
+        }
+      )
     }
   }
 }
@@ -193,11 +198,12 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
     _: UNUserNotificationCenter, didReceive response: UNNotificationResponse
   ) async {
     guard let plaintext = response.notification.request.content.userInfo["plaintext"] as? Data,
-      let mastodonPushNotification = try? JSONDecoder().decode(
-        MastodonPushNotification.self, from: plaintext),
-      let account = subscriptions.first(where: {
-        $0.account.token.accessToken == mastodonPushNotification.accessToken
-      })
+          let mastodonPushNotification = try? JSONDecoder().decode(
+            MastodonPushNotification.self, from: plaintext
+          ),
+          let account = subscriptions.first(where: {
+            $0.account.token.accessToken == mastodonPushNotification.accessToken
+          })
     else {
       return
     }
@@ -205,14 +211,15 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
       let client = MastodonClient(server: account.account.server, oauthToken: account.account.token)
       let notification: Models.Notification =
         try await client.get(
-          endpoint: Notifications.notification(id: String(mastodonPushNotification.notificationID)))
+          endpoint: Notifications.notification(id: String(mastodonPushNotification.notificationID))
+        )
       handledNotification = .init(account: account.account, notification: notification)
     } catch {}
   }
 
   public func userNotificationCenter(
-    _ center: UNUserNotificationCenter,
-    willPresent notification: UNNotification
+    _: UNUserNotificationCenter,
+    willPresent _: UNNotification
   ) async -> UNNotificationPresentationOptions {
     UserPreferences.shared.reloadNotificationsCount(tokens: tokens)
     return [.banner, .sound]
@@ -284,7 +291,9 @@ extension Data {
             reblog: isReblogNotificationEnabled,
             follow: isFollowNotificationEnabled,
             favorite: isFavoriteNotificationEnabled,
-            poll: isPollNotificationEnabled))
+            poll: isPollNotificationEnabled
+          )
+        )
       isEnabled = subscription != nil
 
     } catch {

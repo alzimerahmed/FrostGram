@@ -48,7 +48,7 @@ public class AccountTabManager {
     let tabs = allTabs.filter { tab in
       isCurrentUser ? tab.isAvailableForCurrentUser : tab.isAvailableForOtherUsers
     }
-    self.selectedTab = tabs.first ?? StatusesTab()
+    selectedTab = tabs.first ?? StatusesTab()
   }
 
   public func getFetcher(for tab: any AccountTabProtocol) -> any StatusesFetcher {
@@ -57,7 +57,8 @@ public class AccountTabManager {
     }
 
     let fetcher = tab.createFetcher(
-      accountId: accountId, client: client, isCurrentUser: isCurrentUser)
+      accountId: accountId, client: client, isCurrentUser: isCurrentUser
+    )
     fetchers[tab.id] = fetcher
     return fetcher
   }

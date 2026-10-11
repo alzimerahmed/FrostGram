@@ -37,14 +37,13 @@ struct StatusRowHeaderView: View {
     }
   }
 
-  @ViewBuilder
   private var accountView: some View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
-          #if targetEnvironment(macCatalyst)
-            .accountPopover(viewModel.finalStatus.account)
-          #endif
+        #if targetEnvironment(macCatalyst)
+          .accountPopover(viewModel.finalStatus.account)
+        #endif
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {

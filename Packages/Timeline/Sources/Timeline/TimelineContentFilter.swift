@@ -63,19 +63,19 @@ import SwiftUI
       storage.showQuotePosts = showQuotePosts
     }
   }
-  
+
   public var hidePostsWithMedia: Bool {
     didSet {
       storage.hidePostsWithMedia = hidePostsWithMedia
     }
   }
-    
+
   public var hidePostsFromBots: Bool {
     didSet {
       storage.hidePostsFromBots = hidePostsFromBots
     }
   }
-    
+
   private init() {
     showBoosts = storage.showBoosts
     showReplies = storage.showReplies

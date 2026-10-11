@@ -8,11 +8,11 @@ public enum Collections: Endpoint {
 
   public func path() -> String {
     switch self {
-    case .accountCollections(let id):
+    case let .accountCollections(id):
       "accounts/\(id)/collections"
-    case .collection(let id):
+    case let .collection(id):
       "collections/\(id)"
-    case .accountInCollections(let id):
+    case let .accountInCollections(id):
       "accounts/\(id)/in_collections"
     }
   }

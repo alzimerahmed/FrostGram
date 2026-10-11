@@ -12,8 +12,7 @@ struct MediaTab {
   let isAvailableForCurrentUser = false
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
-  {
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher {
     MediaTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
@@ -35,7 +34,7 @@ private class MediaTabFetcher: AccountTabFetcher {
     statuses.filter { !$0.mediaAttachments.isEmpty }.flatMap { $0.asMediaStatus }
   }
 
-  override func fetchNewestStatuses(pullToRefresh: Bool) async {
+  override func fetchNewestStatuses(pullToRefresh _: Bool) async {
     do {
       statusesState = .loading
       statuses = try await client.get(
@@ -87,31 +86,29 @@ private struct MediaTabView: View {
   @Environment(Theme.self) private var theme
 
   var body: some View {
-    Group {
-      HStack {
-        Label("Media Grid", systemImage: "square.grid.2x2")
-        Spacer()
-        Image(systemName: "chevron.right")
-      }
-      .onTapGesture {
-        if let account {
-          routerPath.navigate(
-            to: .accountMediaGridView(
-              account: account,
-              initialMediaStatuses: fetcher.statusesMedias
-            )
-          )
-        }
-      }
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-
-      AnyStatusesListView(
-        fetcher: fetcher,
-        client: client,
-        routerPath: routerPath
-      )
+    HStack {
+      Label("Media Grid", systemImage: "square.grid.2x2")
+      Spacer()
+      Image(systemName: "chevron.right")
     }
+    .onTapGesture {
+      if let account {
+        routerPath.navigate(
+          to: .accountMediaGridView(
+            account: account,
+            initialMediaStatuses: fetcher.statusesMedias
+          )
+        )
+      }
+    }
+    #if !os(visionOS)
+    .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+
+    AnyStatusesListView(
+      fetcher: fetcher,
+      client: client,
+      routerPath: routerPath
+    )
   }
 }

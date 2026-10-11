@@ -1,17 +1,17 @@
-import SwiftUI
-import StatusKit
-import NetworkClient
+import DesignSystem
 import Env
 import Models
-import DesignSystem
+import NetworkClient
+import StatusKit
+import SwiftUI
 
 struct AnyStatusesListView: View {
   let fetcher: any StatusesFetcher
   let client: MastodonClient
   let routerPath: RouterPath
-  
+
   @Environment(Theme.self) private var theme
-  
+
   var body: some View {
     switch fetcher.statusesState {
     case .loading:
@@ -21,7 +21,8 @@ struct AnyStatusesListView: View {
             status: status,
             client: client,
             routerPath: routerPath,
-            filterContext: .account)
+            filterContext: .account
+          )
         )
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
@@ -33,10 +34,11 @@ struct AnyStatusesListView: View {
             status: status,
             client: client,
             routerPath: routerPath,
-            filterContext: .account)
+            filterContext: .account
+          )
         )
       }
-      
+
       if nextPageState == .hasNextPage {
         loadMoreView
           .onAppear {
@@ -61,7 +63,7 @@ struct AnyStatusesListView: View {
       EmptyView()
     }
   }
-  
+
   private var loadMoreView: some View {
     HStack {
       Spacer()

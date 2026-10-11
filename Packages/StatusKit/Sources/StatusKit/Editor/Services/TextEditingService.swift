@@ -104,7 +104,7 @@ extension StatusEditor {
       store.textState.currentSuggestionRange = result.suggestionRange
 
       switch result.action {
-      case .suggest(let query):
+      case let .suggest(query):
         store.loadAutoCompleteResults(query: query)
       case .reset:
         store.resetAutoCompletion()
@@ -115,8 +115,8 @@ extension StatusEditor {
 
     private func checkEmbed(in store: StatusEditor.EditorStore) {
       if let url = store.embeddedStatusURL,
-        store.currentInstance?.isQuoteSupported == false,
-        !store.textState.statusText.string.contains(url.absoluteString)
+         store.currentInstance?.isQuoteSupported == false,
+         !store.textState.statusText.string.contains(url.absoluteString)
       {
         store.embeddedStatus = nil
         store.mode = .new(text: nil, visibility: store.visibility)

@@ -79,7 +79,8 @@ extension StatusEditor {
             close()
             NotificationCenter.default.post(
               name: .shareSheetClose,
-              object: nil)
+              object: nil
+            )
           }
         } label: {
           Image(systemName: "xmark")
@@ -94,14 +95,16 @@ extension StatusEditor {
               close()
               NotificationCenter.default.post(
                 name: .shareSheetClose,
-                object: nil)
+                object: nil
+              )
             }
             Button("status.draft.save") {
               context.insert(Draft(content: mainStore.statusText.string))
               close()
               NotificationCenter.default.post(
                 name: .shareSheetClose,
-                object: nil)
+                object: nil
+              )
             }
             Button("action.cancel", role: .cancel) {}
           }
@@ -117,13 +120,13 @@ extension StatusEditor {
           hasMedia: !mainStore.mediaContainers.isEmpty,
           allMediaHasDescription: mainStore.allMediaHasDescription,
           isReminderEnabled: preferences.isAltTextReminderEnabled,
-          requiresAltText: preferences.appRequireAltText)
-        {
+          requiresAltText: preferences.appRequireAltText
+        ) {
           isAltTextConfirmPresented = true
         } else if mainStore.scheduledAt != nil {
           startScheduling()
         } else if preferences.autoDetectPostLanguage,
-          mainStore.languageConfirmationDialogLanguages != nil
+                  mainStore.languageConfirmationDialogLanguages != nil
         {
           isLanguageConfirmPresented = true
         } else {
@@ -149,19 +152,21 @@ extension StatusEditor {
         },
         message: {
           Text("status.editor.alt-text-reminder.confirm.message")
-        })
+        }
+      )
       .confirmationDialog(
         "", isPresented: $isLanguageConfirmPresented,
         actions: {
           languageConfirmationDialog
-        })
+        }
+      )
     }
 
     private func proceedWithPosting() {
       if mainStore.scheduledAt != nil {
         startScheduling()
       } else if preferences.autoDetectPostLanguage,
-        mainStore.languageConfirmationDialogLanguages != nil
+                mainStore.languageConfirmationDialogLanguages != nil
       {
         isLanguageConfirmPresented = true
       } else {
@@ -196,7 +201,8 @@ extension StatusEditor {
               selection: Binding(
                 get: { mainStore.scheduledAt ?? Date().addingTimeInterval(60 * 60) },
                 set: { mainStore.scheduledAt = $0 }
-              ))
+              )
+            )
           }
         }
         .toolbar {
@@ -350,9 +356,13 @@ extension StatusEditor {
     }
 
     #if targetEnvironment(macCatalyst)
-      private func close() { dismissWindow() }
+      private func close() {
+        dismissWindow()
+      }
     #else
-      private func close() { dismiss() }
+      private func close() {
+        dismiss()
+      }
     #endif
 
     @ViewBuilder
@@ -373,8 +383,6 @@ extension StatusEditor {
         Button("action.cancel", role: .cancel) {
           mainStore.languageConfirmationDialogLanguages = nil
         }
-      } else {
-        EmptyView()
       }
     }
 
@@ -388,7 +396,9 @@ extension StatusEditor {
             if let draft {
               focusedStore.insertStatusText(text: draft.content)
             }
-          }))
+          }
+        )
+      )
     }
   }
 }

@@ -1,9 +1,8 @@
+@testable import Account
 import Foundation
 import Models
 import SwiftData
 import XCTest
-
-@testable import Account
 
 @MainActor
 final class AccountMetricsStoreTests: XCTestCase {

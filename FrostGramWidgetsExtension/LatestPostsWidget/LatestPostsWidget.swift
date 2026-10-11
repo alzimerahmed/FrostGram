@@ -11,7 +11,8 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "Home",
       statuses: [.placeholder()],
-      images: [:])
+      images: [:]
+    )
   }
 
   func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async
@@ -24,7 +25,8 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: configuration.timeline?.timeline.title ?? "",
       statuses: [],
-      images: [:])
+      images: [:]
+    )
   }
 
   func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async
@@ -44,14 +46,17 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
               date: Date(),
               title: "",
               statuses: [],
-              images: [:])
+              images: [:]
+            ),
           ],
-          policy: .atEnd)
+          policy: .atEnd
+        )
       }
       let statuses = await loadStatuses(
         for: timeline.timeline,
         account: account,
-        widgetFamily: context.family)
+        widgetFamily: context.family
+      )
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(
         entries: [
@@ -59,8 +64,10 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: timeline.timeline.title,
             statuses: statuses,
-            images: images)
-        ], policy: .atEnd)
+            images: images
+          ),
+        ], policy: .atEnd
+      )
     } catch {
       return Timeline(
         entries: [
@@ -68,9 +75,11 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: configuration.timeline?.timeline.title ?? "",
             statuses: [],
-            images: [:])
+            images: [:]
+          ),
         ],
-        policy: .atEnd)
+        policy: .atEnd
+      )
     }
   }
 
@@ -119,5 +128,6 @@ struct LatestPostsWidget: Widget {
     date: .now,
     title: "Mastodon",
     statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-    images: [:])
+    images: [:]
+  )
 }

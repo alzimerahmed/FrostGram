@@ -1,11 +1,11 @@
-import AVFoundation
 import Account
 import AppAccount
+import AVFoundation
 import DesignSystem
 import Env
 import KeychainSwift
-import Models
 import MediaUI
+import Models
 import NetworkClient
 import StatusKit
 import SwiftUI
@@ -29,14 +29,15 @@ struct FrostGramApp: App {
   @State var theme = Theme.shared
   @State var toastCenter = ToastCenter.shared
   @State var onboarding = OnboardingStateMachine(
-    defaults: UserPreferences.sharedDefault ?? .standard)
+    defaults: UserPreferences.sharedDefault ?? .standard
+  )
 
   @State var selectedTab: AppTab = .timeline
   @State var appRouterPath = RouterPath()
   @State var showOnboarding = false
 
   @State var isSupporter: Bool = false
-  
+
   @Namespace var namespace
 
   init() {
@@ -61,7 +62,8 @@ struct FrostGramApp: App {
       watcher.watch(streams: [.user, .direct])
       UNUserNotificationCenter.current().setBadgeCount(0)
       userPreferences.reloadNotificationsCount(
-        tokens: appAccountsManager.availableAccounts.compactMap(\.oauthToken))
+        tokens: appAccountsManager.availableAccounts.compactMap(\.oauthToken)
+      )
       Task {
         await userPreferences.refreshServerPreferences()
       }
@@ -85,13 +87,14 @@ struct FrostGramApp: App {
   /// account, the current (token-less) account points at that server.
   func applyGuestServerIfAvailable() {
     guard !appAccountsManager.availableAccounts.contains(where: { $0.oauthToken != nil }),
-      let guestServer = onboarding.guestServer,
-      appAccountsManager.currentAccount.server != guestServer
+          let guestServer = onboarding.guestServer,
+          appAccountsManager.currentAccount.server != guestServer
     else { return }
     appAccountsManager.currentAccount = AppAccount(
       server: guestServer,
       accountName: nil,
-      oauthToken: nil)
+      oauthToken: nil
+    )
   }
 }
 
@@ -126,7 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     return .noData
   }
-  
 
   func application(
     _: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession,

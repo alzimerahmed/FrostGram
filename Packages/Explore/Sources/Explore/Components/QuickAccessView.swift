@@ -24,7 +24,8 @@ struct QuickAccessView: View {
         .buttonStyle(.bordered)
         Button("explore.section.suggested-users") {
           routerPath.navigate(
-            to: RouterDestination.accountsList(accounts: suggestedAccounts))
+            to: RouterDestination.accountsList(accounts: suggestedAccounts)
+          )
         }
         .buttonStyle(.bordered)
         Button("explore.section.trending.tags") {
@@ -39,6 +40,6 @@ struct QuickAccessView: View {
     #if !os(visionOS)
       .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-    .listRowSeparator(.hidden)
+      .listRowSeparator(.hidden)
   }
 }

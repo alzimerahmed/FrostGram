@@ -12,16 +12,16 @@ struct StatusesTab {
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
-  {
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher {
     StatusesTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account _: Account?
   ) -> some View {
     StatusesTabView(
-      fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath)
+      fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath
+    )
   }
 }
 
@@ -32,7 +32,7 @@ extension StatusesTab: @MainActor AccountTabProtocol {}
 private class StatusesTabFetcher: AccountTabFetcher {
   var pinned: [Status] = []
 
-  override func fetchNewestStatuses(pullToRefresh: Bool) async {
+  override func fetchNewestStatuses(pullToRefresh _: Bool) async {
     do {
       statusesState = .loading
       statuses = try await client.get(
@@ -110,17 +110,15 @@ private struct StatusesTabView: View {
   @Environment(Theme.self) private var theme
 
   var body: some View {
-    Group {
-      if !fetcher.pinned.isEmpty {
-        pinnedPostsView
-      }
-
-      AnyStatusesListView(
-        fetcher: fetcher,
-        client: client,
-        routerPath: routerPath
-      )
+    if !fetcher.pinned.isEmpty {
+      pinnedPostsView
     }
+
+    AnyStatusesListView(
+      fetcher: fetcher,
+      client: client,
+      routerPath: routerPath
+    )
   }
 
   @ViewBuilder
@@ -135,12 +133,13 @@ private struct StatusesTabView: View {
           top: 0,
           leading: 12,
           bottom: 0,
-          trailing: .layoutPadding)
+          trailing: .layoutPadding
+        )
       )
       .listRowSeparator(.hidden)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
 
     ForEach(fetcher.pinned) { status in
       StatusRowExternalView(
@@ -148,16 +147,17 @@ private struct StatusesTabView: View {
           status: status,
           client: client,
           routerPath: routerPath,
-          filterContext: .account)
+          filterContext: .account
+        )
       )
     }
 
     Rectangle()
-      #if os(visionOS)
-        .fill(Color.clear)
-      #else
-        .fill(theme.secondaryBackgroundColor)
-      #endif
+    #if os(visionOS)
+      .fill(Color.clear)
+    #else
+      .fill(theme.secondaryBackgroundColor)
+    #endif
       .frame(height: 12)
       .listRowInsets(.init())
       .listRowSeparator(.hidden)

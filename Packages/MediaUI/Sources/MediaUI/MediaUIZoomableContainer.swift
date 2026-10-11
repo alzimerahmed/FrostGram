@@ -70,12 +70,13 @@ struct MediaUIZoomableContainer<Content: View>: View {
     func updateUIView(_ uiView: UIScrollView, context: Context) {
       context.coordinator.hostingController.rootView = content
 
-      if uiView.zoomScale > uiView.minimumZoomScale {  // Scale out
+      if uiView.zoomScale > uiView.minimumZoomScale { // Scale out
         uiView.setZoomScale(currentScale, animated: true)
-      } else if tapLocation != .zero {  // Scale in to a specific point
+      } else if tapLocation != .zero { // Scale in to a specific point
         uiView.zoom(
           to: zoomRect(for: uiView, scale: uiView.maximumZoomScale, center: tapLocation),
-          animated: true)
+          animated: true
+        )
         DispatchQueue.main.async { tapLocation = .zero }
       }
     }

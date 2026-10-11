@@ -15,7 +15,8 @@ public struct Conversation: Identifiable, Decodable, Hashable, Equatable {
 
   public static func placeholder() -> Conversation {
     .init(
-      id: UUID().uuidString, unread: false, lastStatus: .placeholder(), accounts: [.placeholder()])
+      id: UUID().uuidString, unread: false, lastStatus: .placeholder(), accounts: [.placeholder()]
+    )
   }
 
   public static func placeholders() -> [Conversation] {

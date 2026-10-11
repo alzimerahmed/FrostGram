@@ -13,34 +13,40 @@ final class AltTextReminderPolicyTests: XCTestCase {
       hasMedia: hasMedia,
       allMediaHasDescription: allMediaHasDescription,
       isReminderEnabled: isReminderEnabled,
-      requiresAltText: requiresAltText)
+      requiresAltText: requiresAltText
+    )
   }
 
   func testNoMediaMeansNoReminder() {
     XCTAssertEqual(
       action(hasMedia: false, allMediaHasDescription: true),
-      .none)
+      .none
+    )
     XCTAssertEqual(
       action(hasMedia: false, allMediaHasDescription: false),
-      .none)
+      .none
+    )
   }
 
   func testAllMediaDescribedMeansNoReminder() {
     XCTAssertEqual(
       action(hasMedia: true, allMediaHasDescription: true),
-      .none)
+      .none
+    )
   }
 
   func testMissingDescriptionWithReminderOnShowsBanner() {
     XCTAssertEqual(
       action(hasMedia: true, allMediaHasDescription: false),
-      .banner)
+      .banner
+    )
   }
 
   func testReminderDisabledMeansNoReminder() {
     XCTAssertEqual(
       action(hasMedia: true, allMediaHasDescription: false, isReminderEnabled: false),
-      .none)
+      .none
+    )
   }
 
   func testRequireAltTextSuppressesSoftReminder() {
@@ -48,7 +54,8 @@ final class AltTextReminderPolicyTests: XCTestCase {
     // reminder stays out of the way.
     XCTAssertEqual(
       action(hasMedia: true, allMediaHasDescription: false, requiresAltText: true),
-      .none)
+      .none
+    )
   }
 
   func testConfirmBeforePostingWhenReminderOnAndDescriptionMissing() {
@@ -57,7 +64,9 @@ final class AltTextReminderPolicyTests: XCTestCase {
         hasMedia: true,
         allMediaHasDescription: false,
         isReminderEnabled: true,
-        requiresAltText: false))
+        requiresAltText: false
+      )
+    )
   }
 
   func testNoConfirmWhenReminderOffOrAllDescribedOrNoMedia() {
@@ -66,19 +75,25 @@ final class AltTextReminderPolicyTests: XCTestCase {
         hasMedia: true,
         allMediaHasDescription: false,
         isReminderEnabled: false,
-        requiresAltText: false))
+        requiresAltText: false
+      )
+    )
     XCTAssertFalse(
       StatusEditor.AltTextReminderPolicy.shouldConfirmBeforePosting(
         hasMedia: true,
         allMediaHasDescription: true,
         isReminderEnabled: true,
-        requiresAltText: false))
+        requiresAltText: false
+      )
+    )
     XCTAssertFalse(
       StatusEditor.AltTextReminderPolicy.shouldConfirmBeforePosting(
         hasMedia: false,
         allMediaHasDescription: false,
         isReminderEnabled: true,
-        requiresAltText: false))
+        requiresAltText: false
+      )
+    )
   }
 
   func testNoConfirmWhenAltTextIsRequired() {
@@ -88,6 +103,8 @@ final class AltTextReminderPolicyTests: XCTestCase {
         hasMedia: true,
         allMediaHasDescription: false,
         isReminderEnabled: true,
-        requiresAltText: true))
+        requiresAltText: true
+      )
+    )
   }
 }

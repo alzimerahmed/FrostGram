@@ -18,10 +18,10 @@ public struct AccountsListView: View {
 
   public var body: some View {
     listView
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
+    #if !os(visionOS)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+    #endif
       .listStyle(.plain)
       .toolbar {
         ToolbarItem(placement: .principal) {
@@ -94,13 +94,14 @@ public struct AccountsListView: View {
         AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
+
     case let .display(accounts, relationships, nextPageState):
       if case .followers = viewModel.mode,
-        !currentAccount.followRequests.isEmpty
+         !currentAccount.followRequests.isEmpty
       {
         Section(
           header: Text("account.follow-requests.pending-requests"),
@@ -120,7 +121,7 @@ public struct AccountsListView: View {
               }
             )
             #if !os(visionOS)
-              .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor)
             #endif
           }
         }
@@ -139,13 +140,15 @@ public struct AccountsListView: View {
               AccountsListRow(
                 viewModel: .init(
                   account: account,
-                  relationShip: relationship))
+                  relationShip: relationship
+                )
+              )
             }
           }
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       switch nextPageState {
@@ -154,7 +157,7 @@ public struct AccountsListView: View {
           try await viewModel.fetchNextPage()
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
       case .none:
@@ -163,9 +166,9 @@ public struct AccountsListView: View {
 
     case let .error(error):
       Text(error.localizedDescription)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 }
@@ -175,7 +178,9 @@ public struct AccountsListView: View {
     AccountsListRow(
       viewModel: .init(
         account: .placeholder(),
-        relationShip: .placeholder()))
+        relationShip: .placeholder()
+      )
+    )
   }
   .listStyle(.plain)
   .withPreviewsEnv()

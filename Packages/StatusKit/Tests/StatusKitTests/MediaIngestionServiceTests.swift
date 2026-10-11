@@ -1,7 +1,7 @@
 import Foundation
-import UniformTypeIdentifiers
-import UIKit
 @testable import StatusKit
+import UIKit
+import UniformTypeIdentifiers
 import XCTest
 
 @MainActor
@@ -34,8 +34,8 @@ final class MediaIngestionServiceTests: XCTestCase {
     )
 
     XCTAssertEqual(result.containers.count, 1)
-    if case .pending(let content) = result.containers[0].state,
-      case .image = content
+    if case let .pending(content) = result.containers[0].state,
+       case .image = content
     {
       XCTAssertFalse(result.hadError)
     } else {

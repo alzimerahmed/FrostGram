@@ -44,10 +44,10 @@ public struct ConversationDetailView: View {
         .padding(.horizontal, .layoutPadding)
       }
       #if !os(visionOS)
-        .scrollDismissesKeyboard(.interactively)
+      .scrollDismissesKeyboard(.interactively)
       #endif
       .safeAreaInset(edge: .bottom) {
-        if case .display(_, let conversation) = viewState {
+        if case let .display(_, conversation) = viewState {
           ConversationInputView(
             newMessageText: $newMessageText,
             conversation: conversation,
@@ -80,34 +80,34 @@ public struct ConversationDetailView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .toolbar {
-      ToolbarItem(placement: .principal) {
-        if case .display(_, let conversation) = viewState {
-          if conversation.accounts.count == 1,
-            let account = conversation.accounts.first
-          {
-            EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-              .font(.scaledHeadline)
-              .foregroundColor(theme.labelColor)
-              .emojiText.size(Font.scaledHeadlineFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
-          } else {
-            Text("Direct message with \(conversation.accounts.count) people")
-              .font(.scaledHeadline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          if case let .display(_, conversation) = viewState {
+            if conversation.accounts.count == 1,
+               let account = conversation.accounts.first
+            {
+              EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+                .font(.scaledHeadline)
+                .foregroundColor(theme.labelColor)
+                .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+            } else {
+              Text("Direct message with \(conversation.accounts.count) people")
+                .font(.scaledHeadline)
+            }
           }
         }
       }
-    }
-    .onChange(of: watcher.latestEvent?.id) {
-      if let latestEvent = watcher.latestEvent {
-        Task {
-          await handleStreamEvent(latestEvent)
+      .onChange(of: watcher.latestEvent?.id) {
+        if let latestEvent = watcher.latestEvent {
+          Task {
+            await handleStreamEvent(latestEvent)
+          }
         }
       }
-    }
-    .onChange(of: client) { _, _ in
-      _ = routerPath.path.removeLast()
-    }
+      .onChange(of: client) { _, _ in
+        _ = routerPath.path.removeLast()
+      }
   }
 
   @ViewBuilder
@@ -116,7 +116,7 @@ public struct ConversationDetailView: View {
     case .loading:
       loadingView
 
-    case .display(let messages, let conversation):
+    case let .display(messages, conversation):
       ForEach(messages) { message in
         ConversationMessageView(
           message: message,

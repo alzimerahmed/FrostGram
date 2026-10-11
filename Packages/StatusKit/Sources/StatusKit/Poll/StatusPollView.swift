@@ -24,7 +24,11 @@ public struct StatusPollView: View {
     let biggestVote = viewModel.poll.options.compactMap { $0.votesCount }.max() ?? 0
     guard biggestVote > 0 else { return 0 }
 
-    return if vote == biggestVote { 100 } else { CGFloat(vote) * 100 / CGFloat(biggestVote) }
+    return if vote == biggestVote {
+      100
+    } else {
+      CGFloat(vote) * 100 / CGFloat(biggestVote)
+    }
   }
 
   private func absolutePercent(for vote: Int) -> Int {
@@ -35,7 +39,7 @@ public struct StatusPollView: View {
 
   private func isSelected(option: Poll.Option) -> Bool {
     if let optionIndex = viewModel.poll.options.firstIndex(where: { $0.id == option.id }),
-      viewModel.votes.firstIndex(of: optionIndex) != nil
+       viewModel.votes.firstIndex(of: optionIndex) != nil
     {
       return true
     }
@@ -117,13 +121,15 @@ public struct StatusPollView: View {
     .accessibilityElement(children: .contain)
     .accessibilityLabel(
       viewModel.poll.expired
-        ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
+        ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label"
+    )
   }
 
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
     return Text(
-      "accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)")
+      "accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)"
+    )
       + Text(", ") + Text(option.title)
       + Text(showPercentage ? ", \(absolutePercent(for: option.votesCount ?? 0))%" : "")
   }
@@ -151,11 +157,10 @@ public struct StatusPollView: View {
     .accessibilityAddTraits(.updatesFrequently)
   }
 
-  @ViewBuilder
   private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
     Button {
       if !viewModel.poll.expired,
-        let index = viewModel.poll.options.firstIndex(where: { $0.title == option.title })
+         let index = viewModel.poll.options.firstIndex(where: { $0.title == option.title })
       {
         withAnimation {
           viewModel.handleSelection(index)
@@ -182,7 +187,9 @@ public struct StatusPollView: View {
               .transition(
                 .asymmetric(
                   insertion: .push(from: .leading),
-                  removal: .push(from: .trailing)))
+                  removal: .push(from: .trailing)
+                )
+              )
           }
         }
       }
@@ -205,7 +212,7 @@ public struct StatusPollView: View {
       in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()
     ) {
       guard let view = subviews.first,
-        let width = proposal.width
+            let width = proposal.width
       else { return }
 
       view.place(

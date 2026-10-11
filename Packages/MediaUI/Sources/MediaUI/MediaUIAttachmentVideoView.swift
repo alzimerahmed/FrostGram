@@ -113,7 +113,7 @@ public struct MediaUIAttachmentVideoView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .contentShape(Rectangle())
             .onTapGesture {
-              if !preferences.autoPlayVideo && !viewModel.isPlaying {
+              if !preferences.autoPlayVideo, !viewModel.isPlaying {
                 viewModel.play()
                 return
               }
@@ -122,7 +122,9 @@ public struct MediaUIAttachmentVideoView: View {
                 let attachement = MediaAttachment.videoWith(url: viewModel.url)
                 openWindow(
                   value: WindowDestinationMedia.mediaViewer(
-                    attachments: [attachement], selectedAttachment: attachement))
+                    attachments: [attachement], selectedAttachment: attachement
+                  )
+                )
               #else
                 isFullScreen = true
               #endif
@@ -132,7 +134,8 @@ public struct MediaUIAttachmentVideoView: View {
       .onAppear {
         viewModel.preparePlayer(
           autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
-          isCompact: isCompact)
+          isCompact: isCompact
+        )
         viewModel.mute(preferences.muteVideo)
       }
       .onDisappear {
@@ -205,10 +208,10 @@ public struct MediaUIAttachmentVideoView: View {
       player: viewModel.player,
       videoOverlay: {
         if !preferences.autoPlayVideo,
-          !viewModel.forceAutoPlay,
-          !isFullScreen,
-          !viewModel.isPlaying,
-          !isCompact
+           !viewModel.forceAutoPlay,
+           !isFullScreen,
+           !viewModel.isPlaying,
+           !isCompact
         {
           Button(
             action: {
@@ -221,7 +224,8 @@ public struct MediaUIAttachmentVideoView: View {
                 .padding(.all, isCompact ? 6 : nil)
                 .background(Circle().fill(.thinMaterial))
                 .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-            })
+            }
+          )
         }
       }
     )

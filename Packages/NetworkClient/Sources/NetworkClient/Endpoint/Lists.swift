@@ -13,11 +13,11 @@ public enum Lists: Endpoint {
     switch self {
     case .lists, .createList:
       "lists"
-    case .list(let id), .updateList(let id, _, _, _):
+    case let .list(id), let .updateList(id, _, _, _):
       "lists/\(id)"
-    case .accounts(let listId):
+    case let .accounts(listId):
       "lists/\(listId)/accounts"
-    case .updateAccounts(let listId, _):
+    case let .updateAccounts(listId, _):
       "lists/\(listId)/accounts"
     }
   }
@@ -26,14 +26,14 @@ public enum Lists: Endpoint {
     switch self {
     case .accounts:
       return [.init(name: "limit", value: String(0))]
-    case .createList(let title, let repliesPolicy, let exclusive),
-      .updateList(_, let title, let repliesPolicy, let exclusive):
+    case let .createList(title, repliesPolicy, exclusive),
+         let .updateList(_, title, repliesPolicy, exclusive):
       return [
         .init(name: "title", value: title),
         .init(name: "replies_policy", value: repliesPolicy.rawValue),
         .init(name: "exclusive", value: exclusive ? "true" : "false"),
       ]
-    case .updateAccounts(_, let accounts):
+    case let .updateAccounts(_, accounts):
       var params: [URLQueryItem] = []
       for account in accounts {
         params.append(.init(name: "account_ids[]", value: account))

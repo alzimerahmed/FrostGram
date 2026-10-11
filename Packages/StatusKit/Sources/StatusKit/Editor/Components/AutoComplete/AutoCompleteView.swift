@@ -36,8 +36,8 @@ extension StatusEditor {
     @ViewBuilder
     var contentView: some View {
       if !store.mentionsSuggestions.isEmpty ||
-          !store.tagsSuggestions.isEmpty ||
-          store.showRecentsTagsInline
+        !store.tagsSuggestions.isEmpty ||
+        store.showRecentsTagsInline
       {
         VStack {
           HStack {
@@ -51,10 +51,12 @@ extension StatusEditor {
                                            isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   } else if store.showRecentsTagsInline {
                     Self.RecentTagsView(
-                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded
+                    )
                   } else {
                     Self.RemoteTagsView(
-                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded
+                    )
                   }
                 }
               }
@@ -78,7 +80,8 @@ extension StatusEditor {
           .frame(height: 40)
           if isTagSuggestionExpanded {
             Self.ExpandedView(
-              store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+              store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded
+            )
           }
         }
       }

@@ -39,7 +39,7 @@ struct EditTagGroupView: View {
           )
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
         Section("add-tag-groups.edit.tags") {
@@ -50,7 +50,7 @@ struct EditTagGroupView: View {
           )
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       .formStyle(.grouped)
@@ -65,16 +65,16 @@ struct EditTagGroupView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.interactively)
       #endif
-      .toolbar {
-        CancelToolbarItem()
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.save", action: { save() })
-            .disabled(!tagGroup.isValid)
+        .toolbar {
+          CancelToolbarItem()
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("action.save", action: { save() })
+              .disabled(!tagGroup.isValid)
+          }
         }
-      }
-      .onAppear {
-        focusedField = .title
-      }
+        .onAppear {
+          focusedField = .title
+        }
     }
   }
 
@@ -141,7 +141,7 @@ private struct TitleInputView: View {
     if case let .invalid(description) = titleValidationStatus {
       return description
     } else if isNewGroup,
-      tagGroups.contains(where: { $0.title == title })
+              tagGroups.contains(where: { $0.title == title })
     {
       return "\(title) add-tag-groups.edit.title.field.warning.already-exists"
     }
@@ -179,7 +179,7 @@ private struct SymbolInputView: View {
       }
 
       if case let .invalid(description) = selectedSymbolValidationStatus,
-        focusedField == .symbol
+         focusedField == .symbol
       {
         Text(description).warningLabel()
       }
@@ -284,7 +284,7 @@ private struct TagsInputView: View {
 
   private func addTag(_ tag: String) {
     guard !tag.isEmpty,
-      !tags.contains(tag)
+          !tags.contains(tag)
     else { return }
 
     tags.append(tag)
@@ -350,15 +350,17 @@ private struct SymbolSearchResultsView: View {
   var validationStatus: ValidationStatus {
     if results.isEmpty {
       if symbolQuery == selectedSymbol,
-        !symbolQuery.isEmpty,
-        results.count == 0
+         !symbolQuery.isEmpty,
+         results.count == 0
       {
         .invalid(
           description:
-            "\(symbolQuery) add-tag-groups.edit.tags.field.warning.search-results.already-selected")
+          "\(symbolQuery) add-tag-groups.edit.tags.field.warning.search-results.already-selected"
+        )
       } else {
         .invalid(
-          description: "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found")
+          description: "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found"
+        )
       }
     } else {
       .valid
@@ -392,7 +394,8 @@ extension TagGroup {
       return .invalid(description: "add-tag-groups.edit.title.field.warning.no-symbol-selected")
     } else if !Self.allSymbols.contains(symbolName) {
       return .invalid(
-        description: "\(symbolName) add-tag-groups.edit.title.field.warning.invalid-sfsymbol-name")
+        description: "\(symbolName) add-tag-groups.edit.title.field.warning.invalid-sfsymbol-name"
+      )
     }
 
     return .valid

@@ -90,7 +90,7 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case .tagGroup(let title, _, _):
+      case let .tagGroup(title, _, _):
         if let group = tagGroups.first(where: { $0.title == title }) {
           selectedTagGroup = group
         }
@@ -156,7 +156,7 @@ struct TimelineTab: View {
       }
     }
     switch timeline {
-    case .list(let list):
+    case let .list(list):
       if #available(iOS 26.0, *) {
         ToolbarSpacer(placement: .topBarTrailing)
       }
@@ -168,7 +168,7 @@ struct TimelineTab: View {
             .foregroundStyle(theme.labelColor)
         }
       }
-    case .remoteLocal(let server, _):
+    case let .remoteLocal(server, _):
       if #available(iOS 26.0, *) {
         ToolbarSpacer(placement: .topBarTrailing)
       }
@@ -193,7 +193,6 @@ struct TimelineTab: View {
     }
   }
 
-  @ViewBuilder
   private var headerGroup: some View {
     ControlGroup {
       if timeline.supportNewestPagination {
@@ -201,7 +200,8 @@ struct TimelineTab: View {
           timeline = .latest
         } label: {
           Label(
-            TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+            TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName()
+          )
         }
       }
       if timeline == .home {
@@ -211,7 +211,8 @@ struct TimelineTab: View {
           VStack {
             Label(
               TimelineFilter.resume.localizedTitle(),
-              systemImage: TimelineFilter.resume.iconName())
+              systemImage: TimelineFilter.resume.iconName()
+            )
           }
         }
       }
@@ -251,7 +252,6 @@ struct TimelineTab: View {
     }
   }
 
-  @ViewBuilder
   private var listsFiltersButons: some View {
     Menu {
       Button {
@@ -339,7 +339,8 @@ struct TimelineTab: View {
       },
       label: {
         Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
-      })
+      }
+    )
   }
 
   private func resetTimelineFilter() {

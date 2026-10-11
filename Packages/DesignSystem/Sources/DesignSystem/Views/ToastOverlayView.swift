@@ -84,5 +84,4 @@ private struct ToastView: View {
       .frame(maxWidth: .infinity, alignment: .leading)
     }
   }
-
 }

@@ -50,7 +50,8 @@ extension View {
         await currentInstance.fetchCurrentInstance()
         watcher.setClient(
           client: client,
-          instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
+          instanceStreamingURL: currentInstance.instance?.urls?.streamingApi
+        )
         if client.isAuth {
           watcher.watch(streams: [.user, .direct])
         } else {
@@ -65,81 +66,87 @@ extension View {
   func withAppRouter() -> some View {
     navigationDestination(for: RouterDestination.self) { destination in
       switch destination {
-      case .accountDetail(let id):
+      case let .accountDetail(id):
         AccountDetailView(accountId: id)
-      case .accountDetailWithAccount(let account):
+      case let .accountDetailWithAccount(account):
         AccountDetailView(account: account)
-      case .accountSettingsWithAccount(let account, let appAccount):
+      case let .accountSettingsWithAccount(account, appAccount):
         AccountSettingsView(account: account, appAccount: appAccount)
-      case .accountMediaGridView(let account, let initialMedia):
+      case let .accountMediaGridView(account, initialMedia):
         AccountDetailMediaGridView(account: account, initialMediaStatuses: initialMedia)
-      case .statusDetail(let id):
+      case let .statusDetail(id):
         StatusDetailView(statusId: id)
-      case .statusDetailWithStatus(let status):
+      case let .statusDetailWithStatus(status):
         StatusDetailView(status: status)
-      case .remoteStatusDetail(let url):
+      case let .remoteStatusDetail(url):
         StatusDetailView(remoteStatusURL: url)
-      case .conversationDetail(let conversation):
+      case let .conversationDetail(conversation):
         ConversationDetailView(conversation: conversation)
-      case .hashTag(let tag, let accountId):
+      case let .hashTag(tag, accountId):
         TimelineView(
           timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
-          canFilterTimeline: false)
-      case .list(let list):
+          canFilterTimeline: false
+        )
+      case let .list(list):
         TimelineView(
           timeline: .constant(.list(list: list)),
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
-          canFilterTimeline: false)
-      case .collectionDetail(let collection):
+          canFilterTimeline: false
+        )
+      case let .collectionDetail(collection):
         CollectionDetailView(collection: collection)
-      case .linkTimeline(let url, let title):
+      case let .linkTimeline(url, title):
         TimelineView(
           timeline: .constant(.link(url: url, title: title)),
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
-          canFilterTimeline: false)
-      case .quotes(let id):
+          canFilterTimeline: false
+        )
+      case let .quotes(id):
         TimelineView(
           timeline: .constant(.quotes(statusId: id)),
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
-          canFilterTimeline: false)
-      case .following(let id):
+          canFilterTimeline: false
+        )
+      case let .following(id):
         AccountsListView(mode: .following(accountId: id))
-      case .followers(let id):
+      case let .followers(id):
         AccountsListView(mode: .followers(accountId: id))
-      case .favoritedBy(let id):
+      case let .favoritedBy(id):
         AccountsListView(mode: .favoritedBy(statusId: id))
-      case .rebloggedBy(let id):
+      case let .rebloggedBy(id):
         AccountsListView(mode: .rebloggedBy(statusId: id))
-      case .accountsList(let accounts):
+      case let .accountsList(accounts):
         AccountsListView(mode: .accountsList(accounts: accounts))
       case .trendingTimeline:
         TimelineView(
           timeline: .constant(.trending),
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
-          canFilterTimeline: false)
-      case .trendingLinks(let cards):
+          canFilterTimeline: false
+        )
+      case let .trendingLinks(cards):
         TrendingLinksListView(cards: cards)
-      case .tagsList(let tags):
+      case let .tagsList(tags):
         TagsListView(tags: tags)
       case .notificationsRequests:
         NotificationsRequestsListView()
-      case .notificationForAccount(let accountId):
+      case let .notificationForAccount(accountId):
         NotificationsListView(
           lockedType: nil,
-          lockedAccountId: accountId)
+          lockedAccountId: accountId
+        )
       case .blockedAccounts:
         AccountsListView(mode: .blocked)
       case .mutedAccounts:
         AccountsListView(mode: .muted)
       case .conversations:
         ConversationsListView()
-      case .instanceInfo(let instance):
+      case let .instanceInfo(instance):
         InstanceInfoView(instance: instance)
       case .metrics:
         AccountMetricsView()
@@ -158,40 +165,41 @@ extension View {
     sheet(item: sheetDestinations) { destination in
       Group {
         switch destination {
-        case .replyToStatusEditor(let status):
+        case let .replyToStatusEditor(status):
           StatusEditor.MainView(mode: .replyTo(status: status))
             .withEnvironments()
-        case .newStatusEditor(let visibility):
+        case let .newStatusEditor(visibility):
           StatusEditor.MainView(mode: .new(text: nil, visibility: visibility))
             .withEnvironments()
-        case .prefilledStatusEditor(let text, let visibility):
+        case let .prefilledStatusEditor(text, visibility):
           StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
             .withEnvironments()
-        case .imageURL(let urls, let caption, let altTexts, let visibility):
+        case let .imageURL(urls, caption, altTexts, visibility):
           StatusEditor.MainView(
             mode: .imageURL(
-              urls: urls, caption: caption, altTexts: altTexts, visibility: visibility)
+              urls: urls, caption: caption, altTexts: altTexts, visibility: visibility
+            )
           )
           .withEnvironments()
-        case .editStatusEditor(let status):
+        case let .editStatusEditor(status):
           StatusEditor.MainView(mode: .edit(status: status))
             .withEnvironments()
-        case .quoteStatusEditor(let status):
+        case let .quoteStatusEditor(status):
           StatusEditor.MainView(mode: .quote(status: status))
             .withEnvironments()
-        case .quoteLinkStatusEditor(let link):
+        case let .quoteLinkStatusEditor(link):
           StatusEditor.MainView(mode: .quoteLink(link: link))
             .withEnvironments()
-        case .mentionStatusEditor(let account, let visibility):
+        case let .mentionStatusEditor(account, visibility):
           StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))
             .withEnvironments()
         case .listCreate:
           ListCreateView()
             .withEnvironments()
-        case .listEdit(let list):
+        case let .listEdit(list):
           ListEditView(list: list)
             .withEnvironments()
-        case .listAddAccount(let account):
+        case let .listAddAccount(account):
           ListAddAccountView(account: account)
             .withEnvironments()
         case .addAccount:
@@ -203,7 +211,7 @@ extension View {
         case .addTagGroup:
           EditTagGroupView()
             .withEnvironments()
-        case .statusEditHistory(let status):
+        case let .statusEditHistory(status):
           StatusEditHistoryView(statusId: status)
             .withEnvironments()
         case .settings:
@@ -216,19 +224,17 @@ extension View {
           }) {
             NavigationSheet { PushNotificationsView(subscription: subscription) }
               .withEnvironments()
-          } else {
-            EmptyView()
           }
         case .about:
           NavigationSheet { AboutView() }
             .withEnvironments()
-        case .report(let status):
+        case let .report(status):
           ReportView(status: status)
             .withEnvironments()
-        case .shareImage(let image, let status):
+        case let .shareImage(image, status):
           ActivityView(image: image, status: status)
             .withEnvironments()
-        case .editTagGroup(let tagGroup, let onSaved):
+        case let .editTagGroup(tagGroup, onSaved):
           EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
             .withEnvironments()
         case .timelineContentFilter:
@@ -307,7 +313,8 @@ struct ActivityView: UIViewControllerRepresentable {
   {
     UIActivityViewController(
       activityItems: [image, LinkDelegate(image: image, status: status)],
-      applicationActivities: nil)
+      applicationActivities: nil
+    )
   }
 
   func updateUIViewController(

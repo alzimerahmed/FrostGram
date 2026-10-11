@@ -90,7 +90,6 @@ struct ConversationInputView: View {
     }
   }
 
-  @ViewBuilder
   private var sendButton: some View {
     HStack {
       if !newMessageText.isEmpty {

@@ -1,10 +1,10 @@
 import Combine
 import Foundation
 import Models
-import OSLog
 import Observation
-import SwiftUI
 import os
+import OSLog
+import SwiftUI
 
 @Observable
 public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
@@ -153,7 +153,7 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
     let (data, httpResponse) = try await urlSession.data(for: request)
     var linkHandler: LinkHandler?
     if let response = httpResponse as? HTTPURLResponse,
-      let link = response.allHeaderFields["Link"] as? String
+       let link = response.allHeaderFields["Link"] as? String
     {
       linkHandler = .init(rawLink: link)
     }
@@ -233,7 +233,7 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       throw OauthError.missingApp
     }
     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-      let code = components.queryItems?.first(where: { $0.name == "code" })?.value
+          let code = components.queryItems?.first(where: { $0.name == "code" })?.value
     else {
       throw OauthError.invalidRedirectURL
     }
@@ -241,7 +241,9 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       endpoint: Oauth.token(
         code: code,
         clientId: app.clientId,
-        clientSecret: app.clientSecret))
+        clientSecret: app.clientSecret
+      )
+    )
     critical.withLock { $0.oauthToken = token }
     return token
   }
@@ -250,7 +252,8 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
     -> URLSessionWebSocketTask
   {
     let url = try makeURL(
-      scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
+      scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host
+    )
     var subprotocols: [String] = []
     if let oauthToken = critical.withLock({ $0.oauthToken }) {
       subprotocols.append(oauthToken.accessToken)
@@ -272,7 +275,8 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       method: method,
       mimeType: mimeType,
       filename: filename,
-      data: data)
+      data: data
+    )
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
@@ -300,8 +304,9 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       method: method,
       mimeType: mimeType,
       filename: filename,
-      data: data)
-    
+      data: data
+    )
+
     let (data, httpResponse) = try await urlSession.upload(for: request, from: request.httpBody!, delegate: UploadProgressDelegate(progressHandler: progressHandler))
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
@@ -328,7 +333,8 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       method: method,
       mimeType: mimeType,
       filename: filename,
-      data: data)
+      data: data
+    )
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
@@ -348,7 +354,8 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       method: method,
       mimeType: mimeType,
       filename: filename,
-      data: data)
+      data: data
+    )
     let (_, httpResponse) = try await urlSession.upload(for: request, from: request.httpBody!, delegate: UploadProgressDelegate(progressHandler: progressHandler))
     return httpResponse as? HTTPURLResponse
   }
@@ -365,12 +372,15 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
     request.setValue(
-      "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+      "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type"
+    )
     let httpBody = NSMutableData()
     httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
     httpBody.append(
       "Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(
-        using: .utf8)!)
+        using: .utf8
+      )!
+    )
     httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
     httpBody.append("\r\n".data(using: .utf8)!)
     httpBody.append(data)
@@ -390,16 +400,17 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
 
 private final class UploadProgressDelegate: NSObject, URLSessionTaskDelegate, Sendable {
   private let progressHandler: @Sendable (Double) -> Void
-  
+
   init(progressHandler: @escaping @Sendable (Double) -> Void) {
     self.progressHandler = progressHandler
   }
-  
-  func urlSession(_ session: URLSession,
-                  task: URLSessionTask,
-                  didSendBodyData bytesSent: Int64,
+
+  func urlSession(_: URLSession,
+                  task _: URLSessionTask,
+                  didSendBodyData _: Int64,
                   totalBytesSent: Int64,
-                  totalBytesExpectedToSend: Int64) {
+                  totalBytesExpectedToSend: Int64)
+  {
     guard totalBytesExpectedToSend > 0 else { return }
     let progress = Double(totalBytesSent) / Double(totalBytesExpectedToSend)
     progressHandler(progress)

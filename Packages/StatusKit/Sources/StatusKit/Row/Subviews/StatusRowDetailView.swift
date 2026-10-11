@@ -25,7 +25,7 @@ struct StatusRowDetailView: View {
         }.accessibilityElement(children: .combine)
         Spacer()
         if let name = viewModel.status.application?.name,
-          let url = viewModel.status.application?.website
+           let url = viewModel.status.application?.website
         {
           Button {
             openURL(url)
@@ -77,7 +77,7 @@ struct StatusRowDetailView: View {
       }
 
       if viewModel.actionsAccountsFetched,
-        statusDataController.reblogsCount > 0
+         statusDataController.reblogsCount > 0
       {
         Divider()
         Button {
@@ -97,7 +97,7 @@ struct StatusRowDetailView: View {
       }
 
       if viewModel.actionsAccountsFetched,
-        statusDataController.quotesCount > 0
+         statusDataController.quotesCount > 0
       {
         Divider()
         Button {

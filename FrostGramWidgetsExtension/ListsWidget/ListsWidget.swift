@@ -11,7 +11,8 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "List name",
       statuses: [.placeholder()],
-      images: [:])
+      images: [:]
+    )
   }
 
   func snapshot(for configuration: ListsWidgetConfiguration, in context: Context) async
@@ -24,7 +25,8 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "List name",
       statuses: [],
-      images: [:])
+      images: [:]
+    )
   }
 
   func timeline(for configuration: ListsWidgetConfiguration, in context: Context) async -> Timeline<
@@ -44,15 +46,18 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
               date: Date(),
               title: "List name",
               statuses: [],
-              images: [:])
+              images: [:]
+            ),
           ],
-          policy: .atEnd)
+          policy: .atEnd
+        )
       }
       let filter: TimelineFilter = .list(list: timeline.list)
       let statuses = await loadStatuses(
         for: filter,
         account: account,
-        widgetFamily: context.family)
+        widgetFamily: context.family
+      )
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(
         entries: [
@@ -60,8 +65,10 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: filter.title,
             statuses: statuses,
-            images: images)
-        ], policy: .atEnd)
+            images: images
+          ),
+        ], policy: .atEnd
+      )
     } catch {
       return Timeline(
         entries: [
@@ -69,9 +76,11 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: "List name",
             statuses: [],
-            images: [:])
+            images: [:]
+          ),
         ],
-        policy: .atEnd)
+        policy: .atEnd
+      )
     }
   }
 }
@@ -101,5 +110,6 @@ struct ListsPostWidget: Widget {
     date: .now,
     title: "List name",
     statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-    images: [:])
+    images: [:]
+  )
 }

@@ -11,11 +11,11 @@ public enum ScheduledStatuses: Endpoint {
     switch self {
     case .scheduledStatuses:
       "scheduled_statuses"
-    case .scheduledStatus(let id):
+    case let .scheduledStatus(id):
       "scheduled_statuses/\(id)"
-    case .updateScheduledStatus(let id, _):
+    case let .updateScheduledStatus(id, _):
       "scheduled_statuses/\(id)"
-    case .deleteScheduledStatus(let id):
+    case let .deleteScheduledStatus(id):
       "scheduled_statuses/\(id)"
     }
   }
@@ -26,7 +26,7 @@ public enum ScheduledStatuses: Endpoint {
 
   public var jsonValue: Encodable? {
     switch self {
-    case .updateScheduledStatus(_, let json):
+    case let .updateScheduledStatus(_, json):
       json
     default:
       nil
@@ -42,23 +42,25 @@ public struct ScheduledStatusUpdateData: Encodable, Sendable {
   }
 }
 
-extension MastodonClient {
-  public func scheduledStatuses() async throws -> [ScheduledStatus] {
+public extension MastodonClient {
+  func scheduledStatuses() async throws -> [ScheduledStatus] {
     try await get(endpoint: ScheduledStatuses.scheduledStatuses)
   }
 
-  public func updateScheduledStatus(id: String, scheduledAt: Date) async throws -> ScheduledStatus {
+  func updateScheduledStatus(id: String, scheduledAt: Date) async throws -> ScheduledStatus {
     try await put(
       endpoint: ScheduledStatuses.updateScheduledStatus(
         id: id,
-        json: ScheduledStatusUpdateData(scheduledAt: Self.iso8601String(from: scheduledAt))))
+        json: ScheduledStatusUpdateData(scheduledAt: Self.iso8601String(from: scheduledAt))
+      )
+    )
   }
 
-  public func deleteScheduledStatus(id: String) async throws -> HTTPURLResponse? {
+  func deleteScheduledStatus(id: String) async throws -> HTTPURLResponse? {
     try await delete(endpoint: ScheduledStatuses.deleteScheduledStatus(id: id))
   }
 
-  public static func iso8601String(from date: Date) -> String {
+  static func iso8601String(from date: Date) -> String {
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
     return formatter.string(from: date)

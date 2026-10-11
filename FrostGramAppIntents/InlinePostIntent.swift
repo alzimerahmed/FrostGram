@@ -8,7 +8,7 @@ import NetworkClient
 enum PostVisibility: String, AppEnum {
   case direct, priv, unlisted, pub
 
-  public static var caseDisplayRepresentations: [PostVisibility: DisplayRepresentation] {
+  static var caseDisplayRepresentations: [PostVisibility: DisplayRepresentation] {
     [
       .direct: "Private",
       .priv: "Followers Only",
@@ -17,9 +17,11 @@ enum PostVisibility: String, AppEnum {
     ]
   }
 
-  static var typeDisplayName: LocalizedStringResource { "Visibility" }
+  static var typeDisplayName: LocalizedStringResource {
+    "Visibility"
+  }
 
-  public static let typeDisplayRepresentation: TypeDisplayRepresentation = "Visibility"
+  static let typeDisplayRepresentation: TypeDisplayRepresentation = "Visibility"
 
   var toAppVisibility: Models.Visibility {
     switch self {
@@ -48,13 +50,15 @@ struct InlinePostIntent: AppIntent {
 
   @Parameter(
     title: "Post content",
-    requestValueDialog: IntentDialog("Content of the post to be sent to Mastodon"))
+    requestValueDialog: IntentDialog("Content of the post to be sent to Mastodon")
+  )
   var content: String
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
     let client = MastodonClient(
-      server: account.account.server, version: .v1, oauthToken: account.account.oauthToken)
+      server: account.account.server, version: .v1, oauthToken: account.account.oauthToken
+    )
     let status = StatusData(status: content, visibility: visibility.toAppVisibility)
     do {
       let status: Status = try await client.post(endpoint: Statuses.postStatus(json: status))

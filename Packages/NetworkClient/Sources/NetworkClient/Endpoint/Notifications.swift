@@ -6,7 +6,8 @@ public enum Notifications: Endpoint {
     minId: String?,
     maxId: String?,
     types: [String]?,
-    limit: Int)
+    limit: Int
+  )
   case notificationsForAccount(accountId: String, maxId: String?)
   case notification(id: String)
   case policy
@@ -16,7 +17,7 @@ public enum Notifications: Endpoint {
   case dismissRequests(ids: [String])
   case clear
 
-  // V2 Grouped Notifications API
+  /// V2 Grouped Notifications API
   case notificationsV2(
     sinceId: String?,
     maxId: String?,
@@ -24,7 +25,8 @@ public enum Notifications: Endpoint {
     excludeTypes: [String]?,
     accountId: String?,
     groupedTypes: [String]?,
-    expandAccounts: String?)
+    expandAccounts: String?
+  )
   case notificationGroupV2(groupKey: String)
   case dismissNotificationGroupV2(groupKey: String)
   case notificationGroupAccountsV2(groupKey: String)
@@ -33,13 +35,14 @@ public enum Notifications: Endpoint {
     types: [String]?,
     excludeTypes: [String]?,
     accountId: String?,
-    groupedTypes: [String]?)
+    groupedTypes: [String]?
+  )
 
   public func path() -> String {
     switch self {
     case .notifications, .notificationsForAccount:
       "notifications"
-    case .notification(let id):
+    case let .notification(id):
       "notifications/\(id)"
     case .policy, .putPolicy:
       "notifications/policy"
@@ -53,11 +56,11 @@ public enum Notifications: Endpoint {
       "notifications/clear"
     case .notificationsV2:
       "notifications"
-    case .notificationGroupV2(let groupKey):
+    case let .notificationGroupV2(groupKey):
       "notifications/\(groupKey)"
-    case .dismissNotificationGroupV2(let groupKey):
+    case let .dismissNotificationGroupV2(groupKey):
       "notifications/\(groupKey)/dismiss"
-    case .notificationGroupAccountsV2(let groupKey):
+    case let .notificationGroupAccountsV2(groupKey):
       "notifications/\(groupKey)/accounts"
     case .unreadCountV2:
       "notifications/unread_count"
@@ -66,7 +69,7 @@ public enum Notifications: Endpoint {
 
   public var jsonValue: (any Encodable)? {
     switch self {
-    case .putPolicy(let policy):
+    case let .putPolicy(policy):
       return policy
     default:
       return nil
@@ -75,11 +78,11 @@ public enum Notifications: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .notificationsForAccount(let accountId, let maxId):
+    case let .notificationsForAccount(accountId, maxId):
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil) ?? []
       params.append(.init(name: "account_id", value: accountId))
       return params
-    case .notifications(let mindId, let maxId, let types, let limit):
+    case let .notifications(mindId, maxId, types, limit):
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: mindId) ?? []
       params.append(.init(name: "limit", value: String(limit)))
       if let types {
@@ -88,11 +91,12 @@ public enum Notifications: Endpoint {
         }
       }
       return params
-    case .acceptRequests(let ids), .dismissRequests(let ids):
+    case let .acceptRequests(ids), let .dismissRequests(ids):
       return ids.map { URLQueryItem(name: "id[]", value: $0) }
-    case .notificationsV2(
-      let sinceId, let maxId, let types, let excludeTypes, let accountId, let groupedTypes,
-      let expandAccounts):
+    case let .notificationsV2(
+      sinceId, maxId, types, excludeTypes, accountId, groupedTypes,
+      expandAccounts
+    ):
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: nil) ?? []
       if let types {
         for type in types {
@@ -116,7 +120,7 @@ public enum Notifications: Endpoint {
         params.append(.init(name: "expand_accounts", value: expandAccounts))
       }
       return params
-    case .unreadCountV2(let limit, let types, let excludeTypes, let accountId, let groupedTypes):
+    case let .unreadCountV2(limit, types, excludeTypes, accountId, groupedTypes):
       var params: [URLQueryItem] = []
       params.append(.init(name: "limit", value: String(limit)))
       if let types {

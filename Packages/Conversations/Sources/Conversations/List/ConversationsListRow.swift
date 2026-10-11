@@ -28,7 +28,8 @@ struct ConversationsListRow: View {
           HStack {
             EmojiTextApp(
               .init(
-                stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
+                stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")
+              ),
               emojis: conversation.accounts.flatMap(\.emojis)
             )
             .font(.scaledSubheadline)
@@ -121,7 +122,8 @@ struct ConversationsListRow: View {
         top: 16,
         leading: .layoutPadding + 4,
         bottom: 16,
-        trailing: .layoutPadding)
+        trailing: .layoutPadding
+      )
     )
   }
 
@@ -143,7 +145,8 @@ struct ConversationsListRow: View {
         Section(message.reblog?.account.acct ?? message.account.acct) {
           Button {
             routerPath.presentedSheet = .mentionStatusEditor(
-              account: message.reblog?.account ?? message.account, visibility: .pub)
+              account: message.reblog?.account ?? message.account, visibility: .pub
+            )
           } label: {
             Label("status.action.mention", systemImage: "at")
           }
@@ -196,7 +199,8 @@ struct ConversationsListRow: View {
       Label(
         conversation.lastStatus?.favourited ?? false
           ? "status.action.unfavorite" : "status.action.favorite",
-        systemImage: conversation.lastStatus?.favourited ?? false ? "star.fill" : "star")
+        systemImage: conversation.lastStatus?.favourited ?? false ? "star.fill" : "star"
+      )
     }
     Button {
       Task {
@@ -206,7 +210,8 @@ struct ConversationsListRow: View {
       Label(
         conversation.lastStatus?.bookmarked ?? false
           ? "status.action.unbookmark" : "status.action.bookmark",
-        systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark")
+        systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark"
+      )
     }
   }
 
@@ -219,8 +224,6 @@ struct ConversationsListRow: View {
         HapticManager.shared.fireHaptic(.notification(.success))
         routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
       }
-    } else {
-      EmptyView()
     }
   }
 

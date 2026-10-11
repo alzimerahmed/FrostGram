@@ -41,7 +41,8 @@ struct StatusRowTextView: View {
           \.openURL,
           OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
-          })
+          }
+        )
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       makeCollapseButton()
@@ -68,7 +69,7 @@ struct StatusRowTextView: View {
         .accessibilityHidden(true)
       }
       .contentShape(Rectangle())
-      .onTapGesture {  // make whole row tapable to make up for smaller button size
+      .onTapGesture { // make whole row tapable to make up for smaller button size
         withAnimation {
           viewModel.isCollapsed.toggle()
         }

@@ -8,7 +8,7 @@ public struct PartialAccountWithAvatar: Codable, Identifiable, Sendable {
   public let avatarStatic: String
   public let locked: Bool
   public let bot: Bool
-  
+
   public init(
     id: String,
     acct: String,

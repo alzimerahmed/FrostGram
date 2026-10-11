@@ -10,9 +10,9 @@ import StoreKit
 import SwiftUI
 import UIKit
 
-extension StatusEditor {
+public extension StatusEditor {
   @MainActor
-  public struct MainView: View {
+  struct MainView: View {
     @Environment(AppAccountsManager.self) private var appAccounts
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(Theme.self) private var theme
@@ -29,8 +29,8 @@ extension StatusEditor {
     @FocusState private var editorFocusState: EditorFocusState?
 
     private var focusedStore: EditorStore {
-      if case .followUp(let id) = editorFocusState,
-        let store = followUpStores.first(where: { $0.id == id })
+      if case let .followUp(id) = editorFocusState,
+         let store = followUpStores.first(where: { $0.id == id })
       {
         return store
       }
@@ -63,7 +63,6 @@ extension StatusEditor {
       Color.clear
     }
 
-    @ViewBuilder
     private func mainContent(focusedStore: EditorStore) -> some View {
       editorScrollView(focusedStore: focusedStore)
     }
@@ -82,25 +81,27 @@ extension StatusEditor {
         .background(backgroundColor)
       #endif
       #if os(visionOS)
-        .ornament(attachmentAnchor: .scene(.leading)) {
-          AccessoryView(
-            focusedStore: focusedStore,
-            followUpStores: $followUpStores,
-            isMediaPanelPresented: $isMediaPanelPresented)
-        }
+      .ornament(attachmentAnchor: .scene(.leading)) {
+        AccessoryView(
+          focusedStore: focusedStore,
+          followUpStores: $followUpStores,
+          isMediaPanelPresented: $isMediaPanelPresented
+        )
+      }
       #else
-        .safeAreaInset(edge: .bottom) {
-          bottomInset(focusedStore: focusedStore)
-        }
+      .safeAreaInset(edge: .bottom) {
+        bottomInset(focusedStore: focusedStore)
+      }
       #endif
-      .accessibilitySortPriority(1)  // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+      .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
       .navigationTitle(focusedStore.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItems(
           mainStore: mainStore,
           focusedStore: focusedStore,
-          followUpStores: followUpStores)
+          followUpStores: followUpStores
+        )
       }
       .alert(
         "status.error.posting.title",
@@ -224,7 +225,8 @@ extension StatusEditor {
             AccessoryView(
               focusedStore: focusedStore,
               followUpStores: $followUpStores,
-              isMediaPanelPresented: $isMediaPanelPresented)
+              isMediaPanelPresented: $isMediaPanelPresented
+            )
 
             if isMediaPanelPresented {
               MediaPickerPanelView(store: focusedStore)

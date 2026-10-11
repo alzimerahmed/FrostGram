@@ -31,7 +31,7 @@ public struct NotificationsListView: View {
   ) {
     self.lockedType = lockedType
     self.lockedAccountId = lockedAccountId
-    self.isLockedType = lockedType != nil
+    isLockedType = lockedType != nil
   }
 
   public var body: some View {
@@ -49,7 +49,7 @@ public struct NotificationsListView: View {
       ToolbarItem(placement: .principal) {
         let title =
           lockedType?.menuTitle() ?? selectedType?.menuTitle()
-          ?? "notifications.navigation-title"
+            ?? "notifications.navigation-title"
         if lockedType == nil {
           Text(title)
             .font(.headline)
@@ -124,47 +124,47 @@ public struct NotificationsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .task {
-      if let lockedType {
-        selectedType = lockedType
-      }
-      await fetchNotifications()
-      policy = await dataSource.fetchPolicy(client: client)
-    }
-    .refreshable {
-      SoundEffectManager.shared.playSound(.pull)
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-      await fetchNotifications()
-      policy = await dataSource.fetchPolicy(client: client)
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-      SoundEffectManager.shared.playSound(.refresh)
-    }
-    .onChange(of: watcher.latestEvent?.id) {
-      if let latestEvent = watcher.latestEvent {
-        Task {
-          await handleStreamEvent(latestEvent)
+      .task {
+        if let lockedType {
+          selectedType = lockedType
         }
-      }
-    }
-    .onChange(of: scenePhase) { _, newValue in
-      switch newValue {
-      case .active:
-        Task {
-          await fetchNotifications()
-        }
-      default:
-        break
-      }
-    }
-    .onChange(of: client) { oldValue, newValue in
-      guard oldValue.id != newValue.id else { return }
-      dataSource.reset()
-      viewState = .loading
-      Task {
         await fetchNotifications()
         policy = await dataSource.fetchPolicy(client: client)
       }
-    }
+      .refreshable {
+        SoundEffectManager.shared.playSound(.pull)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+        await fetchNotifications()
+        policy = await dataSource.fetchPolicy(client: client)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(.refresh)
+      }
+      .onChange(of: watcher.latestEvent?.id) {
+        if let latestEvent = watcher.latestEvent {
+          Task {
+            await handleStreamEvent(latestEvent)
+          }
+        }
+      }
+      .onChange(of: scenePhase) { _, newValue in
+        switch newValue {
+        case .active:
+          Task {
+            await fetchNotifications()
+          }
+        default:
+          break
+        }
+      }
+      .onChange(of: client) { oldValue, newValue in
+        guard oldValue.id != newValue.id else { return }
+        dataSource.reset()
+        viewState = .loading
+        Task {
+          await fetchNotifications()
+          policy = await dataSource.fetchPolicy(client: client)
+        }
+      }
   }
 
   @ViewBuilder
@@ -183,20 +183,22 @@ public struct NotificationsListView: View {
             top: 12,
             leading: .layoutPadding + 4,
             bottom: 0,
-            trailing: .layoutPadding)
+            trailing: .layoutPadding
+          )
         )
         #if os(visionOS)
-          .listRowBackground(
-            RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(.background))
+        .listRowBackground(
+          RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background)
+        )
         #else
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
       }
 
-    case .display(let notifications, let nextPageState):
+    case let .display(notifications, nextPageState):
       if notifications.isEmpty {
         PlaceholderView(
           iconName: "bell.slash",
@@ -204,7 +206,7 @@ public struct NotificationsListView: View {
           message: "notifications.empty.message"
         )
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .listSectionSeparator(.hidden)
       } else {
@@ -220,21 +222,23 @@ public struct NotificationsListView: View {
               top: 12,
               leading: .layoutPadding + 4,
               bottom: 6,
-              trailing: .layoutPadding)
+              trailing: .layoutPadding
+            )
           )
           #if os(visionOS)
-            .listRowBackground(
-              RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(
-                  notification.type == .mention && lockedType != .mention
-                    ? Material.thick : Material.regular
-                ).hoverEffect()
-            )
-            .listRowHoverEffectDisabled()
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(
+                notification.type == .mention && lockedType != .mention
+                  ? Material.thick : Material.regular
+              ).hoverEffect()
+          )
+          .listRowHoverEffectDisabled()
           #else
-            .listRowBackground(
-              notification.type == .mention && lockedType != .mention
-                ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+          .listRowBackground(
+            notification.type == .mention && lockedType != .mention
+              ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor
+          )
           #endif
           .id(notification.id)
         }
@@ -251,10 +255,11 @@ public struct NotificationsListView: View {
               top: .layoutPadding,
               leading: .layoutPadding + 4,
               bottom: .layoutPadding,
-              trailing: .layoutPadding)
+              trailing: .layoutPadding
+            )
           )
           #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
       }
@@ -268,7 +273,7 @@ public struct NotificationsListView: View {
         await fetchNotifications()
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
       .listSectionSeparator(.hidden)
     }

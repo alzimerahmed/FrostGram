@@ -24,7 +24,8 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
     let images = try? await loadImages(urls: [account.avatar])
     return .init(
       entries: [.init(date: Date(), account: account, avatar: images?.first?.value)],
-      policy: .atEnd)
+      policy: .atEnd
+    )
   }
 
   private func fetchAccount(configuration: AccountWidgetConfiguration) async -> Account {
@@ -33,7 +34,8 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
     }
     let client = MastodonClient(
       server: account.account.server,
-      oauthToken: account.account.oauthToken)
+      oauthToken: account.account.oauthToken
+    )
     do {
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
       return account

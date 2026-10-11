@@ -42,14 +42,16 @@ struct TimelineListView: View {
             client: client,
             routerPath: routerPath,
             isRemote: true,
-            filterContext: timeline.filterContext)
+            filterContext: timeline.filterContext
+          )
         default:
           StatusesListView(
             fetcher: viewModel,
             client: client,
             routerPath: routerPath,
-            filterContext: timeline.filterContext)
-            .environment(\.isHomeTimeline, timeline == .home)
+            filterContext: timeline.filterContext
+          )
+          .environment(\.isHomeTimeline, timeline == .home)
         }
       }
       .id(client.id)
@@ -59,27 +61,27 @@ struct TimelineListView: View {
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
       #endif
-      .onChange(of: viewModel.scrollToId) { _, newValue in
-        if let newValue {
-          proxy.scrollTo(newValue, anchor: .top)
-          viewModel.scrollToId = nil
-        }
-      }
-      .onChange(of: scrollToIdAnimated) { _, newValue in
-        if let newValue {
-          withAnimation {
+        .onChange(of: viewModel.scrollToId) { _, newValue in
+          if let newValue {
             proxy.scrollTo(newValue, anchor: .top)
-            scrollToIdAnimated = nil
+            viewModel.scrollToId = nil
           }
         }
-      }
-      .onChange(of: selectedTabScrollToTop) { _, newValue in
-        if newValue == 0, routerPath.path.isEmpty {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        .onChange(of: scrollToIdAnimated) { _, newValue in
+          if let newValue {
+            withAnimation {
+              proxy.scrollTo(newValue, anchor: .top)
+              scrollToIdAnimated = nil
+            }
           }
         }
-      }
+        .onChange(of: selectedTabScrollToTop) { _, newValue in
+          if newValue == 0, routerPath.path.isEmpty {
+            withAnimation {
+              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+            }
+          }
+        }
     }
   }
 }

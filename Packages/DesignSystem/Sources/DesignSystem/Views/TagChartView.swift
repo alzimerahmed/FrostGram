@@ -9,7 +9,8 @@ public struct TagChartView: View {
     _sortedHistory = .init(
       initialValue: tag.history.sorted {
         Int($0.day) ?? 0 < Int($1.day) ?? 0
-      })
+      }
+    )
   }
 
   public var body: some View {

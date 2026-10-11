@@ -1,6 +1,6 @@
 import Models
-import UIKit
 @testable import StatusKit
+import UIKit
 import XCTest
 
 @MainActor

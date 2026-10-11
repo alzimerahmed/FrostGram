@@ -7,6 +7,7 @@ enum AccountDetailState {
     account: Account,
     featuredTags: [FeaturedTag],
     relationships: [Relationship],
-    fields: [Account.Field])
+    fields: [Account.Field]
+  )
   case error(error: Error)
 }

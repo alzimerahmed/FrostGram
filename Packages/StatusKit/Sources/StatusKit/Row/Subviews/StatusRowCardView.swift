@@ -90,33 +90,33 @@ public struct StatusRowCardView: View {
         #else
           .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(isCompact ? 0 : 10)
-        .overlay {
-          if !isCompact {
-            RoundedRectangle(cornerRadius: 10)
-              .stroke(.gray.opacity(0.35), lineWidth: 1)
+          .cornerRadius(isCompact ? 0 : 10)
+          .overlay {
+            if !isCompact {
+              RoundedRectangle(cornerRadius: 10)
+                .stroke(.gray.opacity(0.35), lineWidth: 1)
+            }
           }
-        }
-        .draggable(url)
-        .contextMenu {
-          ShareLink(item: url) {
-            Label("status.card.share", systemImage: "square.and.arrow.up")
+          .draggable(url)
+          .contextMenu {
+            ShareLink(item: url) {
+              Label("status.card.share", systemImage: "square.and.arrow.up")
+            }
+            Button {
+              openURL(url)
+            } label: {
+              Label("status.action.view-in-browser", systemImage: "safari")
+            }
+            Divider()
+            Button {
+              UIPasteboard.general.url = url
+            } label: {
+              Label("status.card.copy", systemImage: "doc.on.doc")
+            }
           }
-          Button {
-            openURL(url)
-          } label: {
-            Label("status.action.view-in-browser", systemImage: "safari")
-          }
-          Divider()
-          Button {
-            UIPasteboard.general.url = url
-          } label: {
-            Label("status.card.copy", systemImage: "doc.on.doc")
-          }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isLink)
-        .accessibilityRemoveTraits(.isStaticText)
+          .accessibilityElement(children: .combine)
+          .accessibilityAddTraits(.isLink)
+          .accessibilityRemoveTraits(.isStaticText)
       }
     }
     .buttonStyle(.plain)
@@ -126,7 +126,8 @@ public struct StatusRowCardView: View {
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
     if let imageURL = card.image, previewsEnabled {
       DefaultPreviewImage(
-        url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
+        url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0
+      )
     }
 
     VStack(alignment: .leading, spacing: 4) {
@@ -338,7 +339,7 @@ struct DefaultPreviewImage: View {
             .overlay { image.scaledToFit() }
         }
       }
-      .accessibilityHidden(true)  // This image is decorative
+      .accessibilityHidden(true) // This image is decorative
       .clipped()
     }
   }

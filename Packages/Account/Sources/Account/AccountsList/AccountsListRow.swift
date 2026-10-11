@@ -1,5 +1,5 @@
-import Combine
 import AppAccount
+import Combine
 import DesignSystem
 import EmojiText
 import Env
@@ -86,7 +86,8 @@ public struct AccountsListRow: View {
                 \.openURL,
                 OpenURLAction { url in
                   routerPath.handle(url: url)
-                })
+                }
+              )
           }
         }
 
@@ -98,17 +99,19 @@ public struct AccountsListRow: View {
             \.openURL,
             OpenURLAction { url in
               routerPath.handle(url: url)
-            })
+            }
+          )
 
         if isFollowRequest {
           FollowRequestButtons(
             account: viewModel.account,
-            requestUpdated: requestUpdated)
+            requestUpdated: requestUpdated
+          )
         }
       }
       Spacer()
       if currentAccount.account?.id != viewModel.account.id,
-        let relationShip = viewModel.relationShip
+         let relationShip = viewModel.relationShip
       {
         VStack(alignment: .center) {
           FollowButton(
@@ -117,7 +120,9 @@ public struct AccountsListRow: View {
               accountId: viewModel.account.id,
               relationship: relationShip,
               shouldDisplayNotify: false,
-              relationshipUpdated: { _ in }))
+              relationshipUpdated: { _ in }
+            )
+          )
         }
       }
     }
@@ -129,7 +134,7 @@ public struct AccountsListRow: View {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
     #if canImport(_Translation_SwiftUI)
-      .addTranslateView(isPresented: $showTranslateView, text: viewModel.account.note.asRawText)
+    .addTranslateView(isPresented: $showTranslateView, text: viewModel.account.note.asRawText)
     #endif
     .contextMenu {
       AccountDetailContextMenu(
@@ -137,7 +142,8 @@ public struct AccountsListRow: View {
         showTranslateView: $showTranslateView,
         account: viewModel.account,
         relationship: .constant(viewModel.relationShip),
-        isCurrentUser: false)
+        isCurrentUser: false
+      )
     } preview: {
       List {
         AccountDetailHeaderView(

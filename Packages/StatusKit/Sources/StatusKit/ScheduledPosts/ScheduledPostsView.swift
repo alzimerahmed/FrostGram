@@ -71,9 +71,10 @@ public struct ScheduledPostsView: View {
       HStack {
         Label(
           scheduledStatus.scheduledAt.relativeFormatted,
-          systemImage: "clock")
-          .font(.footnote)
-          .foregroundStyle(theme.tintColor)
+          systemImage: "clock"
+        )
+        .font(.footnote)
+        .foregroundStyle(theme.tintColor)
         Spacer()
         Menu {
           Button("status.scheduled-posts.reschedule") {

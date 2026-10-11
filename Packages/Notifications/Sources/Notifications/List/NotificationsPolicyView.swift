@@ -23,13 +23,15 @@ struct NotificationsPolicyView: View {
               set: { policy in
                 self.policy?.forNotFollowing = policy
                 Task { await updatePolicy() }
-              })
+              }
+            )
           ) {
             pickerMenu
           } label: {
             makePickerLabel(
               title: "notifications.content-filter.peopleYouDontFollow",
-              subtitle: "notifications.content-filter.peopleYouDontFollow.subtitle")
+              subtitle: "notifications.content-filter.peopleYouDontFollow.subtitle"
+            )
           }
 
           Picker(
@@ -40,13 +42,15 @@ struct NotificationsPolicyView: View {
               set: { policy in
                 self.policy?.forNotFollowers = policy
                 Task { await updatePolicy() }
-              })
+              }
+            )
           ) {
             pickerMenu
           } label: {
             makePickerLabel(
               title: "notifications.content-filter.peopleNotFollowingYou",
-              subtitle: "notifications.content-filter.peopleNotFollowingYou.subtitle")
+              subtitle: "notifications.content-filter.peopleNotFollowingYou.subtitle"
+            )
           }
 
           Picker(
@@ -57,13 +61,15 @@ struct NotificationsPolicyView: View {
               set: { policy in
                 self.policy?.forNewAccounts = policy
                 Task { await updatePolicy() }
-              })
+              }
+            )
           ) {
             pickerMenu
           } label: {
             makePickerLabel(
               title: "notifications.content-filter.newAccounts",
-              subtitle: "notifications.content-filter.newAccounts.subtitle")
+              subtitle: "notifications.content-filter.newAccounts.subtitle"
+            )
           }
 
           Picker(
@@ -74,13 +80,15 @@ struct NotificationsPolicyView: View {
               set: { policy in
                 self.policy?.forPrivateMentions = policy
                 Task { await updatePolicy() }
-              })
+              }
+            )
           ) {
             pickerMenu
           } label: {
             makePickerLabel(
               title: "notifications.content-filter.privateMentions",
-              subtitle: "notifications.content-filter.privateMentions.subtitle")
+              subtitle: "notifications.content-filter.privateMentions.subtitle"
+            )
           }
 
           Picker(
@@ -91,14 +99,16 @@ struct NotificationsPolicyView: View {
               set: { policy in
                 self.policy?.forLimitedAccounts = policy
                 Task { await updatePolicy() }
-              })
+              }
+            )
           ) {
             pickerMenu
           } label: {
             VStack(alignment: .leading) {
               makePickerLabel(
                 title: "notifications.content-filter.moderatedAccounts",
-                subtitle: "notifications.content-filter.moderatedAccounts.subtitle")
+                subtitle: "notifications.content-filter.moderatedAccounts.subtitle"
+              )
             }
           }
         }
@@ -130,8 +140,7 @@ struct NotificationsPolicyView: View {
     }
   }
 
-  private func makePickerLabel(title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View
-  {
+  private func makePickerLabel(title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
     VStack(alignment: .leading) {
       Text(title)
         .font(.callout)
@@ -161,7 +170,8 @@ struct NotificationsPolicyView: View {
       do {
         isUpdating = true
         self.policy = try await client.put(
-          endpoint: Notifications.putPolicy(policy: policy), forceVersion: .v2)
+          endpoint: Notifications.putPolicy(policy: policy), forceVersion: .v2
+        )
       } catch {}
     }
   }

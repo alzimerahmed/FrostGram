@@ -46,9 +46,10 @@ public struct AccountDetailView: View {
 
   /// When the account is already fetched by the parent caller.
   public init(account: Account) {
-    self.accountId = account.id
+    accountId = account.id
     _viewState = .init(
-      initialValue: .display(account: account, featuredTags: [], relationships: [], fields: []))
+      initialValue: .display(account: account, featuredTags: [], relationships: [], fields: [])
+    )
   }
 
   public var body: some View {
@@ -62,7 +63,7 @@ public struct AccountDetailView: View {
           .padding(.bottom, -20)
 
         switch viewState {
-        case .display(let account, let featuredTags, _, _):
+        case let .display(account, featuredTags, _, _):
           FamiliarFollowersView(familiarFollowers: familiarFollowers)
             .applyAccountDetailsRowStyle(theme: theme)
           FeaturedTagsView(featuredTags: featuredTags, accountId: accountId)
@@ -82,7 +83,8 @@ public struct AccountDetailView: View {
                 client: client,
                 routerPath: routerPath,
                 account: account
-              ))
+              )
+            )
           }
         default:
           EmptyView()
@@ -148,8 +150,8 @@ public struct AccountDetailView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-        accountId == currentAccount.account?.id,
-        let tabManager
+         accountId == currentAccount.account?.id,
+         let tabManager
       {
         // Handle stream events directly with the current tab's fetcher
         if let fetcher = tabManager.currentTabFetcher as? AccountTabFetcher {
@@ -184,7 +186,7 @@ public struct AccountDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       switch viewState {
-      case .display(let account, _, _, _):
+      case let .display(account, _, _, _):
         AccountDetailToolbar(
           account: account,
           displayTitle: displayTitle,
@@ -202,7 +204,6 @@ public struct AccountDetailView: View {
     }
   }
 
-  @ViewBuilder
   private func makeTabPicker(tabManager: AccountTabManager) -> some View {
     Picker(
       "",
@@ -212,7 +213,8 @@ public struct AccountDetailView: View {
           if let newTab = tabManager.availableTabs.first(where: { $0.id == newTabId }) {
             tabManager.selectedTab = newTab
           }
-        })
+        }
+      )
     ) {
       ForEach(tabManager.availableTabs, id: \.id) { tab in
         Image(systemName: tab.iconName)
@@ -239,7 +241,7 @@ public struct AccountDetailView: View {
       )
       .redacted(reason: .placeholder)
       .allowsHitTesting(false)
-    case .display(let account, _, _, let fields):
+    case let .display(account, _, _, fields):
       AccountDetailHeaderView(
         account: account,
         relationship: relationship,
@@ -249,12 +251,12 @@ public struct AccountDetailView: View {
         isLoadingTranslation: $isLoadingTranslation,
         isCurrentUser: isCurrentUser,
         accountId: accountId,
-        scrollViewProxy: proxy)
-    case .error(let error):
+        scrollViewProxy: proxy
+      )
+    case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }
   }
-
 }
 
 extension View {
@@ -262,9 +264,9 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 }
 
@@ -275,6 +277,7 @@ struct AccountDetailView_Previews: PreviewProvider {
 }
 
 // MARK: - Data Fetching
+
 extension AccountDetailView {
   private struct AccountData {
     let account: Account
@@ -294,7 +297,8 @@ extension AccountDetailView {
         account: data.account,
         featuredTags: featuredTags,
         relationships: data.relationships,
-        fields: data.account.fields)
+        fields: data.account.fields
+      )
 
       if let relationship {
         if let existingFollowButtonViewModel = followButtonViewModel {
@@ -307,11 +311,12 @@ extension AccountDetailView {
             shouldDisplayNotify: true,
             relationshipUpdated: { relationship in
               self.relationship = relationship
-            })
+            }
+          )
         }
       }
     } catch {
-      if case .display(let account, _, _, _) = viewState {
+      if case let .display(account, _, _, _) = viewState {
         viewState = .display(account: account, featuredTags: [], relationships: [], fields: [])
       } else {
         viewState = .error(error: error)
@@ -324,26 +329,31 @@ extension AccountDetailView {
   {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(
-      endpoint: Accounts.featuredTags(id: accountId))
+      endpoint: Accounts.featuredTags(id: accountId)
+    )
     if client.isAuth, !isCurrentUser {
       async let relationships: [Relationship] = client.get(
-        endpoint: Accounts.relationships(ids: [accountId]))
+        endpoint: Accounts.relationships(ids: [accountId])
+      )
       do {
         return try await .init(
           account: account,
           featuredTags: featuredTags,
-          relationships: relationships)
+          relationships: relationships
+        )
       } catch {
         return try await .init(
           account: account,
           featuredTags: [],
-          relationships: relationships)
+          relationships: relationships
+        )
       }
     }
     return try await .init(
       account: account,
       featuredTags: featuredTags,
-      relationships: [])
+      relationships: []
+    )
   }
 
   private func fetchCollections() async {
@@ -352,14 +362,16 @@ extension AccountDetailView {
       return
     }
     guard let response: AccountCollectionsResponse = try? await client.get(
-      endpoint: Collections.accountCollections(id: accountId))
+      endpoint: Collections.accountCollections(id: accountId)
+    )
     else { return }
     collections = response.collections.filter(\.discoverable)
   }
 
   private func fetchFamiliarFollowers() async {
     let familiarFollowersResponse: [FamiliarAccounts]? = try? await client.get(
-      endpoint: Accounts.familiarFollowers(withAccount: accountId))
-    self.familiarFollowers = familiarFollowersResponse?.first?.accounts ?? []
+      endpoint: Accounts.familiarFollowers(withAccount: accountId)
+    )
+    familiarFollowers = familiarFollowersResponse?.first?.accounts ?? []
   }
 }

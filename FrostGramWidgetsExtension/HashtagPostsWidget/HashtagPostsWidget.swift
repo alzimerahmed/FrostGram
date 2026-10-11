@@ -11,7 +11,8 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "#Mastodon",
       statuses: [.placeholder()],
-      images: [:])
+      images: [:]
+    )
   }
 
   func snapshot(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async
@@ -24,7 +25,8 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "#Mastodon",
       statuses: [],
-      images: [:])
+      images: [:]
+    )
   }
 
   func timeline(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async
@@ -44,15 +46,18 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
               date: Date(),
               title: "#Mastodon",
               statuses: [],
-              images: [:])
+              images: [:]
+            ),
           ],
-          policy: .atEnd)
+          policy: .atEnd
+        )
       }
       let timeline: TimelineFilter = .hashtag(tag: hashgtag, accountId: nil)
       let statuses = await loadStatuses(
         for: timeline,
         account: account,
-        widgetFamily: context.family)
+        widgetFamily: context.family
+      )
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(
         entries: [
@@ -60,8 +65,10 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: timeline.title,
             statuses: statuses,
-            images: images)
-        ], policy: .atEnd)
+            images: images
+          ),
+        ], policy: .atEnd
+      )
     } catch {
       return Timeline(
         entries: [
@@ -69,9 +76,11 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: "#Mastodon",
             statuses: [],
-            images: [:])
+            images: [:]
+          ),
         ],
-        policy: .atEnd)
+        policy: .atEnd
+      )
     }
   }
 }
@@ -101,5 +110,6 @@ struct HashtagPostsWidget: Widget {
     date: .now,
     title: "#Mastodon",
     statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-    images: [:])
+    images: [:]
+  )
 }

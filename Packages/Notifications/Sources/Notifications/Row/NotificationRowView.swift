@@ -40,7 +40,9 @@ struct NotificationRowView: View {
           .accessibilityHidden(true)
           .glassEffect(
             .regular.tint(
-              notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+              notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)
+            )
+          )
         } else {
           NotificationRowIconView(
             type: notification.type,
@@ -67,9 +69,9 @@ struct NotificationRowView: View {
           client: client,
           routerPath: routerPath
         )
-      .environment(\.isNotificationsTab, true)
+        .environment(\.isNotificationsTab, true)
         if notification.type == .follow_request,
-          followRequests.map(\.id).contains(notification.accounts[0].id)
+           followRequests.map(\.id).contains(notification.accounts[0].id)
         {
           FollowRequestButtons(account: notification.accounts[0])
         }

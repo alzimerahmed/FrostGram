@@ -32,7 +32,8 @@ import SwiftUI
   func addToList(list: Models.List) async {
     guard let client else { return }
     let response = try? await client.post(
-      endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id])
+    )
     if response?.statusCode == 200 {
       inLists.append(list)
     }
@@ -41,7 +42,8 @@ import SwiftUI
   func removeFromList(list: Models.List) async {
     guard let client else { return }
     let response = try? await client.delete(
-      endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id])
+    )
     if response?.statusCode == 200 {
       inLists.removeAll(where: { $0.id == list.id })
     }

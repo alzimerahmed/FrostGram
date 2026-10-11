@@ -11,17 +11,20 @@ struct PostImageIntent: AppIntent {
     title: "Image",
     description: "Image to post on Mastodon",
     supportedContentTypes: [.image, .jpeg, .png, .gif, .heic],
-    inputConnectionBehavior: .connectToPreviousIntentResult)
+    inputConnectionBehavior: .connectToPreviousIntentResult
+  )
   var images: [IntentFile]?
 
   @Parameter(
     title: "Caption",
-    requestValueDialog: IntentDialog("Caption for your post"))
+    requestValueDialog: IntentDialog("Caption for your post")
+  )
   var caption: String?
 
   @Parameter(
     title: "Image description",
-    requestValueDialog: IntentDialog("ALT text for the image"))
+    requestValueDialog: IntentDialog("ALT text for the image")
+  )
   var altText: String?
 
   func perform() async throws -> some IntentResult {

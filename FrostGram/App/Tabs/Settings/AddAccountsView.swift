@@ -37,12 +37,12 @@ struct AddAccountView: View {
   private var sanitizedName: String {
     var name =
       instanceName
-      .replacingOccurrences(of: "http://", with: "")
-      .replacingOccurrences(of: "https://", with: "")
+        .replacingOccurrences(of: "http://", with: "")
+        .replacingOccurrences(of: "https://", with: "")
 
     if name.contains("@") {
       let parts = name.components(separatedBy: "@")
-      name = parts[parts.count - 1]  // [@]username@server.address.com
+      name = parts[parts.count - 1] // [@]username@server.address.com
     }
     return name
   }
@@ -65,9 +65,9 @@ struct AddAccountView: View {
     NavigationStack {
       Form {
         TextField("instance.url", text: $instanceName)
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -96,73 +96,74 @@ struct AddAccountView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        CancelToolbarItem()
-      }
-      .onAppear {
-        isInstanceURLFieldFocused = true
-        let instanceName = instanceName
-        Task {
-          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
-          withAnimation {
-            self.instances = instances
-          }
+        .toolbar {
+          CancelToolbarItem()
         }
-        isSigninIn = false
-      }
-      .onChange(of: instanceName) {
-        searchingTask.cancel()
-        let instanceName = instanceName
-        let instanceSocialClient = instanceSocialClient
-        searchingTask = Task {
-          try? await Task.sleep(for: .seconds(0.1))
-          guard !Task.isCancelled else { return }
-
-          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
-          withAnimation {
-            self.instances = instances
+        .onAppear {
+          isInstanceURLFieldFocused = true
+          let instanceName = instanceName
+          Task {
+            let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+            withAnimation {
+              self.instances = instances
+            }
           }
+          isSigninIn = false
         }
+        .onChange(of: instanceName) {
+          searchingTask.cancel()
+          let instanceName = instanceName
+          let instanceSocialClient = instanceSocialClient
+          searchingTask = Task {
+            try? await Task.sleep(for: .seconds(0.1))
+            guard !Task.isCancelled else { return }
 
-        getInstanceDetailTask.cancel()
-        getInstanceDetailTask = Task {
-          try? await Task.sleep(for: .seconds(0.1))
-          guard !Task.isCancelled else { return }
+            let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+            withAnimation {
+              self.instances = instances
+            }
+          }
 
-          do {
-            // bare bones preflight for domain validity
-            let instanceDetailClient = MastodonClient(server: sanitizedName, version: .v2)
-            if instanceDetailClient.server.contains("."),
-              instanceDetailClient.server.last != "."
-            {
-              let instance: Instance = try await instanceDetailClient.get(
-                endpoint: Instances.instance)
-              withAnimation {
-                self.instance = instance
-                self.instanceName = sanitizedName  // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+          getInstanceDetailTask.cancel()
+          getInstanceDetailTask = Task {
+            try? await Task.sleep(for: .seconds(0.1))
+            guard !Task.isCancelled else { return }
+
+            do {
+              // bare bones preflight for domain validity
+              let instanceDetailClient = MastodonClient(server: sanitizedName, version: .v2)
+              if instanceDetailClient.server.contains("."),
+                 instanceDetailClient.server.last != "."
+              {
+                let instance: Instance = try await instanceDetailClient.get(
+                  endpoint: Instances.instance
+                )
+                withAnimation {
+                  self.instance = instance
+                  self.instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                }
+                instanceFetchError = nil
+              } else {
+                instance = nil
+                instanceFetchError = nil
               }
-              instanceFetchError = nil
-            } else {
+            } catch _ as ServerError {
+              instance = nil
+              instanceFetchError = "account.add.error.instance-not-supported"
+            } catch {
               instance = nil
               instanceFetchError = nil
             }
-          } catch _ as ServerError {
-            instance = nil
-            instanceFetchError = "account.add.error.instance-not-supported"
-          } catch {
-            instance = nil
-            instanceFetchError = nil
           }
         }
-      }
-      .onChange(of: scenePhase) { _, newValue in
-        switch newValue {
-        case .active:
-          isSigninIn = false
-        default:
-          break
+        .onChange(of: scenePhase) { _, newValue in
+          switch newValue {
+          case .active:
+            isSigninIn = false
+          default:
+            break
+          }
         }
-      }
     }
   }
 
@@ -251,11 +252,11 @@ struct AddAccountView: View {
             }
           }
           #if !os(visionOS)
-            .background(theme.primaryBackgroundColor)
-            .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-            .listRowSeparator(.hidden)
-            .clipShape(RoundedRectangle(cornerRadius: 4))
+          .background(theme.primaryBackgroundColor)
+          .listRowBackground(Color.clear)
+          .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+          .listRowSeparator(.hidden)
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           #endif
         }
       }
@@ -293,9 +294,10 @@ struct AddAccountView: View {
   private func signIn() async {
     signInClient = .init(server: sanitizedName)
     if let oauthURL = try? await signInClient?.oauthURL(),
-      let url = try? await webAuthenticationSession.authenticate(
-        using: oauthURL,
-        callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: ""))
+       let url = try? await webAuthenticationSession.authenticate(
+         using: oauthURL,
+         callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")
+       )
     {
       await continueSignIn(url: url)
     } else {
@@ -317,7 +319,9 @@ struct AddAccountView: View {
         account: AppAccount(
           server: client.server,
           accountName: "\(account.acct)@\(client.server)",
-          oauthToken: oauthToken))
+          oauthToken: oauthToken
+        )
+      )
       Task {
         pushNotifications.setAccounts(accounts: appAccountsManager.pushAccounts)
         await pushNotifications.updateSubscriptions(forceCreate: true)

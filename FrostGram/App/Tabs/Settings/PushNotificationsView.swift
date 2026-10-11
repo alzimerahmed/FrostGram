@@ -13,7 +13,7 @@ struct PushNotificationsView: View {
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(PushNotificationsService.self) private var pushNotifications
 
-  @State public var subscription: PushNotificationSubscriptionSettings
+  @State var subscription: PushNotificationSubscriptionSettings
 
   var body: some View {
     Form {
@@ -30,7 +30,8 @@ struct PushNotificationsView: View {
               } else {
                 deleteSubscription()
               }
-            })
+            }
+          )
         ) {
           Text("settings.push.main-toggle")
         }
@@ -38,7 +39,7 @@ struct PushNotificationsView: View {
         Text("settings.push.main-toggle.description")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       if subscription.isEnabled {
@@ -51,7 +52,8 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isMentionNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.mentions", systemImage: "at")
           }
@@ -63,7 +65,8 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isFollowNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.follows", systemImage: "person.badge.plus")
           }
@@ -75,7 +78,8 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isFavoriteNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.favorites", systemImage: "star")
           }
@@ -87,7 +91,8 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isReblogNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.boosts", systemImage: "arrow.2.squarepath")
           }
@@ -99,7 +104,8 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isPollNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.polls", systemImage: "chart.bar")
           }
@@ -111,13 +117,14 @@ struct PushNotificationsView: View {
               set: { newValue in
                 subscription.isNewPostsNotificationEnabled = newValue
                 updateSubscription()
-              })
+              }
+            )
           ) {
             Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
 
@@ -134,7 +141,7 @@ struct PushNotificationsView: View {
         Text("settings.push.duplicate.footer")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.push.navigation-title")
@@ -142,9 +149,9 @@ struct PushNotificationsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-    .task {
-      await subscription.fetchSubscription()
-    }
+      .task {
+        await subscription.fetchSubscription()
+      }
   }
 
   private func updateSubscription() {

@@ -11,9 +11,9 @@ import SwiftUI
   import FoundationModels
 #endif
 
-extension StatusEditor {
+public extension StatusEditor {
   @MainActor
-  @Observable public class EditorStore: NSObject, Identifiable {
+  @Observable class EditorStore: NSObject, Identifiable {
     public let id = UUID()
 
     var mode: Mode
@@ -132,8 +132,8 @@ extension StatusEditor {
 
         let removedIDs =
           oldValue
-          .filter { !mediaPickers.contains($0) }
-          .compactMap(\.itemIdentifier)
+            .filter { !mediaPickers.contains($0) }
+            .compactMap(\.itemIdentifier)
         mediaContainers.removeAll { removedIDs.contains($0.id) }
 
         let newPickerItems = mediaPickers.filter { !oldValue.contains($0) }
@@ -191,7 +191,7 @@ extension StatusEditor {
       return !modifiedStatusText.isEmpty && !mode.isInShareExtension
     }
 
-    // Map of container.id -> initial alt text (from intents)
+    /// Map of container.id -> initial alt text (from intents)
     private var pendingMediaDescriptions = MediaDescriptionService.PendingStore()
 
     /// Whether the user dismissed the alt-text reminder banner for this composer session.
@@ -262,9 +262,9 @@ extension StatusEditor {
       let store = EditorStore(mode: .new(text: nil, visibility: visibility))
 
       if let client,
-        let theme,
-        let preferences,
-        let currentInstance
+         let theme,
+         let preferences,
+         let currentInstance
       {
         store.configureIfNeeded(
           client: client,
@@ -280,7 +280,7 @@ extension StatusEditor {
 
     func setInitialLanguageSelection(preference: String?) {
       switch mode {
-      case .edit(let status), .quote(let status):
+      case let .edit(status), let .quote(status):
         selectedLanguage = status.language
       default:
         break
@@ -291,9 +291,9 @@ extension StatusEditor {
 
     func evaluateLanguages() {
       if let detectedLang = detectLanguage(text: textState.statusText.string),
-        let selectedLanguage,
-        selectedLanguage != "",
-        selectedLanguage != detectedLang
+         let selectedLanguage,
+         selectedLanguage != "",
+         selectedLanguage != detectedLang
       {
         languageConfirmationDialogLanguages = (detected: detectedLang, selected: selectedLanguage)
       } else {
@@ -410,7 +410,8 @@ extension StatusEditor {
         let input = makePostingInput()
         let scheduledStatus = try await postingService.schedule(
           input: input,
-          client: client)
+          client: client
+        )
         HapticManager.shared.fireHaptic(.notification(.success))
         if hasExplicitlySelectedLanguage, let selectedLanguage {
           preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
@@ -456,10 +457,10 @@ extension StatusEditor {
       textEditingService.applyTextChanges(textChanges, in: self)
 
       switch mode {
-      case .shareExtension(let items):
+      case let .shareExtension(items):
         itemsProvider = items
         processItemsProvider(items: items)
-      case .imageURL(let urls, _, let altTexts, _):
+      case let .imageURL(urls, _, altTexts, _):
         Task {
           let containers = await Self.makeImageContainer(from: urls)
           if let altTexts {
@@ -472,7 +473,7 @@ extension StatusEditor {
           }
           prepareToPost(for: containers)
         }
-      case .edit(let status):
+      case let .edit(status):
         mediaContainers = status.mediaAttachments.map {
           MediaContainer.uploaded(
             id: UUID().uuidString,
@@ -503,7 +504,8 @@ extension StatusEditor {
       let container = MediaContainer.pending(
         id: UUID().uuidString,
         gif: .init(url: url),
-        preview: nil)
+        preview: nil
+      )
       prepareToPost(for: container)
     }
 
@@ -566,12 +568,12 @@ extension StatusEditor {
             withAnimation {
               showRecentsTagsInline = true
             }
-          case .tags(let tags):
+          case let .tags(tags):
             withAnimation {
               showRecentsTagsInline = false
               tagsSuggestions = tags
             }
-          case .mentions(let accounts):
+          case let .mentions(accounts):
             withAnimation {
               mentionsSuggestions = accounts
             }
@@ -626,7 +628,7 @@ extension StatusEditor {
           newStream = await assistant.emphasize(message: textState.statusText.string)
         case .fit:
           newStream = await assistant.shorten(message: textState.statusText.string)
-        case .rewriteWithTone(let tone):
+        case let .rewriteWithTone(tone):
           newStream = await assistant.adjustTone(message: textState.statusText.string, to: tone)
         }
 
@@ -678,8 +680,7 @@ extension StatusEditor {
       }
     }
 
-    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer?
-    {
+    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
       await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
         taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
         taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
@@ -696,13 +697,12 @@ extension StatusEditor {
       }
     }
 
-    private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer?
-    {
+    private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
       guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self)
       else { return nil }
 
       // Try to extract a preview image from the GIF
-      let previewImage: UIImage? = nil  // GIFs typically show animated preview
+      let previewImage: UIImage? = nil // GIFs typically show animated preview
 
       return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
@@ -738,7 +738,7 @@ extension StatusEditor {
       let compressor = Compressor()
 
       guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-        let image = UIImage(data: compressedData)
+            let image = UIImage(data: compressedData)
       else { return nil }
 
       return MediaContainer.pending(
@@ -754,7 +754,7 @@ extension StatusEditor {
         let compressor = Compressor()
         _ = url.startAccessingSecurityScopedResource()
         if let compressedData = await compressor.compressImageFrom(url: url),
-          let image = UIImage(data: compressedData)
+           let image = UIImage(data: compressedData)
         {
           containers.append(
             MediaContainer.pending(
@@ -776,7 +776,7 @@ extension StatusEditor {
       generator.appliesPreferredTrackTransform = true
 
       return await withCheckedContinuation { continuation in
-        generator.generateCGImageAsynchronously(for: .zero) { cgImage, _, error in
+        generator.generateCGImageAsynchronously(for: .zero) { cgImage, _, _ in
           if let cgImage = cgImage {
             continuation.resume(returning: UIImage(cgImage: cgImage))
           } else {
@@ -791,7 +791,7 @@ extension StatusEditor {
       let originalContainer = mediaContainers[index]
 
       // Only upload if in pending state
-      guard case .pending(let content) = originalContainer.state else { return }
+      guard case let .pending(content) = originalContainer.state else { return }
 
       guard let client else { return }
       let input = MediaUploadService.UploadInput(
@@ -822,7 +822,7 @@ extension StatusEditor {
     private func upload(containers: [MediaContainer]) async {
       guard let client else { return }
       let inputs = containers.compactMap { container -> MediaUploadService.UploadInput? in
-        guard case .pending(let content) = container.state else { return nil }
+        guard case let .pending(content) = container.state else { return nil }
         return MediaUploadService.UploadInput(
           id: container.id,
           content: content,
@@ -838,21 +838,21 @@ extension StatusEditor {
       ) { [weak self] event in
         guard let self else { return }
         switch event {
-        case .started(let id, let content):
+        case let .started(id, content):
           if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
             self.mediaContainers[index] = MediaContainer(
               id: id,
               state: .uploading(content: content, progress: 0.0)
             )
           }
-        case .progress(let id, let content, let progress):
+        case let .progress(id, content, progress):
           if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
             self.mediaContainers[index] = MediaContainer(
               id: id,
               state: .uploading(content: content, progress: progress)
             )
           }
-        case .success(let id, let result):
+        case let .success(id, result):
           if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
             self.mediaContainers[index] = MediaContainer.uploaded(
               id: id,
@@ -869,7 +869,7 @@ extension StatusEditor {
               if let index = self.mediaContainers.firstIndex(where: {
                 $0.mediaAttachment?.id == refreshed.id
               }) {
-                if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+                if case let .uploaded(_, originalImage) = self.mediaContainers[index].state {
                   self.mediaContainers[index] = MediaContainer.uploaded(
                     id: self.mediaContainers[index].id,
                     attachment: refreshed,
@@ -882,7 +882,7 @@ extension StatusEditor {
           if let desc = pendingMediaDescriptions.altTextByContainerId[id], !desc.isEmpty {
             Task { @MainActor in
               guard let client = self.client,
-                let container = self.mediaContainers.first(where: { $0.id == id })
+                    let container = self.mediaContainers.first(where: { $0.id == id })
               else { return }
               if let updated = await self.mediaDescriptionService.addDescription(
                 container: container,
@@ -890,7 +890,7 @@ extension StatusEditor {
                 client: client
               ) {
                 if let index = self.indexOf(container: container) {
-                  if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+                  if case let .uploaded(_, originalImage) = self.mediaContainers[index].state {
                     self.mediaContainers[index] = MediaContainer.uploaded(
                       id: self.mediaContainers[index].id,
                       attachment: updated,
@@ -902,7 +902,7 @@ extension StatusEditor {
               self.pendingMediaDescriptions.altTextByContainerId.removeValue(forKey: id)
             }
           }
-        case .failure(let id, let content, let error):
+        case let .failure(id, content, error):
           if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
             self.mediaContainers[index] = MediaContainer.failed(
               id: id,
@@ -921,7 +921,7 @@ extension StatusEditor {
     ) async {
       guard let index = indexOf(container: container) else { return }
       switch result {
-      case .success(let result):
+      case let .success(result):
         mediaContainers[index] = MediaContainer.uploaded(
           id: container.id,
           attachment: result.attachment,
@@ -936,7 +936,7 @@ extension StatusEditor {
             if let index = self.mediaContainers.firstIndex(where: {
               $0.mediaAttachment?.id == refreshed.id
             }) {
-              if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+              if case let .uploaded(_, originalImage) = self.mediaContainers[index].state {
                 self.mediaContainers[index] = MediaContainer.uploaded(
                   id: self.mediaContainers[index].id,
                   attachment: refreshed,
@@ -947,14 +947,14 @@ extension StatusEditor {
           }
         }
         if let desc = pendingMediaDescriptions.altTextByContainerId[container.id], !desc.isEmpty,
-          let client
+           let client
         {
           if let updated = await mediaDescriptionService.addDescription(
             container: mediaContainers[index],
             description: desc,
             client: client
           ) {
-            if case .uploaded(_, let originalImage) = mediaContainers[index].state {
+            if case let .uploaded(_, originalImage) = mediaContainers[index].state {
               mediaContainers[index] = MediaContainer.uploaded(
                 id: mediaContainers[index].id,
                 attachment: updated,
@@ -964,7 +964,7 @@ extension StatusEditor {
           }
           pendingMediaDescriptions.altTextByContainerId.removeValue(forKey: container.id)
         }
-      case .failure(let error):
+      case let .failure(error):
         mediaContainers[index] = MediaContainer.failed(
           id: container.id,
           content: content,
@@ -975,14 +975,14 @@ extension StatusEditor {
 
     func addDescription(container: MediaContainer, description: String) async {
       guard let client,
-        let index = indexOf(container: container)
+            let index = indexOf(container: container)
       else { return }
       if let updated = await mediaDescriptionService.addDescription(
         container: mediaContainers[index],
         description: description,
         client: client
       ) {
-        if case .uploaded(_, let originalImage) = mediaContainers[index].state {
+        if case let .uploaded(_, originalImage) = mediaContainers[index].state {
           mediaContainers[index] = MediaContainer.uploaded(
             id: mediaContainers[index].id,
             attachment: updated,

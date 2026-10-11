@@ -162,11 +162,11 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
       displayName: "John Mastodon",
       avatar: URL(
         string:
-          "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
+        "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
       )!,
       header: URL(
         string:
-          "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
+        "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
       )!,
       acct: "johnm@example.com",
       note: .init(stringValue: "Some content"),
@@ -181,7 +181,8 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
       url: nil,
       source: nil,
       bot: false,
-      discoverable: true)
+      discoverable: true
+    )
   }
 
   public static func placeholders() -> [Account] {

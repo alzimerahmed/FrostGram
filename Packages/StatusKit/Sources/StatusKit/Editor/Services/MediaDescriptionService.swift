@@ -23,7 +23,7 @@ extension StatusEditor {
     ) {
       for container in mediaContainers {
         if let desc = store.altTextByContainerId[container.id],
-          let id = container.mediaAttachment?.id
+           let id = container.mediaAttachment?.id
         {
           store.mediaAttributes.append(.init(id: id, description: desc, thumbnail: nil, focus: nil))
         }
@@ -35,7 +35,7 @@ extension StatusEditor {
       description: String,
       client: Client
     ) async -> MediaAttachment? {
-      guard case .uploaded(let attachment, _) = container.state else { return nil }
+      guard case let .uploaded(attachment, _) = container.state else { return nil }
       return try? await client.updateDescription(
         mediaId: attachment.id,
         description: description

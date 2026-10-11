@@ -8,15 +8,15 @@ struct AccountAvatarView: View {
   @Environment(\.isSupporter) private var isSupporter: Bool
   @Environment(Theme.self) private var theme
   @Environment(QuickLook.self) private var quickLook
-  
+
   let account: Account
   let isCurrentUser: Bool
-  
+
   var body: some View {
     ZStack(alignment: .topTrailing) {
       AvatarView(account.avatar, config: .account)
         .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
-      
+
       if isCurrentUser, isSupporter {
         supporterBadge
       }
@@ -28,10 +28,13 @@ struct AccountAvatarView: View {
         openWindow(
           value: WindowDestinationMedia.mediaViewer(
             attachments: [attachement],
-            selectedAttachment: attachement))
+            selectedAttachment: attachement
+          )
+        )
       #else
         quickLook.prepareFor(
-          selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+          selectedMediaAttachment: attachement, mediaAttachments: [attachement]
+        )
       #endif
     }
     .accessibilityElement(children: .combine)
@@ -39,7 +42,7 @@ struct AccountAvatarView: View {
     .accessibilityHint("accessibility.tabs.profile.user-avatar.hint")
     .accessibilityHidden(account.haveAvatar == false)
   }
-  
+
   private var supporterBadge: some View {
     Image(systemName: "checkmark.seal.fill")
       .resizable()

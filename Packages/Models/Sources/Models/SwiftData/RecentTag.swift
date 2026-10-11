@@ -8,13 +8,14 @@ import SwiftUI
 
   public init(title: String) {
     self.title = title
-    self.lastUse = Date()
+    lastUse = Date()
   }
 }
 
-extension RecentTag {
-  public var formattedDate: String {
+public extension RecentTag {
+  var formattedDate: String {
     DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(
-      for: lastUse, relativeTo: Date())
+      for: lastUse, relativeTo: Date()
+    )
   }
 }

@@ -16,9 +16,9 @@ struct StatusRowTranslateView: View {
     let statusLang = viewModel.getStatusLang()
 
     if let userLang = preferences.serverPreferences?.postLanguage,
-      preferences.showTranslateButton,
-      !viewModel.finalStatus.content.asRawText.isEmpty,
-      viewModel.translation == nil
+       preferences.showTranslateButton,
+       !viewModel.finalStatus.content.asRawText.isEmpty,
+       viewModel.translation == nil
     {
       return userLang != statusLang
     } else {
@@ -38,9 +38,9 @@ struct StatusRowTranslateView: View {
   @ViewBuilder
   var translateButton: some View {
     if !isInCaptureMode,
-      !isCompact,
-      let userLang = preferences.serverPreferences?.postLanguage,
-      shouldShowTranslateButton
+       !isCompact,
+       let userLang = preferences.serverPreferences?.postLanguage,
+       shouldShowTranslateButton
     {
       Button {
         Task {
@@ -57,7 +57,6 @@ struct StatusRowTranslateView: View {
     }
   }
 
-  @ViewBuilder
   var generalTranslateButton: some View {
     translateButton
   }
@@ -71,7 +70,7 @@ struct StatusRowTranslateView: View {
       }
 
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation,
-      preferences.preferredTranslationType != .useApple
+       preferences.preferredTranslationType != .useApple
     {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
@@ -79,7 +78,8 @@ struct StatusRowTranslateView: View {
             .font(.scaledBody)
           Text(
             getLocalizedString(
-              langCode: translation.detectedSourceLanguage, provider: translation.provider)
+              langCode: translation.detectedSourceLanguage, provider: translation.provider
+            )
           )
           .font(.footnote)
           .foregroundStyle(.secondary)

@@ -47,7 +47,7 @@ extension StatusEditor {
       preferences: UserPreferences?
     ) -> InitialTextChanges {
       switch mode {
-      case .new(let text, let visibility):
+      case let .new(text, visibility):
         if let text {
           return InitialTextChanges(
             statusText: .init(string: text),
@@ -81,7 +81,7 @@ extension StatusEditor {
           replyToStatus: nil,
           embeddedStatus: nil
         )
-      case .imageURL(_, let caption, _, let visibility):
+      case let .imageURL(_, caption, _, visibility):
         if let caption, !caption.isEmpty {
           return InitialTextChanges(
             statusText: .init(string: caption),
@@ -104,7 +104,7 @@ extension StatusEditor {
           replyToStatus: nil,
           embeddedStatus: nil
         )
-      case .replyTo(let status):
+      case let .replyTo(status):
         let mention = replyMentionText(for: status, currentAccount: currentAccount)
         let trimmedMention = mention.isEmpty
           ? nil
@@ -120,7 +120,7 @@ extension StatusEditor {
           replyToStatus: status,
           embeddedStatus: nil
         )
-      case .mention(let account, let visibility):
+      case let .mention(account, visibility):
         let mention = "@\(account.acct) "
         return InitialTextChanges(
           statusText: .init(string: mention),
@@ -132,7 +132,7 @@ extension StatusEditor {
           replyToStatus: nil,
           embeddedStatus: nil
         )
-      case .edit(let status):
+      case let .edit(status):
         let normalizedText = editText(for: status)
         return InitialTextChanges(
           statusText: .init(string: normalizedText),
@@ -144,7 +144,7 @@ extension StatusEditor {
           replyToStatus: nil,
           embeddedStatus: nil
         )
-      case .quote(let status):
+      case let .quote(status):
         if currentInstance?.isQuoteSupported == true {
           return InitialTextChanges(
             statusText: nil,
@@ -180,7 +180,7 @@ extension StatusEditor {
           replyToStatus: nil,
           embeddedStatus: status
         )
-      case .quoteLink(let link):
+      case let .quoteLink(link):
         let text = "\n\n\(link)"
         return InitialTextChanges(
           statusText: .init(string: text),
@@ -322,7 +322,7 @@ extension StatusEditor {
 
       for range in ranges {
         guard selectedRange.location == (range.location + range.length),
-          let swiftRange = Range(range, in: text)
+              let swiftRange = Range(range, in: text)
         else {
           continue
         }

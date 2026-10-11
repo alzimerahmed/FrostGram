@@ -39,14 +39,18 @@ struct StatusRowSwipeView: View {
         .tint(
           preferences.swipeActionsStatusTrailingRight.color(
             themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
-            outside: true))
+            outside: true
+          )
+        )
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
         .tint(
           preferences.swipeActionsStatusTrailingLeft.color(
             themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
-            outside: false))
+            outside: false
+          )
+        )
     }
   }
 
@@ -57,14 +61,18 @@ struct StatusRowSwipeView: View {
         .tint(
           preferences.swipeActionsStatusLeadingLeft.color(
             themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
-            outside: true))
+            outside: true
+          )
+        )
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
         .tint(
           preferences.swipeActionsStatusLeadingRight.color(
             themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
-            outside: false))
+            outside: false
+          )
+        )
     }
   }
 
@@ -73,7 +81,8 @@ struct StatusRowSwipeView: View {
     switch action {
     case .reply:
       makeSwipeButtonForRouterPath(
-        action: action, destination: .replyToStatusEditor(status: viewModel.status))
+        action: action, destination: .replyToStatusEditor(status: viewModel.status)
+      )
     case .quote:
       let finalStatus = viewModel.finalStatus
       makeSwipeButtonForRouterPath(
@@ -81,7 +90,8 @@ struct StatusRowSwipeView: View {
       )
       .disabled(
         finalStatus.visibility != .pub
-          || finalStatus.quoteApproval?.currentUser == .denied)
+          || finalStatus.quoteApproval?.currentUser == .denied
+      )
     case .favorite:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleFavorite(remoteStatus: nil)
@@ -93,7 +103,7 @@ struct StatusRowSwipeView: View {
       .disabled(
         viewModel.status.visibility == .direct
           || viewModel.status.visibility == .priv
-            && viewModel.status.account.id != currentAccount.account?.id
+          && viewModel.status.account.id != currentAccount.account?.id
       )
     case .bookmark:
       makeSwipeButtonForTask(action: action) {
@@ -104,7 +114,6 @@ struct StatusRowSwipeView: View {
     }
   }
 
-  @ViewBuilder
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination)
     -> some View
   {
@@ -112,9 +121,9 @@ struct StatusRowSwipeView: View {
       HapticManager.shared.fireHaptic(.notification(.success))
       #if targetEnvironment(macCatalyst) || os(visionOS)
         switch destination {
-        case .replyToStatusEditor(let status):
+        case let .replyToStatusEditor(status):
           openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: status))
-        case .quoteStatusEditor(let status):
+        case let .quoteStatusEditor(status):
           openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: status))
         default:
           viewModel.routerPath.presentedSheet = destination
@@ -127,7 +136,6 @@ struct StatusRowSwipeView: View {
     }
   }
 
-  @ViewBuilder
   private func makeSwipeButtonForTask(
     action: StatusAction, privateBoost: Bool = false, task: @escaping () async -> Void
   ) -> some View {
@@ -138,7 +146,8 @@ struct StatusRowSwipeView: View {
       }
     } label: {
       makeSwipeLabel(
-        action: action, style: preferences.swipeActionsIconStyle, privateBoost: privateBoost)
+        action: action, style: preferences.swipeActionsIconStyle, privateBoost: privateBoost
+      )
     }
   }
 
@@ -153,12 +162,14 @@ struct StatusRowSwipeView: View {
           isReblogged: statusDataController.isReblogged,
           isFavorited: statusDataController.isFavorited,
           isBookmarked: statusDataController.isBookmarked,
-          privateBoost: privateBoost),
+          privateBoost: privateBoost
+        ),
         imageNamed: action.iconName(
           isReblogged: statusDataController.isReblogged,
           isFavorited: statusDataController.isFavorited,
           isBookmarked: statusDataController.isBookmarked,
-          privateBoost: privateBoost)
+          privateBoost: privateBoost
+        )
       )
       .labelStyle(.iconOnly)
       .environment(\.symbolVariants, .none)
@@ -168,12 +179,14 @@ struct StatusRowSwipeView: View {
           isReblogged: statusDataController.isReblogged,
           isFavorited: statusDataController.isFavorited,
           isBookmarked: statusDataController.isBookmarked,
-          privateBoost: privateBoost),
+          privateBoost: privateBoost
+        ),
         imageNamed: action.iconName(
           isReblogged: statusDataController.isReblogged,
           isFavorited: statusDataController.isFavorited,
           isBookmarked: statusDataController.isBookmarked,
-          privateBoost: privateBoost)
+          privateBoost: privateBoost
+        )
       )
       .labelStyle(.titleAndIcon)
       .environment(\.symbolVariants, .none)

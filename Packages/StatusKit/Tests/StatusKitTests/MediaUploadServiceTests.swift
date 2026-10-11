@@ -1,7 +1,7 @@
 import Foundation
 import Models
-import UIKit
 @testable import StatusKit
+import UIKit
 import XCTest
 
 @MainActor
@@ -33,15 +33,15 @@ final class MediaUploadServiceTests: XCTestCase {
 
     XCTAssertEqual(client.lastMimeType, "image/gif")
     switch result {
-    case .success(let value):
+    case let .success(value):
       XCTAssertEqual(value.attachment.id, "media-1")
       XCTAssertEqual(value.needsRefresh, true)
-    case .failure(let error):
+    case let .failure(error):
       XCTFail("Unexpected error: \(error)")
     }
   }
 
-  func testUploadImageUsesJpegMimeType() async throws {
+  func testUploadImageUsesJpegMimeType() async {
     let image = makeOpaqueTestImage()
     let content = StatusEditor.MediaContainer.MediaContent.image(image)
     let client = FakeUploadClient()
@@ -66,11 +66,11 @@ final class MediaUploadServiceTests: XCTestCase {
 
     XCTAssertEqual(client.lastMimeType, "image/jpeg")
     switch result {
-    case .success(let value):
+    case let .success(value):
       XCTAssertEqual(value.attachment.id, "media-2")
       XCTAssertEqual(value.needsRefresh, false)
       XCTAssertNotNil(value.originalImage)
-    case .failure(let error):
+    case let .failure(error):
       XCTFail("Unexpected error: \(error)")
     }
   }
@@ -99,7 +99,7 @@ final class MediaUploadServiceTests: XCTestCase {
     switch result {
     case .success:
       XCTFail("Expected missing alt text error")
-    case .failure(let error):
+    case let .failure(error):
       if case .missingAltText = error {
         XCTAssertEqual(client.uploadCalls, 0)
       } else {
@@ -132,7 +132,7 @@ final class MediaUploadServiceTests: XCTestCase {
     switch result {
     case .success:
       XCTFail("Expected size limit error")
-    case .failure(let error):
+    case let .failure(error):
       if case .sizeLimitExceeded = error {
         XCTAssertEqual(client.uploadCalls, 0)
       } else {
@@ -167,9 +167,9 @@ final class MediaUploadServiceTests: XCTestCase {
 
     XCTAssertEqual(client.uploadCalls, 2)
     switch result {
-    case .success(let value):
+    case let .success(value):
       XCTAssertEqual(value.attachment.id, "media-3")
-    case .failure(let error):
+    case let .failure(error):
       XCTFail("Unexpected error: \(error)")
     }
   }

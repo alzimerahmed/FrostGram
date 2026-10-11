@@ -105,15 +105,15 @@ extension StatusEditor {
             }
 
             switch result {
-            case .success(let result):
+            case let .success(result):
               await eventHandler(.success(id: input.id, result: result))
-            case .failure(let error):
+            case let .failure(error):
               await eventHandler(.failure(id: input.id, content: input.content, error: error))
             }
           }
         }
 
-        for _ in 0..<limit {
+        for _ in 0 ..< limit {
           addNext()
         }
 
@@ -169,18 +169,18 @@ extension StatusEditor {
       let compressor = Compressor()
 
       switch content {
-      case .image(let image):
+      case let .image(image):
         let data = try await compressor.compressImageForUpload(image)
         return (data, "image/jpeg")
-      case .video(let transferable, _):
+      case let .video(transferable, _):
         let videoURL = transferable.url
         guard let compressedVideoURL = await compressor.compressVideo(videoURL),
-          let videoData = try? Data(contentsOf: compressedVideoURL)
+              let videoData = try? Data(contentsOf: compressedVideoURL)
         else {
           throw MediaContainer.MediaError.compressionFailed
         }
         return (videoData, compressedVideoURL.mimeType())
-      case .gif(let transferable, _):
+      case let .gif(transferable, _):
         guard let gifData = transferable.data else {
           throw MediaContainer.MediaError.compressionFailed
         }

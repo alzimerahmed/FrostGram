@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Timeline",
       targets: ["Timeline"]
-    )
+    ),
   ],
   dependencies: [
     .package(name: "NetworkClient", path: "../NetworkClient"),
@@ -39,7 +39,7 @@ let package = Package(
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6),
-        .defaultIsolation(MainActor.self)
+        .defaultIsolation(MainActor.self),
       ]
     ),
     .testTarget(

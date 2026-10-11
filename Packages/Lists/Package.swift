@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Lists",
       targets: ["Lists"]
-    )
+    ),
   ],
   dependencies: [
     .package(name: "Account", path: "../Account"),
@@ -35,8 +35,8 @@ let package = Package(
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6),
-        .defaultIsolation(MainActor.self)
+        .defaultIsolation(MainActor.self),
       ]
-    )
+    ),
   ]
 )

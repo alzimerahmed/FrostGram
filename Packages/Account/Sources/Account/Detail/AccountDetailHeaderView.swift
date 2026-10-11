@@ -42,7 +42,7 @@ struct AccountDetailHeaderView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-        let latestEvent = latestEvent as? StreamEventNotification
+         let latestEvent = latestEvent as? StreamEventNotification
       {
         if latestEvent.notification.account.id == accountId {
           Task {
@@ -81,7 +81,6 @@ struct AccountDetailHeaderView: View {
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
   }
-
 }
 
 struct AccountDetailHeaderView_Previews: PreviewProvider {
@@ -95,6 +94,7 @@ struct AccountDetailHeaderView_Previews: PreviewProvider {
       isLoadingTranslation: .constant(false),
       isCurrentUser: false,
       accountId: "123",
-      scrollViewProxy: nil)
+      scrollViewProxy: nil
+    )
   }
 }

@@ -5,7 +5,7 @@ import NetworkClient
 import SwiftUI
 
 @MainActor
-public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
+public struct StatusesListView<Fetcher: StatusesFetcher>: View {
   @Environment(Theme.self) private var theme
 
   @State private var fetcher: Fetcher
@@ -38,12 +38,14 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             status: status,
             client: client,
             routerPath: routerPath,
-            filterContext: filterContext),
+            filterContext: filterContext
+          ),
           context: .timeline
         )
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
       }
+
     case .error:
       ErrorView(
         title: "status.error.title",
@@ -55,7 +57,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
 
-    case .display(let statuses, let nextPageState):
+    case let .display(statuses, nextPageState):
       ForEach(statuses) { status in
         StatusRowView(
           viewModel: StatusRowViewModel(
@@ -63,7 +65,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             client: client,
             routerPath: routerPath,
             isRemote: isRemote,
-            filterContext: filterContext),
+            filterContext: filterContext
+          ),
           context: .timeline
         )
         .onAppear {
@@ -75,18 +78,19 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       }
       makeNextPageRow(nextPageState: nextPageState)
 
-    case .displayWithGaps(let items, let nextPageState):
+    case let .displayWithGaps(items, nextPageState):
       ForEach(items) { item in
         ZStack {
           switch item {
-          case .status(let status):
+          case let .status(status):
             StatusRowView(
               viewModel: StatusRowViewModel(
                 status: status,
                 client: client,
                 routerPath: routerPath,
                 isRemote: isRemote,
-                filterContext: filterContext),
+                filterContext: filterContext
+              ),
               context: .timeline
             )
             .onAppear {
@@ -96,7 +100,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
               fetcher.statusDidDisappear(status: status)
             }
 
-          case .gap(let gap):
+          case let .gap(gap):
             ZStack {
               if let gapLoader = fetcher as? GapLoadingFetcher {
                 TimelineGapView(gap: gap) {
@@ -107,26 +111,27 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           }
         }
         #if os(visionOS)
-          .listRowBackground(
-            RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(.background).hoverEffect()
-          )
-          .listRowHoverEffectDisabled()
+        .listRowBackground(
+          RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background).hoverEffect()
+        )
+        .listRowHoverEffectDisabled()
         #else
-          .listRowBackground(makeBackgroundColorFor(status: item.status))
+        .listRowBackground(makeBackgroundColorFor(status: item.status))
         #endif
         .listRowInsets(
           .init(
             top: 0,
             leading: .layoutPadding,
             bottom: 0,
-            trailing: .layoutPadding)
+            trailing: .layoutPadding
+          )
         )
-        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-          return -100
+        .alignmentGuide(.listRowSeparatorLeading) { _ in
+          -100
         }
         .alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
-          return viewDimensions.width + 100
+          viewDimensions.width + 100
         }
       }
       makeNextPageRow(nextPageState: nextPageState)
@@ -151,9 +156,9 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
     #endif
-    .alignmentGuide(.listRowSeparatorLeading) { _ in
-      -100
-    }
+      .alignmentGuide(.listRowSeparatorLeading) { _ in
+        -100
+      }
   }
 
   @ViewBuilder
@@ -161,8 +166,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     if let status {
       if status.visibility == .direct {
         theme.tintColor.opacity(0.15)
-      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil
-      {
+      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil {
         theme.secondaryBackgroundColor
       } else {
         theme.primaryBackgroundColor

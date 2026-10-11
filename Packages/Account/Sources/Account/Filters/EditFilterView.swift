@@ -32,7 +32,7 @@ struct EditFilterView: View {
     let expiresIn: String? =
       switch expirySelection {
       case .infinite:
-        ""  // need to send an empty value in order for the server to clear this field in the filter
+        "" // need to send an empty value in order for the server to clear this field in the filter
       case .custom:
         String(Int(expiresAt?.timeIntervalSince(Date()) ?? 0) + 50)
       default:
@@ -43,7 +43,8 @@ struct EditFilterView: View {
       title: title,
       context: contexts,
       filterAction: filterAction,
-      expiresIn: expiresIn)
+      expiresIn: expiresIn
+    )
   }
 
   private var canSave: Bool {
@@ -77,16 +78,16 @@ struct EditFilterView: View {
       .scrollDismissesKeyboard(.interactively)
       .background(theme.secondaryBackgroundColor)
     #endif
-    .onAppear {
-      if filter == nil {
-        focusedField = .title
+      .onAppear {
+        if filter == nil {
+          focusedField = .title
+        }
       }
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        saveButton
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          saveButton
+        }
       }
-    }
   }
 
   private var expirySection: some View {
@@ -111,7 +112,7 @@ struct EditFilterView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -127,7 +128,7 @@ struct EditFilterView: View {
         }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
 
     if filter == nil, !title.isEmpty {
@@ -149,7 +150,7 @@ struct EditFilterView: View {
         .transition(.opacity)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
       #endif
     }
   }
@@ -205,7 +206,7 @@ struct EditFilterView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -226,14 +227,15 @@ struct EditFilterView: View {
               Task {
                 await saveFilter(client)
               }
-            })
+            }
+          )
         ) {
           Label(context.name, systemImage: context.iconName)
         }
         .disabled(isSavingFilter)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
   }
@@ -256,7 +258,7 @@ struct EditFilterView: View {
       .pickerStyle(.inline)
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -287,11 +289,13 @@ struct EditFilterView: View {
       if let filter {
         self.filter = try await client.put(
           endpoint: ServerFilters.editFilter(id: filter.id, json: data),
-          forceVersion: .v2)
+          forceVersion: .v2
+        )
       } else {
         let newFilter: ServerFilter = try await client.post(
           endpoint: ServerFilters.createFilter(json: data),
-          forceVersion: .v2)
+          forceVersion: .v2
+        )
         filter = newFilter
       }
     } catch {}
@@ -306,8 +310,10 @@ struct EditFilterView: View {
         endpoint: ServerFilters.addKeyword(
           filter: filterId,
           keyword: name,
-          wholeWord: true),
-        forceVersion: .v2)
+          wholeWord: true
+        ),
+        forceVersion: .v2
+      )
       keywords.append(keyword)
     } catch {}
     isSavingFilter = false
@@ -318,7 +324,8 @@ struct EditFilterView: View {
     do {
       let response = try await client.delete(
         endpoint: ServerFilters.removeKeyword(id: keyword.id),
-        forceVersion: .v2)
+        forceVersion: .v2
+      )
       if response?.statusCode == 200 {
         keywords.removeAll(where: { $0.id == keyword.id })
       }

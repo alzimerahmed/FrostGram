@@ -25,9 +25,9 @@ public enum Markers: Endpoint {
     switch self {
     case .markers:
       nil
-    case .markNotifications(let lastReadId):
+    case let .markNotifications(lastReadId):
       MarkerPayload(notifications: MarkerPayload.Marker(lastReadId: lastReadId), home: nil)
-    case .markHome(let lastReadId):
+    case let .markHome(lastReadId):
       MarkerPayload(notifications: nil, home: MarkerPayload.Marker(lastReadId: lastReadId))
     }
   }

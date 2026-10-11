@@ -7,17 +7,17 @@ import SwiftUI
 struct AccountFieldsView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
-  
+
   let fields: [Account.Field]
   let account: Account
-  
+
   var body: some View {
     if !fields.isEmpty {
       if #available(iOS 26.0, *) {
         fieldsContainer
-        .padding(8)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
+          .padding(8)
+          .accessibilityElement(children: .contain)
+          .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
         #if os(visionOS)
           .background(Material.thick)
           .cornerRadius(4)
@@ -31,23 +31,23 @@ struct AccountFieldsView: View {
         #endif
       } else {
         fieldsContainer
-        .padding(8)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
+          .padding(8)
+          .accessibilityElement(children: .contain)
+          .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
         #if os(visionOS)
           .background(Material.thick)
         #else
           .background(theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(4)
-        .overlay(
-          RoundedRectangle(cornerRadius: 4)
-            .stroke(.gray.opacity(0.35), lineWidth: 1)
-        )
+          .cornerRadius(4)
+          .overlay(
+            RoundedRectangle(cornerRadius: 4)
+              .stroke(.gray.opacity(0.35), lineWidth: 1)
+          )
       }
     }
   }
-  
+
   private var fieldsContainer: some View {
     VStack(alignment: .leading) {
       ForEach(fields) { field in
@@ -75,7 +75,8 @@ struct AccountFieldsView: View {
                 )
                 .accessibilityValue(
                   field.verifiedAt != nil
-                    ? "accessibility.tabs.profile.fields.verified.label" : "")
+                    ? "accessibility.tabs.profile.fields.verified.label" : ""
+                )
             }
             .font(.scaledBody)
             if fields.last != field {
@@ -88,7 +89,9 @@ struct AccountFieldsView: View {
         .accessibilityElement(children: .combine)
         .modifier(
           ConditionalUserDefinedFieldAccessibilityActionModifier(
-            field: field, routerPath: routerPath))
+            field: field, routerPath: routerPath
+          )
+        )
       }
     }
   }

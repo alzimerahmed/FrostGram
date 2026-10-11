@@ -84,14 +84,16 @@ extension StatusEditor {
                 if currentInstance.isEditAltTextSupported, store.mode.isEditing {
                   Task {
                     await store.editDescription(
-                      container: container, description: imageDescription)
+                      container: container, description: imageDescription
+                    )
                     dismiss()
                     isUpdating = false
                   }
                 } else {
                   Task {
                     await store.addDescription(
-                      container: container, description: imageDescription)
+                      container: container, description: imageDescription
+                    )
                     dismiss()
                     isUpdating = false
                   }
@@ -121,7 +123,7 @@ extension StatusEditor {
           switch phase {
           case .empty:
             ProgressView()
-          case .success(let image):
+          case let .success(image):
             image
               .resizable()
               .scaledToFit()
@@ -174,7 +176,7 @@ extension StatusEditor {
         }
       }
       #if canImport(_Translation_SwiftUI)
-        .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
+      .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
       #endif
     }
 

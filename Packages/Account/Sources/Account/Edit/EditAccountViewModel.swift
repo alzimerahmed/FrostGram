@@ -18,7 +18,7 @@ import SwiftUI
     }
   }
 
-  public var client: MastodonClient?
+  var client: MastodonClient?
 
   var displayName: String = ""
   var note: String = ""
@@ -101,7 +101,8 @@ import SwiftUI
         bot: isBot,
         locked: isLocked,
         discoverable: isDiscoverable,
-        fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
+        fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) }
+      )
       let response = try await client?.patch(endpoint: Accounts.updateCredentials(json: data))
       if response?.statusCode != 200 {
         saveError = true
@@ -144,7 +145,8 @@ import SwiftUI
         method: "PATCH",
         mimeType: "image/jpeg",
         filename: "header",
-        data: data)
+        data: data
+      )
       return response?.statusCode == 200
     } catch {
       return false
@@ -160,7 +162,8 @@ import SwiftUI
         method: "PATCH",
         mimeType: "image/jpeg",
         filename: "avatar",
-        data: data)
+        data: data
+      )
       return response?.statusCode == 200
     } catch {
       return false
@@ -170,19 +173,20 @@ import SwiftUI
   private func getItemImageData(item: PhotosPickerItem, for type: ItemType) async -> Data? {
     guard
       let imageFile = try? await item.loadTransferable(
-        type: StatusEditor.ImageFileTranseferable.self)
+        type: StatusEditor.ImageFileTranseferable.self
+      )
     else { return nil }
 
     let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-      let image = UIImage(data: compressedData),
-      let uploadData = try? await compressor.compressImageForUpload(
-        image,
-        maxSize: 2 * 1024 * 1024,  // 2MB
-        maxHeight: type.maxHeight,
-        maxWidth: type.maxWidth
-      )
+          let image = UIImage(data: compressedData),
+          let uploadData = try? await compressor.compressImageForUpload(
+            image,
+            maxSize: 2 * 1024 * 1024, // 2MB
+            maxHeight: type.maxHeight,
+            maxWidth: type.maxWidth
+          )
     else {
       return nil
     }

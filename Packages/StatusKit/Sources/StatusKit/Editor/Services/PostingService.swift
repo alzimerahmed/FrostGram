@@ -1,7 +1,7 @@
 import Env
+import Foundation
 import Models
 import NetworkClient
-import Foundation
 
 extension StatusEditor {
   @MainActor
@@ -69,7 +69,7 @@ extension StatusEditor {
         let status = try await client.postStatus(data: data)
         StreamWatcher.shared.emmitPostEvent(for: status)
         return status
-      case .edit(let status):
+      case let .edit(status):
         let updated = try await client.editStatus(id: status.id, data: data)
         StreamWatcher.shared.emmitEditEvent(for: updated)
         return updated
@@ -110,7 +110,8 @@ extension MastodonClient: StatusEditor.PostingService.Client {
       language: data.language,
       mediaAttributes: data.mediaAttributes,
       quotedStatusId: data.quotedStatusId,
-      scheduledAt: MastodonClient.iso8601String(from: scheduledAt))
+      scheduledAt: MastodonClient.iso8601String(from: scheduledAt)
+    )
     return try await post(endpoint: Statuses.postStatus(json: scheduledData))
   }
 }

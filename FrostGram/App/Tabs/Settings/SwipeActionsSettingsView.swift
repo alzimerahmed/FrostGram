@@ -55,7 +55,7 @@ struct SwipeActionsSettingsView: View {
         Text("settings.swipeactions.status.explanation")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section {
@@ -76,7 +76,7 @@ struct SwipeActionsSettingsView: View {
         Text("settings.swipeactions.use-theme-colors-explanation")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.swipeactions.navigation-title")

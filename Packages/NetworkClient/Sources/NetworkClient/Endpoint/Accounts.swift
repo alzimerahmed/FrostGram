@@ -18,7 +18,8 @@ public enum Accounts: Endpoint {
     onlyMedia: Bool,
     excludeReplies: Bool,
     excludeReblogs: Bool,
-    pinned: Bool?)
+    pinned: Bool?
+  )
   case relationships(ids: [String])
   case follow(id: String, notify: Bool, reblogs: Bool)
   case unfollow(id: String)
@@ -98,7 +99,7 @@ public enum Accounts: Endpoint {
     switch self {
     case let .lookup(name):
       return [
-        .init(name: "acct", value: name)
+        .init(name: "acct", value: name),
       ]
     case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, excludeReblogs, pinned):
       var params: [URLQueryItem] = []

@@ -14,19 +14,19 @@ let package = Package(
     .library(
       name: "NetworkClient",
       targets: ["NetworkClient"]
-    )
+    ),
   ],
   dependencies: [
-    .package(name: "Models", path: "../Models")
+    .package(name: "Models", path: "../Models"),
   ],
   targets: [
     .target(
       name: "NetworkClient",
       dependencies: [
-        .product(name: "Models", package: "Models")
+        .product(name: "Models", package: "Models"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(

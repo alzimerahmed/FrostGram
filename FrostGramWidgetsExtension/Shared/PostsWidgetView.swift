@@ -63,7 +63,8 @@ struct PostsWidgetView: View {
               .fixedSize(horizontal: false, vertical: true)
               .padding(.leading, 20)
           }
-        })
+        }
+      )
     }
   }
 

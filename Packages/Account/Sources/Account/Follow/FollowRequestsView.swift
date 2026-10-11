@@ -23,15 +23,15 @@ public struct FollowRequestsView: View {
           .foregroundStyle(.secondary)
           .frame(maxWidth: .infinity, alignment: .center)
           .padding(.vertical, 16)
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       } else {
         ForEach(currentAccount.followRequests) { account in
           AccountsListRow(viewModel: .init(account: account), isFollowRequest: true)
-            #if !os(visionOS)
-              .listRowBackground(theme.primaryBackgroundColor)
-            #endif
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
     }
@@ -40,15 +40,15 @@ public struct FollowRequestsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle("account.follow-requests.title")
-    .navigationBarTitleDisplayMode(.inline)
-    .refreshable {
-      await currentAccount.fetchFollowerRequests()
-    }
-    .task {
-      guard !isInitialLoadDone else { return }
-      isInitialLoadDone = true
-      await currentAccount.fetchFollowerRequests()
-    }
+      .navigationTitle("account.follow-requests.title")
+      .navigationBarTitleDisplayMode(.inline)
+      .refreshable {
+        await currentAccount.fetchFollowerRequests()
+      }
+      .task {
+        guard !isInitialLoadDone else { return }
+        isInitialLoadDone = true
+        await currentAccount.fetchFollowerRequests()
+      }
   }
 }

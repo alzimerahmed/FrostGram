@@ -138,8 +138,9 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
       id: UUID().uuidString,
       content: .init(
         stringValue:
-          "Here's to the [#crazy](#) ones. The misfits.\nThe [@rebels](#). The troublemakers.",
-        parseMarkdown: forSettings),
+        "Here's to the [#crazy](#) ones. The misfits.\nThe [@rebels](#). The troublemakers.",
+        parseMarkdown: forSettings
+      ),
 
       account: .placeholder(),
       createdAt: ServerDate(),
@@ -169,7 +170,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
       tags: [],
       quote: nil,
       quotesCount: 2,
-      quoteApproval: nil)
+      quoteApproval: nil
+    )
   }
 
   public static func placeholders() -> [Status] {
@@ -212,7 +214,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
         tags: reblog.tags,
         quote: reblog.quote,
         quotesCount: reblog.quotesCount,
-        quoteApproval: reblog.quoteApproval)
+        quoteApproval: reblog.quoteApproval
+      )
     }
     return nil
   }
@@ -314,8 +317,8 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   }
 }
 
-// Every property in Status is immutable.
+/// Every property in Status is immutable.
 extension Status: Sendable {}
 
-// Every property in ReblogStatus is immutable.
+/// Every property in ReblogStatus is immutable.
 extension ReblogStatus: Sendable {}

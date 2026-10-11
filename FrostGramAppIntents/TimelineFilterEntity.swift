@@ -7,7 +7,9 @@ import NetworkClient
 import Timeline
 
 public struct TimelineFilterEntity: Identifiable, AppEntity {
-  public nonisolated var id: String { timeline.id }
+  public nonisolated var id: String {
+    timeline.id
+  }
 
   public let timeline: TimelineFilter
 

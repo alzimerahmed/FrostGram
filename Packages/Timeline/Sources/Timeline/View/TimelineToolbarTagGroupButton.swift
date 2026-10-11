@@ -12,7 +12,7 @@ struct TimelineToolbarTagGroupButton: ToolbarContent {
   var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
       switch timeline {
-      case .hashtag(let tag, _):
+      case let .hashtag(tag, _):
         if !tagGroups.isEmpty {
           Menu {
             Section("tag-groups.edit.section.title") {
@@ -27,7 +27,8 @@ struct TimelineToolbarTagGroupButton: ToolbarContent {
                   Label(
                     group.title,
                     systemImage: group.tags.contains(tag)
-                      ? "checkmark.rectangle.fill" : "checkmark.rectangle")
+                      ? "checkmark.rectangle.fill" : "checkmark.rectangle"
+                  )
                 }
               }
             }

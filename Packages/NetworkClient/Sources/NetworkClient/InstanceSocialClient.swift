@@ -31,13 +31,12 @@ public struct InstanceSocialClient: Sendable {
 
     guard let response = try? decoder.decode(Response.self, from: data) else { return [] }
 
-    let result = response.instances.sorted(by: keyword)
-    return result
+    return response.instances.sorted(by: keyword)
   }
 }
 
-extension Array where Self.Element == InstanceSocial {
-  fileprivate func sorted(by keyword: String) -> Self {
+private extension Array where Self.Element == InstanceSocial {
+  func sorted(by keyword: String) -> Self {
     let keyword = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
     var newArray = self
 
@@ -62,7 +61,7 @@ extension Array where Self.Element == InstanceSocial {
     if !keyword.isEmpty {
       newArray.sort { (lhs: InstanceSocial, rhs: InstanceSocial) in
         if lhs.name.contains(keyword),
-          !rhs.name.contains(keyword)
+           !rhs.name.contains(keyword)
         {
           return true
         }

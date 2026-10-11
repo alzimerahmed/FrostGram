@@ -20,7 +20,7 @@ public struct GifView: UIViewRepresentable {
     self.data = data
   }
 
-  public func makeUIView(context: UIViewRepresentableContext<GifView>) -> UIView {
+  public func makeUIView(context _: UIViewRepresentableContext<GifView>) -> UIView {
     let view = UIView()
 
     animatedView.prepareForAnimation(withGIFData: data)
@@ -41,8 +41,5 @@ public struct GifView: UIViewRepresentable {
     return view
   }
 
-  public func updateUIView(_ uiView: UIView, context: Context) {
-
-  }
-
+  public func updateUIView(_: UIView, context _: Context) {}
 }

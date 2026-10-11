@@ -31,8 +31,10 @@ struct TimelineTagGroupheaderView: View {
               tagGroup: group,
               onSaved: { group in
                 timeline = .tagGroup(
-                  title: group.title, tags: group.tags, symbolName: group.symbolName)
-              })
+                  title: group.title, tags: group.tags, symbolName: group.symbolName
+                )
+              }
+            )
           }
           .buttonStyle(.bordered)
         }

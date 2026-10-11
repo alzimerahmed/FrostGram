@@ -7,11 +7,7 @@ import SwiftUI
 struct NavigationSheet<Content: View>: View {
   @Environment(\.dismiss) private var dismiss
 
-  var content: () -> Content
-
-  init(@ViewBuilder content: @escaping () -> Content) {
-    self.content = content
-  }
+  @ViewBuilder var content: () -> Content
 
   var body: some View {
     NavigationStack {

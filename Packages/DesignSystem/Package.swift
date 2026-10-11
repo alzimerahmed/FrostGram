@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "DesignSystem",
       targets: ["DesignSystem"]
-    )
+    ),
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
@@ -36,8 +36,8 @@ let package = Package(
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6),
-        .defaultIsolation(MainActor.self)
+        .defaultIsolation(MainActor.self),
       ]
-    )
+    ),
   ]
 )

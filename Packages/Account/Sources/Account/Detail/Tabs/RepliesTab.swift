@@ -11,13 +11,12 @@ struct RepliesTab {
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
-  {
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher {
     RepliesTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account _: Account?
   ) -> some View {
     AnyStatusesListView(
       fetcher: fetcher,
@@ -32,7 +31,7 @@ extension RepliesTab: @MainActor AccountTabProtocol {}
 @MainActor
 @Observable
 private class RepliesTabFetcher: AccountTabFetcher {
-  override func fetchNewestStatuses(pullToRefresh: Bool) async {
+  override func fetchNewestStatuses(pullToRefresh _: Bool) async {
     do {
       statusesState = .loading
       statuses = try await client.get(

@@ -3,8 +3,8 @@ import SwiftUI
 
 @MainActor
 extension Font {
-  // See https://gist.github.com/zacwest/916d31da5d03405809c4 for iOS values
-  // Custom values for Mac
+  /// See https://gist.github.com/zacwest/916d31da5d03405809c4 for iOS values
+  /// Custom values for Mac
   private static let title = 28.0
   #if targetEnvironment(macCatalyst)
     private static let headline = 20.0
@@ -51,7 +51,8 @@ extension Font {
 
   public static var scaledHeadline: Font {
     customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(
-      .semibold)
+      .semibold
+    )
   }
 
   public static var scaledHeadlineFont: UIFont {
@@ -111,19 +112,19 @@ extension Font {
   }
 }
 
-extension UIFont {
-  public func rounded() -> UIFont {
+public extension UIFont {
+  func rounded() -> UIFont {
     guard let descriptor = fontDescriptor.withDesign(.rounded) else {
       return self
     }
     return UIFont(descriptor: descriptor, size: pointSize)
   }
 
-  public var emojiSize: CGFloat {
+  var emojiSize: CGFloat {
     pointSize
   }
 
-  public var emojiBaselineOffset: CGFloat {
+  var emojiBaselineOffset: CGFloat {
     // Center emoji with capital letter size of font
     -(emojiSize - capHeight) / 2
   }

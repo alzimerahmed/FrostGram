@@ -2,8 +2,8 @@ import Combine
 import Foundation
 import Models
 import NetworkClient
-import OSLog
 import Observation
+import OSLog
 
 @MainActor
 @Observable public class StreamWatcher {
@@ -31,8 +31,7 @@ import Observation
 
   public static let shared = StreamWatcher()
 
-  private init() {
-  }
+  private init() {}
 
   public func setClient(client: MastodonClient, instanceStreamingURL: URL?) {
     if self.client != nil {
@@ -77,7 +76,7 @@ import Observation
 
   private func sendMessage(message: StreamMessage) {
     if let encodedMessage = try? encoder.encode(message),
-      let stringMessage = String(data: encodedMessage, encoding: .utf8)
+       let stringMessage = String(data: encodedMessage, encoding: .utf8)
     {
       task?.send(.string(stringMessage), completionHandler: { _ in })
     }
@@ -155,7 +154,7 @@ import Observation
   }
 }
 
-fileprivate enum StreamDecodeError: Error {
+private enum StreamDecodeError: Error {
   case rawEvent(Error)
   case event(rawEvent: RawStreamEvent, error: Error)
 }

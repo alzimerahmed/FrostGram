@@ -17,7 +17,7 @@ class AccountStatusesFetcher: StatusesFetcher {
     self.mode = mode
   }
 
-  func fetchNewestStatuses(pullToRefresh: Bool) async {
+  func fetchNewestStatuses(pullToRefresh _: Bool) async {
     guard let client else { return }
     statusesState = .loading
     do {
@@ -25,7 +25,8 @@ class AccountStatusesFetcher: StatusesFetcher {
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       statusesState = .display(
         statuses: statuses,
-        nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
+        nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none
+      )
     } catch {
       statusesState = .error(error: .noData)
     }
@@ -39,10 +40,11 @@ class AccountStatusesFetcher: StatusesFetcher {
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
     statusesState = .display(
       statuses: statuses,
-      nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
+      nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none
+    )
   }
 
-  func statusDidAppear(status: Status) {}
+  func statusDidAppear(status _: Status) {}
 
-  func statusDidDisappear(status: Status) {}
+  func statusDidDisappear(status _: Status) {}
 }

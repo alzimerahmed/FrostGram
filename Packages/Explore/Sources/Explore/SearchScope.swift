@@ -2,7 +2,7 @@ import SwiftUI
 
 enum SearchScope: String, CaseIterable {
   case all, people, hashtags, posts
-  
+
   var localizedString: LocalizedStringKey {
     switch self {
     case .all:

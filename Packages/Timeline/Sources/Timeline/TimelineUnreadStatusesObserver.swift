@@ -23,7 +23,7 @@ import SwiftUI
 
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
-      pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
+      pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
       HapticManager.shared.fireHaptic(.timeline)
     }
   }
@@ -41,30 +41,30 @@ struct TimelineUnreadStatusesView: View {
   var body: some View {
     if #available(iOS 26, *) {
       buttonBody
-        #if os(visionOS)
-          .buttonStyle(.bordered)
-          .tint(Material.ultraThick)
-        #endif
+      #if os(visionOS)
+        .buttonStyle(.bordered)
+        .tint(Material.ultraThick)
+      #endif
         .padding(8)
         .foregroundStyle(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     } else {
       buttonBody
-        #if os(visionOS)
-          .buttonStyle(.bordered)
-          .tint(Material.ultraThick)
-        #else
-          .buttonStyle(.bordered)
-          .background(Material.ultraThick)
-        #endif
+      #if os(visionOS)
+        .buttonStyle(.bordered)
+        .tint(Material.ultraThick)
+      #else
+        .buttonStyle(.bordered)
+        .background(Material.ultraThick)
+      #endif
         .cornerRadius(8)
-        #if !os(visionOS)
-          .foregroundStyle(.secondary)
-          .overlay(
-            RoundedRectangle(cornerRadius: 8)
-              .stroke(theme.tintColor, lineWidth: 1)
-          )
-        #endif
+      #if !os(visionOS)
+        .foregroundStyle(.secondary)
+        .overlay(
+          RoundedRectangle(cornerRadius: 8)
+            .stroke(theme.tintColor, lineWidth: 1)
+        )
+      #endif
         .padding(8)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
@@ -91,7 +91,7 @@ struct TimelineUnreadStatusesView: View {
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
     }
   }
-  
+
   var label: some View {
     HStack(spacing: 8) {
       if observer.isLoadingNewStatuses {

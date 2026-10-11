@@ -27,7 +27,6 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sen
       "chart.line.uptrend.xyaxis"
     }
   }
-
 }
 
 public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
@@ -141,7 +140,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     case let .hashtag(tag, _):
       "#\(tag)"
     case let .tagGroup(title, _, _):
-      LocalizedStringKey(title)  // ?? not sure since this can't be localized.
+      LocalizedStringKey(title) // ?? not sure since this can't be localized.
     case let .list(list):
       LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
@@ -184,7 +183,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     switch self {
     case .home, .latest, .resume, .list:
       return .home
-    case .hashtag(_, let accountId):
+    case let .hashtag(_, accountId):
       return accountId == nil ? .pub : .account
     case .local, .federated, .trending, .tagGroup, .remoteLocal, .link, .quotes:
       return .pub
@@ -207,10 +206,12 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       switch filter {
       case .local:
         return Timelines.pub(
-          sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
+          sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit
+        )
       case .federated:
         return Timelines.pub(
-          sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
+          sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit
+        )
       case .trending:
         return Trends.statuses(offset: offset)
       }
@@ -233,7 +234,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
           onlyMedia: false,
           excludeReplies: false,
           excludeReblogs: false,
-          pinned: nil)
+          pinned: nil
+        )
       } else {
         return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)
       }
@@ -375,7 +377,7 @@ extension TimelineFilter: Codable {
 extension TimelineFilter: RawRepresentable {
   public init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
-      let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
+          let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
     else {
       return nil
     }
@@ -384,7 +386,7 @@ extension TimelineFilter: RawRepresentable {
 
   public var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
-      let result = String(data: data, encoding: .utf8)
+          let result = String(data: data, encoding: .utf8)
     else {
       return "[]"
     }
@@ -435,7 +437,7 @@ extension RemoteTimelineFilter: Codable {
 extension RemoteTimelineFilter: RawRepresentable {
   public init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
-      let result = try? JSONDecoder().decode(RemoteTimelineFilter.self, from: data)
+          let result = try? JSONDecoder().decode(RemoteTimelineFilter.self, from: data)
     else {
       return nil
     }
@@ -444,7 +446,7 @@ extension RemoteTimelineFilter: RawRepresentable {
 
   public var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
-      let result = String(data: data, encoding: .utf8)
+          let result = String(data: data, encoding: .utf8)
     else {
       return "[]"
     }

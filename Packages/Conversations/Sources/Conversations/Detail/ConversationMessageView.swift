@@ -40,18 +40,18 @@ struct ConversationMessageView: View {
             .background(isOwnMessage ? Material.ultraThick : Material.regular)
           #else
             .glassEffect(.regular.tint(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor),
-                          in: RoundedRectangle(cornerRadius: 8))
+                         in: RoundedRectangle(cornerRadius: 8))
           #endif
-          .padding(.leading, isOwnMessage ? 24 : 0)
-          .padding(.trailing, isOwnMessage ? 0 : 24)
-          .overlay {
-            if isLiked, message.account.id != currentAccount.account?.id {
-              likeView
+            .padding(.leading, isOwnMessage ? 24 : 0)
+            .padding(.trailing, isOwnMessage ? 0 : 24)
+            .overlay {
+              if isLiked, message.account.id != currentAccount.account?.id {
+                likeView
+              }
             }
-          }
-          .contextMenu {
-            contextMenu
-          }
+            .contextMenu {
+              contextMenu
+            }
         } else {
           textView
           #if os(visionOS)
@@ -59,17 +59,17 @@ struct ConversationMessageView: View {
           #else
             .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
           #endif
-          .cornerRadius(8)
-          .padding(.leading, isOwnMessage ? 24 : 0)
-          .padding(.trailing, isOwnMessage ? 0 : 24)
-          .overlay {
-            if isLiked, message.account.id != currentAccount.account?.id {
-              likeView
+            .cornerRadius(8)
+            .padding(.leading, isOwnMessage ? 24 : 0)
+            .padding(.trailing, isOwnMessage ? 0 : 24)
+            .overlay {
+              if isLiked, message.account.id != currentAccount.account?.id {
+                likeView
+              }
             }
-          }
-          .contextMenu {
-            contextMenu
-          }
+            .contextMenu {
+              contextMenu
+            }
         }
 
         if !isOwnMessage {
@@ -136,7 +136,8 @@ struct ConversationMessageView: View {
     } label: {
       Label(
         isLiked ? "status.action.unfavorite" : "status.action.favorite",
-        systemImage: isLiked ? "star.fill" : "star")
+        systemImage: isLiked ? "star.fill" : "star"
+      )
     }
     Button {
       Task {
@@ -155,7 +156,8 @@ struct ConversationMessageView: View {
     } label: {
       Label(
         isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-        systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
+        systemImage: isBookmarked ? "bookmark.fill" : "bookmark"
+      )
     }
     Divider()
     if message.account.id == currentAccount.account?.id {
@@ -164,7 +166,8 @@ struct ConversationMessageView: View {
       Section(message.reblog?.account.acct ?? message.account.acct) {
         Button {
           routerPath.presentedSheet = .mentionStatusEditor(
-            account: message.reblog?.account ?? message.account, visibility: .pub)
+            account: message.reblog?.account ?? message.account, visibility: .pub
+          )
         } label: {
           Label("status.action.mention", systemImage: "at")
         }
@@ -222,8 +225,7 @@ struct ConversationMessageView: View {
       }
     }
   }
-  
-  @ViewBuilder
+
   private var textView: some View {
     VStack(alignment: .leading) {
       EmojiTextApp(message.content, emojis: message.emojis)
@@ -236,7 +238,8 @@ struct ConversationMessageView: View {
           \.openURL,
           OpenURLAction { url in
             routerPath.handleStatus(status: message, url: url)
-          })
+          }
+        )
     }
   }
 }

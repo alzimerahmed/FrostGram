@@ -6,8 +6,8 @@ import SwiftUI
 
 @MainActor
 @Observable class StatusDetailViewModel {
-  public var statusId: String?
-  public var remoteStatusURL: URL?
+  var statusId: String?
+  var remoteStatusURL: URL?
 
   var client: MastodonClient?
   var routerPath: RouterPath?
@@ -64,8 +64,10 @@ import SwiftUI
         query: remoteStatusURL.absoluteString,
         type: .statuses,
         offset: nil,
-        following: nil),
-      forceVersion: .v2)
+        following: nil
+      ),
+      forceVersion: .v2
+    )
     if let statusId = results?.statuses.first?.id {
       self.statusId = statusId
       await fetchStatusDetail(animate: false)
@@ -118,7 +120,7 @@ import SwiftUI
     indentationLevelPreviousCache = [:]
     for status in statuses {
       if let inReplyToId = status.inReplyToId,
-        let prevIndent = indentationLevelPreviousCache[inReplyToId]
+         let prevIndent = indentationLevelPreviousCache[inReplyToId]
       {
         indentationLevelPreviousCache[status.id] = prevIndent + 1
       } else {
@@ -130,11 +132,11 @@ import SwiftUI
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
     Task {
       if let event = event as? StreamEventUpdate,
-        event.status.account.id == currentAccount?.id
+         event.status.account.id == currentAccount?.id
       {
         await fetchStatusDetail(animate: true)
       } else if let event = event as? StreamEventStatusUpdate,
-        event.status.account.id == currentAccount?.id
+                event.status.account.id == currentAccount?.id
       {
         await fetchStatusDetail(animate: true)
       } else if event is StreamEventDelete {

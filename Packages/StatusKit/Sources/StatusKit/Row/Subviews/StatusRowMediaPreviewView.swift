@@ -24,7 +24,10 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   #if targetEnvironment(macCatalyst)
-    private var showsScrollIndicators: Bool { attachments.count > 1 }
+    private var showsScrollIndicators: Bool {
+      attachments.count > 1
+    }
+
     private var scrollBottomPadding: CGFloat?
   #else
     private var showsScrollIndicators: Bool = false
@@ -45,30 +48,28 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   public var body: some View {
-    Group {
-      if attachments.count == 1 {
-        FeaturedImagePreView(
-          attachment: attachments[0],
-          maxSize: imageMaxHeight == 300
-            ? nil
-            : CGSize(width: imageMaxHeight, height: imageMaxHeight),
-          sensitive: sensitive
-        )
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
-        .accessibilityAddTraits([.isButton, .isImage])
-        .onTapGesture { tabAction(for: 0) }
-      } else {
-        ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
-          HStack {
-            ForEach(attachments) { attachment in
-              makeAttachmentView(attachment)
-            }
+    if attachments.count == 1 {
+      FeaturedImagePreView(
+        attachment: attachments[0],
+        maxSize: imageMaxHeight == 300
+          ? nil
+          : CGSize(width: imageMaxHeight, height: imageMaxHeight),
+        sensitive: sensitive
+      )
+      .accessibilityElement(children: .ignore)
+      .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
+      .accessibilityAddTraits([.isButton, .isImage])
+      .onTapGesture { tabAction(for: 0) }
+    } else {
+      ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
+        HStack {
+          ForEach(attachments) { attachment in
+            makeAttachmentView(attachment)
           }
-          .padding(.bottom, scrollBottomPadding)
         }
-        .scrollClipDisabled()
+        .padding(.bottom, scrollBottomPadding)
       }
+      .scrollClipDisabled()
     }
   }
 
@@ -86,7 +87,7 @@ public struct StatusRowMediaPreviewView: View {
         }
       }
       #if os(visionOS)
-        .hoverEffect()
+      .hoverEffect()
       #endif
     }
   }
@@ -250,8 +251,6 @@ struct BlurOverLay: View {
         maxHeight: .infinity,
         alignment: isFrameExpanded ? .center : .bottomLeading
       )
-    } else {
-      EmptyView()
     }
   }
 
@@ -282,10 +281,10 @@ struct AltTextButton: View {
 
   var body: some View {
     if !isInCaptureMode,
-      let text,
-      !text.isEmpty,
-      !isCompact,
-      preferences.showAltTextForMedia
+       let text,
+       !text.isEmpty,
+       !isCompact,
+       preferences.showAltTextForMedia
     {
       Button {
         isDisplayingAlert = true
@@ -303,7 +302,7 @@ struct AltTextButton: View {
         .addTranslateView(isPresented: $isDisplayingTranslation, text: text)
       #endif
       #if os(visionOS)
-        .clipShape(Capsule())
+      .clipShape(Capsule())
       #endif
       .cornerRadius(4)
       .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
@@ -349,7 +348,7 @@ private struct DisplayData: Identifiable, Hashable {
     previewUrl = attachment.previewUrl ?? attachment.url
     description = attachment.description
     self.type = DisplayType(from: type)
-    self.supportedType = type
+    supportedType = type
     accessibilityText = Self.getAccessibilityString(from: attachment)
     isLandscape = (attachment.meta?.original?.width ?? 0) > (attachment.meta?.original?.height ?? 0)
   }
@@ -393,7 +392,7 @@ struct WrapperForPreview: View {
     VStack {
       ScrollView {
         VStack {
-          ForEach(1..<5) { number in
+          ForEach(1 ..< 5) { number in
             VStack {
               Text("Preview for \(number) item(s)")
               StatusRowMediaPreviewView(
@@ -421,7 +420,8 @@ struct WrapperForPreview: View {
   }
 
   private static let url = URL(
-    string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
+    string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494"
+  )!
   private static let attachment = MediaAttachment.imageWith(url: url)
   private static let local = Locale(identifier: "en")
 }
@@ -459,7 +459,8 @@ private struct FeaturedImagePreView: View {
               if !previewsEnabled {
                 MediaPreviewsPlaceholder(
                   systemImage: MediaPreviewsPolicy.placeholderSystemImage(
-                    for: attachment.supportedType)
+                    for: attachment.supportedType
+                  )
                 )
               } else {
                 switch attachment.supportedType {
@@ -484,9 +485,9 @@ private struct FeaturedImagePreView: View {
               RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             )
-            #if os(visionOS)
-              .hoverEffect()
-            #endif
+          #if os(visionOS)
+            .hoverEffect()
+          #endif
         }
         .matchedTransitionSource(id: attachment.id, in: namespace)
       }
@@ -518,7 +519,9 @@ private struct FeaturedImagePreView: View {
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
       guard !subviews.isEmpty else { return CGSize.zero }
 
-      if let maxSize { return maxSize }
+      if let maxSize {
+        return maxSize
+      }
 
       return calculateSize(proposal)
     }
@@ -528,7 +531,11 @@ private struct FeaturedImagePreView: View {
     ) {
       guard let view = subviews.first else { return }
 
-      let size = if let maxSize { maxSize } else { calculateSize(proposal) }
+      let size = if let maxSize {
+        maxSize
+      } else {
+        calculateSize(proposal)
+      }
       view.place(at: bounds.origin, proposal: ProposedViewSize(size))
     }
 
@@ -539,10 +546,10 @@ private struct FeaturedImagePreView: View {
         size = CGSize.zero
 
       case (nil, nil), (nil, .some(.infinity)), (.some(.infinity), .some(.infinity)),
-        (.some(.infinity), nil):
+           (.some(.infinity), nil):
         size = CGSize(width: originalWidth, height: originalWidth)
 
-      case (nil, .some(let height)), (.some(.infinity), .some(let height)):
+      case (nil, let .some(height)), let (.some(.infinity), .some(height)):
         let minHeight = min(height, originalWidth)
         if originalHeight == 0 {
           size = CGSize.zero
@@ -550,14 +557,14 @@ private struct FeaturedImagePreView: View {
           size = CGSize(width: originalWidth * minHeight / originalHeight, height: minHeight)
         }
 
-      case (.some(let width), .some(.infinity)), (.some(let width), nil):
+      case let (.some(width), .some(.infinity)), (.some(let width), nil):
         if originalWidth == 0 {
           size = CGSize(width: width, height: width)
         } else {
           size = CGSize(width: width, height: width / originalWidth * originalHeight)
         }
 
-      case (.some(let width), .some(let height)):
+      case let (.some(width), .some(height)):
         // intrinsic size of image fits just fine
         if originalWidth <= width, originalHeight <= height {
           size = CGSize(width: originalWidth, height: originalHeight)

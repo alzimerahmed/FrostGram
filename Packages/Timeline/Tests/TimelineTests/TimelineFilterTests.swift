@@ -2,7 +2,6 @@ import Foundation
 import Models
 import NetworkClient
 import Testing
-
 @testable import Timeline
 
 @MainActor
@@ -18,7 +17,8 @@ struct TimelineFilterTests {
       TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
       TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
       TimelineFilter.hashtag(tag: "test", accountId: nil),
-    ])
+    ]
+  )
   func timelineCanEncodeAndDecode(filter: TimelineFilter) {
     #expect(testCodableOn(filter: filter))
   }
@@ -31,7 +31,5 @@ struct TimelineFilterTests {
     }
     let newFilter = try? decoder.decode(TimelineFilter.self, from: data)
     return newFilter == filter
-
   }
-
 }

@@ -12,20 +12,20 @@ import UserNotifications
 extension UNMutableNotificationContent: @unchecked @retroactive Sendable {}
 
 class NotificationService: UNNotificationServiceExtension {
-  nonisolated override init() {
+  override nonisolated init() {
     super.init()
   }
 
-  nonisolated override func didReceive(
+  override nonisolated func didReceive(
     _ request: UNNotificationRequest,
     withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
   ) {
-
     let bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent
     let provider = NotificationServiceContentProvider(bestAttemptContent: bestAttemptContent)
     let casted = unsafeBitCast(
       contentHandler,
-      to: (@Sendable (UNNotificationContent) -> Void).self)
+      to: (@Sendable (UNNotificationContent) -> Void).self
+    )
     Task {
       if let content = await provider.buildContent() {
         casted(content)
@@ -47,26 +47,26 @@ actor NotificationServiceContentProvider {
   func buildContent() async -> UNMutableNotificationContent? {
     if var bestAttemptContent {
       guard let privateKey = pushKeys.notificationsPrivateKeyIfPresent,
-        let auth = pushKeys.notificationsAuthKeyIfPresent
+            let auth = pushKeys.notificationsAuthKeyIfPresent
       else {
         return bestAttemptContent
       }
 
       guard let encodedPayload = bestAttemptContent.userInfo["m"] as? String,
-        let payload = Data(base64Encoded: encodedPayload.URLSafeBase64ToBase64())
+            let payload = Data(base64Encoded: encodedPayload.URLSafeBase64ToBase64())
       else {
         return bestAttemptContent
       }
 
       guard let encodedPublicKey = bestAttemptContent.userInfo["k"] as? String,
-        let publicKeyData = Data(base64Encoded: encodedPublicKey.URLSafeBase64ToBase64()),
-        let publicKey = try? P256.KeyAgreement.PublicKey(x963Representation: publicKeyData)
+            let publicKeyData = Data(base64Encoded: encodedPublicKey.URLSafeBase64ToBase64()),
+            let publicKey = try? P256.KeyAgreement.PublicKey(x963Representation: publicKeyData)
       else {
         return bestAttemptContent
       }
 
       guard let encodedSalt = bestAttemptContent.userInfo["s"] as? String,
-        let salt = Data(base64Encoded: encodedSalt.URLSafeBase64ToBase64())
+            let salt = Data(base64Encoded: encodedSalt.URLSafeBase64ToBase64())
       else {
         return bestAttemptContent
       }
@@ -77,9 +77,11 @@ actor NotificationServiceContentProvider {
           salt: salt,
           auth: auth,
           privateKey: privateKey,
-          publicKey: publicKey),
+          publicKey: publicKey
+        ),
         let notification = try? JSONDecoder().decode(
-          MastodonPushNotification.self, from: plaintextData)
+          MastodonPushNotification.self, from: plaintextData
+        )
       else {
         return bestAttemptContent
       }
@@ -91,17 +93,19 @@ actor NotificationServiceContentProvider {
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound(
-        named: UNNotificationSoundName(rawValue: "glass.caf"))
+        named: UNNotificationSoundName(rawValue: "glass.caf")
+      )
       let badgeCount = await updateBadgeCoung(notification: notification)
       bestAttemptContent.badge = .init(integerLiteral: badgeCount)
 
       if let urlString = notification.icon,
-        let url = URL(string: urlString)
+         let url = URL(string: urlString)
       {
         let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
           .appendingPathComponent("notification-attachments")
         try? FileManager.default.createDirectory(
-          at: temporaryDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+          at: temporaryDirectoryURL, withIntermediateDirectories: true, attributes: nil
+        )
         let filename = url.lastPathComponent
         let fileURL = temporaryDirectoryURL.appendingPathComponent(filename)
 
@@ -115,12 +119,13 @@ actor NotificationServiceContentProvider {
             try? image.pngData()?.write(to: fileURL)
 
             if let remoteNotification = await toRemoteNotification(localNotification: notification),
-              let type = remoteNotification.supportedType
+               let type = remoteNotification.supportedType
             {
               let intent = buildMessageIntent(
                 remoteNotification: remoteNotification,
                 currentUser: bestAttemptContent.userInfo["i"] as? String ?? "",
-                avatarURL: fileURL)
+                avatarURL: fileURL
+              )
               do {
                 bestAttemptContent =
                   try bestAttemptContent.updating(from: intent) as! UNMutableNotificationContent
@@ -129,7 +134,7 @@ actor NotificationServiceContentProvider {
                   bestAttemptContent.body = notification.body.escape()
                 } else {
                   let newBody =
-                  "\(await NSLocalizedString(type.notificationKey(), bundle: .main, comment: ""))\(notification.body.escape())"
+                    "\(await NSLocalizedString(type.notificationKey(), bundle: .main, comment: ""))\(notification.body.escape())"
                   bestAttemptContent.body = newBody
                 }
                 return bestAttemptContent
@@ -140,8 +145,8 @@ actor NotificationServiceContentProvider {
               if let attachment = try? UNNotificationAttachment(
                 identifier: filename,
                 url: fileURL,
-                options: nil)
-              {
+                options: nil
+              ) {
                 bestAttemptContent.attachments = [attachment]
               }
             }
@@ -165,7 +170,8 @@ actor NotificationServiceContentProvider {
       }) {
         let client = MastodonClient(server: account.server, oauthToken: account.oauthToken)
         let remoteNotification: Models.Notification = try await client.get(
-          endpoint: Notifications.notification(id: String(localNotification.notificationID)))
+          endpoint: Notifications.notification(id: String(localNotification.notificationID))
+        )
         return remoteNotification
       }
     } catch {
@@ -190,7 +196,8 @@ actor NotificationServiceContentProvider {
       displayName: senderDisplayName,
       image: avatar,
       contactIdentifier: nil,
-      customIdentifier: nil)
+      customIdentifier: nil
+    )
     var recipents: [INPerson]?
     var groupName: INSpeakableString?
     if keychainAccounts.count > 1 {
@@ -200,7 +207,8 @@ actor NotificationServiceContentProvider {
         displayName: currentUser,
         image: nil,
         contactIdentifier: nil,
-        customIdentifier: nil)
+        customIdentifier: nil
+      )
       recipents = [me, sender]
       groupName = .init(spokenPhrase: currentUser)
     }
@@ -212,7 +220,8 @@ actor NotificationServiceContentProvider {
       conversationIdentifier: remoteNotification.account.id,
       serviceName: nil,
       sender: sender,
-      attachments: nil)
+      attachments: nil
+    )
     if groupName != nil {
       intent.setImage(avatar, forParameterNamed: \.speakableGroupName)
     }

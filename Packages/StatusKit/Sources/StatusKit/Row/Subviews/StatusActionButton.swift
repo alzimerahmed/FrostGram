@@ -23,25 +23,27 @@ struct StatusActionButton: View {
 
   var body: some View {
     actionView
-      #if os(visionOS)
-        .buttonStyle(.borderless)
-        .foregroundColor(Color(UIColor.secondaryLabel))
-      #else
-        .buttonStyle(
-          .statusAction(
-            isOn: configuration.display.isOn(dataController: statusDataController),
-            tintColor: configuration.display.tintColor(theme: theme)
-          )
+    #if os(visionOS)
+      .buttonStyle(.borderless)
+      .foregroundColor(Color(UIColor.secondaryLabel))
+    #else
+      .buttonStyle(
+        .statusAction(
+          isOn: configuration.display.isOn(dataController: statusDataController),
+          tintColor: configuration.display.tintColor(theme: theme)
         )
-        .offset(x: -8)
-      #endif
+      )
+      .offset(x: -8)
+    #endif
       .disabled(isDisabled)
       .opacity(isDisabled ? 0.35 : 1)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(
         configuration.display.accessibilityLabel(
           dataController: statusDataController,
-          privateBoost: privateBoost))
+          privateBoost: privateBoost
+        )
+      )
   }
 
   @ViewBuilder
@@ -97,12 +99,12 @@ struct StatusActionButton: View {
   private func actionImage(for action: StatusRowActionsView.Action) -> some View {
     action
       .image(dataController: statusDataController, privateBoost: privateBoost)
-      #if targetEnvironment(macCatalyst)
-        .font(.scaledBody)
-      #else
-        .font(.body)
-        .dynamicTypeSize(.large)
-      #endif
+    #if targetEnvironment(macCatalyst)
+      .font(.scaledBody)
+    #else
+      .font(.body)
+      .dynamicTypeSize(.large)
+    #endif
   }
 
   private var countValue: Int? {
@@ -110,7 +112,8 @@ struct StatusActionButton: View {
     return configuration.display.count(
       dataController: statusDataController,
       isFocused: isFocused,
-      theme: theme)
+      theme: theme
+    )
   }
 
   private func countView(_ count: Int) -> some View {
@@ -119,12 +122,12 @@ struct StatusActionButton: View {
       .minimumScaleFactor(0.6)
       .contentTransition(.numericText(value: Double(count)))
       .foregroundColor(Color(UIColor.secondaryLabel))
-      #if targetEnvironment(macCatalyst)
-        .font(.scaledFootnote)
-      #else
-        .font(.footnote)
-        .dynamicTypeSize(.medium)
-      #endif
+    #if targetEnvironment(macCatalyst)
+      .font(.scaledFootnote)
+    #else
+      .font(.footnote)
+      .dynamicTypeSize(.medium)
+    #endif
       .monospacedDigit()
       .opacity(count > 0 ? 1 : 0)
   }

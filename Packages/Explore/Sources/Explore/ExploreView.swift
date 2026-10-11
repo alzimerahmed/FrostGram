@@ -33,7 +33,7 @@ public struct ExploreView: View {
   public init() {}
 
   public var body: some View {
-    ScrollViewReader { proxy in
+    ScrollViewReader { _ in
       List {
         scrollToTopView
         if !isLoaded {
@@ -67,7 +67,7 @@ public struct ExploreView: View {
               Spacer()
             }
             #if !os(visionOS)
-              .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowBackground(theme.secondaryBackgroundColor)
             #endif
             .listRowSeparator(.hidden)
             .id(UUID())
@@ -79,7 +79,7 @@ public struct ExploreView: View {
             message: "explore.search.message-\(client.server)"
           )
           #if !os(visionOS)
-            .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
           #endif
           .listRowSeparator(.hidden)
         } else {
@@ -125,22 +125,22 @@ public struct ExploreView: View {
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor.edgesIgnoringSafeArea(.all))
       #endif
-      .navigationTitle("explore.navigation-title")
-      .navigationBarTitleDisplayMode(.inline)
-      .searchable(
-        text: $searchQuery,
-        isPresented: $isSearchPresented,
-        placement: .navigationBarDrawer(displayMode: .always),
-        prompt: Text("explore.search.prompt")
-      )
-      .searchScopes($searchScope) {
-        ForEach(SearchScope.allCases, id: \.self) { scope in
-          Text(scope.localizedString)
+        .navigationTitle("explore.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(
+          text: $searchQuery,
+          isPresented: $isSearchPresented,
+          placement: .navigationBarDrawer(displayMode: .always),
+          prompt: Text("explore.search.prompt")
+        )
+        .searchScopes($searchScope) {
+          ForEach(SearchScope.allCases, id: \.self) { scope in
+            Text(scope.localizedString)
+          }
         }
-      }
-      .task(id: searchQuery) {
-        await search()
-      }
+        .task(id: searchQuery) {
+          await search()
+        }
     }
   }
 
@@ -151,7 +151,8 @@ public struct ExploreView: View {
           status: status,
           client: client,
           routerPath: routerPath,
-          filterContext: .pub)
+          filterContext: .pub
+        )
       )
       .padding(.vertical, 8)
       .redacted(reason: .placeholder)
@@ -186,7 +187,8 @@ extension ExploreView {
       // Relationships require an authenticated account; skip in guest mode.
       if client.isAuth, !suggestedAccounts.isEmpty {
         suggestedAccountsRelationShips = try await client.get(
-          endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
+          endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id))
+        )
       }
       withAnimation {
         isLoaded = true
@@ -219,7 +221,8 @@ extension ExploreView {
       suggestedAccounts: suggestedAccounts,
       trendingTags: trendingTags,
       trendingStatuses: trendingStatuses,
-      trendingLinks: trendingLinks)
+      trendingLinks: trendingLinks
+    )
   }
 
   private func search() async {
@@ -232,8 +235,10 @@ extension ExploreView {
           query: searchQuery,
           type: nil,
           offset: nil,
-          following: nil),
-        forceVersion: .v2)
+          following: nil
+        ),
+        forceVersion: .v2
+      )
       // Relationships require an authenticated account; skip in guest mode.
       if client.isAuth, !results.accounts.isEmpty {
         let relationships: [Relationship] =
@@ -251,7 +256,7 @@ extension ExploreView {
 
   private func fetchNextPage(of type: Search.EntityType) async {
     guard !searchQuery.isEmpty,
-      let results = results[searchQuery]
+          let results = results[searchQuery]
     else { return }
     do {
       let offset =
@@ -269,12 +274,15 @@ extension ExploreView {
           query: searchQuery,
           type: type,
           offset: offset,
-          following: nil),
-        forceVersion: .v2)
+          following: nil
+        ),
+        forceVersion: .v2
+      )
       if client.isAuth, type == .accounts, !newPageResults.accounts.isEmpty {
         let relationships: [Relationship] =
           try await client.get(
-            endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id)))
+            endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id))
+          )
         newPageResults.relationships = relationships
       }
 

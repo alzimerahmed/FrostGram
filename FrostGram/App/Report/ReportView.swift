@@ -22,7 +22,8 @@ public struct ReportView: View {
           TextField(
             "report.comment.placeholder",
             text: $commentText,
-            axis: .vertical)
+            axis: .vertical
+          )
         }
         .listRowBackground(theme.primaryBackgroundColor)
 
@@ -37,34 +38,36 @@ public struct ReportView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isSendingReport = true
-            Task {
-              do {
-                _ = try await client.post(
-                  endpoint: Statuses.report(
-                    accountId: status.account.id,
-                    statusId: status.id,
-                    comment: commentText))
-                dismiss()
-                isSendingReport = false
-              } catch {
-                isSendingReport = false
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              isSendingReport = true
+              Task {
+                do {
+                  _ = try await client.post(
+                    endpoint: Statuses.report(
+                      accountId: status.account.id,
+                      statusId: status.id,
+                      comment: commentText
+                    )
+                  )
+                  dismiss()
+                  isSendingReport = false
+                } catch {
+                  isSendingReport = false
+                }
+              }
+            } label: {
+              if isSendingReport {
+                ProgressView()
+              } else {
+                Text("report.action.send")
               }
             }
-          } label: {
-            if isSendingReport {
-              ProgressView()
-            } else {
-              Text("report.action.send")
-            }
           }
-        }
 
-        CancelToolbarItem()
-      }
+          CancelToolbarItem()
+        }
     }
   }
 }

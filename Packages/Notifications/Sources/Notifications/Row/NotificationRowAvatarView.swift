@@ -22,7 +22,7 @@ struct NotificationRowAvatarView: View {
         )
         .frame(
           width: AvatarView.FrameConfig.status.width / 1.7,
-          height: AvatarView.FrameConfig.status.height / 1.7,
+          height: AvatarView.FrameConfig.status.height / 1.7
         )
         .glassEffect(
           .regular.tint(notificationType.tintColor(isPrivate: status?.visibility == .direct))

@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Env",
       targets: ["Env"]
-    )
+    ),
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
@@ -32,7 +32,7 @@ let package = Package(
         .product(name: "TelemetryDeck", package: "SwiftSDK"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(

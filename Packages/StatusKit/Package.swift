@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "StatusKit",
       targets: ["StatusKit"]
-    )
+    ),
   ],
   dependencies: [
     .package(name: "AppAccount", path: "../AppAccount"),
@@ -39,7 +39,7 @@ let package = Package(
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6),
-        .defaultIsolation(MainActor.self)
+        .defaultIsolation(MainActor.self),
       ]
     ),
     .testTarget(
@@ -49,8 +49,8 @@ let package = Package(
         .product(name: "Models", package: "Models"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
       ]
-    )
+    ),
   ]
 )

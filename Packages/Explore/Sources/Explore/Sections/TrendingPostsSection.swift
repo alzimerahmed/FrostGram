@@ -9,9 +9,9 @@ struct TrendingPostsSection: View {
   @Environment(Theme.self) private var theme
   @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
-  
+
   let trendingStatuses: [Status]
-  
+
   var body: some View {
     Section("explore.section.trending.posts") {
       ForEach(
@@ -23,32 +23,33 @@ struct TrendingPostsSection: View {
             status: status,
             client: client,
             routerPath: routerPath,
-            filterContext: .pub)
+            filterContext: .pub
+          )
         )
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #else
-          .listRowBackground(
-            RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(.background).hoverEffect()
-          )
-          .listRowHoverEffectDisabled()
-        #endif
-        .padding(.vertical, 8)
-      }
-      
-      NavigationLink(value: RouterDestination.trendingTimeline) {
-        Text("see-more")
-          .foregroundColor(theme.tintColor)
-      }
-      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-      #else
+        #else
         .listRowBackground(
           RoundedRectangle(cornerRadius: 8)
             .foregroundStyle(.background).hoverEffect()
         )
         .listRowHoverEffectDisabled()
+        #endif
+        .padding(.vertical, 8)
+      }
+
+      NavigationLink(value: RouterDestination.trendingTimeline) {
+        Text("see-more")
+          .foregroundColor(theme.tintColor)
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(
+        RoundedRectangle(cornerRadius: 8)
+          .foregroundStyle(.background).hoverEffect()
+      )
+      .listRowHoverEffectDisabled()
       #endif
     }
   }

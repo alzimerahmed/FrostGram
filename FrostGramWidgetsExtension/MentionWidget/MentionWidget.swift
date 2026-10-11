@@ -11,7 +11,8 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "Mentions",
       statuses: [.placeholder()],
-      images: [:])
+      images: [:]
+    )
   }
 
   func snapshot(for configuration: MentionsWidgetConfiguration, in context: Context) async
@@ -24,7 +25,8 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
       date: Date(),
       title: "Mentions",
       statuses: [],
-      images: [:])
+      images: [:]
+    )
   }
 
   func timeline(for configuration: MentionsWidgetConfiguration, in context: Context) async
@@ -44,13 +46,16 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
               date: Date(),
               title: "Mentions",
               statuses: [],
-              images: [:])
+              images: [:]
+            ),
           ],
-          policy: .atEnd)
+          policy: .atEnd
+        )
       }
       let client = MastodonClient(
         server: account.account.server,
-        oauthToken: account.account.oauthToken)
+        oauthToken: account.account.oauthToken
+      )
       var excludedTypes = Models.Notification.NotificationType.allCases
       excludedTypes.removeAll(where: { $0 == .mention })
       let notifications: [Models.Notification] =
@@ -59,7 +64,9 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
             minId: nil,
             maxId: nil,
             types: excludedTypes.map(\.rawValue),
-            limit: 5))
+            limit: 5
+          )
+        )
       let statuses = notifications.compactMap { $0.status }
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(
@@ -68,8 +75,10 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: "Mentions",
             statuses: statuses,
-            images: images)
-        ], policy: .atEnd)
+            images: images
+          ),
+        ], policy: .atEnd
+      )
     } catch {
       return Timeline(
         entries: [
@@ -77,9 +86,11 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
             date: Date(),
             title: "Mentions",
             statuses: [],
-            images: [:])
+            images: [:]
+          ),
         ],
-        policy: .atEnd)
+        policy: .atEnd
+      )
     }
   }
 }
@@ -109,5 +120,6 @@ struct MentionsWidget: Widget {
     date: .now,
     title: "Mentions",
     statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-    images: [:])
+    images: [:]
+  )
 }

@@ -7,7 +7,9 @@ enum MetricRange: Int, CaseIterable, Identifiable {
   case days30 = 30
   case days90 = 90
 
-  var id: Int { rawValue }
+  var id: Int {
+    rawValue
+  }
 
   var title: String {
     switch self {
@@ -32,7 +34,9 @@ enum MetricType: String, CaseIterable, Identifiable {
   case reblog
   case mention
 
-  var id: String { rawValue }
+  var id: String {
+    rawValue
+  }
 
   var title: String {
     switch self {
@@ -75,7 +79,9 @@ enum MetricChartStyle: String, CaseIterable, Identifiable {
   case bars
   case line
 
-  var id: String { rawValue }
+  var id: String {
+    rawValue
+  }
 
   var iconName: String {
     switch self {
@@ -89,5 +95,7 @@ struct DailyMetric: Identifiable, Equatable {
   let dayStart: Date
   let count: Int
 
-  var id: Date { dayStart }
+  var id: Date {
+    dayStart
+  }
 }

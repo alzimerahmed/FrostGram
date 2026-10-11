@@ -36,8 +36,8 @@ public struct ServerFilter: Codable, Identifiable, Hashable, Sendable {
   }
 }
 
-extension ServerFilter.Context {
-  public var iconName: String {
+public extension ServerFilter.Context {
+  var iconName: String {
     switch self {
     case .home:
       "rectangle.stack"
@@ -52,7 +52,7 @@ extension ServerFilter.Context {
     }
   }
 
-  public var name: String {
+  var name: String {
     switch self {
     case .home:
       NSLocalizedString("filter.contexts.home", comment: "")
@@ -68,8 +68,8 @@ extension ServerFilter.Context {
   }
 }
 
-extension ServerFilter.Action {
-  public var label: String {
+public extension ServerFilter.Action {
+  var label: String {
     switch self {
     case .warn:
       NSLocalizedString("filter.action.warning", comment: "")

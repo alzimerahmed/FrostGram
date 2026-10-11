@@ -29,12 +29,13 @@ public struct Relationship: Codable, Equatable, Identifiable {
       domainBlocking: false,
       endorsed: false,
       note: "",
-      notifying: false)
+      notifying: false
+    )
   }
 }
 
-extension Relationship {
-  public init(from decoder: Decoder) throws {
+public extension Relationship {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     id = try values.decodeIfPresent(String.self, forKey: .id) ?? ""
     following = try values.decodeIfPresent(Bool.self, forKey: .following) ?? false

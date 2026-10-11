@@ -6,7 +6,7 @@ public enum TimelineItem: Identifiable, Equatable, Sendable {
 
   public var status: Status? {
     switch self {
-    case .status(let status):
+    case let .status(status):
       return status
     default:
       return nil
@@ -15,9 +15,9 @@ public enum TimelineItem: Identifiable, Equatable, Sendable {
 
   public var id: String {
     switch self {
-    case .status(let status):
+    case let .status(status):
       return status.id
-    case .gap(let gap):
+    case let .gap(gap):
       return gap.id
     }
   }
@@ -31,7 +31,7 @@ public struct TimelineGap: Identifiable, Equatable, Sendable {
 
   public init(sinceId: String?, maxId: String) {
     let sinceIdStr = sinceId ?? "start"
-    self.id = "gap-\(sinceIdStr)-\(maxId)"
+    id = "gap-\(sinceIdStr)-\(maxId)"
     self.sinceId = sinceId ?? ""
     self.maxId = maxId
   }

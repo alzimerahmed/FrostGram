@@ -15,7 +15,8 @@ import SwiftUI
       Self.latestCurrentAccountKey = currentAccount.id
       currentClient = .init(
         server: currentAccount.server,
-        oauthToken: currentAccount.oauthToken)
+        oauthToken: currentAccount.oauthToken
+      )
     }
   }
 
@@ -31,11 +32,11 @@ import SwiftUI
 
   init() {
     var defaultAccount = AppAccount(
-      server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
+      server: AppInfo.defaultServer, accountName: nil, oauthToken: nil
+    )
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts
-    if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey })
-    {
+    if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
       defaultAccount = currentAccount
     } else {
       defaultAccount = keychainAccounts.last ?? defaultAccount
@@ -58,10 +59,11 @@ import SwiftUI
     if currentAccount.id == account.id {
       currentAccount =
         availableAccounts.first
-        ?? AppAccount(
-          server: AppInfo.defaultServer,
-          accountName: nil,
-          oauthToken: nil)
+          ?? AppAccount(
+            server: AppInfo.defaultServer,
+            accountName: nil,
+            oauthToken: nil
+          )
     }
   }
 }

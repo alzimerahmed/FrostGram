@@ -9,8 +9,8 @@ public struct Application: Codable, Identifiable, Hashable, Equatable, Sendable 
   public let website: URL?
 }
 
-extension Application {
-  public init(from decoder: Decoder) throws {
+public extension Application {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     name = try values.decodeIfPresent(String.self, forKey: .name) ?? ""

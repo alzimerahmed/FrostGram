@@ -7,7 +7,7 @@ import SwiftUI
 @Observable public class QuickLook {
   public var selectedMediaAttachment: MediaAttachment?
   public var mediaAttachments: [MediaAttachment] = []
-  
+
   @ObservationIgnored
   public var namespace: Namespace.ID?
 

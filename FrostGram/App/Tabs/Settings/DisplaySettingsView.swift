@@ -30,7 +30,8 @@ struct DisplaySettingsView: View {
   private let previewStatusViewModel = StatusRowViewModel(
     status: Status.placeholder(forSettings: true, language: "la"),
     client: MastodonClient(server: ""),
-    routerPath: RouterPath())  // translate from latin button
+    routerPath: RouterPath()
+  ) // translate from latin button
 
   var body: some View {
     ZStack(alignment: .top) {
@@ -52,30 +53,30 @@ struct DisplaySettingsView: View {
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)
       #endif
-      .task(id: localValues.tintColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.tintColor = localValues.tintColor
-      }
-      .task(id: localValues.primaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.primaryBackgroundColor = localValues.primaryBackgroundColor
-      }
-      .task(id: localValues.secondaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
-      }
-      .task(id: localValues.labelColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.labelColor = localValues.labelColor
-      }
-      .task(id: localValues.lineSpacing) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.lineSpacing = localValues.lineSpacing
-      }
-      .task(id: localValues.fontSizeScale) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.fontSizeScale = localValues.fontSizeScale
-      }
+        .task(id: localValues.tintColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.tintColor = localValues.tintColor
+        }
+        .task(id: localValues.primaryBackgroundColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.primaryBackgroundColor = localValues.primaryBackgroundColor
+        }
+        .task(id: localValues.secondaryBackgroundColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
+        }
+        .task(id: localValues.labelColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.labelColor = localValues.labelColor
+        }
+        .task(id: localValues.lineSpacing) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.lineSpacing = localValues.lineSpacing
+        }
+        .task(id: localValues.fontSizeScale) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.fontSizeScale = localValues.fontSizeScale
+        }
       #if !os(visionOS)
         examplePost
       #endif
@@ -98,7 +99,9 @@ struct DisplaySettingsView: View {
         .mask(
           LinearGradient(
             gradient: Gradient(colors: [theme.secondaryBackgroundColor, .clear]),
-            startPoint: .top, endPoint: .bottom))
+            startPoint: .top, endPoint: .bottom
+          )
+        )
     }
   }
 
@@ -111,10 +114,12 @@ struct DisplaySettingsView: View {
       Group {
         ColorPicker("settings.display.theme.tint", selection: $localValues.tintColor)
         ColorPicker(
-          "settings.display.theme.background", selection: $localValues.primaryBackgroundColor)
+          "settings.display.theme.background", selection: $localValues.primaryBackgroundColor
+        )
         ColorPicker(
           "settings.display.theme.secondary-background",
-          selection: $localValues.secondaryBackgroundColor)
+          selection: $localValues.secondaryBackgroundColor
+        )
         ColorPicker("settings.display.theme.text-color", selection: $localValues.labelColor)
       }
       .disabled(theme.followSystemColorScheme)
@@ -133,7 +138,7 @@ struct DisplaySettingsView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -163,14 +168,15 @@ struct DisplaySettingsView: View {
             case .SFRounded:
               theme.chosenFont = UIFont.systemFont(ofSize: 1).rounded()
             }
-          })
+          }
+        )
       ) {
         ForEach(FontState.allCases, id: \.rawValue) { fontState in
           Text(fontState.title).tag(fontState)
         }
       }
       VStack {
-        Slider(value: $localValues.fontSizeScale, in: 0.5...1.5, step: 0.1)
+        Slider(value: $localValues.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
         Text("settings.display.font.scaling-\(String(format: "%.1f", localValues.fontSizeScale))")
           .font(.scaledBody)
       }
@@ -179,7 +185,7 @@ struct DisplaySettingsView: View {
       }
 
       VStack {
-        Slider(value: $localValues.lineSpacing, in: 0.4...10.0, step: 0.2)
+        Slider(value: $localValues.lineSpacing, in: 0.4 ... 10.0, step: 0.2)
         Text(
           "settings.display.font.line-spacing-\(String(format: "%.1f", localValues.lineSpacing))"
         )
@@ -190,7 +196,7 @@ struct DisplaySettingsView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -244,7 +250,9 @@ struct DisplaySettingsView: View {
               },
               set: { newVal in
                 userPreferences.maxReplyIndentation = UInt(newVal)
-              }), in: 1...20, step: 1)
+              }
+            ), in: 1 ... 20, step: 1
+          )
           Text(
             "settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))"
           )
@@ -258,7 +266,7 @@ struct DisplaySettingsView: View {
       Toggle("Compact Layout", isOn: $theme.compactLayoutPadding)
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -277,7 +285,7 @@ struct DisplaySettingsView: View {
           .foregroundStyle(.gray)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
   }
@@ -291,7 +299,7 @@ struct DisplaySettingsView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 

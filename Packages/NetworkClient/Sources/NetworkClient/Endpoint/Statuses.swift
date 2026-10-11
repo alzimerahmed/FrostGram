@@ -25,37 +25,37 @@ public enum Statuses: Endpoint {
     switch self {
     case .postStatus:
       "statuses"
-    case .status(let id):
+    case let .status(id):
       "statuses/\(id)"
-    case .editStatus(let id, _):
+    case let .editStatus(id, _):
       "statuses/\(id)"
-    case .context(let id):
+    case let .context(id):
       "statuses/\(id)/context"
-    case .favorite(let id):
+    case let .favorite(id):
       "statuses/\(id)/favourite"
-    case .unfavorite(let id):
+    case let .unfavorite(id):
       "statuses/\(id)/unfavourite"
-    case .reblog(let id):
+    case let .reblog(id):
       "statuses/\(id)/reblog"
-    case .unreblog(let id):
+    case let .unreblog(id):
       "statuses/\(id)/unreblog"
-    case .rebloggedBy(let id, _):
+    case let .rebloggedBy(id, _):
       "statuses/\(id)/reblogged_by"
-    case .favoritedBy(let id, _):
+    case let .favoritedBy(id, _):
       "statuses/\(id)/favourited_by"
-    case .quotesBy(let id, _):
+    case let .quotesBy(id, _):
       "statuses/\(id)/quotes"
-    case .pin(let id):
+    case let .pin(id):
       "statuses/\(id)/pin"
-    case .unpin(let id):
+    case let .unpin(id):
       "statuses/\(id)/unpin"
-    case .bookmark(let id):
+    case let .bookmark(id):
       "statuses/\(id)/bookmark"
-    case .unbookmark(let id):
+    case let .unbookmark(id):
       "statuses/\(id)/unbookmark"
-    case .history(let id):
+    case let .history(id):
       "statuses/\(id)/history"
-    case .translate(let id, _):
+    case let .translate(id, _):
       "statuses/\(id)/translate"
     case .report:
       "reports"
@@ -64,18 +64,18 @@ public enum Statuses: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .rebloggedBy(_, let maxId):
+    case let .rebloggedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case .favoritedBy(_, let maxId):
+    case let .favoritedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case .quotesBy(_, let maxId):
+    case let .quotesBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case .translate(_, let lang):
+    case let .translate(_, lang):
       if let lang {
         return [.init(name: "lang", value: lang)]
       }
       return nil
-    case .report(let accountId, let statusId, let comment):
+    case let .report(accountId, statusId, comment):
       return [
         .init(name: "account_id", value: accountId),
         .init(name: "status_ids[]", value: statusId),
@@ -88,9 +88,9 @@ public enum Statuses: Endpoint {
 
   public var jsonValue: Encodable? {
     switch self {
-    case .postStatus(let json):
+    case let .postStatus(json):
       json
-    case .editStatus(_, let json):
+    case let .editStatus(_, json):
       json
     default:
       nil

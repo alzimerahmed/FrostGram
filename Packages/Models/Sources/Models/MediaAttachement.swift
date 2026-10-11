@@ -30,19 +30,23 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
       case .image:
         return NSLocalizedString(
           "accessibility.media.supported-type.image.label", bundle: .main,
-          comment: "A localized description of SupportedType.image")
+          comment: "A localized description of SupportedType.image"
+        )
       case .gifv:
         return NSLocalizedString(
           "accessibility.media.supported-type.gifv.label", bundle: .main,
-          comment: "A localized description of SupportedType.gifv")
+          comment: "A localized description of SupportedType.gifv"
+        )
       case .video:
         return NSLocalizedString(
           "accessibility.media.supported-type.video.label", bundle: .main,
-          comment: "A localized description of SupportedType.video")
+          comment: "A localized description of SupportedType.video"
+        )
       case .audio:
         return NSLocalizedString(
           "accessibility.media.supported-type.audio.label", bundle: .main,
-          comment: "A localized description of SupportedType.audio")
+          comment: "A localized description of SupportedType.audio"
+        )
       }
     }
     return nil
@@ -60,7 +64,8 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
       url: url,
       previewUrl: url,
       description: nil,
-      meta: nil)
+      meta: nil
+    )
   }
 
   public static func videoWith(url: URL) -> MediaAttachment {
@@ -70,7 +75,8 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
       url: url,
       previewUrl: url,
       description: nil,
-      meta: nil)
+      meta: nil
+    )
   }
 }
 

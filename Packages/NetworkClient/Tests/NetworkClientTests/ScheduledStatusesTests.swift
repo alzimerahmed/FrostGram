@@ -9,11 +9,12 @@ final class ScheduledStatusesTests: XCTestCase {
     let data = StatusData(
       status: "Hello",
       visibility: .pub,
-      scheduledAt: MastodonClient.iso8601String(from: date))
+      scheduledAt: MastodonClient.iso8601String(from: date)
+    )
 
     let encoder = JSONEncoder()
     encoder.keyEncodingStrategy = .convertToSnakeCase
-    let json = try XCTUnwrap(String(data: try encoder.encode(data), encoding: .utf8))
+    let json = try XCTUnwrap(try String(data: encoder.encode(data), encoding: .utf8))
     XCTAssertTrue(json.contains("\"scheduled_at\""), "expected scheduled_at key in \(json)")
     XCTAssertTrue(json.contains("Z"), "expected ISO 8601 date in \(json)")
   }
@@ -22,7 +23,7 @@ final class ScheduledStatusesTests: XCTestCase {
     let data = StatusData(status: "Hello", visibility: .pub)
     let encoder = JSONEncoder()
     encoder.keyEncodingStrategy = .convertToSnakeCase
-    let json = try XCTUnwrap(String(data: try encoder.encode(data), encoding: .utf8))
+    let json = try XCTUnwrap(try String(data: encoder.encode(data), encoding: .utf8))
     XCTAssertFalse(json.contains("scheduled_at"))
   }
 
@@ -34,12 +35,14 @@ final class ScheduledStatusesTests: XCTestCase {
       ScheduledStatuses.updateScheduledStatus(
         id: "42", json: ScheduledStatusUpdateData(scheduledAt: "2026-01-01T00:00:00.000Z")
       ).path(),
-      "scheduled_statuses/42")
+      "scheduled_statuses/42"
+    )
   }
 
   func testUpdateEndpointCarriesJSON() {
     let endpoint = ScheduledStatuses.updateScheduledStatus(
-      id: "42", json: ScheduledStatusUpdateData(scheduledAt: "2026-01-01T00:00:00.000Z"))
+      id: "42", json: ScheduledStatusUpdateData(scheduledAt: "2026-01-01T00:00:00.000Z")
+    )
     XCTAssertNotNil(endpoint.jsonValue)
     XCTAssertNil(ScheduledStatuses.scheduledStatuses.jsonValue)
   }

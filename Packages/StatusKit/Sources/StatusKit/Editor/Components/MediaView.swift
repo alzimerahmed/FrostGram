@@ -40,16 +40,21 @@ extension StatusEditor {
       }
     }
 
-    private var containers: [MediaContainer] { store.mediaContainers }
+    private var containers: [MediaContainer] {
+      store.mediaContainers
+    }
+
     private let containerHeight: CGFloat = 300
-    private var containerWidth: CGFloat { containerHeight / 1.5 }
+    private var containerWidth: CGFloat {
+      containerHeight / 1.5
+    }
 
     #if targetEnvironment(macCatalyst)
       private var scrollBottomPadding: CGFloat?
     #else
       private var scrollBottomPadding: CGFloat? = 0
     #endif
-    
+
     private var showsScrollIndicators: Bool = false
 
     init(store: EditorStore, editingMediaContainer: Binding<StatusEditor.MediaContainer?>) {
@@ -59,7 +64,7 @@ extension StatusEditor {
 
     private var mediaLayout: some View {
       HStack(alignment: .center, spacing: 8) {
-        ForEach(Array(store.mediaContainers.enumerated()), id: \.offset) { index, container in
+        ForEach(Array(store.mediaContainers.enumerated()), id: \.offset) { _, container in
           makeMediaItem(container)
             .containerRelativeFrame(.horizontal,
                                     count: store.mediaContainers.count == 1 ? 1 : 2,
@@ -77,13 +82,13 @@ extension StatusEditor {
         .fill(.clear)
         .overlay {
           switch container.state {
-          case .pending(let content):
+          case let .pending(content):
             makeLocalMediaView(content: content)
-          case .uploading(let content, let progress):
+          case let .uploading(content, progress):
             makeUploadingView(content: content, progress: progress)
-          case .uploaded(let attachment, _):
+          case let .uploaded(attachment, _):
             makeRemoteMediaView(mediaAttachement: attachment)
-          case .failed(let content, let error):
+          case let .failed(content, error):
             makeErrorView(content: content, error: error)
           }
         }
@@ -120,7 +125,7 @@ extension StatusEditor {
         ProgressView()
       }
     }
-    
+
     private func makeUploadingView(content: MediaContainer.MediaContent, progress: Double) -> some View {
       ZStack(alignment: .center) {
         if let image = content.previewImage {
@@ -138,9 +143,9 @@ extension StatusEditor {
               .progressViewStyle(.linear)
               .padding(.horizontal, 24)
               .frame(maxWidth: .infinity)
-          } else  {
+          } else {
             ProgressView()
-                .progressViewStyle(.circular)
+              .progressViewStyle(.circular)
           }
         }
         .transition(.identity)
@@ -181,7 +186,7 @@ extension StatusEditor {
     @ViewBuilder
     private func makeImageMenu(container: MediaContainer) -> some View {
       switch container.state {
-      case .uploaded(let attachment, _):
+      case let .uploaded(attachment, _):
         if attachment.url != nil {
           if currentInstance.isEditAltTextSupported || !store.mode.isEditing {
             Button {
@@ -190,7 +195,8 @@ extension StatusEditor {
               Label(
                 attachment.description?.isEmpty == false
                   ? "status.editor.description.edit" : "status.editor.description.add",
-                systemImage: "pencil.line")
+                systemImage: "pencil.line"
+              )
             }
           }
         }
@@ -219,7 +225,7 @@ extension StatusEditor {
       }
     }
 
-    private func makeErrorView(content: MediaContainer.MediaContent, error: MediaContainer.MediaError) -> some View {
+    private func makeErrorView(content: MediaContainer.MediaContent, error _: MediaContainer.MediaError) -> some View {
       ZStack {
         if let image = content.previewImage {
           Image(uiImage: image)

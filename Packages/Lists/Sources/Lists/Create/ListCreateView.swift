@@ -68,7 +68,9 @@ public struct ListCreateView: View {
           endpoint: Lists.createList(
             title: title,
             repliesPolicy: repliesPolicy,
-            exclusive: isExclusive))
+            exclusive: isExclusive
+          )
+        )
         await currentAccount.fetchLists()
         dismiss()
       } catch {

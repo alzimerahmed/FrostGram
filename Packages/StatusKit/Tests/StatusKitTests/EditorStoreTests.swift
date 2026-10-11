@@ -79,31 +79,35 @@ private final class MockEditorClient: StatusEditor.AutocompleteService.Client,
 {
   struct DummyError: Error {}
 
-  func searchHashtags(query: String) async throws -> [Tag] { [] }
+  func searchHashtags(query _: String) async throws -> [Tag] {
+    []
+  }
 
-  func searchAccounts(query: String) async throws -> [Account] { [] }
+  func searchAccounts(query _: String) async throws -> [Account] {
+    []
+  }
 
   func uploadMedia(
-    data: Data,
-    mimeType: String,
-    progressHandler: @escaping @Sendable (Double) -> Void
+    data _: Data,
+    mimeType _: String,
+    progressHandler _: @escaping @Sendable (Double) -> Void
   ) async throws -> MediaAttachment? {
     nil
   }
 
-  func fetchMedia(id: String) async throws -> MediaAttachment {
+  func fetchMedia(id _: String) async throws -> MediaAttachment {
     throw DummyError()
   }
 
-  func updateDescription(mediaId: String, description: String) async throws -> MediaAttachment {
+  func updateDescription(mediaId _: String, description _: String) async throws -> MediaAttachment {
     throw DummyError()
   }
 
-  func postStatus(data: StatusData) async throws -> Status {
+  func postStatus(data _: StatusData) async throws -> Status {
     throw DummyError()
   }
 
-  func editStatus(id: String, data: StatusData) async throws -> Status {
+  func editStatus(id _: String, data _: StatusData) async throws -> Status {
     throw DummyError()
   }
 
@@ -111,5 +115,7 @@ private final class MockEditorClient: StatusEditor.AutocompleteService.Client,
     throw DummyError()
   }
 
-  func fetchCustomEmojis() async throws -> [Emoji] { [] }
+  func fetchCustomEmojis() async throws -> [Emoji] {
+    []
+  }
 }

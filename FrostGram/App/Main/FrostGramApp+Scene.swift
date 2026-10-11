@@ -30,7 +30,8 @@ extension FrostGramApp {
           quickLook: quickLook,
           toastCenter: toastCenter,
           namespace: namespace,
-          isSupporter: isSupporter)
+          isSupporter: isSupporter
+        )
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           if let namespace = quickLook.namespace {
             MediaUIView(
@@ -42,8 +43,6 @@ extension FrostGramApp {
             .presentationCornerRadius(16)
             .presentationSizing(.page)
             .withEnvironments()
-          } else {
-            EmptyView()
           }
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
@@ -80,9 +79,9 @@ extension FrostGramApp {
       handleScenePhase(scenePhase: newValue)
     }
     #if targetEnvironment(macCatalyst)
-      .windowResize()
+    .windowResize()
     #elseif os(visionOS)
-      .defaultSize(width: 800, height: 1200)
+    .defaultSize(width: 800, height: 1200)
     #endif
   }
 
@@ -125,7 +124,8 @@ extension FrostGramApp {
         case let .mediaViewer(attachments, selectedAttachment):
           MediaUIView(
             selectedAttachment: selectedAttachment,
-            attachments: attachments)
+            attachments: attachments
+          )
         case .none:
           EmptyView()
         }
@@ -146,28 +146,32 @@ extension FrostGramApp {
         openWindow(
           value: WindowDestinationEditor.prefilledStatusEditor(
             text: postIntent.content ?? "",
-            visibility: userPreferences.postVisibility))
+            visibility: userPreferences.postVisibility
+          )
+        )
       #else
         appRouterPath.presentedSheet = .prefilledStatusEditor(
           text: postIntent.content ?? "",
-          visibility: userPreferences.postVisibility)
+          visibility: userPreferences.postVisibility
+        )
       #endif
     } else if let tabIntent = appIntentService.handledIntent?.intent as? TabIntent {
       selectedTab = tabIntent.tab.toAppTab
     } else if let imageIntent = appIntentService.handledIntent?.intent as? PostImageIntent,
-      let urls = imageIntent.images?.compactMap({ $0.fileURL })
+              let urls = imageIntent.images?.compactMap({ $0.fileURL })
     {
       appRouterPath.presentedSheet = .imageURL(
         urls: urls,
         caption: imageIntent.caption,
         altTexts: imageIntent.altText.map { [$0] },
-        visibility: userPreferences.postVisibility)
+        visibility: userPreferences.postVisibility
+      )
     }
   }
 }
 
 extension Scene {
   func windowResize() -> some Scene {
-    return self.windowResizability(.contentSize)
+    return windowResizability(.contentSize)
   }
 }

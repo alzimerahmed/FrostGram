@@ -20,7 +20,9 @@ func loadStatuses(
         maxId: nil,
         minId: nil,
         offset: nil,
-        limit: 6))
+        limit: 6
+      )
+    )
     statuses = statuses.filter { $0.reblog == nil && !$0.content.asRawText.isEmpty }
     switch widgetFamily {
     case .systemSmall, .systemMedium:

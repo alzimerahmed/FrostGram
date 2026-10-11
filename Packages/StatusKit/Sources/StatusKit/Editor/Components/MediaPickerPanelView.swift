@@ -78,7 +78,8 @@
                   if let image {
                     store.processCameraPhoto(image: image)
                   }
-                })
+                }
+              )
             )
             .background(.black)
           }
@@ -171,7 +172,7 @@
           try? dataResult.write(to: tempURL)
           let compressor = Compressor()
           if let compressedData = await compressor.compressImageFrom(url: tempURL),
-            let image = UIImage(data: compressedData)
+             let image = UIImage(data: compressedData)
           {
             store.processCameraPhoto(image: image)
             return
@@ -196,7 +197,7 @@
       ScrollView(.horizontal) {
         LazyHStack(spacing: 12) {
           if assets.isEmpty {
-            ForEach(0..<6, id: \.self) { _ in
+            ForEach(0 ..< 6, id: \.self) { _ in
               RoundedRectangle(cornerRadius: 16)
                 .fill(.secondary.opacity(0.2))
                 .frame(width: thumbnailSize, height: thumbnailSize)

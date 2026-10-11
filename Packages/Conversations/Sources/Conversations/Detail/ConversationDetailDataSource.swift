@@ -88,17 +88,17 @@ public final class ConversationDetailDataSource {
     var hasChanges = false
 
     if let event = event as? StreamEventStatusUpdate,
-      let index = messages.firstIndex(where: { $0.id == event.status.id })
+       let index = messages.firstIndex(where: { $0.id == event.status.id })
     {
       messages[index] = event.status
       hasChanges = true
     } else if let event = event as? StreamEventDelete,
-      let index = messages.firstIndex(where: { $0.id == event.status })
+              let index = messages.firstIndex(where: { $0.id == event.status })
     {
       messages.remove(at: index)
       hasChanges = true
     } else if let event = event as? StreamEventConversation,
-      event.conversation.id == conversation.id
+              event.conversation.id == conversation.id
     {
       conversation = event.conversation
       if let lastStatus = conversation.lastStatus {

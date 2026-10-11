@@ -12,7 +12,7 @@ struct StatusRowAccessibilityLabel {
 
   var isReply: Bool {
     if let accountId = viewModel.status.inReplyToAccountId,
-      viewModel.status.mentions.contains(where: { $0.id == accountId })
+       viewModel.status.mentions.contains(where: { $0.id == accountId })
     {
       return true
     }
@@ -107,21 +107,21 @@ struct StatusRowAccessibilityLabel {
       let showPercentage = poll.expired || poll.voted ?? false
       let title: LocalizedStringKey =
         poll.expired
-        ? "accessibility.status.poll.finished.label"
-        : "accessibility.status.poll.active.label"
+          ? "accessibility.status.poll.finished.label"
+          : "accessibility.status.poll.active.label"
 
       return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
         let (index, option) = pair
         let selected = poll.ownVotes?.contains(index) ?? false
         let percentage =
           poll.safeVotersCount > 0 && option.votesCount != nil
-          ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
-          : 0
+            ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
+            : 0
 
         text =
           text + Text(selected ? "accessibility.status.poll.selected.label" : "") + Text(", ")
-          + Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)")
-          + Text(", ") + Text(option.title) + Text(showPercentage ? ", \(percentage)%. " : ". ")
+            + Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)")
+            + Text(", ") + Text(option.title) + Text(showPercentage ? ", \(percentage)%. " : ". ")
       }
     }
     return Text("")

@@ -1,6 +1,5 @@
 import Models
 import NetworkClient
-
 @testable import Timeline
 
 actor MockTimelineStatusFetcher: TimelineStatusFetching {
@@ -13,24 +12,24 @@ actor MockTimelineStatusFetcher: TimelineStatusFetching {
     self.nextPages = nextPages
   }
 
-  func fetchFirstPage(client: MastodonClient?, timeline: TimelineFilter) async throws -> [Status] {
+  func fetchFirstPage(client _: MastodonClient?, timeline _: TimelineFilter) async throws -> [Status] {
     firstPage
   }
 
   func fetchNewPages(
-    client: MastodonClient?,
-    timeline: TimelineFilter,
-    minId: String,
-    maxPages: Int
+    client _: MastodonClient?,
+    timeline _: TimelineFilter,
+    minId _: String,
+    maxPages _: Int
   ) async throws -> [Status] {
     []
   }
 
   func fetchNextPage(
-    client: MastodonClient?,
-    timeline: TimelineFilter,
-    lastId: String,
-    offset: Int
+    client _: MastodonClient?,
+    timeline _: TimelineFilter,
+    lastId _: String,
+    offset _: Int
   ) async throws -> [Status] {
     defer { nextPageCalls += 1 }
     guard nextPageCalls < nextPages.count else { return [] }

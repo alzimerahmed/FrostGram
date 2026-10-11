@@ -5,9 +5,9 @@ import SwiftUI
 
 struct FamiliarFollowersView: View {
   @Environment(RouterPath.self) private var routerPath
-  
+
   let familiarFollowers: [Account]
-  
+
   var body: some View {
     if !familiarFollowers.isEmpty {
       VStack(alignment: .leading, spacing: 2) {

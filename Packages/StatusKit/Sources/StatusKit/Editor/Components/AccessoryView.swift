@@ -24,14 +24,14 @@ extension StatusEditor {
     private var canAddNewStore: Bool {
       guard followUpStores.count < 5 else { return false }
 
-      if followUpStores.isEmpty,  // there is only the main store in the editor
-        !focusedStore.statusText.string.isEmpty  // focusedStore is also mainStore
+      if followUpStores.isEmpty, // there is only the main store in the editor
+         !focusedStore.statusText.string.isEmpty // focusedStore is also mainStore
       {
         return true
       }
 
       if let lastStore = followUpStores.last,
-        !lastStore.statusText.string.isEmpty
+         !lastStore.statusText.string.isEmpty
       {
         return true
       }
@@ -154,7 +154,8 @@ extension StatusEditor {
                   if let image {
                     store.processCameraPhoto(image: image)
                   }
-                })
+                }
+              )
             )
             .background(.black)
           }

@@ -7,10 +7,10 @@ struct AccountStatsView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
-  
+
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
-  
+
   var body: some View {
     Group {
       Button {
@@ -46,7 +46,7 @@ struct AccountStatsView: View {
     }
     .offset(y: 20)
   }
-  
+
   private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false)
     -> some View
   {

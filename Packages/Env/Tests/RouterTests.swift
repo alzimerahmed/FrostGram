@@ -1,13 +1,12 @@
+@testable import Env
 import NetworkClient
 import SwiftUI
 import Testing
 import XCTest
 
-@testable import Env
-
 @Test
 @MainActor
-func testRouterThreadsURL() {
+func routerThreadsURL() {
   let router = RouterPath()
   let url = URL(string: "https://www.threads.net/@dimillian")!
   _ = router.handle(url: url)
@@ -16,11 +15,12 @@ func testRouterThreadsURL() {
 
 @Test
 @MainActor
-func testRouterLocalStatusURL() {
+func routerLocalStatusURL() {
   let router = RouterPath()
   let client = MastodonClient(
     server: "mastodon.social",
-    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
+    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0)
+  )
   client.addConnections(["mastodon.social"])
   router.client = client
   let url = URL(string: "https://mastodon.social/status/1010384")!
@@ -30,11 +30,12 @@ func testRouterLocalStatusURL() {
 
 @Test
 @MainActor
-func testRouterRemoteStatusURL() {
+func routerRemoteStatusURL() {
   let router = RouterPath()
   let client = MastodonClient(
     server: "mastodon.social",
-    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
+    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0)
+  )
   client.addConnections(["mastodon.social", "mastodon.online"])
   router.client = client
   let url = URL(string: "https://mastodon.online/status/1010384")!
@@ -44,7 +45,7 @@ func testRouterRemoteStatusURL() {
 
 @Test
 @MainActor
-func testRouteRandomURL() {
+func routeRandomURL() {
   let router = RouterPath()
   let url = URL(string: "https://theweb.com/test/test/one")!
   _ = router.handle(url: url)

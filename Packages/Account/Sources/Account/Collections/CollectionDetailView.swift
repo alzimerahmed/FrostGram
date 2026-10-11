@@ -34,12 +34,12 @@ public struct CollectionDetailView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle(displayedCollection.name)
-    .navigationBarTitleDisplayMode(.inline)
-    .task(id: isSensitiveContentRevealed) {
-      guard !isSensitiveContentHidden else { return }
-      await fetchAccounts()
-    }
+      .navigationTitle(displayedCollection.name)
+      .navigationBarTitleDisplayMode(.inline)
+      .task(id: isSensitiveContentRevealed) {
+        guard !isSensitiveContentHidden else { return }
+        await fetchAccounts()
+      }
   }
 
   private var displayedCollection: AccountCollection {
@@ -60,7 +60,7 @@ public struct CollectionDetailView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -78,7 +78,7 @@ public struct CollectionDetailView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -102,7 +102,7 @@ public struct CollectionDetailView: View {
       }
     }
     #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -111,7 +111,8 @@ public struct CollectionDetailView: View {
     didError = false
     do {
       let response: AccountCollectionResponse = try await client.get(
-        endpoint: Collections.collection(id: collection.id))
+        endpoint: Collections.collection(id: collection.id)
+      )
       fetchedCollection = response.collection
       let acceptedAccountIds = Set(response.collection.acceptedAccountIds)
       accounts = response.accounts.filter { acceptedAccountIds.contains($0.id) }

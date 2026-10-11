@@ -12,7 +12,7 @@ public struct EditRelationshipNoteView: View {
   let accountId: String
   let relationship: Relationship?
   let onSave: () -> Void
-  
+
   @State private var note: String = ""
   @State private var isSaving: Bool = false
   @State private var saveError: Bool = false
@@ -27,12 +27,12 @@ public struct EditRelationshipNoteView: View {
           .frame(minHeight: 150, maxHeight: 150, alignment: .top)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       #endif
       .navigationTitle("account.relation.note.edit")
       .navigationBarTitleDisplayMode(.inline)
@@ -84,7 +84,9 @@ extension EditRelationshipNoteView {
     do {
       _ = try await client.post(
         endpoint: Accounts.relationshipNote(
-          id: accountId, json: RelationshipNoteData(note: note)))
+          id: accountId, json: RelationshipNoteData(note: note)
+        )
+      )
       isSaving = false
     } catch {
       isSaving = false

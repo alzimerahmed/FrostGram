@@ -36,7 +36,8 @@ func makeStatus(id: String, hidden: Bool) -> Status {
     tags: base.tags,
     quote: nil,
     quotesCount: nil,
-    quoteApproval: nil)
+    quoteApproval: nil
+  )
 }
 
 func makeStatus(
@@ -78,16 +79,17 @@ func makeStatus(
     tags: base.tags,
     quote: quote,
     quotesCount: base.quotesCount,
-    quoteApproval: base.quoteApproval)
+    quoteApproval: base.quoteApproval
+  )
 }
 
 func makeQuote(quotedStatusId: String) throws -> Quote {
   let json = """
-    {
-      "state": "accepted",
-      "quoted_status_id": "\(quotedStatusId)"
-    }
-    """
+  {
+    "state": "accepted",
+    "quoted_status_id": "\(quotedStatusId)"
+  }
+  """
   let decoder = JSONDecoder()
   decoder.keyDecodingStrategy = .convertFromSnakeCase
   return try decoder.decode(Quote.self, from: Data(json.utf8))
@@ -95,16 +97,16 @@ func makeQuote(quotedStatusId: String) throws -> Quote {
 
 private func makeHiddenFilter() -> Filtered? {
   let json = """
-    {
-      "filter": {
-        "id": "filter",
-        "title": "Hidden",
-        "context": ["home"],
-        "filterAction": "hide"
-      },
-      "keywordMatches": null
-    }
-    """
+  {
+    "filter": {
+      "id": "filter",
+      "title": "Hidden",
+      "context": ["home"],
+      "filterAction": "hide"
+    },
+    "keywordMatches": null
+  }
+  """
 
   return try? JSONDecoder().decode(Filtered.self, from: Data(json.utf8))
 }

@@ -6,9 +6,9 @@ import SwiftUI
 struct TrendingTagsSection: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
-  
+
   let trendingTags: [Tag]
-  
+
   var body: some View {
     Section("explore.section.trending.tags") {
       ForEach(
@@ -16,15 +16,15 @@ struct TrendingTagsSection: View {
           .prefix(upTo: trendingTags.count > 5 ? 5 : trendingTags.count)
       ) { tag in
         TagRowView(tag: tag)
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #else
-            .listRowBackground(
-              RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.background).hoverEffect()
-            )
-            .listRowHoverEffectDisabled()
-          #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #else
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect()
+          )
+          .listRowHoverEffectDisabled()
+        #endif
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: trendingTags)) {
@@ -32,13 +32,13 @@ struct TrendingTagsSection: View {
           .foregroundColor(theme.tintColor)
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #else
-        .listRowBackground(
-          RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(.background).hoverEffect()
-        )
-        .listRowHoverEffectDisabled()
+      .listRowBackground(
+        RoundedRectangle(cornerRadius: 8)
+          .foregroundStyle(.background).hoverEffect()
+      )
+      .listRowHoverEffectDisabled()
       #endif
     }
   }

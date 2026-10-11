@@ -52,7 +52,8 @@ struct AccountSettingsView: View {
         }) {
           NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
             Label(
-              "settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
+              "settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right"
+            )
           }
         }
       }
@@ -60,12 +61,14 @@ struct AccountSettingsView: View {
 
       Section {
         Label(
-          "settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
+          "settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive"
+        )
         Button("settings.account.action.delete-cache", role: .destructive) {
           Task {
             await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
             cachedPostsCount = await timelineCache.cachedPostsCount(
-              for: appAccountsManager.currentClient.id)
+              for: appAccountsManager.currentClient.id
+            )
           }
         }
       }
@@ -114,7 +117,8 @@ struct AccountSettingsView: View {
     }
     .task {
       cachedPostsCount = await timelineCache.cachedPostsCount(
-        for: appAccountsManager.currentClient.id)
+        for: appAccountsManager.currentClient.id
+      )
     }
     .navigationTitle(account.safeDisplayName)
     #if !os(visionOS)

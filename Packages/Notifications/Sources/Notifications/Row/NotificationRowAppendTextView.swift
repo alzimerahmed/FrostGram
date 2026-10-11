@@ -6,11 +6,11 @@ nonisolated func NotificationRowAppendTextView(notification: ConsolidatedNotific
     let othersCount: Int
     // For favorites and reblogs, use the actual count from the status
     if notification.type == .favourite, let favCount = notification.status?.favouritesCount,
-      favCount > 1
+       favCount > 1
     {
       othersCount = favCount - 1
     } else if notification.type == .reblog, let reblogCount = notification.status?.reblogsCount,
-      reblogCount > 1
+              reblogCount > 1
     {
       othersCount = reblogCount - 1
     } else {

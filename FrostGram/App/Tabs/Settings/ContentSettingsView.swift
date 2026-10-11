@@ -29,7 +29,7 @@ struct ContentSettingsView: View {
           Text("settings.content.media.show.alt")
         }
         Toggle(isOn: $userPreferences.animateEmojis) {
-            Text("settings.other.animate-emojis")
+          Text("settings.other.animate-emojis")
         }
         Toggle(isOn: $userPreferences.isMediaPreviewsEnabled) {
           Text("settings.content.media.previews")
@@ -40,7 +40,7 @@ struct ContentSettingsView: View {
         Text("settings.content.media.previews-hint")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.sharing") {
@@ -55,7 +55,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.instance-settings") {
@@ -64,7 +64,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
       .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
@@ -98,7 +98,7 @@ struct ContentSettingsView: View {
         Text("settings.content.collapse-long-posts-hint")
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.posting") {
@@ -142,7 +142,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("timeline.content-filter.title") {
@@ -166,7 +166,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("Notifications") {
@@ -175,7 +175,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.content.navigation-title")

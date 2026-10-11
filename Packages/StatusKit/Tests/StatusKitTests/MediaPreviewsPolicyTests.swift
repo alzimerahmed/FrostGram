@@ -25,14 +25,19 @@ final class MediaPreviewsPolicyTests: XCTestCase {
 
   func testPlaceholderSymbolPerAttachmentType() {
     XCTAssertEqual(
-      MediaPreviewsPolicy.placeholderSystemImage(for: .image), "photo")
+      MediaPreviewsPolicy.placeholderSystemImage(for: .image), "photo"
+    )
     XCTAssertEqual(
-      MediaPreviewsPolicy.placeholderSystemImage(for: .video), "video")
+      MediaPreviewsPolicy.placeholderSystemImage(for: .video), "video"
+    )
     XCTAssertEqual(
-      MediaPreviewsPolicy.placeholderSystemImage(for: .gifv), "video")
+      MediaPreviewsPolicy.placeholderSystemImage(for: .gifv), "video"
+    )
     XCTAssertEqual(
-      MediaPreviewsPolicy.placeholderSystemImage(for: .audio), "waveform")
+      MediaPreviewsPolicy.placeholderSystemImage(for: .audio), "waveform"
+    )
     XCTAssertEqual(
-      MediaPreviewsPolicy.placeholderSystemImage(for: nil), "photo")
+      MediaPreviewsPolicy.placeholderSystemImage(for: nil), "photo"
+    )
   }
 }

@@ -1,7 +1,7 @@
 import Models
 import NetworkClient
-import OSLog
 import Observation
+import OSLog
 import SwiftUI
 
 public enum AccountsListMode {
@@ -38,8 +38,8 @@ public enum AccountsListMode {
 
   let mode: AccountsListMode
 
-  public enum State {
-    public enum PagingState {
+  enum State {
+    enum PagingState {
       case hasNextPage, none
     }
 
@@ -47,7 +47,8 @@ public enum AccountsListMode {
     case display(
       accounts: [Account],
       relationships: [Relationship],
-      nextPageState: PagingState)
+      nextPageState: PagingState
+    )
     case error(error: Error)
   }
 
@@ -78,7 +79,9 @@ public enum AccountsListMode {
         (accounts, link) = try await client.getWithLink(
           endpoint: Accounts.followers(
             id: accountId,
-            maxId: nil))
+            maxId: nil
+          )
+        )
       case let .following(accountId):
         self.accountId = accountId
         let account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
@@ -86,35 +89,41 @@ public enum AccountsListMode {
         (accounts, link) = try await client.getWithLink(
           endpoint: Accounts.following(
             id: accountId,
-            maxId: nil))
+            maxId: nil
+          )
+        )
       case let .rebloggedBy(statusId):
         (accounts, link) = try await client.getWithLink(
           endpoint: Statuses.rebloggedBy(
             id: statusId,
-            maxId: nil))
+            maxId: nil
+          )
+        )
       case let .favoritedBy(statusId):
         (accounts, link) = try await client.getWithLink(
           endpoint: Statuses.favoritedBy(
             id: statusId,
-            maxId: nil))
+            maxId: nil
+          )
+        )
       case let .accountsList(accounts):
         self.accounts = accounts
         link = nil
-
       case .blocked:
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
-
       case .muted:
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
       }
       nextPageId = link?.maxId
       relationships = try await client.get(
         endpoint:
-          Accounts.relationships(ids: accounts.map(\.id)))
+        Accounts.relationships(ids: accounts.map(\.id))
+      )
       state = .display(
         accounts: accounts,
         relationships: relationships,
-        nextPageState: link?.maxId != nil ? .hasNextPage : .none)
+        nextPageState: link?.maxId != nil ? .hasNextPage : .none
+      )
     } catch {}
   }
 
@@ -127,29 +136,35 @@ public enum AccountsListMode {
       (newAccounts, link) = try await client.getWithLink(
         endpoint: Accounts.followers(
           id: accountId,
-          maxId: nextPageId))
+          maxId: nextPageId
+        )
+      )
     case let .following(accountId):
       (newAccounts, link) = try await client.getWithLink(
         endpoint: Accounts.following(
           id: accountId,
-          maxId: nextPageId))
+          maxId: nextPageId
+        )
+      )
     case let .rebloggedBy(statusId):
       (newAccounts, link) = try await client.getWithLink(
         endpoint: Statuses.rebloggedBy(
           id: statusId,
-          maxId: nextPageId))
+          maxId: nextPageId
+        )
+      )
     case let .favoritedBy(statusId):
       (newAccounts, link) = try await client.getWithLink(
         endpoint: Statuses.favoritedBy(
           id: statusId,
-          maxId: nextPageId))
+          maxId: nextPageId
+        )
+      )
     case .accountsList:
       newAccounts = []
       link = nil
-
     case .blocked:
       (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
-
     case .muted:
       (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
     }
@@ -163,7 +178,8 @@ public enum AccountsListMode {
     state = .display(
       accounts: accounts,
       relationships: relationships,
-      nextPageState: link?.maxId != nil ? .hasNextPage : .none)
+      nextPageState: link?.maxId != nil ? .hasNextPage : .none
+    )
   }
 
   func search() async {
@@ -176,8 +192,10 @@ public enum AccountsListMode {
           query: searchQuery,
           type: .accounts,
           offset: nil,
-          following: true),
-        forceVersion: .v2)
+          following: true
+        ),
+        forceVersion: .v2
+      )
       let relationships: [Relationship] =
         try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
       results.relationships = relationships
@@ -185,7 +203,8 @@ public enum AccountsListMode {
         state = .display(
           accounts: results.accounts,
           relationships: relationships,
-          nextPageState: .none)
+          nextPageState: .none
+        )
       }
     } catch {}
   }

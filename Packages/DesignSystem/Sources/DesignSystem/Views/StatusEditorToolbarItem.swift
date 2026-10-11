@@ -3,8 +3,8 @@ import Models
 import SwiftUI
 
 @MainActor
-extension View {
-  public func statusEditorToolbarItem(
+public extension View {
+  func statusEditorToolbarItem(
     routerPath _: RouterPath,
     visibility: Models.Visibility
   ) -> some ToolbarContent {
@@ -13,8 +13,8 @@ extension View {
 }
 
 @MainActor
-extension ToolbarContent {
-  public func statusEditorToolbarItem(
+public extension ToolbarContent {
+  func statusEditorToolbarItem(
     routerPath _: RouterPath,
     visibility: Models.Visibility
   ) -> some ToolbarContent {

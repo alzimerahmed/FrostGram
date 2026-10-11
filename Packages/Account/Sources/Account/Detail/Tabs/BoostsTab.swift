@@ -18,7 +18,7 @@ struct BoostsTab {
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account _: Account?
   ) -> some View {
     AnyStatusesListView(
       fetcher: fetcher,
@@ -35,7 +35,7 @@ extension BoostsTab: @MainActor AccountTabProtocol {}
 private class BoostsTabFetcher: AccountTabFetcher {
   var boosts: [Status] = []
 
-  override func fetchNewestStatuses(pullToRefresh: Bool) async {
+  override func fetchNewestStatuses(pullToRefresh _: Bool) async {
     do {
       statusesState = .loading
       statuses = try await client.get(

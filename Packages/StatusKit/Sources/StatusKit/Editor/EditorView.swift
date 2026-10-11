@@ -81,7 +81,7 @@ extension StatusEditor {
         }
       }
       #if !os(visionOS)
-        .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
+      .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
       #endif
       .focused($editorFocusState, equals: assignedFocusState)
       .onAppear {
@@ -111,7 +111,8 @@ extension StatusEditor {
               transition: transition,
               routerPath: RouterPath(),
               accountCreationEnabled: false,
-              avatarConfig: .status)
+              avatarConfig: .status
+            )
           } else {
             AvatarView(account.avatar, config: AvatarView.FrameConfig.status)
               .environment(theme)
@@ -131,7 +132,7 @@ extension StatusEditor {
 
           Spacer()
 
-          if case .followUp(let id) = assignedFocusState {
+          if case let .followUp(id) = assignedFocusState {
             Button {
               followUpStores.removeAll { $0.id == id }
             } label: {
@@ -168,7 +169,8 @@ extension StatusEditor {
       .placeholder(
         String(
           localized: isMain
-            ? "status.editor.text.placeholder" : "status.editor.follow-up.text.placeholder")
+            ? "status.editor.text.placeholder" : "status.editor.follow-up.text.placeholder"
+        )
       )
       .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
       .padding(.horizontal, .layoutPadding)
@@ -184,7 +186,8 @@ extension StatusEditor {
             status: status,
             client: client,
             routerPath: RouterPath(),
-            showActions: false),
+            showActions: false
+          ),
           context: .timeline
         )
         .accessibilityLabel(status.content.asRawText)
@@ -218,7 +221,6 @@ extension StatusEditor {
       }
     }
 
-    @ViewBuilder
     private var characterCountAndLangView: some View {
       HStack(alignment: .center) {
         if #available(iOS 26.0, *) {
@@ -239,7 +241,6 @@ extension StatusEditor {
           Spacer()
           characterCount
         }
-
       }
       .padding(.vertical, 8)
       .padding(.leading, .layoutPadding)
@@ -269,7 +270,8 @@ extension StatusEditor {
       } label: {
         Image(
           systemName: store.spoilerOn
-            ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+            ? "exclamationmark.triangle.fill" : "exclamationmark.triangle"
+        )
       }
       .buttonStyle(.bordered)
       .accessibilityLabel("accessibility.editor.button.spoiler")
@@ -279,7 +281,7 @@ extension StatusEditor {
     private var characterCount: some View {
       let value =
         (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500)
-        + store.statusTextCharacterLength
+          + store.statusTextCharacterLength
       Text("\(value)")
         .contentTransition(.numericText(value: Double(value)))
         .foregroundColor(value < 0 ? .red : .secondary)
@@ -308,7 +310,6 @@ extension StatusEditor {
         #endif
         NotificationCenter.default.post(name: .shareSheetClose, object: nil)
       }
-
     }
   }
 }

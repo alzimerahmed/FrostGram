@@ -34,8 +34,8 @@ extension StatusEditor {
               )
             )
           } else if let content = content as? ImageFileTranseferable,
-            let compressedData = await compressor.compressImageFrom(url: content.url),
-            let image = UIImage(data: compressedData)
+                    let compressedData = await compressor.compressImageFrom(url: content.url),
+                    let image = UIImage(data: compressedData)
           {
             containers.append(
               MediaContainer.pending(
