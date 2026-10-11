@@ -21,12 +21,7 @@ struct ToolbarTab: ToolbarContent {
         visibility: userPreferences.postVisibility)
       if #available(iOS 26.0, *) {
         #if os(iOS) && !targetEnvironment(macCatalyst)
-          if #available(iOS 27.1, *) {
-            accountToolbarItem
-              .axisBehavior(.verticalPreferred)
-          } else {
-            accountToolbarItem
-          }
+          accountToolbarItem
         #else
           accountToolbarItem
         #endif
