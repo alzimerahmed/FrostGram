@@ -27,16 +27,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scheme: [ModelsTests, NetworkClientTests, TimelineTests, EnvTests, AccountTests]
+        include:
+          - { package: Packages/Models, scheme: ModelsTests }
+          - { package: Packages/NetworkClient, scheme: NetworkTests }
+          - { package: Packages/Timeline, scheme: TimelineTests }
+          - { package: Packages/Account, scheme: AccountTests }
+          - { package: Packages/StatusKit, scheme: StatusKitTests }
     steps:
       - uses: actions/checkout@v4
       - name: Run package tests
         run: |
           xcodebuild test \
-            -project IceCubesApp.xcodeproj \
             -scheme ${{ matrix.scheme }} \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
             CODE_SIGNING_ALLOWED=NO
+        working-directory: ${{ matrix.package }}
 
   build:
     name: Build app (unsigned)

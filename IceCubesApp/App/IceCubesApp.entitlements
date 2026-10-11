@@ -28,7 +28,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)$(BUNDLE_ID_PREFIX).IceCubesApp</string>
+		<string>$(AppIdentifierPrefix)$(BUNDLE_ID_PREFIX).FrostGram</string>
 	</array>
 </dict>
 </plist>

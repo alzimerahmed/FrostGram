@@ -9,7 +9,7 @@ public enum DeepLUserAPIHandler {
   private static var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG && !targetEnvironment(simulator)
-      keychain.accessGroup = AppInfo.keychainGroup
+      keychain.accessGroup = AppInfo.keychainGroup.isEmpty ? nil : AppInfo.keychainGroup
     #endif
     return keychain
   }

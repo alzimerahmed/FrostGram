@@ -13,7 +13,7 @@ assignees: ''
 
  - OS: 
  <!-- [e.g. iOS vX.Y.Z] -->
- - IceCubesApp version: 
+ - FrostGram version: 
  <!-- [e.g. IceCubesApp vX.Y.Z] -->
 
 ## Description
