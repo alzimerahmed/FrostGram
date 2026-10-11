@@ -55,7 +55,7 @@ extension StatusEditor {
         language: input.selectedLanguage,
         mediaAttributes: input.pendingMediaAttributes,
         quotedStatusId: input.embeddedStatusId,
-        scheduledAt: scheduledAt.map(Statuses.iso8601String(from:))
+        scheduledAt: scheduledAt.map(MastodonClient.iso8601String(from:))
       )
     }
 
