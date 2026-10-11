@@ -32,7 +32,6 @@ struct OnboardingView: View {
   @State private var instanceSocialClient = InstanceSocialClient()
   @State private var instance: Instance?
   @State private var isLoadingInstance = false
-  @State private var isSigningIn = false
   @State private var showAddAccount = false
   @State private var searchQuery = ""
   @State private var searchTask: Task<Void, Never>?
@@ -79,12 +78,12 @@ struct OnboardingView: View {
     .sheet(isPresented: $showAddAccount) {
       AddAccountView(initialServer: selectedServer ?? "")
         .withEnvironments()
-        .onChange(of: showAddAccount) { _, isShown in
-          if !isShown, hasLoggedInAccount {
-            onboarding.send(.signInCompleted)
-            dismiss()
-          }
-        }
+    }
+    .onChange(of: showAddAccount) { _, isShown in
+      if !isShown, hasLoggedInAccount {
+        onboarding.send(.signInCompleted)
+        dismiss()
+      }
     }
   }
 
