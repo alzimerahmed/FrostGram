@@ -2,7 +2,7 @@ import Foundation
 
 extension StatusEditor {
   /// What the composer should do about missing alt text on attached media.
-  public enum AltTextReminderAction: Equatable {
+  public nonisolated enum AltTextReminderAction: Equatable {
     /// Nothing to remind about (no media, all media described, or reminders off).
     case none
     /// Show a dismissible reminder banner while composing.
@@ -12,7 +12,7 @@ extension StatusEditor {
   /// Pure decision logic for alt-text reminders (Gap #9).
   /// Local-only check: no network calls, no telemetry — the reminder is computed
   /// from the composer state and the user's own preferences.
-  public struct AltTextReminderPolicy {
+  public nonisolated struct AltTextReminderPolicy {
     /// Reminder to show while composing: a banner when media is attached but
     /// at least one attachment lacks a description and the reminder setting is on.
     /// When `requiresAltText` is on, the hard block in `PostingService` already
