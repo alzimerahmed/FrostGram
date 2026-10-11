@@ -71,6 +71,7 @@ extension StatusEditor {
             textInput
             pollView
             characterCountAndLangView
+            altTextReminderBanner
             MediaView(store: store, editingMediaContainer: $editingMediaContainer)
             embeddedStatus
           }
@@ -141,6 +142,20 @@ extension StatusEditor {
           }
         }
         .padding(.horizontal, .layoutPadding)
+      }
+    }
+
+    @ViewBuilder
+    private var altTextReminderBanner: some View {
+      if store.altTextReminderAction == .banner, !store.isAltTextBannerDismissed {
+        AltTextReminderBanner(
+          onAddAltText: {
+            if let container = store.firstMediaContainerMissingDescription {
+              editingMediaContainer = container
+            }
+          },
+          onDismiss: { store.isAltTextBannerDismissed = true }
+        )
       }
     }
 

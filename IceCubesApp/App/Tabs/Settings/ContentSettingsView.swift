@@ -136,6 +136,10 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.appRequireAltText) {
           Text("settings.content.require-alt-text")
         }
+
+        Toggle(isOn: $userPreferences.isAltTextReminderEnabled) {
+          Text("settings.content.alt-text-reminder")
+        }
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

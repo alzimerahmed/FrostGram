@@ -25,6 +25,7 @@ import SwiftUI
       Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
     @AppStorage("app_require_alt_text") public var appRequireAltText = false
+    @AppStorage("alt-text-reminder-enabled") public var isAltTextReminderEnabled = true
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("media-previews-enabled") public var isMediaPreviewsEnabled = true
     @AppStorage("animate_emojis") public var animateEmojis = true
@@ -209,6 +210,13 @@ import SwiftUI
   public var appRequireAltText: Bool {
     didSet {
       storage.appRequireAltText = appRequireAltText
+    }
+  }
+
+  /// Remind me to add alt text to media before posting (local-only check, default on).
+  public var isAltTextReminderEnabled: Bool {
+    didSet {
+      storage.isAltTextReminderEnabled = isAltTextReminderEnabled
     }
   }
 
@@ -556,6 +564,7 @@ import SwiftUI
     appDefaultReplyVisibility = storage.appDefaultReplyVisibility
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
     appRequireAltText = storage.appRequireAltText
+    isAltTextReminderEnabled = storage.isAltTextReminderEnabled
     autoPlayVideo = storage.autoPlayVideo
     isMediaPreviewsEnabled = storage.isMediaPreviewsEnabled
     animateEmojis = storage.animateEmojis

@@ -12,6 +12,7 @@ extension StatusEditor {
     @State private var isDismissAlertPresented: Bool = false
     @State private var isDraftsSheetDisplayed: Bool = false
     @State private var isScheduleSheetDisplayed: Bool = false
+    @State private var isAltTextConfirmPresented: Bool = false
 
     let mainStore: EditorStore
     let focusedStore: EditorStore
@@ -112,7 +113,14 @@ extension StatusEditor {
       Button {
         guard !isSendingDisabled else { return }
         mainStore.evaluateLanguages()
-        if mainStore.scheduledAt != nil {
+        if AltTextReminderPolicy.shouldConfirmBeforePosting(
+          hasMedia: !mainStore.mediaContainers.isEmpty,
+          allMediaHasDescription: mainStore.allMediaHasDescription,
+          isReminderEnabled: preferences.isAltTextReminderEnabled,
+          requiresAltText: preferences.appRequireAltText)
+        {
+          isAltTextConfirmPresented = true
+        } else if mainStore.scheduledAt != nil {
           startScheduling()
         } else if preferences.autoDetectPostLanguage,
           mainStore.languageConfirmationDialogLanguages != nil
@@ -130,10 +138,35 @@ extension StatusEditor {
       .buttonBorderShape(.circle)
       .keyboardShortcut(.return, modifiers: .command)
       .confirmationDialog(
+        "status.editor.alt-text-reminder.confirm.title",
+        isPresented: $isAltTextConfirmPresented,
+        titleVisibility: .visible,
+        actions: {
+          Button("status.editor.alt-text-reminder.confirm.post-anyway", role: .destructive) {
+            proceedWithPosting()
+          }
+          Button("action.cancel", role: .cancel) {}
+        },
+        message: {
+          Text("status.editor.alt-text-reminder.confirm.message")
+        })
+      .confirmationDialog(
         "", isPresented: $isLanguageConfirmPresented,
         actions: {
           languageConfirmationDialog
         })
+    }
+
+    private func proceedWithPosting() {
+      if mainStore.scheduledAt != nil {
+        startScheduling()
+      } else if preferences.autoDetectPostLanguage,
+        mainStore.languageConfirmationDialogLanguages != nil
+      {
+        isLanguageConfirmPresented = true
+      } else {
+        startPosting()
+      }
     }
 
     private var scheduleMenu: some View {

@@ -194,6 +194,29 @@ extension StatusEditor {
     // Map of container.id -> initial alt text (from intents)
     private var pendingMediaDescriptions = MediaDescriptionService.PendingStore()
 
+    /// Whether the user dismissed the alt-text reminder banner for this composer session.
+    var isAltTextBannerDismissed: Bool = false
+
+    /// Soft reminder state for missing alt text (Gap #9). Local-only: computed
+    /// from composer state + the user's own preferences, no network involved.
+    var altTextReminderAction: AltTextReminderAction {
+      AltTextReminderPolicy.action(
+        hasMedia: !mediaContainers.isEmpty,
+        allMediaHasDescription: allMediaHasDescription,
+        isReminderEnabled: preferences?.isAltTextReminderEnabled
+          ?? UserPreferences.shared.isAltTextReminderEnabled,
+        requiresAltText: preferences?.appRequireAltText ?? UserPreferences.shared.appRequireAltText
+      )
+    }
+
+    /// First attached media container that still lacks a description, if any.
+    var firstMediaContainerMissingDescription: MediaContainer? {
+      mediaContainers.first { container in
+        guard let description = container.mediaAttachment?.description else { return true }
+        return description.isEmpty
+      }
+    }
+
     var visibility: Models.Visibility = .pub
 
     var mentionsSuggestions: [Account] = []

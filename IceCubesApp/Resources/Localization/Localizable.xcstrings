@@ -85340,6 +85340,83 @@
           }
         }
       }
+    },
+    "settings.content.alt-text-reminder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remind me to add alt text"
+          }
+        }
+      }
+    },
+    "status.editor.alt-text-reminder.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some attached media has no description. Adding alt text makes your post accessible to everyone."
+          }
+        }
+      }
+    },
+    "status.editor.alt-text-reminder.add": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add alt text"
+          }
+        }
+      }
+    },
+    "accessibility.editor.button.alt-text-reminder.dismiss": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dismiss alt text reminder"
+          }
+        }
+      }
+    },
+    "status.editor.alt-text-reminder.confirm.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post without alt text?"
+          }
+        }
+      }
+    },
+    "status.editor.alt-text-reminder.confirm.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some attached media has no description. You can post anyway, but screen reader users won't be able to experience the media."
+          }
+        }
+      }
+    },
+    "status.editor.alt-text-reminder.confirm.post-anyway": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post anyway"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
