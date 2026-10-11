@@ -33,7 +33,7 @@ jobs:
       matrix:
         include:
           - { package: Packages/Models, scheme: ModelsTests }
-          - { package: Packages/NetworkClient, scheme: NetworkTests }
+          - { package: Packages/NetworkClient, scheme: NetworkClientTests }
           - { package: Packages/Timeline, scheme: TimelineTests }
           - { package: Packages/Account, scheme: AccountTests }
           - { package: Packages/StatusKit, scheme: StatusKitTests }
